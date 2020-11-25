@@ -1,11 +1,26 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const { AwsCdkConstructLibrary } = require("projen");
 
 const project = new AwsCdkConstructLibrary({
-  authorAddress: "jonathan@goldwasserexchange.be",
+  authorAddress: "jonathan.goldwasser@gmail.com",
   authorName: "Jonathan Goldwasser",
-  cdkVersion: "1.73.0",
+  description: "High-level constructs for AWS CDK",
+  cdkVersion: "1.75.0",
   name: "cloudstructs",
-  repository: "https://github.com/jonathan/cloudstructs.git",
+  repository: "https://github.com/jogold/cloudstructs.git",
+  cdkDependencies: [
+    "@aws-cdk/aws-apigateway",
+    "@aws-cdk/aws-events",
+    "@aws-cdk/aws-lambda",
+    "@aws-cdk/aws-lambda-nodejs",
+    "@aws-cdk/aws-logs",
+    "@aws-cdk/core",
+  ],
+  devDeps: [
+    "@types/aws-lambda",
+    "@types/tsscmp",
+    "aws-sdk",
+    "esbuild",
+  ],
 
   /* AwsCdkConstructLibraryOptions */
   // cdkAssert: true,                                                          /* Install the @aws-cdk/assert library? */
