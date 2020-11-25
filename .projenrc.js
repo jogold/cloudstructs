@@ -10,10 +10,16 @@ const project = new AwsCdkConstructLibrary({
   cdkDependencies: [
     "@aws-cdk/aws-apigateway",
     "@aws-cdk/aws-events",
+    "@aws-cdk/aws-events-targets",
+    "@aws-cdk/aws-iam",
     "@aws-cdk/aws-lambda",
     "@aws-cdk/aws-lambda-nodejs",
     "@aws-cdk/aws-logs",
     "@aws-cdk/core",
+  ],
+  bundledDeps: [
+    'got',
+    '@slack/web-api',
   ],
   devDeps: [
     "@types/aws-lambda",
