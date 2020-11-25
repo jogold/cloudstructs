@@ -1,0 +1,840 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SlackEvents 1`] = `
+Object {
+  "Outputs": Object {
+    "SlackTextractSlackEventsSlackEventsApiEndpoint95933236": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "SlackTextractSlackEventsSlackEventsApiDeploymentStageprod0DF5384A",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24ArtifactHashBA91B77F": Object {
+      "Description": "Artifact hash for asset \\"67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24\\"",
+      "Type": "String",
+    },
+    "AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3Bucket4D46ABB5": Object {
+      "Description": "S3 bucket for asset \\"67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24\\"",
+      "Type": "String",
+    },
+    "AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3VersionKeyB0F28861": Object {
+      "Description": "S3 key for asset version \\"67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24\\"",
+      "Type": "String",
+    },
+    "AssetParametersb05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222ArtifactHash051CAE59": Object {
+      "Description": "Artifact hash for asset \\"b05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222\\"",
+      "Type": "String",
+    },
+    "AssetParametersb05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222S3Bucket54C9B8FC": Object {
+      "Description": "S3 bucket for asset \\"b05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222\\"",
+      "Type": "String",
+    },
+    "AssetParametersb05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222S3VersionKey3CD3BA44": Object {
+      "Description": "S3 key for asset version \\"b05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222\\"",
+      "Type": "String",
+    },
+    "AssetParametersdcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278caArtifactHashBDADB009": Object {
+      "Description": "Artifact hash for asset \\"dcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278ca\\"",
+      "Type": "String",
+    },
+    "AssetParametersdcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278caS3BucketE44B1BF0": Object {
+      "Description": "S3 bucket for asset \\"dcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278ca\\"",
+      "Type": "String",
+    },
+    "AssetParametersdcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278caS3VersionKeyA50401F1": Object {
+      "Description": "S3 key for asset version \\"dcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278ca\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": Object {
+      "DependsOn": Array [
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3Bucket4D46ABB5",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3VersionKeyB0F28861",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters67b7823b74bc135986aa72f889d6a8da058d0c4a20cbc2dfc6f78995fdd2fc24S3VersionKeyB0F28861",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs10.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "logs:PutRetentionPolicy",
+                "logs:DeleteRetentionPolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "Roles": Array [
+          Object {
+            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SlackTextractSlackEventsRuleAF3FF8E7": Object {
+      "Properties": Object {
+        "EventPattern": Object {
+          "detail": Object {
+            "event": Object {
+              "type": Array [
+                "file_shared",
+              ],
+            },
+          },
+          "resources": Array [
+            "{{resolve:secretsmanager:my-slack-app:SecretString:appId::}}",
+          ],
+          "source": Array [
+            "slack",
+          ],
+        },
+        "State": "ENABLED",
+        "Targets": Array [
+          Object {
+            "Arn": Object {
+              "Fn::GetAtt": Array [
+                "SlackTextractdetect22DD487C",
+                "Arn",
+              ],
+            },
+            "Id": "Target0",
+            "InputPath": "$.detail.event",
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "SlackTextractSlackEventsRuleAllowEventRuleSlackTextractSlackEventsRule7FA1C9F876FCFC5F": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractdetect22DD487C",
+            "Arn",
+          ],
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventsRuleAF3FF8E7",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "SlackTextractSlackEventsSlackEventsApi117A1D5A": Object {
+      "Properties": Object {
+        "Name": "SlackEventsApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "SlackTextractSlackEventsSlackEventsApiANY18B2C6B0": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SlackTextractSlackEventshandler91A38AF9",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "SlackTextractSlackEventsSlackEventsApiANYApiPermissionSlackTextractSlackEventsSlackEventsApiE19A7E1BANY00495932": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventshandler91A38AF9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+              },
+              "/",
+              Object {
+                "Ref": "SlackTextractSlackEventsSlackEventsApiDeploymentStageprod0DF5384A",
+              },
+              "/*/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "SlackTextractSlackEventsSlackEventsApiANYApiPermissionTestSlackTextractSlackEventsSlackEventsApiE19A7E1BANY8EA5CB44": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventshandler91A38AF9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+              },
+              "/test-invoke-stage/*/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "SlackTextractSlackEventsSlackEventsApiAccount8956DB13": Object {
+      "DependsOn": Array [
+        "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventsSlackEventsApiCloudWatchRoleFFBA0D92",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "SlackTextractSlackEventsSlackEventsApiCloudWatchRoleFFBA0D92": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SlackTextractSlackEventsSlackEventsApiDeploymentD0D866E273bab44da74e389c750fa9604fdcc4f4": Object {
+      "DependsOn": Array [
+        "SlackTextractSlackEventsSlackEventsApiproxyANY7E6B0B24",
+        "SlackTextractSlackEventsSlackEventsApiproxy8DCF6CD6",
+        "SlackTextractSlackEventsSlackEventsApiANY18B2C6B0",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "SlackTextractSlackEventsSlackEventsApiDeploymentStageprod0DF5384A": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "SlackTextractSlackEventsSlackEventsApiDeploymentD0D866E273bab44da74e389c750fa9604fdcc4f4",
+        },
+        "RestApiId": Object {
+          "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "SlackTextractSlackEventsSlackEventsApiproxy8DCF6CD6": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{proxy+}",
+        "RestApiId": Object {
+          "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "SlackTextractSlackEventsSlackEventsApiproxyANY7E6B0B24": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SlackTextractSlackEventshandler91A38AF9",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "SlackTextractSlackEventsSlackEventsApiproxy8DCF6CD6",
+        },
+        "RestApiId": Object {
+          "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "SlackTextractSlackEventsSlackEventsApiproxyANYApiPermissionSlackTextractSlackEventsSlackEventsApiE19A7E1BANYproxy479CC08E": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventshandler91A38AF9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+              },
+              "/",
+              Object {
+                "Ref": "SlackTextractSlackEventsSlackEventsApiDeploymentStageprod0DF5384A",
+              },
+              "/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "SlackTextractSlackEventsSlackEventsApiproxyANYApiPermissionTestSlackTextractSlackEventsSlackEventsApiE19A7E1BANYproxy7C7D81AB": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventshandler91A38AF9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",
+              },
+              "/test-invoke-stage/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "SlackTextractSlackEventshandler91A38AF9": Object {
+      "DependsOn": Array [
+        "SlackTextractSlackEventshandlerServiceRoleDefaultPolicyDC806BC0",
+        "SlackTextractSlackEventshandlerServiceRole0F09489F",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersdcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278caS3BucketE44B1BF0",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersdcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278caS3VersionKeyA50401F1",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersdcc9f1f815f479cb280c3652ef9b123148cbc56d1d5db8185f96c05eb2e278caS3VersionKeyA50401F1",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "SLACK_SIGNING_SECRET": "{{resolve:secretsmanager:my-slack-app:SecretString:signingSecret::}}",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractSlackEventshandlerServiceRole0F09489F",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "SlackTextractSlackEventshandlerLogRetention5F25E029": Object {
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "SlackTextractSlackEventshandler91A38AF9",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "SlackTextractSlackEventshandlerServiceRole0F09489F": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SlackTextractSlackEventshandlerServiceRoleDefaultPolicyDC806BC0": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "events:PutEvents",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SlackTextractSlackEventshandlerServiceRoleDefaultPolicyDC806BC0",
+        "Roles": Array [
+          Object {
+            "Ref": "SlackTextractSlackEventshandlerServiceRole0F09489F",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SlackTextractdetect22DD487C": Object {
+      "DependsOn": Array [
+        "SlackTextractdetectServiceRoleDefaultPolicyFF72E503",
+        "SlackTextractdetectServiceRoleCC235154",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersb05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222S3Bucket54C9B8FC",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222S3VersionKey3CD3BA44",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb05fe8193b88bd6c2d97f63afed3b4635ce6ad104e4966839d69f8b25aa85222S3VersionKey3CD3BA44",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "SLACK_TOKEN": "{{resolve:secretsmanager:my-slack-app:SecretString:botToken::}}",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "SlackTextractdetectServiceRoleCC235154",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 30,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "SlackTextractdetectLogRetention814D47F1": Object {
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "SlackTextractdetect22DD487C",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "SlackTextractdetectServiceRoleCC235154": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SlackTextractdetectServiceRoleDefaultPolicyFF72E503": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "textract:DetectDocumentText",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SlackTextractdetectServiceRoleDefaultPolicyFF72E503",
+        "Roles": Array [
+          Object {
+            "Ref": "SlackTextractdetectServiceRoleCC235154",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;
