@@ -10,6 +10,7 @@ const project = new AwsCdkConstructLibrary({
   cdkDependencies: [
     "@aws-cdk/aws-apigateway",
     "@aws-cdk/aws-events",
+    "@aws-cdk/aws-lambda",
     "@aws-cdk/aws-lambda-nodejs",
     "@aws-cdk/aws-logs",
     "@aws-cdk/core",
