@@ -9,7 +9,7 @@ beforeEach(() => {
 
 test('SlackEvents', () => {
   new SlackEvents(stack, 'SlackEvents', {
-    signingSecret: cdk.SecretValue.plainText('super-secret'),
+    signingSecret: cdk.SecretValue.secretsManager('my-slack-app'),
   });
 
   expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();

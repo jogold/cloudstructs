@@ -34,7 +34,7 @@ export interface SlackEventsProps {
  */
 export class SlackEvents extends cdk.Construct {
   /**
-   * The event bus where Slack events are sent
+   * The custom event bus where Slack events are sent
    */
   public readonly eventBus?: events.EventBus;
 

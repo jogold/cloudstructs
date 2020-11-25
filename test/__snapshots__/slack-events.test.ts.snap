@@ -545,7 +545,7 @@ Object {
         "Environment": Object {
           "Variables": Object {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "SLACK_SIGNING_SECRET": "super-secret",
+            "SLACK_SIGNING_SECRET": "{{resolve:secretsmanager:my-slack-app:SecretString:::}}",
           },
         },
         "Handler": "index.handler",
