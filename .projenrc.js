@@ -15,9 +15,6 @@ const project = new AwsCdkConstructLibrary({
     "@aws-cdk/aws-logs",
     "@aws-cdk/core",
   ],
-  bundledDeps: [
-    "@slack/events-api",
-  ],
   devDeps: [
     "@types/aws-lambda",
     "@types/tsscmp",
