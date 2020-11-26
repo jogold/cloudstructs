@@ -36,7 +36,7 @@ const s3 = new S3({ apiVersion: '2006-03-01' });
 
 export async function handler(event: SESMessage): Promise<void> {
   // Download email
-  const getObject = await s3.getObject({
+  const rawEmail = await s3.getObject({
     Bucket: event.receipt.action.bucketName,
     Key: event.receipt.action.objectKey,
   }).promise();
