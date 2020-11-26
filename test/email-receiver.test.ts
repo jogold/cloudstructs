@@ -17,10 +17,10 @@ test('EmailReceiver', () => {
   });
   const ruleSet = ses.ReceiptRuleSet.fromReceiptRuleSetName(stack, 'RuleSet', 'rule-set');
   new EmailReceiver(stack, 'EmailReceiver', {
-    function: fn,
-    receiptRuleSet: ruleSet,
     recipients: ['support@cloudstructs.com'],
     sourceWhitelist: '@amazon.com$',
+    function: fn,
+    receiptRuleSet: ruleSet,
   });
 
   expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
