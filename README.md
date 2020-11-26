@@ -12,3 +12,5 @@ High-level constructs for AWS CDK
 * [`SlackTextract`](src/slack-textract) Extract text from images posted to Slack
 using Amazon Textract. The extracted text is posted in a thread under the image
 and gets indexed!
+* [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
+and invoke a Lambda function
