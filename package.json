@@ -80,10 +80,7 @@
     "@slack/web-api": "^5.13.0",
     "got": "^11.8.0"
   },
-  "bundledDependencies": [
-    "@slack/web-api",
-    "got"
-  ],
+  "bundledDependencies": [],
   "keywords": [
     "cdk"
   ],
