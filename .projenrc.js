@@ -21,6 +21,10 @@ const project = new AwsCdkConstructLibrary({
     'got',
     '@slack/web-api',
   ],
+  peerDeps: [
+    'got',
+    '@slack/web-api',
+  ],
   devDeps: [
     "@types/aws-lambda",
     "@types/tsscmp",

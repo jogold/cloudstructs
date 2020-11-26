@@ -66,7 +66,9 @@
     "@aws-cdk/aws-lambda-nodejs": "^1.75.0",
     "@aws-cdk/aws-logs": "^1.75.0",
     "@aws-cdk/core": "^1.75.0",
-    "constructs": "^3.2.27"
+    "@slack/web-api": "^5.13.0",
+    "constructs": "^3.2.27",
+    "got": "^11.8.0"
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.75.0",
