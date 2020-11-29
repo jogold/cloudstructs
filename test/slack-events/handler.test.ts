@@ -7,6 +7,8 @@ process.env.SLACK_SIGNING_SECRET = 'secret';
 
 awsMock.setSDKInstance(aws);
 
+console.log = jest.fn();
+
 beforeEach(() => {
   awsMock.restore();
 });
