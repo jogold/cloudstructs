@@ -1,0 +1,65 @@
+# StaticWebsite
+
+A CloudFront static website hosted on S3 with HTTPS redirect and backend configuration
+saved to the bucket.
+
+## Usage
+
+Define a `StaticWebsite`:
+
+```ts
+import * as apigateway from '@aws-cdk/aws-apigateway';
+import * as deployment from '@aws-cdk/aws-s3-deployment';
+import * as cdk from '@aws-cdk/core';
+import * as cloudstructs from 'cloudstructs';
+
+export class MyStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
+      domainName: 'www.my-site.com',
+      hostedZone,
+      backendConfiguration: {
+        stage: 'prod',
+        apiUrl: 'https://www.my-api.com/api',
+      },
+    });
+
+    // Use the website to add a deployment
+    new deployment.BucketDeployment(this, 'Deploymen', {
+      destinationBucket: staticWebSite.bucket,
+      sources: [deployment.Source.asset(sourcePath)],
+      cacheControl: [deployment.CacheControl.fromString('public, max-age=31536000, immutable')],
+    });
+  }
+}
+```
+
+The `backendConfiguration` will be saved as `config.json` in the S3 bucket of
+static website. This allows the frontend to `fetch('/config.json')` to get its
+configuration. Deploy time values can be used:
+
+```ts
+const myApi = new apigateway.LambdaRestApi(this, 'Api', { ... });
+
+const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
+  domainName: 'www.my-site.com',
+  hostedZone,
+  backendConfiguration: {
+    apiUrl: myApi.url,
+  },
+});
+```
+
+By default a HTTPS redirect will be created from the domain name of the hosted
+zone to the domain name of the static website. This can be changed by specifying
+the `redirects` prop:
+
+```ts
+const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
+  domainName: 'www.my-site.com',
+  hostedZone,
+  redirects: ['my-site.com', 'hello.my-site.com'],
+});
+```
