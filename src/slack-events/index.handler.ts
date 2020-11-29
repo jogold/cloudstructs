@@ -1,20 +1,18 @@
 /* eslint-disable no-console */
-import * as crypto from 'crypto';
 import { EventBridge } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
-
-const eventBridge = new EventBridge({ apiVersion: '2015-10-07' });
-
-// Base API gateway response
-const response: AWSLambda.APIGatewayProxyResult = {
-  statusCode: 200,
-  body: '',
-};
+import { verifyRequestSignature } from './signature';
 
 /**
  * Handle Slack events
  */
 export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AWSLambda.APIGatewayProxyResult> {
   console.log('Event: %j', event);
+
+  // Base API gateway response
+  const response: AWSLambda.APIGatewayProxyResult = {
+    statusCode: 200,
+    body: '',
+  };
 
   try {
     if (!process.env.SLACK_SIGNING_SECRET) throw new Error('The environment variable SLACK_SIGNING_SECRET is not defined');
@@ -40,6 +38,8 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
       return response;
     }
 
+    const eventBridge = new EventBridge({ apiVersion: '2015-10-07' });
+
     const putEvents = await eventBridge.putEvents({
       Entries: [
         {
@@ -53,38 +53,11 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
       ],
     }).promise();
     console.log('Put events: %j', putEvents);
+
+    return response;
   } catch (err) {
     console.log(err);
     response.statusCode = 500;
     return response;
   }
-
-  return response;
-}
-
-interface VerifyRequestSignatureOptions {
-  readonly body: string;
-  readonly requestSignature: string;
-  readonly requestTimestamp: number;
-  readonly signingSecret: string;
-}
-
-function verifyRequestSignature(options: VerifyRequestSignatureOptions): boolean {
-  const fiveMinutesAgo = Math.floor(Date.now() / 1000) - (60 * 5);
-
-  if (options.requestTimestamp < fiveMinutesAgo) {
-    throw new Error('Slack request signing verification outdated');
-  }
-
-  const hmac = crypto.createHmac('sha256', options.signingSecret);
-  const [version, hash] = options.requestSignature.split('=');
-  hmac.update(`${version}:${options.requestTimestamp}:${options.body}`);
-  const hex = hmac.digest('hex');
-
-  if (hash.length !== hex.length ||
-      !crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(hmac.digest('hex')))) {
-    throw new Error('Slack request signing verification failed');
-  }
-
-  return true;
 }
