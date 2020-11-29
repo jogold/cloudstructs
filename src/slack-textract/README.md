@@ -15,7 +15,7 @@ secret.
 This can be done with the [AWS CLI](https://aws.amazon.com/cli/):
 
 ```
-aws secretsmanager --name my-slack-app --secret-string <signing secret>
+aws secretsmanager create-secret --name my-slack-app --secret-string '{"appId":"<id>","signingSecret":"<secret>","botToken":"<token>"}'
 ```
 
 ### 2. Add the SlackTextract construct
@@ -44,9 +44,9 @@ export class MyStack extends cdk.Stack {
 Look for the API endoint in your stack outputs and use it to enable event subscriptions
 in your Slack app and subscribe to the `file_shared` events.
 
-### 4. Invite your bot in a channel
+### 4. Add your app to a channel
 
-Invite the bot of your Slack app in a channel, share an image and let the magic happen
+Add your app to a channel, share an image and let the magic happen:
 
 <p align="center">
   <img src="slack-textract.gif" width="50%">

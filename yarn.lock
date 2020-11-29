@@ -1748,9 +1748,9 @@ aws-sdk@^2.637.0:
     xml2js "0.4.19"
 
 aws-sdk@^2.798.0:
-  version "2.798.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.798.0.tgz#fd108e0569d7210816003fc8cc0c995b39854ad6"
-  integrity sha512-7BMCH90yFpMmCF5uxZiiKMMzIAFibZz8b6CLGw/92FgMd86ZedpNqDyaikcGv1yOVtOlNCCnXN6OglC8/vwm4Q==
+  version "2.799.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.799.0.tgz#8b1a64c1a9f8ccf5794eb07bdd8051e4cb6adcfd"
+  integrity sha512-NYAoiNU+bJXhlJsC0rFqrmD5t5ho7/VxldmziP6HLPYHfOCI9Uvk6UVjfPmhLWPm0mHnIxhsHqmsNGyjhHNYmw==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -2839,9 +2839,9 @@ es-to-primitive@^1.2.1:
     is-symbol "^1.0.2"
 
 esbuild@^0.8.15:
-  version "0.8.15"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.15.tgz#cbc4d82a7fc4571d455233456e6fba83fd0364f1"
-  integrity sha512-mSaLo9t/oYtQE6FRUEdO47Pr8PisSPzHtgr+LcihIcjBEhbYwjT6WLCQ7noDoTBfIatBCw229rtmIwl9u9UQwg==
+  version "0.8.16"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.16.tgz#8ae34b15d938e8b8b5ac2459414fe3e7fd7dd6b2"
+  integrity sha512-HMvPNxDIhEGO/YUh8oO8oxQ1g+ttWz2anUF7NJmQglj2XfJS8zd8mP0Sb2y+jE1SVk3UjD/rYhdsEOFULN9/xw==
 
 escalade@^3.1.1:
   version "3.1.1"
@@ -4598,9 +4598,9 @@ jsii-diff@^1.14.1:
     yargs "^16.1.1"
 
 jsii-docgen@^1.4.96:
-  version "1.4.98"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.4.98.tgz#b41049f711920ca505da49acb9f4e38e9d99404a"
-  integrity sha512-n7QYk8jScqiOxFM5xFURAcsKrkd7NP66wg3+sZvqMYXcluPhCcMCq4Jf4j8FYrO4yliEp+PY0PEbXNJqkcNwqQ==
+  version "1.4.101"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.4.101.tgz#e46421094d0d0332a9d712aa30193642aa924e32"
+  integrity sha512-ULwkTqiXqBqMpQS3BhFwP/an/qxX11S5mq144vqx+uLSDPuzvyLRVP5dYT3QC86ywYTataa1ALxVcL/lfYe96g==
   dependencies:
     "@jsii/spec" "^1.9.0"
     fs-extra "^9.0.0"

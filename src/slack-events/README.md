@@ -13,7 +13,7 @@ secret.
 This can be done with the [AWS CLI](https://aws.amazon.com/cli/):
 
 ```
-aws secretsmanager create-secret --name my-slack-app --secret-string '{"appId":"<id>","signingSecret":"<secret>","botToken":"<token>"}'
+aws secretsmanager create-secret --name my-slack-app --secret-string <signing secret>
 ```
 
 ### 2. Add the SlackEvents construct
