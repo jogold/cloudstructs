@@ -27,7 +27,7 @@ export class MyStack extends cdk.Stack {
     });
 
     // Use the website to add a deployment
-    new deployment.BucketDeployment(this, 'Deploymen', {
+    new deployment.BucketDeployment(this, 'Deployment', {
       destinationBucket: staticWebSite.bucket,
       sources: [deployment.Source.asset(sourcePath)],
       cacheControl: [deployment.CacheControl.fromString('public, max-age=31536000, immutable')],
