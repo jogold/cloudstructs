@@ -19,8 +19,8 @@ export class MyStack extends cdk.Stack {
 
     const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
       domainName: 'www.my-site.com',
-      hostedZone,
-      backendConfiguration: {
+      hostedZone: myHostedZone,
+      backendConfiguration: { // Saved to `config.json` in the bucket
         stage: 'prod',
         apiUrl: 'https://www.my-api.com/api',
       },
@@ -36,7 +36,7 @@ export class MyStack extends cdk.Stack {
 }
 ```
 
-The `backendConfiguration` will be saved as `config.json` in the S3 bucket of
+The `backendConfiguration` will be saved as `config.json` in the S3 bucket of the
 static website. This allows the frontend to `fetch('/config.json')` to get its
 configuration. Deploy time values can be used:
 
@@ -45,7 +45,7 @@ const myApi = new apigateway.LambdaRestApi(this, 'Api', { ... });
 
 const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
   domainName: 'www.my-site.com',
-  hostedZone,
+  hostedZone: myHostedZone,
   backendConfiguration: {
     apiUrl: myApi.url,
   },
@@ -59,7 +59,7 @@ the `redirects` prop:
 ```ts
 const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
   domainName: 'www.my-site.com',
-  hostedZone,
+  hostedZone: myHostedZone,
   redirects: ['my-site.com', 'hello.my-site.com'],
 });
 ```
