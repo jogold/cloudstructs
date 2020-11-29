@@ -42,12 +42,14 @@ configuration. Deploy time values can be used:
 
 ```ts
 const myApi = new apigateway.LambdaRestApi(this, 'Api', { ... });
+const myUserPool = new cognito.UserPool(this, 'UserPool');
 
 const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
   domainName: 'www.my-site.com',
   hostedZone: myHostedZone,
   backendConfiguration: {
     apiUrl: myApi.url,
+    userPoolId: myUserPool.userPoolId,
   },
 });
 ```
