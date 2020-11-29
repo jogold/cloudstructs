@@ -22,6 +22,7 @@ const project = new AwsCdkConstructLibrary({
     '@slack/web-api',
   ],
   devDeps: [
+    "aws-sdk-mock",
     "@types/aws-lambda",
     "@types/tsscmp",
     "aws-sdk",

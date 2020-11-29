@@ -39,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "aws-sdk": "^2.798.0",
+    "aws-sdk-mock": "^5.1.0",
     "esbuild": "^0.8.15",
     "eslint": "^7.14.0",
     "eslint-import-resolver-node": "^0.3.4",

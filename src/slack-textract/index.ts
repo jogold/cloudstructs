@@ -37,7 +37,7 @@ export class SlackTextract extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: SlackTextractProps) {
     super(scope, id);
 
-    const detectDocumentText = new nodejs.NodejsFunction(this, 'detect', {
+    const handler = new nodejs.NodejsFunction(this, 'handler', {
       runtime: lambda.Runtime.NODEJS_12_X,
       timeout: cdk.Duration.seconds(30),
       logRetention: logs.RetentionDays.ONE_MONTH,
@@ -46,7 +46,7 @@ export class SlackTextract extends cdk.Construct {
       },
     });
 
-    detectDocumentText.addToRolePolicy(new iam.PolicyStatement({
+    handler.addToRolePolicy(new iam.PolicyStatement({
       actions: ['textract:DetectDocumentText'],
       resources: ['*'],
     }));
@@ -67,7 +67,7 @@ export class SlackTextract extends cdk.Construct {
       },
     });
 
-    fileSharedRule.addTarget(new targets.LambdaFunction(detectDocumentText, {
+    fileSharedRule.addTarget(new targets.LambdaFunction(handler, {
       event: events.RuleTargetInput.fromEventPath('$.detail.event'),
     }));
   }

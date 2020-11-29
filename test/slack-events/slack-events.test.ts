@@ -1,6 +1,6 @@
 import * as assert from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import { SlackEvents } from '../src';
+import { SlackEvents } from '../../src';
 
 let stack: cdk.Stack;
 beforeEach(() => {

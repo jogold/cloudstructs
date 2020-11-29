@@ -1,6 +1,6 @@
 import * as assert from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import { SlackTextract } from '../src';
+import { SlackTextract } from '../../src';
 
 let stack: cdk.Stack;
 beforeEach(() => {
