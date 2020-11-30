@@ -35,6 +35,7 @@ const project = new AwsCdkConstructLibrary({
     "@types/tsscmp",
     "aws-sdk",
     "esbuild",
+    "nock",
   ],
 
   /* AwsCdkConstructLibraryOptions */

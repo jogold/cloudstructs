@@ -53,6 +53,7 @@
     "jsii-pacmak": "^1.14.1",
     "jsii-release": "^0.2.3",
     "json-schema": "^0.2.5",
+    "nock": "^13.0.5",
     "projen": "^0.5.0",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",

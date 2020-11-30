@@ -30,7 +30,7 @@ export class MyStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    new SlackTextract(stack, 'SlackTextract', {
+    new cloudstructs.SlackTextract(stack, 'SlackTextract', {
       signingSecret: cdk.SecretValue.secretsManager('my-slack-app', { jsonField: 'signingSecret' }),
       appId: cdk.SecretValue.secretsManager('my-slack-app', { jsonField: 'appId' }).toString(),
       botToken: cdk.SecretValue.secretsManager('my-slack-app', { jsonField: 'botToken' }),
