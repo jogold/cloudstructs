@@ -17,7 +17,7 @@ export class MyStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
+    const staticWebsite = new cloudstructs.StaticWebsite(this, 'StaticWebsite', {
       domainName: 'www.my-site.com',
       hostedZone: myHostedZone,
       backendConfiguration: { // Saved to `config.json` in the bucket
@@ -44,7 +44,7 @@ configuration. Deploy time values can be used:
 const myApi = new apigateway.LambdaRestApi(this, 'Api', { ... });
 const myUserPool = new cognito.UserPool(this, 'UserPool');
 
-const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
+const staticWebsite = new cloudstructs.StaticWebsite(this, 'StaticWebsite', {
   domainName: 'www.my-site.com',
   hostedZone: myHostedZone,
   backendConfiguration: {
@@ -59,7 +59,7 @@ zone to the domain name of the static website. This can be changed by specifying
 the `redirects` prop:
 
 ```ts
-const staticWebsite = new StaticWebsite(this, 'StaticWebsite', {
+const staticWebsite = new cloudstructs.StaticWebsite(this, 'StaticWebsite', {
   domainName: 'www.my-site.com',
   hostedZone: myHostedZone,
   redirects: ['my-site.com', 'hello.my-site.com'],
