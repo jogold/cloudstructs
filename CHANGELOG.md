@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.10 (2020-11-30)
+
+
+### Features
+
+* **state-machine-cr-provider:** custom resources with state machines ([#22](https://github.com/jogold/cloudstructs/issues/22)) ([ba4a814](https://github.com/jogold/cloudstructs/commit/ba4a814687f86e582c6362babcbce09547521be7))
+
 ### 0.0.9 (2020-11-30)
 
 ### 0.0.8 (2020-11-29)
