@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StateMachineProvider 1`] = `
+exports[`StateMachineCustomResourceProvider 1`] = `
 Object {
   "Parameters": Object {
     "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bArtifactHashF557E213": Object {
