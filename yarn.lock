@@ -2885,9 +2885,9 @@ es-to-primitive@^1.2.1:
     is-symbol "^1.0.2"
 
 esbuild@^0.8.15:
-  version "0.8.16"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.16.tgz#8ae34b15d938e8b8b5ac2459414fe3e7fd7dd6b2"
-  integrity sha512-HMvPNxDIhEGO/YUh8oO8oxQ1g+ttWz2anUF7NJmQglj2XfJS8zd8mP0Sb2y+jE1SVk3UjD/rYhdsEOFULN9/xw==
+  version "0.8.18"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.18.tgz#4a8c70df8fffa27164a26daa3ec58ce6f1315446"
+  integrity sha512-EPbCSr7Ems1loeoy1faUGnJOwTwSrGcoYVQ4f4T4JMKjxJxrWAg+zqXkZK7GvqxfvokPp3HV6Raqn6rqAuW7+Q==
 
 escalade@^3.1.1:
   version "3.1.1"
