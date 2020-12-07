@@ -3,12 +3,12 @@ import { WebClient, WebAPICallResult } from '@slack/web-api';
 import { Textract } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 import got from 'got';
 
-interface SlackEvent {
+export interface SlackEvent {
   channel_id: string;
   file_id: string;
 }
 
-interface FilesInfoResult extends WebAPICallResult {
+export interface FilesInfoResult extends WebAPICallResult {
   file: {
     mimetype: string;
     filetype: string;
@@ -23,11 +23,11 @@ interface FilesInfoResult extends WebAPICallResult {
   };
 }
 
-const slackClient = new WebClient(process.env.SLACK_TOKEN);
-const textract = new Textract({ apiVersion: '2018-06-27' });
 
 export async function handler(event: SlackEvent): Promise<void> {
   console.log('Event: %j', event);
+
+  const slackClient = new WebClient(process.env.SLACK_TOKEN);
 
   // Get file info
   const info = await slackClient.files.info({
@@ -48,6 +48,8 @@ export async function handler(event: SlackEvent): Promise<void> {
   }).buffer();
 
   // Detect text with Textract
+  const textract = new Textract({ apiVersion: '2018-06-27' });
+
   const data = await textract.detectDocumentText({
     Document: { Bytes: file },
   }).promise();

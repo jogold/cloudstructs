@@ -1,0 +1,480 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StateMachineCustomResourceProvider 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bArtifactHashF557E213": Object {
+      "Description": "Artifact hash for asset \\"6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023b\\"",
+      "Type": "String",
+    },
+    "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3Bucket76144C8E": Object {
+      "Description": "S3 bucket for asset \\"6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023b\\"",
+      "Type": "String",
+    },
+    "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3VersionKeyD2DC2A1C": Object {
+      "Description": "S3 key for asset version \\"6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023b\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "CustomResource": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "ProviderStartExecutionA94D3483",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "ProviderCfnResponseFailedCC9A90F2": Object {
+      "DependsOn": Array [
+        "ProviderCfnResponseFailedServiceRole1026DD92",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3Bucket76144C8E",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3VersionKeyD2DC2A1C",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3VersionKeyD2DC2A1C",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.cfnResponseFailed",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ProviderCfnResponseFailedServiceRole1026DD92",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ProviderCfnResponseFailedServiceRole1026DD92": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ProviderCfnResponseSuccess01B6851D": Object {
+      "DependsOn": Array [
+        "ProviderCfnResponseSuccessServiceRole5D01681D",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3Bucket76144C8E",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3VersionKeyD2DC2A1C",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3VersionKeyD2DC2A1C",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.cfnResponseSuccess",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ProviderCfnResponseSuccessServiceRole5D01681D",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ProviderCfnResponseSuccessServiceRole5D01681D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ProviderRole1DE8EC3B": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "states.",
+                      Object {
+                        "Ref": "AWS::Region",
+                      },
+                      ".amazonaws.com",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ProviderRoleDefaultPolicyD21592EE": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ProviderCfnResponseSuccess01B6851D",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ProviderCfnResponseFailedCC9A90F2",
+                    "Arn",
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": "states:StartExecution",
+              "Effect": "Allow",
+              "Resource": "arn:aws:states:us-east-1:123456789012:stateMachine:my-machine",
+            },
+            Object {
+              "Action": Array [
+                "states:DescribeExecution",
+                "states:StopExecution",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":states:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":execution:my-machine*",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": Array [
+                "events:PutTargets",
+                "events:PutRule",
+                "events:DescribeRule",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":events:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":rule/StepFunctionsGetEventsForStepFunctionsExecutionRule",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ProviderRoleDefaultPolicyD21592EE",
+        "Roles": Array [
+          Object {
+            "Ref": "ProviderRole1DE8EC3B",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ProviderStartExecutionA94D3483": Object {
+      "DependsOn": Array [
+        "ProviderStartExecutionServiceRoleDefaultPolicy9428BBFE",
+        "ProviderStartExecutionServiceRole86F1DDB6",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3Bucket76144C8E",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3VersionKeyD2DC2A1C",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023bS3VersionKeyD2DC2A1C",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "STATE_MACHINE_ARN": Object {
+              "Ref": "ProviderStateMachine873099F5",
+            },
+          },
+        },
+        "Handler": "index.startExecution",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ProviderStartExecutionServiceRole86F1DDB6",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ProviderStartExecutionServiceRole86F1DDB6": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ProviderStartExecutionServiceRoleDefaultPolicy9428BBFE": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "states:StartExecution",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "ProviderStateMachine873099F5",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ProviderStartExecutionServiceRoleDefaultPolicy9428BBFE",
+        "Roles": Array [
+          Object {
+            "Ref": "ProviderStartExecutionServiceRole86F1DDB6",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ProviderStateMachine873099F5": Object {
+      "DependsOn": Array [
+        "ProviderRoleDefaultPolicyD21592EE",
+        "ProviderRole1DE8EC3B",
+      ],
+      "Properties": Object {
+        "DefinitionString": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"StartAt\\":\\"StartExecution\\",\\"States\\":{\\"StartExecution\\":{\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::states:startExecution.sync:2\\",\\"Parameters\\":{\\"Input.$\\":\\"$\\",\\"StateMachineArn\\":\\"arn:aws:states:us-east-1:123456789012:stateMachine:my-machine\\"},\\"TimeoutSeconds\\":1800,\\"Next\\":\\"CfnResponseSuccess\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"CfnResponseFailed\\"}]},\\"CfnResponseSuccess\\":{\\"Type\\":\\"Task\\",\\"Resource\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "ProviderCfnResponseSuccess01B6851D",
+                  "Arn",
+                ],
+              },
+              "\\",\\"End\\":true},\\"CfnResponseFailed\\":{\\"Type\\":\\"Task\\",\\"Resource\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "ProviderCfnResponseFailedCC9A90F2",
+                  "Arn",
+                ],
+              },
+              "\\",\\"End\\":true}}}",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "ProviderRole1DE8EC3B",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::StepFunctions::StateMachine",
+    },
+  },
+}
+`;

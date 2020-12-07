@@ -13,7 +13,7 @@ secret.
 This can be done with the [AWS CLI](https://aws.amazon.com/cli/):
 
 ```
-aws secretsmanager create-secret --name my-slack-app --secret-string '{"appId":"<id>","signingSecret":"<secret>","botToken":"<token>"}'
+aws secretsmanager create-secret --name my-slack-app --secret-string <signing secret>
 ```
 
 ### 2. Add the SlackEvents construct
@@ -28,7 +28,7 @@ export class MyStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    new SlackEvents(stack, 'SlackEvents', {
+    new cloudstructs.SlackEvents(stack, 'SlackEvents', {
       signingSecret: cdk.SecretValue.secretsManager('my-slack-app'),
     });
   }
@@ -71,7 +71,7 @@ Set the `customEventBus` to `true` to create and send events to a
 [custom event bus](https://docs.aws.amazon.com/eventbridge/latest/userguide/create-event-bus.html)
 
 ```ts
-const slackEvents = new SlackEvents(stack, 'SlackEvents', {
+const slackEvents = new cloudstructs.SlackEvents(stack, 'SlackEvents', {
   signingSecret: cdk.SecretValue.secretsManager('my-slack-app'),
   customEventBus: true,
 });
