@@ -48,8 +48,8 @@ new SlackEvents(scope: Construct, id: string, props: SlackEventsProps)
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SlackEventsProps](#cloudstructs-slackeventsprops)</code>)  *No description*
   * **signingSecret** (<code>[SecretValue](#aws-cdk-core-secretvalue)</code>)  The signing secret of the Slack app. 
+  * **apiName** (<code>string</code>)  A name for the API Gateway resource. __*Default*__: SlackEventsApi
   * **customEventBus** (<code>boolean</code>)  Whether to use a custom event bus. __*Default*__: false
-  * **restApiName** (<code>string</code>)  A name for the API Gateway RestApi resource. __*Default*__: SlackEventsApi
 
 
 
@@ -181,8 +181,8 @@ Properties for a SlackEvents.
 Name | Type | Description 
 -----|------|-------------
 **signingSecret** | <code>[SecretValue](#aws-cdk-core-secretvalue)</code> | The signing secret of the Slack app.
+**apiName**? | <code>string</code> | A name for the API Gateway resource.<br/>__*Default*__: SlackEventsApi
 **customEventBus**? | <code>boolean</code> | Whether to use a custom event bus.<br/>__*Default*__: false
-**restApiName**? | <code>string</code> | A name for the API Gateway RestApi resource.<br/>__*Default*__: SlackEventsApi
 
 
 
