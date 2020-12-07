@@ -22,7 +22,7 @@
     "@aws-cdk/cx-api" "1.77.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-apigateway@1.77.0", "@aws-cdk/aws-apigateway@^1.77.0":
+"@aws-cdk/aws-apigateway@1.77.0":
   version "1.77.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigateway/-/aws-apigateway-1.77.0.tgz#7080d41eb06d66681517f46c95a20db80693a3ee"
   integrity sha512-vqVJWu86vSWj9fQ8H8Dg5WsXYhz9QO1tivAgUTMdEaZEKQHuJ0B13MZXl62cRzdkaxm4z9S0dE3FLrgfwIgWEA==
@@ -41,7 +41,21 @@
     "@aws-cdk/cx-api" "1.77.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-apigatewayv2@1.77.0":
+"@aws-cdk/aws-apigatewayv2-integrations@^1.77.0":
+  version "1.77.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigatewayv2-integrations/-/aws-apigatewayv2-integrations-1.77.0.tgz#19430cb76b8263f363862e661ae554518620d5bf"
+  integrity sha512-uFS5CRdZIXm1PqzpWdOZyZMiOqdnYpjamtN5cnRIcMRvH0JhevgoeJp24PdJCUms2NqHb1VG6Jne1igz5xrLqQ==
+  dependencies:
+    "@aws-cdk/aws-apigatewayv2" "1.77.0"
+    "@aws-cdk/aws-ec2" "1.77.0"
+    "@aws-cdk/aws-elasticloadbalancingv2" "1.77.0"
+    "@aws-cdk/aws-iam" "1.77.0"
+    "@aws-cdk/aws-lambda" "1.77.0"
+    "@aws-cdk/aws-servicediscovery" "1.77.0"
+    "@aws-cdk/core" "1.77.0"
+    constructs "^3.2.0"
+
+"@aws-cdk/aws-apigatewayv2@1.77.0", "@aws-cdk/aws-apigatewayv2@^1.77.0":
   version "1.77.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigatewayv2/-/aws-apigatewayv2-1.77.0.tgz#178485176692917b5ae1f70b02b1d4744cfd9371"
   integrity sha512-LdRmUGW0QQ8XKmahASN1W50mq0mx5E5cYBn7ufnhfWo3WtJA91jMMt5Qeky+QGStTg18BIsmvisY4414ZGHZgw==

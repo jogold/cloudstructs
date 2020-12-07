@@ -8,7 +8,6 @@ saved to the bucket.
 Define a `StaticWebsite`:
 
 ```ts
-import * as apigateway from '@aws-cdk/aws-apigateway';
 import * as deployment from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
 import * as cloudstructs from 'cloudstructs';

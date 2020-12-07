@@ -12,34 +12,6 @@ Object {
       },
     },
   },
-  "Outputs": Object {
-    "ApiEndpoint4F160690": Object {
-      "Value": Object {
-        "Fn::Join": Array [
-          "",
-          Array [
-            "https://",
-            Object {
-              "Ref": "ApiF70053CD",
-            },
-            ".execute-api.",
-            Object {
-              "Ref": "AWS::Region",
-            },
-            ".",
-            Object {
-              "Ref": "AWS::URLSuffix",
-            },
-            "/",
-            Object {
-              "Ref": "ApiDeploymentStageprod3EB9684E",
-            },
-            "/",
-          ],
-        ],
-      },
-    },
-  },
   "Parameters": Object {
     "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2ArtifactHash652C125C": Object {
       "Description": "Artifact hash for asset \\"19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2\\"",
@@ -153,50 +125,27 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "ApiANY40671C4F": Object {
+    "ApiDefaultRoute1D83B0D8": Object {
       "Properties": Object {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "ANY",
-        "Integration": Object {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                Object {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                Object {
-                  "Fn::GetAtt": Array [
-                    "Fn9270CBC0",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "ResourceId": Object {
-          "Fn::GetAtt": Array [
-            "ApiF70053CD",
-            "RootResourceId",
-          ],
-        },
-        "RestApiId": Object {
+        "ApiId": Object {
           "Ref": "ApiF70053CD",
         },
+        "RouteKey": "$default",
+        "Target": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "integrations/",
+              Object {
+                "Ref": "ApiDefaultRouteDefaultRouteIntegrationABD448B2",
+              },
+            ],
+          ],
+        },
       },
-      "Type": "AWS::ApiGateway::Method",
+      "Type": "AWS::ApiGatewayV2::Route",
     },
-    "ApiANYApiPermissionApiANY152A6C0A": Object {
+    "ApiDefaultRouteApiDefaultRouteF266FA2APermission46D561C5": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -225,220 +174,6 @@ Object {
               ":",
               Object {
                 "Ref": "ApiF70053CD",
-              },
-              "/",
-              Object {
-                "Ref": "ApiDeploymentStageprod3EB9684E",
-              },
-              "/*/",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "ApiANYApiPermissionTestApiANYDE21CEEE": Object {
-      "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "Fn9270CBC0",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "ApiF70053CD",
-              },
-              "/test-invoke-stage/*/",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "ApiAccountA18C9B29": Object {
-      "DependsOn": Array [
-        "ApiF70053CD",
-      ],
-      "Properties": Object {
-        "CloudWatchRoleArn": Object {
-          "Fn::GetAtt": Array [
-            "ApiCloudWatchRole73EC6FC4",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::ApiGateway::Account",
-    },
-    "ApiCloudWatchRole73EC6FC4": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "apigateway.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "ApiDeploymentB17BE62Ddbf2a80cf8fa8a238d45112ae9502855": Object {
-      "DependsOn": Array [
-        "ApiproxyANY4946669B",
-        "Apiproxy05443892",
-        "ApiANY40671C4F",
-      ],
-      "Properties": Object {
-        "Description": "Automatically created by the RestApi construct",
-        "RestApiId": Object {
-          "Ref": "ApiF70053CD",
-        },
-      },
-      "Type": "AWS::ApiGateway::Deployment",
-    },
-    "ApiDeploymentStageprod3EB9684E": Object {
-      "Properties": Object {
-        "DeploymentId": Object {
-          "Ref": "ApiDeploymentB17BE62Ddbf2a80cf8fa8a238d45112ae9502855",
-        },
-        "RestApiId": Object {
-          "Ref": "ApiF70053CD",
-        },
-        "StageName": "prod",
-      },
-      "Type": "AWS::ApiGateway::Stage",
-    },
-    "ApiF70053CD": Object {
-      "Properties": Object {
-        "Name": "Api",
-      },
-      "Type": "AWS::ApiGateway::RestApi",
-    },
-    "Apiproxy05443892": Object {
-      "Properties": Object {
-        "ParentId": Object {
-          "Fn::GetAtt": Array [
-            "ApiF70053CD",
-            "RootResourceId",
-          ],
-        },
-        "PathPart": "{proxy+}",
-        "RestApiId": Object {
-          "Ref": "ApiF70053CD",
-        },
-      },
-      "Type": "AWS::ApiGateway::Resource",
-    },
-    "ApiproxyANY4946669B": Object {
-      "Properties": Object {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "ANY",
-        "Integration": Object {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                Object {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                Object {
-                  "Fn::GetAtt": Array [
-                    "Fn9270CBC0",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "ResourceId": Object {
-          "Ref": "Apiproxy05443892",
-        },
-        "RestApiId": Object {
-          "Ref": "ApiF70053CD",
-        },
-      },
-      "Type": "AWS::ApiGateway::Method",
-    },
-    "ApiproxyANYApiPermissionApiANYproxyD2F11AC7": Object {
-      "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "Fn9270CBC0",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "ApiF70053CD",
-              },
-              "/",
-              Object {
-                "Ref": "ApiDeploymentStageprod3EB9684E",
               },
               "/*/*",
             ],
@@ -447,42 +182,38 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ApiproxyANYApiPermissionTestApiANYproxy5B89AF8D": Object {
+    "ApiDefaultRouteDefaultRouteIntegrationABD448B2": Object {
       "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
+        "ApiId": Object {
+          "Ref": "ApiF70053CD",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": Object {
           "Fn::GetAtt": Array [
             "Fn9270CBC0",
             "Arn",
           ],
         },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "ApiF70053CD",
-              },
-              "/test-invoke-stage/*/*",
-            ],
-          ],
-        },
+        "PayloadFormatVersion": "2.0",
       },
-      "Type": "AWS::Lambda::Permission",
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "ApiDefaultStage189A7074": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "ApiF70053CD",
+        },
+        "AutoDeploy": true,
+        "StageName": "$default",
+      },
+      "Type": "AWS::ApiGatewayV2::Stage",
+    },
+    "ApiF70053CD": Object {
+      "Properties": Object {
+        "Name": "Api",
+        "ProtocolType": "HTTP",
+      },
+      "Type": "AWS::ApiGatewayV2::Api",
     },
     "Fn9270CBC0": Object {
       "DependsOn": Array [
@@ -1207,10 +938,6 @@ Object {
                   Object {
                     "Ref": "AWS::URLSuffix",
                   },
-                  "/",
-                  Object {
-                    "Ref": "ApiDeploymentStageprod3EB9684E",
-                  },
                   "/\\"}",
                 ],
               ],
@@ -1252,10 +979,6 @@ Object {
                   ".",
                   Object {
                     "Ref": "AWS::URLSuffix",
-                  },
-                  "/",
-                  Object {
-                    "Ref": "ApiDeploymentStageprod3EB9684E",
                   },
                   "/\\"}",
                 ],
