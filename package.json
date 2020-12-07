@@ -60,7 +60,8 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-apigateway": "^1.77.0",
+    "@aws-cdk/aws-apigatewayv2": "^1.77.0",
+    "@aws-cdk/aws-apigatewayv2-integrations": "^1.77.0",
     "@aws-cdk/aws-certificatemanager": "^1.77.0",
     "@aws-cdk/aws-cloudfront": "^1.77.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.77.0",
@@ -79,7 +80,8 @@
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.77.0",
+    "@aws-cdk/aws-apigatewayv2": "^1.77.0",
+    "@aws-cdk/aws-apigatewayv2-integrations": "^1.77.0",
     "@aws-cdk/aws-certificatemanager": "^1.77.0",
     "@aws-cdk/aws-cloudfront": "^1.77.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.77.0",
@@ -178,7 +180,7 @@
       "category": 2
     }
   },
-  "version": "0.0.11",
+  "version": "0.1.1",
   "jest": {
     "clearMocks": true,
     "collectCoverage": true,

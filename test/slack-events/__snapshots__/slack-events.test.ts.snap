@@ -3,29 +3,11 @@
 exports[`SlackEvents 1`] = `
 Object {
   "Outputs": Object {
-    "SlackEventsSlackEventsApiEndpointE290B4AF": Object {
+    "SlackEventsApiEndpoint11A6FA12": Object {
       "Value": Object {
-        "Fn::Join": Array [
-          "",
-          Array [
-            "https://",
-            Object {
-              "Ref": "SlackEventsSlackEventsApiE97C93CF",
-            },
-            ".execute-api.",
-            Object {
-              "Ref": "AWS::Region",
-            },
-            ".",
-            Object {
-              "Ref": "AWS::URLSuffix",
-            },
-            "/",
-            Object {
-              "Ref": "SlackEventsSlackEventsApiDeploymentStageprod047EBB19",
-            },
-            "/",
-          ],
+        "Fn::GetAtt": Array [
+          "SlackEventsSlackEventsApiE97C93CF",
+          "ApiEndpoint",
         ],
       },
     },
@@ -167,50 +149,43 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-    "SlackEventsSlackEventsApiANY2A40A712": Object {
+    "SlackEventsSlackEventsApiDefaultRouteBD062D1A": Object {
       "Properties": Object {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "ANY",
-        "Integration": Object {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                Object {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SlackEventshandler0D367EF7",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "ResourceId": Object {
-          "Fn::GetAtt": Array [
-            "SlackEventsSlackEventsApiE97C93CF",
-            "RootResourceId",
-          ],
-        },
-        "RestApiId": Object {
+        "ApiId": Object {
           "Ref": "SlackEventsSlackEventsApiE97C93CF",
         },
+        "RouteKey": "$default",
+        "Target": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "integrations/",
+              Object {
+                "Ref": "SlackEventsSlackEventsApiDefaultRouteDefaultRouteIntegration8BDEF45E",
+              },
+            ],
+          ],
+        },
       },
-      "Type": "AWS::ApiGateway::Method",
+      "Type": "AWS::ApiGatewayV2::Route",
     },
-    "SlackEventsSlackEventsApiANYApiPermissionSlackEventsSlackEventsApi635C17FDANYB1B66706": Object {
+    "SlackEventsSlackEventsApiDefaultRouteDefaultRouteIntegration8BDEF45E": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "SlackEventsSlackEventsApiE97C93CF",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": Object {
+          "Fn::GetAtt": Array [
+            "SlackEventshandler0D367EF7",
+            "Arn",
+          ],
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "SlackEventsSlackEventsApiDefaultRouteSlackEventsSlackEventsApiDefaultRouteDA050C8APermission19510ADB": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -239,220 +214,6 @@ Object {
               ":",
               Object {
                 "Ref": "SlackEventsSlackEventsApiE97C93CF",
-              },
-              "/",
-              Object {
-                "Ref": "SlackEventsSlackEventsApiDeploymentStageprod047EBB19",
-              },
-              "/*/",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "SlackEventsSlackEventsApiANYApiPermissionTestSlackEventsSlackEventsApi635C17FDANYEDED0374": Object {
-      "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "SlackEventshandler0D367EF7",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "SlackEventsSlackEventsApiE97C93CF",
-              },
-              "/test-invoke-stage/*/",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "SlackEventsSlackEventsApiAccount81055F48": Object {
-      "DependsOn": Array [
-        "SlackEventsSlackEventsApiE97C93CF",
-      ],
-      "Properties": Object {
-        "CloudWatchRoleArn": Object {
-          "Fn::GetAtt": Array [
-            "SlackEventsSlackEventsApiCloudWatchRole054C136D",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::ApiGateway::Account",
-    },
-    "SlackEventsSlackEventsApiCloudWatchRole054C136D": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "apigateway.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "SlackEventsSlackEventsApiDeploymentA3D4A1A6b47be57a93a398e2d630f259fdf5ec92": Object {
-      "DependsOn": Array [
-        "SlackEventsSlackEventsApiproxyANY422185E6",
-        "SlackEventsSlackEventsApiproxy92B25B5D",
-        "SlackEventsSlackEventsApiANY2A40A712",
-      ],
-      "Properties": Object {
-        "Description": "Automatically created by the RestApi construct",
-        "RestApiId": Object {
-          "Ref": "SlackEventsSlackEventsApiE97C93CF",
-        },
-      },
-      "Type": "AWS::ApiGateway::Deployment",
-    },
-    "SlackEventsSlackEventsApiDeploymentStageprod047EBB19": Object {
-      "Properties": Object {
-        "DeploymentId": Object {
-          "Ref": "SlackEventsSlackEventsApiDeploymentA3D4A1A6b47be57a93a398e2d630f259fdf5ec92",
-        },
-        "RestApiId": Object {
-          "Ref": "SlackEventsSlackEventsApiE97C93CF",
-        },
-        "StageName": "prod",
-      },
-      "Type": "AWS::ApiGateway::Stage",
-    },
-    "SlackEventsSlackEventsApiE97C93CF": Object {
-      "Properties": Object {
-        "Name": "SlackEventsApi",
-      },
-      "Type": "AWS::ApiGateway::RestApi",
-    },
-    "SlackEventsSlackEventsApiproxy92B25B5D": Object {
-      "Properties": Object {
-        "ParentId": Object {
-          "Fn::GetAtt": Array [
-            "SlackEventsSlackEventsApiE97C93CF",
-            "RootResourceId",
-          ],
-        },
-        "PathPart": "{proxy+}",
-        "RestApiId": Object {
-          "Ref": "SlackEventsSlackEventsApiE97C93CF",
-        },
-      },
-      "Type": "AWS::ApiGateway::Resource",
-    },
-    "SlackEventsSlackEventsApiproxyANY422185E6": Object {
-      "Properties": Object {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "ANY",
-        "Integration": Object {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                Object {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SlackEventshandler0D367EF7",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "ResourceId": Object {
-          "Ref": "SlackEventsSlackEventsApiproxy92B25B5D",
-        },
-        "RestApiId": Object {
-          "Ref": "SlackEventsSlackEventsApiE97C93CF",
-        },
-      },
-      "Type": "AWS::ApiGateway::Method",
-    },
-    "SlackEventsSlackEventsApiproxyANYApiPermissionSlackEventsSlackEventsApi635C17FDANYproxyB45E552D": Object {
-      "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "SlackEventshandler0D367EF7",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "SlackEventsSlackEventsApiE97C93CF",
-              },
-              "/",
-              Object {
-                "Ref": "SlackEventsSlackEventsApiDeploymentStageprod047EBB19",
               },
               "/*/*",
             ],
@@ -461,42 +222,22 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "SlackEventsSlackEventsApiproxyANYApiPermissionTestSlackEventsSlackEventsApi635C17FDANYproxy71ED5D97": Object {
+    "SlackEventsSlackEventsApiDefaultStage40400FF4": Object {
       "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "SlackEventshandler0D367EF7",
-            "Arn",
-          ],
+        "ApiId": Object {
+          "Ref": "SlackEventsSlackEventsApiE97C93CF",
         },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "SlackEventsSlackEventsApiE97C93CF",
-              },
-              "/test-invoke-stage/*/*",
-            ],
-          ],
-        },
+        "AutoDeploy": true,
+        "StageName": "$default",
       },
-      "Type": "AWS::Lambda::Permission",
+      "Type": "AWS::ApiGatewayV2::Stage",
+    },
+    "SlackEventsSlackEventsApiE97C93CF": Object {
+      "Properties": Object {
+        "Name": "SlackEventsApi",
+        "ProtocolType": "HTTP",
+      },
+      "Type": "AWS::ApiGatewayV2::Api",
     },
     "SlackEventshandler0D367EF7": Object {
       "DependsOn": Array [

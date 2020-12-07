@@ -8,7 +8,8 @@ const project = new AwsCdkConstructLibrary({
   name: "cloudstructs",
   repository: "https://github.com/jogold/cloudstructs.git",
   cdkDependencies: [
-    "@aws-cdk/aws-apigateway",
+    "@aws-cdk/aws-apigatewayv2",
+    "@aws-cdk/aws-apigatewayv2-integrations",
     "@aws-cdk/aws-certificatemanager",
     "@aws-cdk/aws-cloudfront",
     "@aws-cdk/aws-cloudfront-origins",

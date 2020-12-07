@@ -1,4 +1,5 @@
-import * as apigateway from '@aws-cdk/aws-apigateway';
+import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2';
+import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations';
 import * as events from '@aws-cdk/aws-events';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as nodejs from '@aws-cdk/aws-lambda-nodejs';
@@ -15,11 +16,11 @@ export interface SlackEventsProps {
   readonly signingSecret: cdk.SecretValue;
 
   /**
-   * A name for the API Gateway RestApi resource
+   * A name for the API Gateway resource
    *
    * @default SlackEventsApi
    */
-  readonly restApiName?: string;
+  readonly apiName?: string;
 
   /**
    * Whether to use a custom event bus
@@ -60,10 +61,16 @@ export class SlackEvents extends cdk.Construct {
 
     events.EventBus.grantPutEvents(handler);
 
-    // Rest API
-    new apigateway.LambdaRestApi(this, 'SlackEventsApi', {
-      handler,
-      restApiName: props.restApiName,
+    // HTTP API
+    const httpApi = new apigatewayv2.HttpApi(this, 'SlackEventsApi', {
+      defaultIntegration: new integrations.LambdaProxyIntegration({
+        handler,
+      }),
+      apiName: props.apiName,
+    });
+
+    new cdk.CfnOutput(this, 'ApiEndpoint', {
+      value: httpApi.apiEndpoint,
     });
   }
 }

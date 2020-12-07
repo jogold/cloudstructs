@@ -22,7 +22,7 @@
     "@aws-cdk/cx-api" "1.77.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-apigateway@1.77.0", "@aws-cdk/aws-apigateway@^1.77.0":
+"@aws-cdk/aws-apigateway@1.77.0":
   version "1.77.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigateway/-/aws-apigateway-1.77.0.tgz#7080d41eb06d66681517f46c95a20db80693a3ee"
   integrity sha512-vqVJWu86vSWj9fQ8H8Dg5WsXYhz9QO1tivAgUTMdEaZEKQHuJ0B13MZXl62cRzdkaxm4z9S0dE3FLrgfwIgWEA==
@@ -41,7 +41,21 @@
     "@aws-cdk/cx-api" "1.77.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-apigatewayv2@1.77.0":
+"@aws-cdk/aws-apigatewayv2-integrations@^1.77.0":
+  version "1.77.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigatewayv2-integrations/-/aws-apigatewayv2-integrations-1.77.0.tgz#19430cb76b8263f363862e661ae554518620d5bf"
+  integrity sha512-uFS5CRdZIXm1PqzpWdOZyZMiOqdnYpjamtN5cnRIcMRvH0JhevgoeJp24PdJCUms2NqHb1VG6Jne1igz5xrLqQ==
+  dependencies:
+    "@aws-cdk/aws-apigatewayv2" "1.77.0"
+    "@aws-cdk/aws-ec2" "1.77.0"
+    "@aws-cdk/aws-elasticloadbalancingv2" "1.77.0"
+    "@aws-cdk/aws-iam" "1.77.0"
+    "@aws-cdk/aws-lambda" "1.77.0"
+    "@aws-cdk/aws-servicediscovery" "1.77.0"
+    "@aws-cdk/core" "1.77.0"
+    constructs "^3.2.0"
+
+"@aws-cdk/aws-apigatewayv2@1.77.0", "@aws-cdk/aws-apigatewayv2@^1.77.0":
   version "1.77.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigatewayv2/-/aws-apigatewayv2-1.77.0.tgz#178485176692917b5ae1f70b02b1d4744cfd9371"
   integrity sha512-LdRmUGW0QQ8XKmahASN1W50mq0mx5E5cYBn7ufnhfWo3WtJA91jMMt5Qeky+QGStTg18BIsmvisY4414ZGHZgw==
@@ -2886,9 +2900,9 @@ es-to-primitive@^1.2.1:
     is-symbol "^1.0.2"
 
 esbuild@^0.8.15:
-  version "0.8.16"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.16.tgz#8ae34b15d938e8b8b5ac2459414fe3e7fd7dd6b2"
-  integrity sha512-HMvPNxDIhEGO/YUh8oO8oxQ1g+ttWz2anUF7NJmQglj2XfJS8zd8mP0Sb2y+jE1SVk3UjD/rYhdsEOFULN9/xw==
+  version "0.8.20"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.20.tgz#e56b594c3bfc1b87f9299b4a43eead3e0a10f49c"
+  integrity sha512-xXNLXa2SraaAoeTybOMAvOf6KW/DthI3ATXMG+W3yMav1iFpEGvo4XS22AzCPE3rTXbK/7TykxpwI8mD6lYUOg==
 
 escalade@^3.1.1:
   version "3.1.1"
