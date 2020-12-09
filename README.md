@@ -22,3 +22,5 @@ High-level constructs for AWS CDK
 
 * [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
 and invoke a Lambda function
+
+* [`EcsServiceRoller`](src/ecs-service-roller) Roll your ECS service tasks on schedule or with a rule
