@@ -13,6 +13,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-certificatemanager',
     '@aws-cdk/aws-cloudfront',
     '@aws-cdk/aws-cloudfront-origins',
+    '@aws-cdk/aws-ecs',
     '@aws-cdk/aws-events',
     '@aws-cdk/aws-events-targets',
     '@aws-cdk/aws-iam',
