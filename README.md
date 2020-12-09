@@ -19,3 +19,6 @@ High-level constructs for AWS CDK
 
 * [`StateMachineCustomResourceProvider`](src/state-machine-cr-provider) Implement custom
   resources with AWS Step Functions state machines
+
+* [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
+and invoke a Lambda function
