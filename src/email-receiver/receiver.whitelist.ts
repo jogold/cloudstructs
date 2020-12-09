@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
-import { SESEvent } from './types';
-
-export async function handler(event: SESEvent): Promise<{ disposition: string }> {
+export async function handler(event: AWSLambda.SESEvent): Promise<{ disposition: string }> {
   console.log('Event: %j', event);
 
   const sesNotification = event.Records[0].ses;

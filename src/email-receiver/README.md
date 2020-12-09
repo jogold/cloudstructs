@@ -17,7 +17,7 @@ export class MyStack extends cdk.Stack {
     // code that defines or imports a Lambda function and receipt rule set
 
     new EmailReceiver(stack, 'EmailReceiver', {
-      recipients: ['support@cloudstructs.com'], // Process emails from this address
+      recipients: ['support@cloudstructs.com'], // Process emails sent to this address
       sourceWhitelist: '@amazon.com$', // Reject emails that are not from @amazon.com
       function: myFn,
       receiptRuleSet: myRuleSet,
@@ -26,7 +26,8 @@ export class MyStack extends cdk.Stack {
 }
 ```
 
-Your Lambda function receives a `constructs.SESEvent` event:
+Your Lambda function conveniently receives a [`AWSLambda.SESMessage`](https://www.npmjs.com/package/@types/aws-lambda)
+event:
 
 ```ts
 import { S3 } from 'aws-sdk';
@@ -34,7 +35,7 @@ import { SESMessage } from 'cloudstructs';
 
 const s3 = new S3({ apiVersion: '2006-03-01' });
 
-export async function handler(event: SESMessage): Promise<void> {
+export async function handler(event: AWSLambda.SESMessage): Promise<void> {
   // Download email
   const rawEmail = await s3.getObject({
     Bucket: event.receipt.action.bucketName,

@@ -4,6 +4,7 @@
 
 Name|Description
 ----|-----------
+[EmailReceiver](#cloudstructs-emailreceiver)|Receive emails through SES, save them to S3 and invokes a Lambda function.
 [SlackEvents](#cloudstructs-slackevents)|Send Slack events to Amazon EventBridge.
 [SlackTextract](#cloudstructs-slacktextract)|Extract text from images posted to Slack using Amazon Textract.
 [StateMachineCustomResourceProvider](#cloudstructs-statemachinecustomresourceprovider)|A state machine custom resource provider.
@@ -14,6 +15,7 @@ Name|Description
 
 Name|Description
 ----|-----------
+[EmailReceiverProps](#cloudstructs-emailreceiverprops)|Properties for an EmailReceiver.
 [SlackEventsProps](#cloudstructs-slackeventsprops)|Properties for a SlackEvents.
 [SlackTextractProps](#cloudstructs-slacktextractprops)|Properties for a SlackTextract.
 [StateMachineCustomResourceProviderProps](#cloudstructs-statemachinecustomresourceproviderprops)|Properties for a StateMachineCustomResourceProvider.
@@ -25,6 +27,34 @@ Name|Description
 Name|Description
 ----|-----------
 [IStateMachine](#cloudstructs-istatemachine)|A State Machine.
+
+
+
+## class EmailReceiver  <a id="cloudstructs-emailreceiver"></a>
+
+Receive emails through SES, save them to S3 and invokes a Lambda function.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new EmailReceiver(scope: Construct, id: string, props: EmailReceiverProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[EmailReceiverProps](#cloudstructs-emailreceiverprops)</code>)  *No description*
+  * **function** (<code>[IFunction](#aws-cdk-aws-lambda-ifunction)</code>)  A Lambda function to invoke after the message is saved to S3. 
+  * **receiptRuleSet** (<code>[IReceiptRuleSet](#aws-cdk-aws-ses-ireceiptruleset)</code>)  The SES receipt rule set where a receipt rule will be added. 
+  * **recipients** (<code>Array<string></code>)  The recipients for which emails should be received. 
+  * **afterRule** (<code>[IReceiptRule](#aws-cdk-aws-ses-ireceiptrule)</code>)  An existing rule after which the new rule will be placed in the rule set. __*Default*__: The new rule is inserted at the beginning of the rule list.
+  * **sourceWhitelist** (<code>string</code>)  A regular expression to whitelist source email addresses. __*Default*__: no whitelisting of source email addresses
+
 
 
 
@@ -154,6 +184,23 @@ Name | Type | Description
 -----|------|-------------
 **bucket** | <code>[Bucket](#aws-cdk-aws-s3-bucket)</code> | The S3 bucket of this static website.
 **distribution** | <code>[Distribution](#aws-cdk-aws-cloudfront-distribution)</code> | The CloudFront distribution of this static website.
+
+
+
+## struct EmailReceiverProps  <a id="cloudstructs-emailreceiverprops"></a>
+
+
+Properties for an EmailReceiver.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**function** | <code>[IFunction](#aws-cdk-aws-lambda-ifunction)</code> | A Lambda function to invoke after the message is saved to S3.
+**receiptRuleSet** | <code>[IReceiptRuleSet](#aws-cdk-aws-ses-ireceiptruleset)</code> | The SES receipt rule set where a receipt rule will be added.
+**recipients** | <code>Array<string></code> | The recipients for which emails should be received.
+**afterRule**? | <code>[IReceiptRule](#aws-cdk-aws-ses-ireceiptrule)</code> | An existing rule after which the new rule will be placed in the rule set.<br/>__*Default*__: The new rule is inserted at the beginning of the rule list.
+**sourceWhitelist**? | <code>string</code> | A regular expression to whitelist source email addresses.<br/>__*Default*__: no whitelisting of source email addresses
 
 
 
