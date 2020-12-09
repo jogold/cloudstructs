@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.5 (2020-12-09)
+
+
+### Features
+
+* **email-receiver:** easily receive and process emails with a Lambda function ([#13](https://github.com/jogold/cloudstructs/issues/13)) ([f8044e0](https://github.com/jogold/cloudstructs/commit/f8044e0a6caad208cca51f05bc619e3402d53532))
+
 ### 0.1.4 (2020-12-09)
 
 ### 0.1.3 (2020-12-08)
