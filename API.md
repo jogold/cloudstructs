@@ -109,8 +109,8 @@ new RollTrigger()
 
 Name | Type | Description 
 -----|------|-------------
-**rule**? | <code>[Rule](#aws-cdk-aws-events-rule)</code> | Roll rule.<br/>__*Default*__: us a schedule
-**schedule**? | <code>[Schedule](#aws-cdk-aws-events-schedule)</code> | Roll schedule.<br/>__*Default*__: use a rule
+**rule**? | <code>[Rule](#aws-cdk-aws-events-rule)</code> | Roll rule.<br/>__*Default*__: roll everyday at midnight
+**schedule**? | <code>[Schedule](#aws-cdk-aws-events-schedule)</code> | Roll schedule.<br/>__*Default*__: roll everyday at midnight
 
 ### Methods
 
