@@ -47,14 +47,14 @@ export abstract class RollTrigger {
   /**
    * Roll schedule
    *
-   * @default - use a rule
+   * @default - roll everyday at midnight
    */
   public abstract readonly schedule?: events.Schedule;
 
   /**
    * Roll rule
    *
-   * @default - us a schedule
+   * @default - roll everyday at midnight
    */
   public abstract readonly rule?: events.Rule;
 }
