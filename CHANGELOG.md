@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.7 (2020-12-09)
+
+
+### Features
+
+* **ecs-service-roller:** easily roll ECS service tasks ([#45](https://github.com/jogold/cloudstructs/issues/45)) ([774bc8f](https://github.com/jogold/cloudstructs/commit/774bc8f994004a34bb2d6bbf732f40c2e12bf702))
+
 ### 0.1.6 (2020-12-09)
 
 ### 0.1.5 (2020-12-09)
