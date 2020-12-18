@@ -439,6 +439,9 @@ Object {
             Object {
               "CustomOriginConfig": Object {
                 "OriginProtocolPolicy": "http-only",
+                "OriginSSLProtocols": Array [
+                  "TLSv1.2",
+                ],
               },
               "DomainName": Object {
                 "Fn::Select": Array [
@@ -1525,6 +1528,9 @@ Object {
             Object {
               "CustomOriginConfig": Object {
                 "OriginProtocolPolicy": "http-only",
+                "OriginSSLProtocols": Array [
+                  "TLSv1.2",
+                ],
               },
               "DomainName": Object {
                 "Fn::Select": Array [

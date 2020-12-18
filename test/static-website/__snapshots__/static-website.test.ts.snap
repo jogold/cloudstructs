@@ -669,6 +669,12 @@ Object {
     "StaticWebsiteHttpsRedirectRedirectBucket45BA11C9": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
+        "PublicAccessBlockConfiguration": Object {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true,
+        },
         "WebsiteConfiguration": Object {
           "RedirectAllRequestsTo": Object {
             "HostName": "www.my-site.com",
