@@ -21,12 +21,12 @@ export class MyStack extends cdk.Stack {
     super(scope, id, props);
 
     // Define a provider
-    const provider = new cloudstructs.StateMachineCustomResourceProvider(stack, 'Provider', {
+    const provider = new cloudstructs.StateMachineCustomResourceProvider(this, 'Provider', {
       stateMachine: myStateMachine,
     });
 
     // Use the provider as a custom resource
-    new cdk.CustomResource(stack, 'CustomResource', {
+    new cdk.CustomResource(this, 'CustomResource', {
       serviceToken: provider.serviceToken,
       properties: {
         Key: 'value',
