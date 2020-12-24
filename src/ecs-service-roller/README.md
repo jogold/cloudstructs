@@ -17,20 +17,20 @@ export class MyStack extends cdk.Stack {
     // code that defines or imports a cluster and a service
 
     // Roll tasks of myFirstService everyday at midnight
-    new cloudstructs.EcsServiceRoller(stack, 'MyFirstRoller', {
+    new cloudstructs.EcsServiceRoller(this, 'MyFirstRoller', {
       cluster: myCluster,
       service: myFirstService,
     });
 
     // Roll tasks of mySecondService every 5 hours
-    new cloudstructs.EcsServiceRoller(stack, 'MySecondRoller', {
+    new cloudstructs.EcsServiceRoller(this, 'MySecondRoller', {
       cluster: myCluster,
       service: mySecondService,
       trigger: cloudstructs.RollTrigger.fromSchedule(events.Schedule.rate(cdk.Duration.hours(5))),
     });
 
     // Roll tasks of myThirdService with a rule
-    new cloudstructs.EcsServiceRoller(stack, 'MyThirdRoller', {
+    new cloudstructs.EcsServiceRoller(this, 'MyThirdRoller', {
       cluster: myCluster,
       service: myThirdService,
       trigger: cloudstructs.RollTrigger.fromRule(rule),

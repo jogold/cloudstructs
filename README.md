@@ -8,10 +8,14 @@ High-level constructs for AWS CDK
 
 ## Constructs
 
-* [`EcsServiceRoller`](src/ecs-service-roller) Roll your ECS service tasks on schedule or with a rule
+* [`EcsServiceRoller`](src/ecs-service-roller) Roll your ECS service tasks on schedule or with
+  a rule
 
 * [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
-and invoke a Lambda function
+  and invoke a Lambda function
+
+* ['SamlIdentityProvider`](src/saml-identity-provider) Custom resource to create a SAML identity
+  provider
 
 * [`SlackEvents`](src/slack-events) Send Slack events to Amazon EventBridge
 
