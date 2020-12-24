@@ -10,6 +10,7 @@ encoded and then a zero-byte object with redirection is stored in S3.
 Define a `UrlShortener`:
 
 ```ts
+import * as route53 from '@aws-cdk/aws-route53';
 import * as cdk from '@aws-cdk/core';
 import * as cloudstructs from 'cloudstructs';
 
@@ -18,9 +19,9 @@ export class MyStack extends cdk.Stack {
     super(scope, id, props);
 
     // The hosted zone for the domain of the short urls
-    const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'short.com' });
+    const hostedZone = new route53.HostedZone(this, 'HostedZone', { zoneName: 'short.com' });
 
-    new UrlShortener(this, 'UrlShortener', { hostedZone });
+    new cloudstructs.UrlShortener(this, 'UrlShortener', { hostedZone });
   }
 }
 ```
