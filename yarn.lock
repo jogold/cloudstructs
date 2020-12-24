@@ -22,7 +22,7 @@
     "@aws-cdk/cx-api" "1.79.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-apigateway@1.79.0":
+"@aws-cdk/aws-apigateway@1.79.0", "@aws-cdk/aws-apigateway@^1.79.0":
   version "1.79.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigateway/-/aws-apigateway-1.79.0.tgz#e2c166324ee50581c643a7692c25a5dd5ad9f11f"
   integrity sha512-P66Jnu3kFnEuN5gXm5BDOK/L7sYWu75kWJztTfyW1nOSqGfiGj4cvrXMMvSGrEw2lmEKLnNgAl93M64DbTdT9Q==
@@ -257,7 +257,21 @@
     constructs "^3.2.0"
     punycode "^2.1.1"
 
-"@aws-cdk/aws-ec2@1.79.0":
+"@aws-cdk/aws-dynamodb@^1.79.0":
+  version "1.79.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-dynamodb/-/aws-dynamodb-1.79.0.tgz#a7c03b3d28dddcb7430fbc3ef813dbb94796b214"
+  integrity sha512-4JYtuN67hdmyAVd0vcG8QkfxBf8RA4hv5sMwFRmxG0GuN2/iTa6Acp2XQstVk/nK8bE3BUioRRRNRK1/5amlDw==
+  dependencies:
+    "@aws-cdk/aws-applicationautoscaling" "1.79.0"
+    "@aws-cdk/aws-cloudwatch" "1.79.0"
+    "@aws-cdk/aws-iam" "1.79.0"
+    "@aws-cdk/aws-kms" "1.79.0"
+    "@aws-cdk/aws-lambda" "1.79.0"
+    "@aws-cdk/core" "1.79.0"
+    "@aws-cdk/custom-resources" "1.79.0"
+    constructs "^3.2.0"
+
+"@aws-cdk/aws-ec2@1.79.0", "@aws-cdk/aws-ec2@^1.79.0":
   version "1.79.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-ec2/-/aws-ec2-1.79.0.tgz#9c1ae84f374980f2456acdc57985a6612c1ae897"
   integrity sha512-A2pbynk5o18gKeCy/epMiaD9R4OKrXlWzaqAOvUlHOom+SkxIyZMcALdxgU26nCty0DxGfgQiNHWTgNttLuRJQ==

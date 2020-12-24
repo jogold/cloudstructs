@@ -58,11 +58,14 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
+    "@aws-cdk/aws-apigateway": "^1.79.0",
     "@aws-cdk/aws-apigatewayv2": "^1.79.0",
     "@aws-cdk/aws-apigatewayv2-integrations": "^1.79.0",
     "@aws-cdk/aws-certificatemanager": "^1.79.0",
     "@aws-cdk/aws-cloudfront": "^1.79.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.79.0",
+    "@aws-cdk/aws-dynamodb": "^1.79.0",
+    "@aws-cdk/aws-ec2": "^1.79.0",
     "@aws-cdk/aws-ecs": "^1.79.0",
     "@aws-cdk/aws-events": "^1.79.0",
     "@aws-cdk/aws-events-targets": "^1.79.0",
@@ -84,11 +87,14 @@
     "constructs": "^3.2.27"
   },
   "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.79.0",
     "@aws-cdk/aws-apigatewayv2": "^1.79.0",
     "@aws-cdk/aws-apigatewayv2-integrations": "^1.79.0",
     "@aws-cdk/aws-certificatemanager": "^1.79.0",
     "@aws-cdk/aws-cloudfront": "^1.79.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.79.0",
+    "@aws-cdk/aws-dynamodb": "^1.79.0",
+    "@aws-cdk/aws-ec2": "^1.79.0",
     "@aws-cdk/aws-ecs": "^1.79.0",
     "@aws-cdk/aws-events": "^1.79.0",
     "@aws-cdk/aws-events-targets": "^1.79.0",

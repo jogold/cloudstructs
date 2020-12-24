@@ -11,6 +11,7 @@ Name|Description
 [SlackTextract](#cloudstructs-slacktextract)|Extract text from images posted to Slack using Amazon Textract.
 [StateMachineCustomResourceProvider](#cloudstructs-statemachinecustomresourceprovider)|A state machine custom resource provider.
 [StaticWebsite](#cloudstructs-staticwebsite)|A CloudFront static website hosted on S3.
+[UrlShortener](#cloudstructs-urlshortener)|URL shortener.
 
 
 **Structs**
@@ -23,6 +24,7 @@ Name|Description
 [SlackTextractProps](#cloudstructs-slacktextractprops)|Properties for a SlackTextract.
 [StateMachineCustomResourceProviderProps](#cloudstructs-statemachinecustomresourceproviderprops)|Properties for a StateMachineCustomResourceProvider.
 [StaticWebsiteProps](#cloudstructs-staticwebsiteprops)|Properties for a StaticWebsite.
+[UrlShortenerProps](#cloudstructs-urlshortenerprops)|Properties for a UrlShortener.
 
 
 **Interfaces**
@@ -272,6 +274,41 @@ Name | Type | Description
 
 
 
+## class UrlShortener  <a id="cloudstructs-urlshortener"></a>
+
+URL shortener.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new UrlShortener(scope: Construct, id: string, props: UrlShortenerProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[UrlShortenerProps](#cloudstructs-urlshortenerprops)</code>)  *No description*
+  * **hostedZone** (<code>[IHostedZone](#aws-cdk-aws-route53-ihostedzone)</code>)  The hosted zone for the short URLs domain. 
+  * **apiGatewayEndpoint** (<code>[IInterfaceVpcEndpoint](#aws-cdk-aws-ec2-iinterfacevpcendpoint)</code>)  An interface VPC endpoint for API gateway. __*Default*__: API is public
+  * **expiration** (<code>[Duration](#aws-cdk-core-duration)</code>)  Expiration for short urls. __*Default*__: cdk.Duration.days(365)
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**api** | <code>[LambdaRestApi](#aws-cdk-aws-apigateway-lambdarestapi)</code> | The underlying API Gateway REST API.
+**apiEndpoint** | <code>string</code> | The endpoint of the URL shortener API.
+
+
+
 ## struct EcsServiceRollerProps  <a id="cloudstructs-ecsservicerollerprops"></a>
 
 
@@ -375,6 +412,21 @@ Name | Type | Description
 **hostedZone** | <code>[IHostedZone](#aws-cdk-aws-route53-ihostedzone)</code> | The hosted zone where records should be added.
 **backendConfiguration**? | <code>any</code> | A backend configuration that will be saved as `config.json` in the S3 bucket of the static website.<br/>__*Optional*__
 **redirects**? | <code>Array<string></code> | A list of domain names that should redirect to `domainName`.<br/>__*Default*__: the domain name of the hosted zone
+
+
+
+## struct UrlShortenerProps  <a id="cloudstructs-urlshortenerprops"></a>
+
+
+Properties for a UrlShortener.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**hostedZone** | <code>[IHostedZone](#aws-cdk-aws-route53-ihostedzone)</code> | The hosted zone for the short URLs domain.
+**apiGatewayEndpoint**? | <code>[IInterfaceVpcEndpoint](#aws-cdk-aws-ec2-iinterfacevpcendpoint)</code> | An interface VPC endpoint for API gateway.<br/>__*Default*__: API is public
+**expiration**? | <code>[Duration](#aws-cdk-core-duration)</code> | Expiration for short urls.<br/>__*Default*__: cdk.Duration.days(365)
 
 
 
