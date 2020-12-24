@@ -21,3 +21,5 @@ export class MyStack extends cdk.Stack {
   }
 }
 ```
+
+The ARN of the identity provider is exposed via the `samlIdentityProviderArn` property.
