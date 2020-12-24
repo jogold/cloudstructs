@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.15 (2020-12-24)
+
+
+### Features
+
+* **url-shortener:** URL shortener API ([#64](https://github.com/jogold/cloudstructs/issues/64)) ([350a705](https://github.com/jogold/cloudstructs/commit/350a705293ac02c9605b8bb99decfdf4a9878664))
+
 ### 0.1.14 (2020-12-23)
 
 ### 0.1.13 (2020-12-22)
