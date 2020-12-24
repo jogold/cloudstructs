@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.17 (2020-12-24)
+
+
+### Features
+
+* **saml-identity-provider:** custom resource to create a SAML identity provider ([#80](https://github.com/jogold/cloudstructs/issues/80)) ([6a1a1bc](https://github.com/jogold/cloudstructs/commit/6a1a1bc8b04d5bfc7e0913ae1c05dc577e193018))
+
 ### 0.1.16 (2020-12-24)
 
 ### 0.1.15 (2020-12-24)
