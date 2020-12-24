@@ -1,6 +1,9 @@
 # UrlShortener
 
-...
+Deploy an URL shortener API.
+
+Uses a DynamoDB table to increment a counter. The value of the counter is base62
+encoded and then a zero-byte object with redirection is stored in S3.
 
 ## Usage
 
@@ -14,7 +17,30 @@ export class MyStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    new UrlShortener(this, 'UrlShortener');
+    // The hosted zone for the domain of the short urls
+    const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'short.com' });
+
+    new UrlShortener(this, 'UrlShortener', { hostedZone });
   }
 }
 ```
+
+The deployed API expects the following JSON body:
+
+```json
+{
+  "url": "https://www.mylongurl.com/very/long/path"
+}
+```
+
+and replies with:
+
+```json
+{
+  "url": "https://www.mylongurl.com/very/long/path",
+  "shortUrl": "https://short.com/trBkV"
+}
+```
+
+By default, the API is public. It can be made private by specifying
+the `apiGatewayEndpoint` prop.
