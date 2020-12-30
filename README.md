@@ -14,7 +14,7 @@ High-level constructs for AWS CDK
 * [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
   and invoke a Lambda function
 
-* ['SamlIdentityProvider`](src/saml-identity-provider) Custom resource to create a SAML identity
+* [`SamlIdentityProvider`](src/saml-identity-provider) Custom resource to create a SAML identity
   provider
 
 * [`SlackEvents`](src/slack-events) Send Slack events to Amazon EventBridge
