@@ -560,7 +560,7 @@ Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
             "TargetOriginId": "StaticWebsiteDistributionOrigin1128FCAFB",
-            "ViewerProtocolPolicy": "allow-all",
+            "ViewerProtocolPolicy": "redirect-to-https",
           },
           "DefaultRootObject": "index.html",
           "Enabled": true,
