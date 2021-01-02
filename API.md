@@ -5,7 +5,7 @@
 Name|Description
 ----|-----------
 [CodeCommitMirror](#cloudstructs-codecommitmirror)|Mirror a repository to AWS CodeCommit on schedule.
-[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)|A git repository.
+[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)|A source repository for AWS CodeCommit mirroring.
 [EcsServiceRoller](#cloudstructs-ecsserviceroller)|Roll your ECS service tasks on schedule or with a rule.
 [EmailReceiver](#cloudstructs-emailreceiver)|Receive emails through SES, save them to S3 and invokes a Lambda function.
 [RollTrigger](#cloudstructs-rolltrigger)|The rule or schedule that should trigger a roll.
@@ -69,7 +69,7 @@ new CodeCommitMirror(scope: Construct, id: string, props: CodeCommitMirrorProps)
 
 ## class CodeCommitMirrorSourceRepository  <a id="cloudstructs-codecommitmirrorsourcerepository"></a>
 
-A git repository.
+A source repository for AWS CodeCommit mirroring.
 
 
 ### Initializer

@@ -455,6 +455,10 @@ Object {
           Object {
             "Environment": Array [
               Object {
+                "Name": "NAME",
+                "Value": "private",
+              },
+              Object {
                 "Name": "DESTINATION",
                 "Value": Object {
                   "Fn::Join": Array [
@@ -492,7 +496,7 @@ Object {
                   Object {
                     "Ref": "AWS::URLSuffix",
                   },
-                  "/aws-cdk/assets:f48c499493d48a0b21f383e8eef48f07160fafb473817c0ecd8ce7e652a6bd09",
+                  "/aws-cdk/assets:60f81122c1d936110160b23dcf7fee21b696f1613a9821311d25b858488ec2d2",
                 ],
               ],
             },
@@ -1260,6 +1264,10 @@ Object {
           Object {
             "Environment": Array [
               Object {
+                "Name": "NAME",
+                "Value": "cloudstructs",
+              },
+              Object {
                 "Name": "DESTINATION",
                 "Value": Object {
                   "Fn::Join": Array [
@@ -1301,7 +1309,7 @@ Object {
                   Object {
                     "Ref": "AWS::URLSuffix",
                   },
-                  "/aws-cdk/assets:f48c499493d48a0b21f383e8eef48f07160fafb473817c0ecd8ce7e652a6bd09",
+                  "/aws-cdk/assets:60f81122c1d936110160b23dcf7fee21b696f1613a9821311d25b858488ec2d2",
                 ],
               ],
             },

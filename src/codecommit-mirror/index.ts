@@ -38,7 +38,7 @@ export interface CodeCommitMirrorProps {
 }
 
 /**
- * A git repository
+ * A source repository for AWS CodeCommit mirroring
  */
 export abstract class CodeCommitMirrorSourceRepository {
   /**
