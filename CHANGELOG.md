@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.22](https://github.com/jogold/cloudstructs/compare/v0.1.21...v0.1.22) (2021-01-02)
+
+
+### Features
+
+* **codecommit-mirror:** mirror a repository to AWS CodeCommit on schedule ([#104](https://github.com/jogold/cloudstructs/issues/104)) ([c7dd0e6](https://github.com/jogold/cloudstructs/commit/c7dd0e662be2df72333f637aa2bf67861dec2efd)), closes [#103](https://github.com/jogold/cloudstructs/issues/103)
+
 ### [0.1.21](https://github.com/jogold/cloudstructs/compare/v0.1.20...v0.1.21) (2020-12-31)
 
 
