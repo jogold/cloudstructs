@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo Mirroring from $SOURCE to $DESTINATION
+echo Mirroring $NAME
 
 echo Cloning source...
 git clone --mirror $SOURCE source

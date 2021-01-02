@@ -106,6 +106,7 @@ export class CodeCommitMirror extends cdk.Construct {
         logRetention: logs.RetentionDays.TWO_MONTHS,
       }),
       environment: {
+        NAME: props.repository.name,
         DESTINATION: `codecommit::${cdk.Stack.of(destination).region}://${destination.repositoryName}`,
         ...props.repository.plainTextUrl
           ? { SOURCE: props.repository.plainTextUrl }
