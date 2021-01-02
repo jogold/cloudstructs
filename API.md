@@ -59,9 +59,10 @@ new CodeCommitMirror(scope: Construct, id: string, props: CodeCommitMirrorProps)
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[CodeCommitMirrorProps](#cloudstructs-codecommitmirrorprops)</code>)  *No description*
-  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS cluster where to run the mirror operation. 
+  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS cluster where to run the mirroring operation. 
   * **repository** (<code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>)  The source repository. 
   * **schedule** (<code>[Schedule](#aws-cdk-aws-events-schedule)</code>)  The schedule for the mirroring operation. __*Default*__: everyday at midnight
+  * **subnetSelection** (<code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code>)  Where to run the mirroring Fargate tasks. __*Default*__: public subnets
 
 
 
@@ -111,14 +112,14 @@ __Returns__:
 
 #### *static* private(name, url) <a id="cloudstructs-codecommitmirrorsourcerepository-private"></a>
 
-Private repository.
+Private repository with HTTPS clone URL stored in a AWS Secrets Manager secret or a AWS Systems Manager secure string parameter.
 
 ```ts
 static private(name: string, url: Secret): CodeCommitMirrorSourceRepository
 ```
 
-* **name** (<code>string</code>)  *No description*
-* **url** (<code>[Secret](#aws-cdk-aws-ecs-secret)</code>)  *No description*
+* **name** (<code>string</code>)  the repository name.
+* **url** (<code>[Secret](#aws-cdk-aws-ecs-secret)</code>)  the secret containing the HTTPS clone URL.
 
 __Returns__:
 * <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>
@@ -441,9 +442,10 @@ Properties for a CodeCommitMirror.
 
 Name | Type | Description 
 -----|------|-------------
-**cluster** | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS cluster where to run the mirror operation.
+**cluster** | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS cluster where to run the mirroring operation.
 **repository** | <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code> | The source repository.
 **schedule**? | <code>[Schedule](#aws-cdk-aws-events-schedule)</code> | The schedule for the mirroring operation.<br/>__*Default*__: everyday at midnight
+**subnetSelection**? | <code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code> | Where to run the mirroring Fargate tasks.<br/>__*Default*__: public subnets
 
 
 

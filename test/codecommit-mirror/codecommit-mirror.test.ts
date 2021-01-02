@@ -22,11 +22,11 @@ test('CodeCommitMirror with a public GitHub repo', () => {
 });
 
 test('CodeCommitMirror with a private GitHub repo', () => {
-  const cloneUrl = secretsmanager.Secret.fromSecretNameV2(stack, 'Secret', 'github-private');
+  const urlSecret = secretsmanager.Secret.fromSecretNameV2(stack, 'Secret', 'clone-url');
 
   new CodeCommitMirror(stack, 'Mirror', {
     cluster,
-    repository: CodeCommitMirrorSourceRepository.private('private', ecs.Secret.fromSecretsManager(cloneUrl)),
+    repository: CodeCommitMirrorSourceRepository.private('private', ecs.Secret.fromSecretsManager(urlSecret)),
     schedule: events.Schedule.rate(cdk.Duration.hours(6)),
   });
 

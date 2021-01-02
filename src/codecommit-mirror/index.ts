@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as codecommit from '@aws-cdk/aws-codecommit';
+import * as ec2 from '@aws-cdk/aws-ec2';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as events from '@aws-cdk/aws-events';
 import * as targets from '@aws-cdk/aws-events-targets';
@@ -17,7 +18,7 @@ export interface CodeCommitMirrorProps {
   readonly repository: CodeCommitMirrorSourceRepository;
 
   /**
-   * The ECS cluster where to run the mirror operation
+   * The ECS cluster where to run the mirroring operation
    */
   readonly cluster: ecs.ICluster;
 
@@ -27,6 +28,13 @@ export interface CodeCommitMirrorProps {
    * @default - everyday at midnight
    */
   readonly schedule?: events.Schedule;
+
+  /**
+   * Where to run the mirroring Fargate tasks
+   *
+   * @default - public subnets
+   */
+  readonly subnetSelection?: ec2.SubnetSelection;
 }
 
 /**
@@ -44,7 +52,11 @@ export abstract class CodeCommitMirrorSourceRepository {
   }
 
   /**
-   * Private repository
+   * Private repository with HTTPS clone URL stored in a AWS Secrets Manager secret or
+   * a AWS Systems Manager secure string parameter.
+   *
+   * @param name the repository name
+   * @param url the secret containing the HTTPS clone URL
    */
   public static private(name: string, url: ecs.Secret): CodeCommitMirrorSourceRepository {
     return {
@@ -65,6 +77,10 @@ export abstract class CodeCommitMirrorSourceRepository {
    * The HTTPS clone URL if the repository is private.
    *
    * The secret should contain the username and/or token.
+   *
+   * @example
+   * `https://TOKEN@github.com/owner/name`
+   * `https://USERNAME:TOKEN@bitbucket.org/owner/name.git`
    */
   public abstract readonly secretUrl?: ecs.Secret;
 }
@@ -84,7 +100,7 @@ export class CodeCommitMirror extends cdk.Construct {
     const taskDefinition = new ecs.FargateTaskDefinition(this, 'TaskDefinition');
 
     taskDefinition.addContainer('Container', {
-      image: ecs.ContainerImage.fromAsset(path.join(__dirname, 'docker')),
+      image: ecs.ContainerImage.fromAsset(path.join(__dirname, '..', '..', 'assets', 'codecommit-mirror', 'docker')),
       logging: new ecs.AwsLogDriver({
         streamPrefix: props.repository.name,
         logRetention: logs.RetentionDays.TWO_MONTHS,
@@ -96,7 +112,7 @@ export class CodeCommitMirror extends cdk.Construct {
           : {},
       },
       secrets: props.repository.secretUrl
-        ? { TOKEN: props.repository.secretUrl }
+        ? { SOURCE: props.repository.secretUrl }
         : undefined,
     });
 
@@ -115,6 +131,7 @@ export class CodeCommitMirror extends cdk.Construct {
     rule.addTarget(new targets.EcsTask({
       cluster: props.cluster,
       taskDefinition,
+      subnetSelection: props.subnetSelection ?? { subnetType: ec2.SubnetType.PUBLIC },
     }));
   }
 }

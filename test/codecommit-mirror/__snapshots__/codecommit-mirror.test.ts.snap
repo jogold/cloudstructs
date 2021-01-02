@@ -412,7 +412,7 @@ Object {
               "LaunchType": "FARGATE",
               "NetworkConfiguration": Object {
                 "AwsVpcConfiguration": Object {
-                  "AssignPublicIp": "DISABLED",
+                  "AssignPublicIp": "ENABLED",
                   "SecurityGroups": Array [
                     Object {
                       "Fn::GetAtt": Array [
@@ -423,10 +423,10 @@ Object {
                   ],
                   "Subnets": Array [
                     Object {
-                      "Ref": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+                      "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
                     },
                     Object {
-                      "Ref": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+                      "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
                     },
                   ],
                 },
@@ -511,7 +511,7 @@ Object {
             "Name": "Container",
             "Secrets": Array [
               Object {
-                "Name": "TOKEN",
+                "Name": "SOURCE",
                 "ValueFrom": Object {
                   "Fn::Join": Array [
                     "",
@@ -528,7 +528,7 @@ Object {
                       Object {
                         "Ref": "AWS::AccountId",
                       },
-                      ":secret:github-private",
+                      ":secret:clone-url",
                     ],
                   ],
                 },
@@ -725,7 +725,7 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":secret:github-private-??????",
+                    ":secret:clone-url-??????",
                   ],
                 ],
               },
@@ -1217,7 +1217,7 @@ Object {
               "LaunchType": "FARGATE",
               "NetworkConfiguration": Object {
                 "AwsVpcConfiguration": Object {
-                  "AssignPublicIp": "DISABLED",
+                  "AssignPublicIp": "ENABLED",
                   "SecurityGroups": Array [
                     Object {
                       "Fn::GetAtt": Array [
@@ -1228,10 +1228,10 @@ Object {
                   ],
                   "Subnets": Array [
                     Object {
-                      "Ref": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
+                      "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
                     },
                     Object {
-                      "Ref": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
+                      "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
                     },
                   ],
                 },
