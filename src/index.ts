@@ -6,3 +6,4 @@ export * from './email-receiver';
 export * from './ecs-service-roller';
 export * from './url-shortener';
 export * from './saml-identity-provider';
+export * from './codecommit-mirror';

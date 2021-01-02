@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.21](https://github.com/jogold/cloudstructs/compare/v0.1.20...v0.1.21) (2020-12-31)
+
+
+### Features
+
+* **static-website:** redirect to HTTPS ([#95](https://github.com/jogold/cloudstructs/issues/95)) ([9357afc](https://github.com/jogold/cloudstructs/commit/9357afce0fedc4f279cbc2dd9096c0e3505faf00))
+
 ### [0.1.20](https://github.com/jogold/cloudstructs/compare/v0.1.19...v0.1.20) (2020-12-30)
 
 ### [0.1.19](https://github.com/jogold/cloudstructs/compare/v0.1.18...v0.1.19) (2020-12-29)
