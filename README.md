@@ -8,6 +8,8 @@ High-level constructs for AWS CDK
 
 ## Constructs
 
+* [`CodeCommitMirror`](src/codecommit-mirror) Mirror a repository to AWS CodeCommit on schedule
+
 * [`EcsServiceRoller`](src/ecs-service-roller) Roll your ECS service tasks on schedule or with
   a rule
 

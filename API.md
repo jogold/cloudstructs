@@ -4,6 +4,8 @@
 
 Name|Description
 ----|-----------
+[CodeCommitMirror](#cloudstructs-codecommitmirror)|Mirror a repository to AWS CodeCommit on schedule.
+[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)|A git repository.
 [EcsServiceRoller](#cloudstructs-ecsserviceroller)|Roll your ECS service tasks on schedule or with a rule.
 [EmailReceiver](#cloudstructs-emailreceiver)|Receive emails through SES, save them to S3 and invokes a Lambda function.
 [RollTrigger](#cloudstructs-rolltrigger)|The rule or schedule that should trigger a roll.
@@ -19,6 +21,7 @@ Name|Description
 
 Name|Description
 ----|-----------
+[CodeCommitMirrorProps](#cloudstructs-codecommitmirrorprops)|Properties for a CodeCommitMirror.
 [EcsServiceRollerProps](#cloudstructs-ecsservicerollerprops)|Properties for a EcsServiceRoller.
 [EmailReceiverProps](#cloudstructs-emailreceiverprops)|Properties for an EmailReceiver.
 [SamlIdentityProviderProps](#cloudstructs-samlidentityproviderprops)|Properties for a SamlProvider.
@@ -34,6 +37,91 @@ Name|Description
 Name|Description
 ----|-----------
 [IStateMachine](#cloudstructs-istatemachine)|A State Machine.
+
+
+
+## class CodeCommitMirror  <a id="cloudstructs-codecommitmirror"></a>
+
+Mirror a repository to AWS CodeCommit on schedule.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new CodeCommitMirror(scope: Construct, id: string, props: CodeCommitMirrorProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[CodeCommitMirrorProps](#cloudstructs-codecommitmirrorprops)</code>)  *No description*
+  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS cluster where to run the mirror operation. 
+  * **repository** (<code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>)  The source repository. 
+  * **schedule** (<code>[Schedule](#aws-cdk-aws-events-schedule)</code>)  The schedule for the mirroring operation. __*Default*__: everyday at midnight
+
+
+
+
+## class CodeCommitMirrorSourceRepository  <a id="cloudstructs-codecommitmirrorsourcerepository"></a>
+
+A git repository.
+
+
+### Initializer
+
+
+
+
+```ts
+new CodeCommitMirrorSourceRepository()
+```
+
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**name** | <code>string</code> | The name of the repository.
+**plainTextUrl**? | <code>string</code> | The HTTPS clone URL in plain text, used for a public repository.<br/>__*Optional*__
+**secretUrl**? | <code>[Secret](#aws-cdk-aws-ecs-secret)</code> | The HTTPS clone URL if the repository is private.<br/>__*Optional*__
+
+### Methods
+
+
+#### *static* gitHub(owner, name) <a id="cloudstructs-codecommitmirrorsourcerepository-github"></a>
+
+Public GitHub repository.
+
+```ts
+static gitHub(owner: string, name: string): CodeCommitMirrorSourceRepository
+```
+
+* **owner** (<code>string</code>)  *No description*
+* **name** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>
+
+#### *static* private(name, url) <a id="cloudstructs-codecommitmirrorsourcerepository-private"></a>
+
+Private repository.
+
+```ts
+static private(name: string, url: Secret): CodeCommitMirrorSourceRepository
+```
+
+* **name** (<code>string</code>)  *No description*
+* **url** (<code>[Secret](#aws-cdk-aws-ecs-secret)</code>)  *No description*
+
+__Returns__:
+* <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>
 
 
 
@@ -341,6 +429,21 @@ Name | Type | Description
 -----|------|-------------
 **api** | <code>[LambdaRestApi](#aws-cdk-aws-apigateway-lambdarestapi)</code> | The underlying API Gateway REST API.
 **apiEndpoint** | <code>string</code> | The endpoint of the URL shortener API.
+
+
+
+## struct CodeCommitMirrorProps  <a id="cloudstructs-codecommitmirrorprops"></a>
+
+
+Properties for a CodeCommitMirror.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**cluster** | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS cluster where to run the mirror operation.
+**repository** | <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code> | The source repository.
+**schedule**? | <code>[Schedule](#aws-cdk-aws-events-schedule)</code> | The schedule for the mirroring operation.<br/>__*Default*__: everyday at midnight
 
 
 

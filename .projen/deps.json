@@ -6,6 +6,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/aws-secretsmanager",
+      "type": "build"
+    },
+    {
       "name": "@types/aws-lambda",
       "type": "build"
     },
@@ -155,6 +159,11 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/aws-codecommit",
+      "version": "^1.80.0",
+      "type": "peer"
+    },
+    {
       "name": "@aws-cdk/aws-dynamodb",
       "version": "^1.80.0",
       "type": "peer"
@@ -286,6 +295,11 @@
     },
     {
       "name": "@aws-cdk/aws-cloudfront",
+      "version": "^1.80.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-codecommit",
       "version": "^1.80.0",
       "type": "runtime"
     },
