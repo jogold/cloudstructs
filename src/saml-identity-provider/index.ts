@@ -41,6 +41,7 @@ export class SamlIdentityProvider extends cdk.Construct {
 
     const arn = cdk.Stack.of(this).formatArn({
       service: 'iam',
+      region: '',
       resource: 'saml-provider',
       resourceName: name,
     });

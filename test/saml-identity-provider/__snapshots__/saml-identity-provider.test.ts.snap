@@ -168,11 +168,7 @@ Object {
                     Object {
                       "Ref": "AWS::Partition",
                     },
-                    ":iam:",
-                    Object {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
+                    ":iam::",
                     Object {
                       "Ref": "AWS::AccountId",
                     },
