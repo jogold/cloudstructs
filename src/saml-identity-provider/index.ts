@@ -88,3 +88,20 @@ export class SamlIdentityProvider extends cdk.Construct {
     this.samlIdentityProviderArn = idp.getResponseField('SAMLProviderArn');
   }
 }
+
+/**
+ * Principal entity that represents a SAML federated identity provider.
+ */
+export class SamlFederatedPrincipal extends iam.FederatedPrincipal {
+  constructor(identityProvider: SamlIdentityProvider) {
+    super(
+      identityProvider.samlIdentityProviderArn,
+      {
+        StringEquals: {
+          'SAML:aud': 'https://signin.aws.amazon.com/saml',
+        },
+      },
+      'sts:AssumeRoleWithSAML',
+    );
+  }
+}

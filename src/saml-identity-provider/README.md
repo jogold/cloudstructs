@@ -23,3 +23,12 @@ export class MyStack extends cdk.Stack {
 ```
 
 The ARN of the identity provider is exposed via the `samlIdentityProviderArn` property.
+
+Use the `SamlFederatedPrincipal` principal to create a `iam.Role` assumed by the identity
+provider:
+
+```ts
+new iam.Role(this, 'Role', {
+  assumedBy: new SamlFederatedPrincipal(identityProvider),
+})
+```

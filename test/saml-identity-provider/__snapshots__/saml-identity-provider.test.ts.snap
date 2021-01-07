@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EmailReceiver 1`] = `
+exports[`SamlIdentityProvider 1`] = `
 Object {
   "Parameters": Object {
     "AssetParameters4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956ArtifactHashD15A2D11": Object {
@@ -188,6 +188,33 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "Role1ABCC5F0": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRoleWithSAML",
+              "Condition": Object {
+                "StringEquals": Object {
+                  "SAML:aud": "https://signin.aws.amazon.com/saml",
+                },
+              },
+              "Effect": "Allow",
+              "Principal": Object {
+                "Federated": Object {
+                  "Fn::GetAtt": Array [
+                    "IdentityProviderA00909EA",
+                    "SAMLProviderArn",
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
     },
   },
 }

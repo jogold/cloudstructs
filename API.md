@@ -9,6 +9,7 @@ Name|Description
 [EcsServiceRoller](#cloudstructs-ecsserviceroller)|Roll your ECS service tasks on schedule or with a rule.
 [EmailReceiver](#cloudstructs-emailreceiver)|Receive emails through SES, save them to S3 and invokes a Lambda function.
 [RollTrigger](#cloudstructs-rolltrigger)|The rule or schedule that should trigger a roll.
+[SamlFederatedPrincipal](#cloudstructs-samlfederatedprincipal)|Principal entity that represents a SAML federated identity provider.
 [SamlIdentityProvider](#cloudstructs-samlidentityprovider)|Create a SAML identity provider.
 [SlackEvents](#cloudstructs-slackevents)|Send Slack events to Amazon EventBridge.
 [SlackTextract](#cloudstructs-slacktextract)|Extract text from images posted to Slack using Amazon Textract.
@@ -233,6 +234,27 @@ static fromSchedule(schedule: Schedule): RollTrigger
 
 __Returns__:
 * <code>[RollTrigger](#cloudstructs-rolltrigger)</code>
+
+
+
+## class SamlFederatedPrincipal  <a id="cloudstructs-samlfederatedprincipal"></a>
+
+Principal entity that represents a SAML federated identity provider.
+
+__Implements__: [IPrincipal](#aws-cdk-aws-iam-iprincipal), [IGrantable](#aws-cdk-aws-iam-igrantable)
+__Extends__: [FederatedPrincipal](#aws-cdk-aws-iam-federatedprincipal)
+
+### Initializer
+
+
+
+
+```ts
+new SamlFederatedPrincipal(identityProvider: SamlIdentityProvider)
+```
+
+* **identityProvider** (<code>[SamlIdentityProvider](#cloudstructs-samlidentityprovider)</code>)  *No description*
+
 
 
 
