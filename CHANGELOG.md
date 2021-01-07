@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.25](https://github.com/jogold/cloudstructs/compare/v0.1.24...v0.1.25) (2021-01-07)
+
+
+### Features
+
+* **saml-identity-provider:** SAML federated principal ([#110](https://github.com/jogold/cloudstructs/issues/110)) ([60b9fa4](https://github.com/jogold/cloudstructs/commit/60b9fa44d1390fd6cd560b86c3dd03d1e4ffed8b))
+
 ### [0.1.24](https://github.com/jogold/cloudstructs/compare/v0.1.23...v0.1.24) (2021-01-06)
 
 
