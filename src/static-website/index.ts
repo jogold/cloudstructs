@@ -1,7 +1,9 @@
+import * as path from 'path';
 import * as acm from '@aws-cdk/aws-certificatemanager';
 import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as origins from '@aws-cdk/aws-cloudfront-origins';
 import * as iam from '@aws-cdk/aws-iam';
+import * as lambda from '@aws-cdk/aws-lambda';
 import * as route53 from '@aws-cdk/aws-route53';
 import * as patterns from '@aws-cdk/aws-route53-patterns';
 import * as targets from '@aws-cdk/aws-route53-targets';
@@ -70,17 +72,26 @@ export class StaticWebsite extends cdk.Construct {
       region: 'us-east-1',
     });
 
+    const originRequest = new cloudfront.experimental.EdgeFunction(this, 'OriginRequest', {
+      code: lambda.Code.fromAsset(path.join(__dirname, 'origin-request-handler')),
+      handler: 'index.handler',
+      runtime: lambda.Runtime.NODEJS_12_X,
+    });
+
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new origins.S3Origin(this.bucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        edgeLambdas: [
+          {
+            eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
+            functionVersion: originRequest,
+          },
+        ],
       },
       defaultRootObject: 'index.html',
       domainNames: [props.domainName],
       certificate,
-      errorResponses: [
-        { httpStatus: 404, responseHttpStatus: 200, responsePagePath: '/index.html' },
-      ],
     });
 
     new route53.ARecord(this, 'ARecord', {

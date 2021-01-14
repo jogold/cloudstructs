@@ -1,4 +1,3 @@
-import * as assert from '@aws-cdk/assert';
 import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2';
 import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations';
 import * as lambda from '@aws-cdk/aws-lambda';
@@ -7,8 +6,12 @@ import * as cdk from '@aws-cdk/core';
 import { StaticWebsite } from '../../src';
 
 let stack: cdk.Stack;
+let app: cdk.App;
 beforeEach(() => {
-  stack = new cdk.Stack();
+  app = new cdk.App();
+  stack = new cdk.Stack(app, 'Stack', {
+    env: { region: 'eu-west-1' },
+  });
 });
 
 test('StaticWebsite', () => {
@@ -33,5 +36,9 @@ test('StaticWebsite', () => {
     },
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  // The EdgeFunction construct creates multiple stacks
+  const assembly = app.synth();
+  for (const stackArtifact of assembly.stacks) {
+    expect(stackArtifact.template).toMatchSnapshot();
+  }
 });
