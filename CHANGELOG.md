@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.28](https://github.com/jogold/cloudstructs/compare/v0.1.27...v0.1.28) (2021-01-15)
+
+
+### Features
+
+* **static-website:** HTTP security headers ([#113](https://github.com/jogold/cloudstructs/issues/113)) ([beff06e](https://github.com/jogold/cloudstructs/commit/beff06e06bd6ccc82e9ffe8a7f85e550e0948ba9))
+
 ### [0.1.27](https://github.com/jogold/cloudstructs/compare/v0.1.26...v0.1.27) (2021-01-15)
 
 
