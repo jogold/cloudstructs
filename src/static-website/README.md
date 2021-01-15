@@ -1,7 +1,7 @@
 # StaticWebsite
 
-A CloudFront static website hosted on S3 with HTTPS redirect, SPA redirect and
-backend configuration saved to the bucket.
+A CloudFront static website hosted on S3 with HTTPS redirect, SPA redirect,
+HTTP security headers and backend configuration saved to the bucket.
 
 ## Usage
 

@@ -29,6 +29,7 @@ High-level constructs for AWS CDK
   resources with AWS Step Functions state machines
 
 * [`StaticWebsite`](src/static-website) A CloudFront static website hosted on S3 with
-  HTTPS redirect, SPA redirect and backend configuration saved to the bucket.
+  HTTPS redirect, SPA redirect, HTTP security headers and backend configuration saved
+  to the bucket.
 
 * [`UrlShortener`](src/url-shortener) Deploy an URL shortener API

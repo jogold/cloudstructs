@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import * as acm from '@aws-cdk/aws-certificatemanager';
 import * as cloudfront from '@aws-cdk/aws-cloudfront';
@@ -10,6 +11,7 @@ import * as targets from '@aws-cdk/aws-route53-targets';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as cdk from '@aws-cdk/core';
 import * as cr from '@aws-cdk/custom-resources';
+import { SECURITY_HEADERS } from './security-headers';
 
 /**
  * Properties for a StaticWebsite
@@ -43,6 +45,13 @@ export interface StaticWebsiteProps {
    * @default - the domain name of the hosted zone
    */
   readonly redirects?: string[];
+
+  /**
+   * Custom HTTP headers
+   *
+   * @default - best practice security headers
+   */
+  readonly httpHeaders?: { [key: string]: string };
 }
 
 /**
@@ -78,6 +87,18 @@ export class StaticWebsite extends cdk.Construct {
       runtime: lambda.Runtime.NODEJS_12_X,
     });
 
+    // Lambda@Edge doesn't support environment variables so we write a JSON file with
+    // the HTTP headers
+    fs.writeFileSync(path.join(__dirname, 'origin-response-handler', 'headers.json'), JSON.stringify({
+      ...SECURITY_HEADERS,
+      ...props.httpHeaders,
+    }));
+    const originResponse = new cloudfront.experimental.EdgeFunction(this, 'OriginResponse', {
+      code: lambda.Code.fromAsset(path.join(__dirname, 'origin-response-handler')),
+      handler: 'index.handler',
+      runtime: lambda.Runtime.NODEJS_12_X,
+    });
+
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new origins.S3Origin(this.bucket),
@@ -86,6 +107,10 @@ export class StaticWebsite extends cdk.Construct {
           {
             eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
             functionVersion: originRequest,
+          },
+          {
+            eventType: cloudfront.LambdaEdgeEventType.ORIGIN_RESPONSE,
+            functionVersion: originResponse,
           },
         ],
       },
