@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.27](https://github.com/jogold/cloudstructs/compare/v0.1.26...v0.1.27) (2021-01-15)
+
+
+### Features
+
+* **static-website:** SPA redirect with origin request Lambda@Edge ([#112](https://github.com/jogold/cloudstructs/issues/112)) ([34829b7](https://github.com/jogold/cloudstructs/commit/34829b7972817091d92039f4b1c11fca705c6286))
+
 ### [0.1.26](https://github.com/jogold/cloudstructs/compare/v0.1.25...v0.1.26) (2021-01-07)
 
 ### [0.1.25](https://github.com/jogold/cloudstructs/compare/v0.1.24...v0.1.25) (2021-01-07)
