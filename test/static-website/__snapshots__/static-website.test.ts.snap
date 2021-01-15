@@ -3,18 +3,6 @@
 exports[`StaticWebsite 1`] = `
 Object {
   "Parameters": Object {
-    "AssetParameters36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79dArtifactHash7C2AD3CE": Object {
-      "Description": "Artifact hash for asset \\"36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79d\\"",
-      "Type": "String",
-    },
-    "AssetParameters36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79dS3BucketBB8B1E1F": Object {
-      "Description": "S3 bucket for asset \\"36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79d\\"",
-      "Type": "String",
-    },
-    "AssetParameters36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79dS3VersionKey939FCBD5": Object {
-      "Description": "S3 key for asset version \\"36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79d\\"",
-      "Type": "String",
-    },
     "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9ArtifactHashE87B5926": Object {
       "Description": "Artifact hash for asset \\"4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9\\"",
       "Type": "String",
@@ -25,6 +13,18 @@ Object {
     },
     "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9S3VersionKey395444CC": Object {
       "Description": "S3 key for asset version \\"4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9\\"",
+      "Type": "String",
+    },
+    "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bArtifactHash609203AF": Object {
+      "Description": "Artifact hash for asset \\"8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b\\"",
+      "Type": "String",
+    },
+    "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3Bucket33C23F33": Object {
+      "Description": "S3 bucket for asset \\"8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b\\"",
+      "Type": "String",
+    },
+    "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3VersionKeyE7613565": Object {
+      "Description": "S3 key for asset version \\"8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b\\"",
       "Type": "String",
     },
   },
@@ -146,7 +146,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79dS3BucketBB8B1E1F",
+            "Ref": "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3Bucket33C23F33",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -159,7 +159,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79dS3VersionKey939FCBD5",
+                          "Ref": "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3VersionKeyE7613565",
                         },
                       ],
                     },
@@ -172,7 +172,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters36813374150cca0778c36632d8b3cb9e9b896c3439530a721b3421c32671d79dS3VersionKey939FCBD5",
+                          "Ref": "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3VersionKeyE7613565",
                         },
                       ],
                     },
@@ -193,7 +193,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginResponseCurrentVersion9FB3D014281283951eca555d93e23bf175547d7d": Object {
+    "OriginResponseCurrentVersion9FB3D014bcee45429946d346604059edd2b83ef2": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "OriginResponse488DDAA0",
@@ -206,7 +206,7 @@ Object {
         "Name": "EdgeFunctionArnOriginResponse",
         "Type": "String",
         "Value": Object {
-          "Ref": "OriginResponseCurrentVersion9FB3D014281283951eca555d93e23bf175547d7d",
+          "Ref": "OriginResponseCurrentVersion9FB3D014bcee45429946d346604059edd2b83ef2",
         },
       },
       "Type": "AWS::SSM::Parameter",
@@ -1323,7 +1323,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "EdgeFunctionArnOriginResponse",
-        "RefreshToken": "0eb6ce9506a0b3603b415d0efbe91493",
+        "RefreshToken": "713589303d574c5147315a5e3e749249",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
