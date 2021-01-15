@@ -3,6 +3,18 @@
 exports[`StaticWebsite 1`] = `
 Object {
   "Parameters": Object {
+    "AssetParameters03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1ArtifactHashE33B1DF7": Object {
+      "Description": "Artifact hash for asset \\"03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1\\"",
+      "Type": "String",
+    },
+    "AssetParameters03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1S3Bucket42FC57A4": Object {
+      "Description": "S3 bucket for asset \\"03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1\\"",
+      "Type": "String",
+    },
+    "AssetParameters03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1S3VersionKey184679B4": Object {
+      "Description": "S3 key for asset version \\"03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1\\"",
+      "Type": "String",
+    },
     "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9ArtifactHashE87B5926": Object {
       "Description": "Artifact hash for asset \\"4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9\\"",
       "Type": "String",
@@ -90,6 +102,116 @@ Object {
       "Type": "AWS::SSM::Parameter",
     },
     "OriginRequestServiceRole04760C2E": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "edgelambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "OriginResponse488DDAA0": Object {
+      "DependsOn": Array [
+        "OriginResponseServiceRoleD33C7FC6",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1S3Bucket42FC57A4",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1S3VersionKey184679B4",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters03d5e7941ac4bbdef3a2bafb700192fa65e7500b58b5764dae3be5b99c9503f1S3VersionKey184679B4",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "OriginResponseServiceRoleD33C7FC6",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "OriginResponseCurrentVersion9FB3D014a3e658cd5fb866f036ac3e89a9cf5492": Object {
+      "Properties": Object {
+        "FunctionName": Object {
+          "Ref": "OriginResponse488DDAA0",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "OriginResponseParameter7A7C8B4F": Object {
+      "Properties": Object {
+        "Name": "EdgeFunctionArnOriginResponse",
+        "Type": "String",
+        "Value": Object {
+          "Ref": "OriginResponseCurrentVersion9FB3D014a3e658cd5fb866f036ac3e89a9cf5492",
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "OriginResponseServiceRoleD33C7FC6": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -811,6 +933,15 @@ Object {
                   ],
                 },
               },
+              Object {
+                "EventType": "origin-response",
+                "LambdaFunctionARN": Object {
+                  "Fn::GetAtt": Array [
+                    "StaticWebsiteOriginResponseArnReader75C7EB4A",
+                    "FunctionArn",
+                  ],
+                },
+              },
             ],
             "TargetOriginId": "StackStaticWebsiteDistributionOrigin103625211",
             "ViewerProtocolPolicy": "redirect-to-https",
@@ -1177,6 +1308,22 @@ Object {
       "Properties": Object {
         "ParameterName": "EdgeFunctionArnOriginRequest",
         "RefreshToken": "6222ca73684368aae6489450bc8ad991",
+        "Region": "us-east-1",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StaticWebsiteOriginResponseArnReader75C7EB4A": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ParameterName": "EdgeFunctionArnOriginResponse",
+        "RefreshToken": "9300b2764ecbcb3a5d699804daca1eef",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
