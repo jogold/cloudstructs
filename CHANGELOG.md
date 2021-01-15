@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.30](https://github.com/jogold/cloudstructs/compare/v0.1.29...v0.1.30) (2021-01-15)
+
+
+### Bug Fixes
+
+* **static-website:** CSP too restrictive or too permissive ([#115](https://github.com/jogold/cloudstructs/issues/115)) ([62f9c78](https://github.com/jogold/cloudstructs/commit/62f9c782c56bfa3e840ce4491ff9acaa4d36300e))
+
 ### [0.1.29](https://github.com/jogold/cloudstructs/compare/v0.1.28...v0.1.29) (2021-01-15)
 
 
