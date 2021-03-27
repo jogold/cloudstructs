@@ -50,6 +50,7 @@ const project = new AwsCdkConstructLibrary({
     'nock',
   ],
   dependabot: false,
+  defaultReleaseBranch: 'master',
 });
 
 project.synth();
