@@ -539,7 +539,7 @@ Object {
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
     },
-    "EcsServiceRollerRuleAllowEventRuleEcsServiceRollerRule6FC83D1BBE4B75FC": Object {
+    "EcsServiceRollerRuleAllowEventRuleEcsServiceRollerRuleRuleTarget0Handler42DA3E676E969203": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -604,7 +604,6 @@ Object {
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
-        "DesiredCount": 1,
         "EnableECSManagedTags": false,
         "LaunchType": "FARGATE",
         "NetworkConfiguration": Object {
@@ -1276,7 +1275,7 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "RuleAllowEventRuleRule98B16695": Object {
+    "RuleAllowEventRuleRuleRuleTarget0Handler2041339A45E733B9": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -1304,7 +1303,6 @@ Object {
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
-        "DesiredCount": 1,
         "EnableECSManagedTags": false,
         "LaunchType": "FARGATE",
         "NetworkConfiguration": Object {
@@ -1935,7 +1933,7 @@ Object {
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
     },
-    "EcsServiceRollerRuleAllowEventRuleEcsServiceRollerRule6FC83D1BBE4B75FC": Object {
+    "EcsServiceRollerRuleAllowEventRuleEcsServiceRollerRuleRuleTarget0Handler42DA3E676E969203": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -2000,7 +1998,6 @@ Object {
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
-        "DesiredCount": 1,
         "EnableECSManagedTags": false,
         "LaunchType": "FARGATE",
         "NetworkConfiguration": Object {
