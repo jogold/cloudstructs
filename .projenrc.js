@@ -4,7 +4,7 @@ const project = new AwsCdkConstructLibrary({
   authorAddress: 'jonathan.goldwasser@gmail.com',
   authorName: 'Jonathan Goldwasser',
   description: 'High-level constructs for AWS CDK',
-  cdkVersion: '1.80.0',
+  cdkVersion: '1.92.0',
   name: 'cloudstructs',
   repository: 'https://github.com/jogold/cloudstructs.git',
   cdkDependencies: [
@@ -29,6 +29,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-route53-patterns',
     '@aws-cdk/aws-route53-targets',
     '@aws-cdk/aws-s3',
+    '@aws-cdk/aws-secretsmanager',
     '@aws-cdk/aws-ses',
     '@aws-cdk/aws-ses-actions',
     '@aws-cdk/aws-sns',
@@ -41,7 +42,6 @@ const project = new AwsCdkConstructLibrary({
     '@slack/web-api',
   ],
   devDeps: [
-    '@aws-cdk/aws-secretsmanager',
     '@types/aws-lambda',
     '@types/tsscmp',
     'aws-sdk',
