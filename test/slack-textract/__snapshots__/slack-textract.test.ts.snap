@@ -102,7 +102,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs10.x",
+        "Runtime": "nodejs12.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -194,7 +194,7 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "SlackTextractSlackEventsRuleAllowEventRuleSlackTextractSlackEventsRule7FA1C9F876FCFC5F": Object {
+    "SlackTextractSlackEventsRuleAllowEventRuleSlackTextracthandlerEFD1C011BCBCE987": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -232,7 +232,7 @@ Object {
             Array [
               "integrations/",
               Object {
-                "Ref": "SlackTextractSlackEventsSlackEventsApiDefaultRouteDefaultRouteIntegration28B4DDC5",
+                "Ref": "SlackTextractSlackEventsSlackEventsApiDefaultRouteHttpIntegration3f744b46c7527f2d6c675e89ab72e6a3D64E6D0A",
               },
             ],
           ],
@@ -240,7 +240,7 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Route",
     },
-    "SlackTextractSlackEventsSlackEventsApiDefaultRouteDefaultRouteIntegration28B4DDC5": Object {
+    "SlackTextractSlackEventsSlackEventsApiDefaultRouteHttpIntegration3f744b46c7527f2d6c675e89ab72e6a3D64E6D0A": Object {
       "Properties": Object {
         "ApiId": Object {
           "Ref": "SlackTextractSlackEventsSlackEventsApi117A1D5A",

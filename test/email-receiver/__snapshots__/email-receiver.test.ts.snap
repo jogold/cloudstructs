@@ -263,7 +263,7 @@ Object {
       },
       "Type": "AWS::Lambda::EventInvokeConfig",
     },
-    "EmailReceivers3EventInvokeConfigSuccessAllowEventRuleEmailReceivers3EventInvokeConfigSuccessE161BAAD2CD65166": Object {
+    "EmailReceivers3EventInvokeConfigSuccessAllowEventRuleFnA881C47A": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -385,7 +385,26 @@ Object {
             Object {
               "Action": "events:PutEvents",
               "Effect": "Allow",
-              "Resource": "*",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":events:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":event-bus/default",
+                  ],
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -692,7 +711,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs10.x",
+        "Runtime": "nodejs12.x",
       },
       "Type": "AWS::Lambda::Function",
     },

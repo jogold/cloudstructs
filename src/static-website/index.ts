@@ -84,7 +84,7 @@ export class StaticWebsite extends cdk.Construct {
     const originRequest = new cloudfront.experimental.EdgeFunction(this, 'OriginRequest', {
       code: lambda.Code.fromAsset(path.join(__dirname, 'origin-request-handler')),
       handler: 'index.handler',
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
     });
 
     // Lambda@Edge doesn't support environment variables so we write a JSON file with
@@ -96,7 +96,7 @@ export class StaticWebsite extends cdk.Construct {
     const originResponse = new cloudfront.experimental.EdgeFunction(this, 'OriginResponse', {
       code: lambda.Code.fromAsset(path.join(__dirname, 'origin-response-handler')),
       handler: 'index.handler',
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
     });
 
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
