@@ -2,7 +2,6 @@
   "tasks": {
     "clobber": {
       "name": "clobber",
-      "category": "30.maintain",
       "description": "hard resets to HEAD of origin and cleans the local repo",
       "env": {
         "BRANCH": "$(git branch --show-current)"
@@ -33,33 +32,8 @@
       ],
       "condition": "git diff --exit-code > /dev/null"
     },
-    "bump": {
-      "name": "bump",
-      "category": "20.release",
-      "description": "Bumps version based on latest git tag and generates a changelog entry",
-      "steps": [
-        {
-          "exec": "git describe --tags --match=\"v*\" --first-parent --abbrev=0 > .version.tmp.json"
-        },
-        {
-          "exec": "standard-version"
-        }
-      ],
-      "condition": "! git log --oneline -1 | grep -q \"chore(release):\""
-    },
-    "unbump": {
-      "name": "unbump",
-      "category": "20.release",
-      "description": "Restores version to 0.0.0",
-      "steps": [
-        {
-          "exec": "standard-version -r 0.0.0"
-        }
-      ]
-    },
     "compile": {
       "name": "compile",
-      "category": "00.build",
       "description": "Only compile",
       "steps": [
         {
@@ -72,7 +46,6 @@
     },
     "test:compile": {
       "name": "test:compile",
-      "category": "10.test",
       "description": "compiles the test code",
       "steps": [
         {
@@ -82,7 +55,6 @@
     },
     "test": {
       "name": "test",
-      "category": "10.test",
       "description": "Run tests",
       "steps": [
         {
@@ -101,7 +73,6 @@
     },
     "build": {
       "name": "build",
-      "category": "00.build",
       "description": "Full release build (test+compile)",
       "steps": [
         {
@@ -120,7 +91,6 @@
     },
     "test:watch": {
       "name": "test:watch",
-      "category": "10.test",
       "description": "Run jest in watch mode",
       "steps": [
         {
@@ -130,7 +100,6 @@
     },
     "test:update": {
       "name": "test:update",
-      "category": "10.test",
       "description": "Update jest snapshots",
       "steps": [
         {
@@ -138,22 +107,87 @@
         }
       ]
     },
-    "projen:upgrade": {
-      "name": "projen:upgrade",
-      "category": "30.maintain",
-      "description": "upgrades projen to the latest version",
+    "bump": {
+      "name": "bump",
+      "description": "Bumps version based on latest git tag and generates a changelog entry",
+      "env": {
+        "OUTFILE": "package.json",
+        "CHANGELOG": "dist/changelog.md",
+        "BUMPFILE": "dist/version.txt"
+      },
       "steps": [
         {
-          "exec": "yarn upgrade -L projen"
+          "builtin": "release/bump-version"
+        }
+      ],
+      "condition": "! git log --oneline -1 | grep -q \"chore(release):\""
+    },
+    "unbump": {
+      "name": "unbump",
+      "description": "Restores version to 0.0.0",
+      "env": {
+        "OUTFILE": "package.json",
+        "CHANGELOG": "dist/changelog.md",
+        "BUMPFILE": "dist/version.txt"
+      },
+      "steps": [
+        {
+          "builtin": "release/reset-version"
+        }
+      ]
+    },
+    "upgrade-dependencies": {
+      "name": "upgrade-dependencies",
+      "description": "upgrade dependencies",
+      "env": {
+        "CI": "0"
+      },
+      "steps": [
+        {
+          "exec": "npm-check-updates --upgrade --target=minor --reject='projen'"
         },
         {
-          "exec": "CI=\"\" yarn projen"
+          "exec": "yarn install --check-files"
+        },
+        {
+          "exec": "yarn upgrade @aws-cdk/assert @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-sdk aws-sdk-mock esbuild eslint eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import jest jest-junit jsii jsii-diff jsii-docgen jsii-pacmak json-schema nock npm-check-updates standard-version ts-jest typescript @slack/web-api got @aws-cdk/aws-apigateway @aws-cdk/aws-apigatewayv2-integrations @aws-cdk/aws-apigatewayv2 @aws-cdk/aws-certificatemanager @aws-cdk/aws-cloudfront-origins @aws-cdk/aws-cloudfront @aws-cdk/aws-codecommit @aws-cdk/aws-dynamodb @aws-cdk/aws-ec2 @aws-cdk/aws-ecs @aws-cdk/aws-events-targets @aws-cdk/aws-events @aws-cdk/aws-iam @aws-cdk/aws-lambda-destinations @aws-cdk/aws-lambda-nodejs @aws-cdk/aws-lambda @aws-cdk/aws-logs @aws-cdk/aws-route53-patterns @aws-cdk/aws-route53-targets @aws-cdk/aws-route53 @aws-cdk/aws-s3 @aws-cdk/aws-secretsmanager @aws-cdk/aws-ses-actions @aws-cdk/aws-ses @aws-cdk/aws-sns-subscriptions @aws-cdk/aws-sns @aws-cdk/core @aws-cdk/custom-resources constructs @aws-cdk/aws-apigateway @aws-cdk/aws-apigatewayv2-integrations @aws-cdk/aws-apigatewayv2 @aws-cdk/aws-certificatemanager @aws-cdk/aws-cloudfront-origins @aws-cdk/aws-cloudfront @aws-cdk/aws-codecommit @aws-cdk/aws-dynamodb @aws-cdk/aws-ec2 @aws-cdk/aws-ecs @aws-cdk/aws-events-targets @aws-cdk/aws-events @aws-cdk/aws-iam @aws-cdk/aws-lambda-destinations @aws-cdk/aws-lambda-nodejs @aws-cdk/aws-lambda @aws-cdk/aws-logs @aws-cdk/aws-route53-patterns @aws-cdk/aws-route53-targets @aws-cdk/aws-route53 @aws-cdk/aws-s3 @aws-cdk/aws-secretsmanager @aws-cdk/aws-ses-actions @aws-cdk/aws-ses @aws-cdk/aws-sns-subscriptions @aws-cdk/aws-sns @aws-cdk/core @aws-cdk/custom-resources"
+        },
+        {
+          "exec": "npx projen"
+        }
+      ]
+    },
+    "upgrade-projen": {
+      "name": "upgrade-projen",
+      "description": "upgrade projen",
+      "env": {
+        "CI": "0"
+      },
+      "steps": [
+        {
+          "exec": "npm-check-updates --upgrade --target=minor --filter='projen'"
+        },
+        {
+          "exec": "yarn install --check-files"
+        },
+        {
+          "exec": "yarn upgrade projen"
+        },
+        {
+          "exec": "npx projen"
+        }
+      ]
+    },
+    "default": {
+      "name": "default",
+      "steps": [
+        {
+          "exec": "node .projenrc.js"
         }
       ]
     },
     "watch": {
       "name": "watch",
-      "category": "00.build",
       "description": "Watch & compile in the background",
       "steps": [
         {
@@ -163,7 +197,6 @@
     },
     "package": {
       "name": "package",
-      "category": "20.release",
       "description": "Create an npm tarball",
       "steps": [
         {
@@ -173,7 +206,6 @@
     },
     "eslint": {
       "name": "eslint",
-      "category": "10.test",
       "description": "Runs eslint against the codebase",
       "steps": [
         {
@@ -183,7 +215,6 @@
     },
     "compat": {
       "name": "compat",
-      "category": "20.release",
       "description": "Perform API compatibility check against latest version",
       "steps": [
         {
@@ -191,13 +222,52 @@
         }
       ]
     },
+    "publish:npm": {
+      "name": "publish:npm",
+      "description": "Publish this package to the npm Registry",
+      "env": {
+        "NPM_DIST_TAG": "latest",
+        "NPM_REGISTRY": "registry.npmjs.org"
+      },
+      "requiredEnv": [
+        "NPM_TOKEN"
+      ],
+      "steps": [
+        {
+          "exec": "npx -p jsii-release@latest jsii-release-npm"
+        }
+      ]
+    },
     "docgen": {
       "name": "docgen",
-      "category": "20.release",
       "description": "Generate API.md from .jsii manifest",
       "steps": [
         {
           "exec": "jsii-docgen"
+        }
+      ]
+    },
+    "release": {
+      "name": "release",
+      "description": "Prepare a release from \"master\" branch",
+      "env": {
+        "RELEASE": "true"
+      },
+      "steps": [
+        {
+          "exec": "rm -fr dist"
+        },
+        {
+          "spawn": "bump"
+        },
+        {
+          "spawn": "build"
+        },
+        {
+          "spawn": "unbump"
+        },
+        {
+          "exec": "git diff --ignore-space-at-eol --exit-code"
         }
       ]
     }

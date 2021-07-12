@@ -49,7 +49,6 @@ const project = new AwsCdkConstructLibrary({
     'esbuild',
     'nock',
   ],
-  dependabot: false,
   defaultReleaseBranch: 'master',
 });
 
