@@ -117,6 +117,7 @@ export class StaticWebsite extends cdk.Construct {
       defaultRootObject: 'index.html',
       domainNames: [props.domainName],
       certificate,
+      minimumProtocolVersion: 'TLSv1.2_2021' as cloudfront.SecurityPolicyProtocol,
     });
 
     new route53.ARecord(this, 'ARecord', {
