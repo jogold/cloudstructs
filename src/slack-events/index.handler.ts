@@ -19,6 +19,10 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
 
     if (!event.body) throw new Error('Missing body');
 
+    if (!event.headers['X-Slack-Signature']) throw new Error('Missing X-Slack-Signature');
+
+    if (!event.headers['X-Slack-Request-Timestamp']) throw new Error('Missing X-Slack-Request-Timestamp');
+
     if (!verifyRequestSignature({
       body: event.body,
       requestSignature: event.headers['X-Slack-Signature'],
