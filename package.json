@@ -41,7 +41,7 @@
     "@types/tsscmp": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
-    "aws-sdk": "^2.944.0",
+    "aws-sdk": "^2.945.0",
     "aws-sdk-mock": "^5.2.1",
     "esbuild": "^0.12.15",
     "eslint": "^7.30.0",
