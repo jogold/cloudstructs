@@ -63,6 +63,7 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
       Bucket: getEnv('BUCKET_NAME'),
       Key: key,
       WebsiteRedirectLocation: body.url,
+      ACL: 'public-read',
     }).promise();
     console.log('Put object: %j', putObject);
 
