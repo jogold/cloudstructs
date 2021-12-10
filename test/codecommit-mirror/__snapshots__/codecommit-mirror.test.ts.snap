@@ -2,6 +2,13 @@
 
 exports[`CodeCommitMirror with a private GitHub repo 1`] = `
 Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
   "Resources": Object {
     "ClusterEB0386A7": Object {
       "Type": "AWS::ECS::Cluster",
@@ -482,23 +489,7 @@ Object {
             ],
             "Essential": true,
             "Image": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  Object {
-                    "Ref": "AWS::AccountId",
-                  },
-                  ".dkr.ecr.",
-                  Object {
-                    "Ref": "AWS::Region",
-                  },
-                  ".",
-                  Object {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/aws-cdk/assets:2ff1f108bc0e7fd570c48598963a44efe70b4ee6d20d3f01cdbbe660026d5c41",
-                ],
-              ],
+              "Fn::Sub": "\${AWS::AccountId}.dkr.ecr.\${AWS::Region}.\${AWS::URLSuffix}/cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}:f1f0f73cf085b6c0337d5053dc994125b5aa5e85fd0f0f4408911a51692508da",
             },
             "LogConfiguration": Object {
               "LogDriver": "awslogs",
@@ -684,7 +675,10 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":repository/aws-cdk/assets",
+                    ":repository/",
+                    Object {
+                      "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
+                    },
                   ],
                 ],
               },
@@ -806,11 +800,45 @@ Object {
       "Type": "AWS::IAM::Policy",
     },
   },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
 }
 `;
 
 exports[`CodeCommitMirror with a public GitHub repo 1`] = `
 Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
   "Resources": Object {
     "ClusterEB0386A7": Object {
       "Type": "AWS::ECS::Cluster",
@@ -1295,23 +1323,7 @@ Object {
             ],
             "Essential": true,
             "Image": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  Object {
-                    "Ref": "AWS::AccountId",
-                  },
-                  ".dkr.ecr.",
-                  Object {
-                    "Ref": "AWS::Region",
-                  },
-                  ".",
-                  Object {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/aws-cdk/assets:2ff1f108bc0e7fd570c48598963a44efe70b4ee6d20d3f01cdbbe660026d5c41",
-                ],
-              ],
+              "Fn::Sub": "\${AWS::AccountId}.dkr.ecr.\${AWS::Region}.\${AWS::URLSuffix}/cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}:f1f0f73cf085b6c0337d5053dc994125b5aa5e85fd0f0f4408911a51692508da",
             },
             "LogConfiguration": Object {
               "LogDriver": "awslogs",
@@ -1472,7 +1484,10 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":repository/aws-cdk/assets",
+                    ":repository/",
+                    Object {
+                      "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
+                    },
                   ],
                 ],
               },
@@ -1565,6 +1580,33 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
     },
   },
 }

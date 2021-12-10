@@ -3,29 +3,10 @@
 exports[`StaticWebsite 1`] = `
 Object {
   "Parameters": Object {
-    "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9ArtifactHashE87B5926": Object {
-      "Description": "Artifact hash for asset \\"4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9\\"",
-      "Type": "String",
-    },
-    "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9S3BucketF3F52F83": Object {
-      "Description": "S3 bucket for asset \\"4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9\\"",
-      "Type": "String",
-    },
-    "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9S3VersionKey395444CC": Object {
-      "Description": "S3 key for asset version \\"4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9\\"",
-      "Type": "String",
-    },
-    "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bArtifactHash609203AF": Object {
-      "Description": "Artifact hash for asset \\"8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b\\"",
-      "Type": "String",
-    },
-    "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3Bucket33C23F33": Object {
-      "Description": "S3 bucket for asset \\"8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b\\"",
-      "Type": "String",
-    },
-    "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3VersionKeyE7613565": Object {
-      "Description": "S3 key for asset version \\"8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b\\"",
-      "Type": "String",
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
   "Resources": Object {
@@ -36,41 +17,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9S3BucketF3F52F83",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-1",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9S3VersionKey395444CC",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9S3VersionKey395444CC",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "4c5f927959e8f372b3efeb876320509126f376a0acf53c36e668e7656dcf26e9.zip",
         },
         "Handler": "index.handler",
         "Role": Object {
@@ -83,7 +32,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginRequestCurrentVersionD6F77E9Ff15e0c86cb39fe18cad1d5bc95264655": Object {
+    "OriginRequestCurrentVersionD6F77E9Ff8266e0cd0245a8087349973a7e94394": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "OriginRequest0052232D",
@@ -96,7 +45,7 @@ Object {
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
         "Type": "String",
         "Value": Object {
-          "Ref": "OriginRequestCurrentVersionD6F77E9Ff15e0c86cb39fe18cad1d5bc95264655",
+          "Ref": "OriginRequestCurrentVersionD6F77E9Ff8266e0cd0245a8087349973a7e94394",
         },
       },
       "Type": "AWS::SSM::Parameter",
@@ -146,41 +95,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3Bucket33C23F33",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-1",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3VersionKeyE7613565",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97bS3VersionKeyE7613565",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b.zip",
         },
         "Handler": "index.handler",
         "Role": Object {
@@ -193,7 +110,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginResponseCurrentVersion9FB3D014ca1def2df93b7ddca1b9692404ece7e0": Object {
+    "OriginResponseCurrentVersion9FB3D014528d3bae92b6ff4ebee6cadfd6df6088": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "OriginResponse488DDAA0",
@@ -206,7 +123,7 @@ Object {
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginResponse",
         "Type": "String",
         "Value": Object {
-          "Ref": "OriginResponseCurrentVersion9FB3D014ca1def2df93b7ddca1b9692404ece7e0",
+          "Ref": "OriginResponseCurrentVersion9FB3D014528d3bae92b6ff4ebee6cadfd6df6088",
         },
       },
       "Type": "AWS::SSM::Parameter",
@@ -250,6 +167,33 @@ Object {
       "Type": "AWS::IAM::Role",
     },
   },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
 }
 `;
 
@@ -266,41 +210,10 @@ Object {
     },
   },
   "Parameters": Object {
-    "AssetParameters11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2ArtifactHashF319B5BD": Object {
-      "Description": "Artifact hash for asset \\"11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2\\"",
-      "Type": "String",
-    },
-    "AssetParameters11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2S3Bucket04AFB68D": Object {
-      "Description": "S3 bucket for asset \\"11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2\\"",
-      "Type": "String",
-    },
-    "AssetParameters11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2S3VersionKeyC247374B": Object {
-      "Description": "S3 key for asset version \\"11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2\\"",
-      "Type": "String",
-    },
-    "AssetParameters45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241ArtifactHash1B3D1B80": Object {
-      "Description": "Artifact hash for asset \\"45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241\\"",
-      "Type": "String",
-    },
-    "AssetParameters45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241S3BucketF1BC72A7": Object {
-      "Description": "S3 bucket for asset \\"45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241\\"",
-      "Type": "String",
-    },
-    "AssetParameters45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241S3VersionKey7AD83AC7": Object {
-      "Description": "S3 key for asset version \\"45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241\\"",
-      "Type": "String",
-    },
-    "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4ArtifactHash5E28809B": Object {
-      "Description": "Artifact hash for asset \\"7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4\\"",
-      "Type": "String",
-    },
-    "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3Bucket5BEBDCBE": Object {
-      "Description": "S3 bucket for asset \\"7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4\\"",
-      "Type": "String",
-    },
-    "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3VersionKey326451BC": Object {
-      "Description": "S3 key for asset version \\"7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4\\"",
-      "Type": "String",
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
   "Resources": Object {
@@ -311,41 +224,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2S3Bucket04AFB68D",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2S3VersionKeyC247374B",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2S3VersionKeyC247374B",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2.zip",
         },
         "Handler": "index.handler",
         "Role": Object {
@@ -403,7 +284,7 @@ Object {
             Array [
               "integrations/",
               Object {
-                "Ref": "ApiDefaultRouteHttpIntegration735edea71ac2184ab523202a003ee002154FF157",
+                "Ref": "ApiDefaultRouteIntegrationDB7B670E",
               },
             ],
           ],
@@ -411,7 +292,7 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Route",
     },
-    "ApiDefaultRouteHttpIntegration735edea71ac2184ab523202a003ee002154FF157": Object {
+    "ApiDefaultRouteIntegrationDB7B670E": Object {
       "Properties": Object {
         "ApiId": Object {
           "Ref": "ApiF70053CD",
@@ -427,7 +308,7 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Integration",
     },
-    "ApiDefaultRouteStackApiDefaultRoute0085804DPermission33ACBA9E": Object {
+    "ApiDefaultRouteIntegrationPermission612BAC34": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -484,41 +365,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241S3BucketF1BC72A7",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241S3VersionKey7AD83AC7",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241S3VersionKey7AD83AC7",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -757,41 +606,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3Bucket5BEBDCBE",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3VersionKey326451BC",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3VersionKey326451BC",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": Object {
@@ -1067,41 +884,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3Bucket5BEBDCBE",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3VersionKey326451BC",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4S3VersionKey326451BC",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": Object {
@@ -1298,7 +1083,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
-        "RefreshToken": "OriginRequestCurrentVersionD6F77E9Ff15e0c86cb39fe18cad1d5bc95264655",
+        "RefreshToken": "OriginRequestCurrentVersionD6F77E9Ff8266e0cd0245a8087349973a7e94394",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -1314,7 +1099,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014ca1def2df93b7ddca1b9692404ece7e0",
+        "RefreshToken": "OriginResponseCurrentVersion9FB3D014528d3bae92b6ff4ebee6cadfd6df6088",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -1416,6 +1201,33 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
     },
   },
 }

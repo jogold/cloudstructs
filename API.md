@@ -45,8 +45,8 @@ Name|Description
 
 Mirror a repository to AWS CodeCommit on schedule.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -57,13 +57,13 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new CodeCommitMirror(scope: Construct, id: string, props: CodeCommitMirrorProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[CodeCommitMirrorProps](#cloudstructs-codecommitmirrorprops)</code>)  *No description*
-  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS cluster where to run the mirroring operation. 
+  * **cluster** (<code>[aws_ecs.ICluster](#aws-cdk-lib-aws-ecs-icluster)</code>)  The ECS cluster where to run the mirroring operation. 
   * **repository** (<code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>)  The source repository. 
-  * **schedule** (<code>[Schedule](#aws-cdk-aws-events-schedule)</code>)  The schedule for the mirroring operation. __*Default*__: everyday at midnight
-  * **subnetSelection** (<code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code>)  Where to run the mirroring Fargate tasks. __*Default*__: public subnets
+  * **schedule** (<code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code>)  The schedule for the mirroring operation. __*Default*__: everyday at midnight
+  * **subnetSelection** (<code>[aws_ec2.SubnetSelection](#aws-cdk-lib-aws-ec2-subnetselection)</code>)  Where to run the mirroring Fargate tasks. __*Default*__: public subnets
 
 
 
@@ -92,7 +92,7 @@ Name | Type | Description
 -----|------|-------------
 **name** | <code>string</code> | The name of the repository.
 **plainTextUrl**? | <code>string</code> | The HTTPS clone URL in plain text, used for a public repository.<br/>__*Optional*__
-**secretUrl**? | <code>[Secret](#aws-cdk-aws-ecs-secret)</code> | The HTTPS clone URL if the repository is private.<br/>__*Optional*__
+**secretUrl**? | <code>[aws_ecs.Secret](#aws-cdk-lib-aws-ecs-secret)</code> | The HTTPS clone URL if the repository is private.<br/>__*Optional*__
 
 ### Methods
 
@@ -120,7 +120,7 @@ static private(name: string, url: Secret): CodeCommitMirrorSourceRepository
 ```
 
 * **name** (<code>string</code>)  the repository name.
-* **url** (<code>[Secret](#aws-cdk-aws-ecs-secret)</code>)  the secret containing the HTTPS clone URL.
+* **url** (<code>[aws_ecs.Secret](#aws-cdk-lib-aws-ecs-secret)</code>)  the secret containing the HTTPS clone URL.
 
 __Returns__:
 * <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>
@@ -131,8 +131,8 @@ __Returns__:
 
 Roll your ECS service tasks on schedule or with a rule.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -143,11 +143,11 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new EcsServiceRoller(scope: Construct, id: string, props: EcsServiceRollerProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[EcsServiceRollerProps](#cloudstructs-ecsservicerollerprops)</code>)  *No description*
-  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS cluster where the services run. 
-  * **service** (<code>[IService](#aws-cdk-aws-ecs-iservice)</code>)  The ECS service for which tasks should be rolled. 
+  * **cluster** (<code>[aws_ecs.ICluster](#aws-cdk-lib-aws-ecs-icluster)</code>)  The ECS cluster where the services run. 
+  * **service** (<code>[aws_ecs.IService](#aws-cdk-lib-aws-ecs-iservice)</code>)  The ECS service for which tasks should be rolled. 
   * **trigger** (<code>[RollTrigger](#cloudstructs-rolltrigger)</code>)  The rule or schedule that should trigger a roll. __*Default*__: roll everyday at midnight
 
 
@@ -157,8 +157,8 @@ new EcsServiceRoller(scope: Construct, id: string, props: EcsServiceRollerProps)
 
 Receive emails through SES, save them to S3 and invokes a Lambda function.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -169,13 +169,13 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new EmailReceiver(scope: Construct, id: string, props: EmailReceiverProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[EmailReceiverProps](#cloudstructs-emailreceiverprops)</code>)  *No description*
-  * **function** (<code>[IFunction](#aws-cdk-aws-lambda-ifunction)</code>)  A Lambda function to invoke after the message is saved to S3. 
-  * **receiptRuleSet** (<code>[IReceiptRuleSet](#aws-cdk-aws-ses-ireceiptruleset)</code>)  The SES receipt rule set where a receipt rule will be added. 
+  * **function** (<code>[aws_lambda.IFunction](#aws-cdk-lib-aws-lambda-ifunction)</code>)  A Lambda function to invoke after the message is saved to S3. 
+  * **receiptRuleSet** (<code>[aws_ses.IReceiptRuleSet](#aws-cdk-lib-aws-ses-ireceiptruleset)</code>)  The SES receipt rule set where a receipt rule will be added. 
   * **recipients** (<code>Array<string></code>)  The recipients for which emails should be received. 
-  * **afterRule** (<code>[IReceiptRule](#aws-cdk-aws-ses-ireceiptrule)</code>)  An existing rule after which the new rule will be placed in the rule set. __*Default*__: The new rule is inserted at the beginning of the rule list.
+  * **afterRule** (<code>[aws_ses.IReceiptRule](#aws-cdk-lib-aws-ses-ireceiptrule)</code>)  An existing rule after which the new rule will be placed in the rule set. __*Default*__: The new rule is inserted at the beginning of the rule list.
   * **sourceWhitelist** (<code>string</code>)  A regular expression to whitelist source email addresses. __*Default*__: no whitelisting of source email addresses
 
 
@@ -203,8 +203,8 @@ new RollTrigger()
 
 Name | Type | Description 
 -----|------|-------------
-**rule**? | <code>[Rule](#aws-cdk-aws-events-rule)</code> | Roll rule.<br/>__*Default*__: roll everyday at midnight
-**schedule**? | <code>[Schedule](#aws-cdk-aws-events-schedule)</code> | Roll schedule.<br/>__*Default*__: roll everyday at midnight
+**rule**? | <code>[aws_events.Rule](#aws-cdk-lib-aws-events-rule)</code> | Roll rule.<br/>__*Default*__: roll everyday at midnight
+**schedule**? | <code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code> | Roll schedule.<br/>__*Default*__: roll everyday at midnight
 
 ### Methods
 
@@ -217,7 +217,7 @@ Rule that should trigger a roll.
 static fromRule(rule: Rule): RollTrigger
 ```
 
-* **rule** (<code>[Rule](#aws-cdk-aws-events-rule)</code>)  *No description*
+* **rule** (<code>[aws_events.Rule](#aws-cdk-lib-aws-events-rule)</code>)  *No description*
 
 __Returns__:
 * <code>[RollTrigger](#cloudstructs-rolltrigger)</code>
@@ -230,7 +230,7 @@ Schedule that should trigger a roll.
 static fromSchedule(schedule: Schedule): RollTrigger
 ```
 
-* **schedule** (<code>[Schedule](#aws-cdk-aws-events-schedule)</code>)  *No description*
+* **schedule** (<code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code>)  *No description*
 
 __Returns__:
 * <code>[RollTrigger](#cloudstructs-rolltrigger)</code>
@@ -241,8 +241,8 @@ __Returns__:
 
 Principal entity that represents a SAML federated identity provider.
 
-__Implements__: [IPrincipal](#aws-cdk-aws-iam-iprincipal), [IGrantable](#aws-cdk-aws-iam-igrantable)
-__Extends__: [FederatedPrincipal](#aws-cdk-aws-iam-federatedprincipal)
+__Implements__: [aws_iam.IPrincipal](#aws-cdk-lib-aws-iam-iprincipal), [aws_iam.IGrantable](#aws-cdk-lib-aws-iam-igrantable)
+__Extends__: [aws_iam.FederatedPrincipal](#aws-cdk-lib-aws-iam-federatedprincipal)
 
 ### Initializer
 
@@ -262,8 +262,8 @@ new SamlFederatedPrincipal(identityProvider: SamlIdentityProvider)
 
 Create a SAML identity provider.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -274,7 +274,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new SamlIdentityProvider(scope: Construct, id: string, props: SamlIdentityProviderProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SamlIdentityProviderProps](#cloudstructs-samlidentityproviderprops)</code>)  *No description*
   * **metadataDocument** (<code>string</code>)  An XML document generated by an identity provider (IdP) that supports SAML 2.0. 
@@ -295,8 +295,8 @@ Name | Type | Description
 
 Send Slack events to Amazon EventBridge.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -307,10 +307,10 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new SlackEvents(scope: Construct, id: string, props: SlackEventsProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SlackEventsProps](#cloudstructs-slackeventsprops)</code>)  *No description*
-  * **signingSecret** (<code>[SecretValue](#aws-cdk-core-secretvalue)</code>)  The signing secret of the Slack app. 
+  * **signingSecret** (<code>[SecretValue](#aws-cdk-lib-secretvalue)</code>)  The signing secret of the Slack app. 
   * **apiName** (<code>string</code>)  A name for the API Gateway resource. __*Default*__: SlackEventsApi
   * **customEventBus** (<code>boolean</code>)  Whether to use a custom event bus. __*Default*__: false
 
@@ -321,7 +321,7 @@ new SlackEvents(scope: Construct, id: string, props: SlackEventsProps)
 
 Name | Type | Description 
 -----|------|-------------
-**eventBus**? | <code>[EventBus](#aws-cdk-aws-events-eventbus)</code> | The custom event bus where Slack events are sent.<br/>__*Optional*__
+**eventBus**? | <code>[aws_events.EventBus](#aws-cdk-lib-aws-events-eventbus)</code> | The custom event bus where Slack events are sent.<br/>__*Optional*__
 
 
 
@@ -329,8 +329,8 @@ Name | Type | Description
 
 Extract text from images posted to Slack using Amazon Textract.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -341,12 +341,12 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new SlackTextract(scope: Construct, id: string, props: SlackTextractProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SlackTextractProps](#cloudstructs-slacktextractprops)</code>)  *No description*
   * **appId** (<code>string</code>)  The application id of the Slack app. 
-  * **botToken** (<code>[SecretValue](#aws-cdk-core-secretvalue)</code>)  The **bot** token of the Slack app. 
-  * **signingSecret** (<code>[SecretValue](#aws-cdk-core-secretvalue)</code>)  The signing secret of the Slack app. 
+  * **botToken** (<code>[SecretValue](#aws-cdk-lib-secretvalue)</code>)  The **bot** token of the Slack app. 
+  * **signingSecret** (<code>[SecretValue](#aws-cdk-lib-secretvalue)</code>)  The signing secret of the Slack app. 
 
 
 
@@ -355,8 +355,8 @@ new SlackTextract(scope: Construct, id: string, props: SlackTextractProps)
 
 A state machine custom resource provider.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -367,11 +367,11 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new StateMachineCustomResourceProvider(scope: Construct, id: string, props: StateMachineCustomResourceProviderProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[StateMachineCustomResourceProviderProps](#cloudstructs-statemachinecustomresourceproviderprops)</code>)  *No description*
   * **stateMachine** (<code>[IStateMachine](#cloudstructs-istatemachine)</code>)  The state machine. 
-  * **timeout** (<code>[Duration](#aws-cdk-core-duration)</code>)  Timeout. __*Default*__: Duration.minutes(30)
+  * **timeout** (<code>[Duration](#aws-cdk-lib-duration)</code>)  Timeout. __*Default*__: Duration.minutes(30)
 
 
 
@@ -388,8 +388,8 @@ Name | Type | Description
 
 A CloudFront static website hosted on S3.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -400,11 +400,11 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new StaticWebsite(scope: Construct, id: string, props: StaticWebsiteProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[StaticWebsiteProps](#cloudstructs-staticwebsiteprops)</code>)  *No description*
   * **domainName** (<code>string</code>)  The domain name for this static website. 
-  * **hostedZone** (<code>[IHostedZone](#aws-cdk-aws-route53-ihostedzone)</code>)  The hosted zone where records should be added. 
+  * **hostedZone** (<code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code>)  The hosted zone where records should be added. 
   * **backendConfiguration** (<code>any</code>)  A backend configuration that will be saved as `config.json` in the S3 bucket of the static website. __*Optional*__
   * **httpHeaders** (<code>Map<string, string></code>)  Custom HTTP headers. __*Default*__: best practice security headers
   * **redirects** (<code>Array<string></code>)  A list of domain names that should redirect to `domainName`. __*Default*__: the domain name of the hosted zone
@@ -416,8 +416,8 @@ new StaticWebsite(scope: Construct, id: string, props: StaticWebsiteProps)
 
 Name | Type | Description 
 -----|------|-------------
-**bucket** | <code>[Bucket](#aws-cdk-aws-s3-bucket)</code> | The S3 bucket of this static website.
-**distribution** | <code>[Distribution](#aws-cdk-aws-cloudfront-distribution)</code> | The CloudFront distribution of this static website.
+**bucket** | <code>[aws_s3.Bucket](#aws-cdk-lib-aws-s3-bucket)</code> | The S3 bucket of this static website.
+**distribution** | <code>[aws_cloudfront.Distribution](#aws-cdk-lib-aws-cloudfront-distribution)</code> | The CloudFront distribution of this static website.
 
 
 
@@ -425,8 +425,8 @@ Name | Type | Description
 
 URL shortener.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -437,12 +437,12 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new UrlShortener(scope: Construct, id: string, props: UrlShortenerProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[UrlShortenerProps](#cloudstructs-urlshortenerprops)</code>)  *No description*
-  * **hostedZone** (<code>[IHostedZone](#aws-cdk-aws-route53-ihostedzone)</code>)  The hosted zone for the short URLs domain. 
-  * **apiGatewayEndpoint** (<code>[IInterfaceVpcEndpoint](#aws-cdk-aws-ec2-iinterfacevpcendpoint)</code>)  An interface VPC endpoint for API gateway. __*Default*__: API is public
-  * **expiration** (<code>[Duration](#aws-cdk-core-duration)</code>)  Expiration for short urls. __*Default*__: cdk.Duration.days(365)
+  * **hostedZone** (<code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code>)  The hosted zone for the short URLs domain. 
+  * **apiGatewayEndpoint** (<code>[aws_ec2.IInterfaceVpcEndpoint](#aws-cdk-lib-aws-ec2-iinterfacevpcendpoint)</code>)  An interface VPC endpoint for API gateway. __*Default*__: API is public
+  * **expiration** (<code>[Duration](#aws-cdk-lib-duration)</code>)  Expiration for short urls. __*Default*__: cdk.Duration.days(365)
 
 
 
@@ -451,7 +451,7 @@ new UrlShortener(scope: Construct, id: string, props: UrlShortenerProps)
 
 Name | Type | Description 
 -----|------|-------------
-**api** | <code>[LambdaRestApi](#aws-cdk-aws-apigateway-lambdarestapi)</code> | The underlying API Gateway REST API.
+**api** | <code>[aws_apigateway.LambdaRestApi](#aws-cdk-lib-aws-apigateway-lambdarestapi)</code> | The underlying API Gateway REST API.
 **apiEndpoint** | <code>string</code> | The endpoint of the URL shortener API.
 
 
@@ -465,10 +465,10 @@ Properties for a CodeCommitMirror.
 
 Name | Type | Description 
 -----|------|-------------
-**cluster** | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS cluster where to run the mirroring operation.
+**cluster** | <code>[aws_ecs.ICluster](#aws-cdk-lib-aws-ecs-icluster)</code> | The ECS cluster where to run the mirroring operation.
 **repository** | <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code> | The source repository.
-**schedule**? | <code>[Schedule](#aws-cdk-aws-events-schedule)</code> | The schedule for the mirroring operation.<br/>__*Default*__: everyday at midnight
-**subnetSelection**? | <code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code> | Where to run the mirroring Fargate tasks.<br/>__*Default*__: public subnets
+**schedule**? | <code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code> | The schedule for the mirroring operation.<br/>__*Default*__: everyday at midnight
+**subnetSelection**? | <code>[aws_ec2.SubnetSelection](#aws-cdk-lib-aws-ec2-subnetselection)</code> | Where to run the mirroring Fargate tasks.<br/>__*Default*__: public subnets
 
 
 
@@ -481,8 +481,8 @@ Properties for a EcsServiceRoller.
 
 Name | Type | Description 
 -----|------|-------------
-**cluster** | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS cluster where the services run.
-**service** | <code>[IService](#aws-cdk-aws-ecs-iservice)</code> | The ECS service for which tasks should be rolled.
+**cluster** | <code>[aws_ecs.ICluster](#aws-cdk-lib-aws-ecs-icluster)</code> | The ECS cluster where the services run.
+**service** | <code>[aws_ecs.IService](#aws-cdk-lib-aws-ecs-iservice)</code> | The ECS service for which tasks should be rolled.
 **trigger**? | <code>[RollTrigger](#cloudstructs-rolltrigger)</code> | The rule or schedule that should trigger a roll.<br/>__*Default*__: roll everyday at midnight
 
 
@@ -496,10 +496,10 @@ Properties for an EmailReceiver.
 
 Name | Type | Description 
 -----|------|-------------
-**function** | <code>[IFunction](#aws-cdk-aws-lambda-ifunction)</code> | A Lambda function to invoke after the message is saved to S3.
-**receiptRuleSet** | <code>[IReceiptRuleSet](#aws-cdk-aws-ses-ireceiptruleset)</code> | The SES receipt rule set where a receipt rule will be added.
+**function** | <code>[aws_lambda.IFunction](#aws-cdk-lib-aws-lambda-ifunction)</code> | A Lambda function to invoke after the message is saved to S3.
+**receiptRuleSet** | <code>[aws_ses.IReceiptRuleSet](#aws-cdk-lib-aws-ses-ireceiptruleset)</code> | The SES receipt rule set where a receipt rule will be added.
 **recipients** | <code>Array<string></code> | The recipients for which emails should be received.
-**afterRule**? | <code>[IReceiptRule](#aws-cdk-aws-ses-ireceiptrule)</code> | An existing rule after which the new rule will be placed in the rule set.<br/>__*Default*__: The new rule is inserted at the beginning of the rule list.
+**afterRule**? | <code>[aws_ses.IReceiptRule](#aws-cdk-lib-aws-ses-ireceiptrule)</code> | An existing rule after which the new rule will be placed in the rule set.<br/>__*Default*__: The new rule is inserted at the beginning of the rule list.
 **sourceWhitelist**? | <code>string</code> | A regular expression to whitelist source email addresses.<br/>__*Default*__: no whitelisting of source email addresses
 
 
@@ -541,7 +541,7 @@ Properties for a SlackEvents.
 
 Name | Type | Description 
 -----|------|-------------
-**signingSecret** | <code>[SecretValue](#aws-cdk-core-secretvalue)</code> | The signing secret of the Slack app.
+**signingSecret** | <code>[SecretValue](#aws-cdk-lib-secretvalue)</code> | The signing secret of the Slack app.
 **apiName**? | <code>string</code> | A name for the API Gateway resource.<br/>__*Default*__: SlackEventsApi
 **customEventBus**? | <code>boolean</code> | Whether to use a custom event bus.<br/>__*Default*__: false
 
@@ -557,8 +557,8 @@ Properties for a SlackTextract.
 Name | Type | Description 
 -----|------|-------------
 **appId** | <code>string</code> | The application id of the Slack app.
-**botToken** | <code>[SecretValue](#aws-cdk-core-secretvalue)</code> | The **bot** token of the Slack app.
-**signingSecret** | <code>[SecretValue](#aws-cdk-core-secretvalue)</code> | The signing secret of the Slack app.
+**botToken** | <code>[SecretValue](#aws-cdk-lib-secretvalue)</code> | The **bot** token of the Slack app.
+**signingSecret** | <code>[SecretValue](#aws-cdk-lib-secretvalue)</code> | The signing secret of the Slack app.
 
 
 
@@ -572,7 +572,7 @@ Properties for a StateMachineCustomResourceProvider.
 Name | Type | Description 
 -----|------|-------------
 **stateMachine** | <code>[IStateMachine](#cloudstructs-istatemachine)</code> | The state machine.
-**timeout**? | <code>[Duration](#aws-cdk-core-duration)</code> | Timeout.<br/>__*Default*__: Duration.minutes(30)
+**timeout**? | <code>[Duration](#aws-cdk-lib-duration)</code> | Timeout.<br/>__*Default*__: Duration.minutes(30)
 
 
 
@@ -586,7 +586,7 @@ Properties for a StaticWebsite.
 Name | Type | Description 
 -----|------|-------------
 **domainName** | <code>string</code> | The domain name for this static website.
-**hostedZone** | <code>[IHostedZone](#aws-cdk-aws-route53-ihostedzone)</code> | The hosted zone where records should be added.
+**hostedZone** | <code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code> | The hosted zone where records should be added.
 **backendConfiguration**? | <code>any</code> | A backend configuration that will be saved as `config.json` in the S3 bucket of the static website.<br/>__*Optional*__
 **httpHeaders**? | <code>Map<string, string></code> | Custom HTTP headers.<br/>__*Default*__: best practice security headers
 **redirects**? | <code>Array<string></code> | A list of domain names that should redirect to `domainName`.<br/>__*Default*__: the domain name of the hosted zone
@@ -602,9 +602,9 @@ Properties for a UrlShortener.
 
 Name | Type | Description 
 -----|------|-------------
-**hostedZone** | <code>[IHostedZone](#aws-cdk-aws-route53-ihostedzone)</code> | The hosted zone for the short URLs domain.
-**apiGatewayEndpoint**? | <code>[IInterfaceVpcEndpoint](#aws-cdk-aws-ec2-iinterfacevpcendpoint)</code> | An interface VPC endpoint for API gateway.<br/>__*Default*__: API is public
-**expiration**? | <code>[Duration](#aws-cdk-core-duration)</code> | Expiration for short urls.<br/>__*Default*__: cdk.Duration.days(365)
+**hostedZone** | <code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code> | The hosted zone for the short URLs domain.
+**apiGatewayEndpoint**? | <code>[aws_ec2.IInterfaceVpcEndpoint](#aws-cdk-lib-aws-ec2-iinterfacevpcendpoint)</code> | An interface VPC endpoint for API gateway.<br/>__*Default*__: API is public
+**expiration**? | <code>[Duration](#aws-cdk-lib-duration)</code> | Expiration for short urls.<br/>__*Default*__: cdk.Duration.days(365)
 
 
 

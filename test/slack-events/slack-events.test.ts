@@ -1,15 +1,15 @@
-import { Template } from '@aws-cdk/assertions';
-import * as cdk from '@aws-cdk/core';
+import { SecretValue, Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 import { SlackEvents } from '../../src';
 
-let stack: cdk.Stack;
+let stack: Stack;
 beforeEach(() => {
-  stack = new cdk.Stack();
+  stack = new Stack();
 });
 
 test('SlackEvents', () => {
   new SlackEvents(stack, 'SlackEvents', {
-    signingSecret: cdk.SecretValue.secretsManager('my-slack-app'),
+    signingSecret: SecretValue.secretsManager('my-slack-app'),
   });
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();

@@ -1,12 +1,12 @@
-import { Template } from '@aws-cdk/assertions';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as ses from '@aws-cdk/aws-ses';
-import * as cdk from '@aws-cdk/core';
+import { Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as ses from 'aws-cdk-lib/aws-ses';
 import { EmailReceiver } from '../../src';
 
-let stack: cdk.Stack;
+let stack: Stack;
 beforeEach(() => {
-  stack = new cdk.Stack();
+  stack = new Stack();
 });
 
 test('EmailReceiver', () => {

@@ -1,11 +1,11 @@
-
-import * as events from '@aws-cdk/aws-events';
-import * as targets from '@aws-cdk/aws-events-targets';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as nodejs from '@aws-cdk/aws-lambda-nodejs';
-import * as logs from '@aws-cdk/aws-logs';
-import * as cdk from '@aws-cdk/core';
+import { Duration, SecretValue } from 'aws-cdk-lib';
+import * as events from 'aws-cdk-lib/aws-events';
+import * as targets from 'aws-cdk-lib/aws-events-targets';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as logs from 'aws-cdk-lib/aws-logs';
+import { Construct } from 'constructs';
 import { SlackEvents } from '../slack-events';
 
 /**
@@ -15,14 +15,14 @@ export interface SlackTextractProps {
   /**
    * The signing secret of the Slack app
    */
-  readonly signingSecret: cdk.SecretValue;
+  readonly signingSecret: SecretValue;
 
   /**
    * The **bot** token of the Slack app.
    *
    * The following scopes are required: `chat:write` and `files:read`
    */
-  readonly botToken: cdk.SecretValue;
+  readonly botToken: SecretValue;
 
   /**
    * The application id of the Slack app.
@@ -33,13 +33,13 @@ export interface SlackTextractProps {
 /**
  * Extract text from images posted to Slack using Amazon Textract
  */
-export class SlackTextract extends cdk.Construct {
-  constructor(scope: cdk.Construct, id: string, props: SlackTextractProps) {
+export class SlackTextract extends Construct {
+  constructor(scope: Construct, id: string, props: SlackTextractProps) {
     super(scope, id);
 
     const handler = new nodejs.NodejsFunction(this, 'handler', {
       runtime: lambda.Runtime.NODEJS_12_X,
-      timeout: cdk.Duration.seconds(30),
+      timeout: Duration.seconds(30),
       logRetention: logs.RetentionDays.ONE_MONTH,
       environment: {
         SLACK_TOKEN: props.botToken.toString(),

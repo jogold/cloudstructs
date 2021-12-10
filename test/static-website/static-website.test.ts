@@ -1,15 +1,15 @@
-import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2';
-import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as cdk from '@aws-cdk/core';
+import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2-alpha';
+import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
+import { App, Stack } from 'aws-cdk-lib';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as route53 from 'aws-cdk-lib/aws-route53';
 import { StaticWebsite } from '../../src';
 
-let stack: cdk.Stack;
-let app: cdk.App;
+let stack: Stack;
+let app: App;
 beforeEach(() => {
-  app = new cdk.App();
-  stack = new cdk.Stack(app, 'Stack', {
+  app = new App();
+  stack = new Stack(app, 'Stack', {
     env: { region: 'eu-west-1' },
   });
 });
@@ -17,13 +17,11 @@ beforeEach(() => {
 test('StaticWebsite', () => {
   const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'my-site.com' });
   const api = new apigatewayv2.HttpApi(stack, 'Api', {
-    defaultIntegration: new integrations.LambdaProxyIntegration({
-      handler: new lambda.Function(stack, 'Fn', {
-        code: lambda.Code.fromInline('inline'),
-        handler: 'index.handler',
-        runtime: lambda.Runtime.NODEJS_12_X,
-      }),
-    }),
+    defaultIntegration: new integrations.HttpLambdaIntegration('Integration', new lambda.Function(stack, 'Fn', {
+      code: lambda.Code.fromInline('inline'),
+      handler: 'index.handler',
+      runtime: lambda.Runtime.NODEJS_12_X,
+    })),
   });
 
   new StaticWebsite(stack, 'StaticWebsite', {

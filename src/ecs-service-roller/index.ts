@@ -1,8 +1,9 @@
-import * as ecs from '@aws-cdk/aws-ecs';
-import * as events from '@aws-cdk/aws-events';
-import * as targets from '@aws-cdk/aws-events-targets';
-import * as iam from '@aws-cdk/aws-iam';
-import * as cdk from '@aws-cdk/core';
+import { Stack } from 'aws-cdk-lib';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as events from 'aws-cdk-lib/aws-events';
+import * as targets from 'aws-cdk-lib/aws-events-targets';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import { Construct } from 'constructs';
 
 /**
  * Properties for a EcsServiceRoller
@@ -62,8 +63,8 @@ export abstract class RollTrigger {
 /**
  * Roll your ECS service tasks on schedule or with a rule
  */
-export class EcsServiceRoller extends cdk.Construct {
-  constructor(scope: cdk.Construct, id: string, props: EcsServiceRollerProps) {
+export class EcsServiceRoller extends Construct {
+  constructor(scope: Construct, id: string, props: EcsServiceRollerProps) {
     super(scope, id);
 
     const rule = props.trigger?.rule ?? new events.Rule(this, 'Rule', {
@@ -86,7 +87,7 @@ export class EcsServiceRoller extends cdk.Construct {
       // arn:aws:ecs:<region>:<account>:service/<cluster-name>/<service-name>
       policyStatement: new iam.PolicyStatement({
         actions: ['ecs:UpdateService'],
-        resources: [cdk.Stack.of(this).formatArn({
+        resources: [Stack.of(this).formatArn({
           service: 'ecs',
           resource: 'service',
           resourceName: `${props.cluster.clusterName}/${props.service.serviceName}`,

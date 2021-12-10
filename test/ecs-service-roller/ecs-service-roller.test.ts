@@ -1,14 +1,14 @@
-import { Template } from '@aws-cdk/assertions';
-import * as ecs from '@aws-cdk/aws-ecs';
-import * as events from '@aws-cdk/aws-events';
-import * as cdk from '@aws-cdk/core';
+import { Duration, Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as events from 'aws-cdk-lib/aws-events';
 import { EcsServiceRoller, RollTrigger } from '../../src';
 
-let stack: cdk.Stack;
+let stack: Stack;
 let cluster: ecs.ICluster;
 let service: ecs.IService;
 beforeEach(() => {
-  stack = new cdk.Stack();
+  stack = new Stack();
   cluster = new ecs.Cluster(stack, 'Cluster');
   const taskDefinition = new ecs.FargateTaskDefinition(stack, 'TaskDef');
   taskDefinition.addContainer('Container', {
@@ -33,7 +33,7 @@ test('EcsServiceRoller with schedule', () => {
   new EcsServiceRoller(stack, 'EcsServiceRoller', {
     cluster,
     service,
-    trigger: RollTrigger.fromSchedule(events.Schedule.rate(cdk.Duration.hours(5))),
+    trigger: RollTrigger.fromSchedule(events.Schedule.rate(Duration.hours(5))),
   });
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();

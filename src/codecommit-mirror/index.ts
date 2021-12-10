@@ -1,12 +1,13 @@
 import * as path from 'path';
-import * as codecommit from '@aws-cdk/aws-codecommit';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import * as ecs from '@aws-cdk/aws-ecs';
-import * as events from '@aws-cdk/aws-events';
-import * as targets from '@aws-cdk/aws-events-targets';
-import * as iam from '@aws-cdk/aws-iam';
-import * as logs from '@aws-cdk/aws-logs';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import * as codecommit from 'aws-cdk-lib/aws-codecommit';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as events from 'aws-cdk-lib/aws-events';
+import * as targets from 'aws-cdk-lib/aws-events-targets';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as logs from 'aws-cdk-lib/aws-logs';
+import { Construct } from 'constructs';
 
 /**
  * Properties for a CodeCommitMirror
@@ -88,8 +89,8 @@ export abstract class CodeCommitMirrorSourceRepository {
 /**
  * Mirror a repository to AWS CodeCommit on schedule
  */
-export class CodeCommitMirror extends cdk.Construct {
-  constructor(scope: cdk.Construct, id: string, props: CodeCommitMirrorProps) {
+export class CodeCommitMirror extends Construct {
+  constructor(scope: Construct, id: string, props: CodeCommitMirrorProps) {
     super(scope, id);
 
     const destination = new codecommit.Repository(this, 'Repository', {

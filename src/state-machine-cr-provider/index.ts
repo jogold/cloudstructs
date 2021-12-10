@@ -1,7 +1,8 @@
 import * as path from 'path';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda';
-import { CfnResource, Construct, Duration, Stack } from '@aws-cdk/core';
+import { ArnFormat, CfnResource, Duration, Stack } from 'aws-cdk-lib';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import { Construct } from 'constructs';
 
 /**
  * A State Machine
@@ -63,8 +64,8 @@ export class StateMachineCustomResourceProvider extends Construct {
       resources: [Stack.of(this).formatArn({
         service: 'states',
         resource: 'execution',
-        sep: ':',
-        resourceName: `${Stack.of(this).parseArn(props.stateMachine.stateMachineArn, ':').resourceName}*`,
+        arnFormat: ArnFormat.COLON_RESOURCE_NAME,
+        resourceName: `${Stack.of(this).splitArn(props.stateMachine.stateMachineArn, ArnFormat.COLON_RESOURCE_NAME).resourceName}*`,
       })],
     }));
     role.addToPolicy(new iam.PolicyStatement({

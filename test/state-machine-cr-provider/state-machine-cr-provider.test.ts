@@ -1,5 +1,5 @@
-import { Template } from '@aws-cdk/assertions';
-import { CustomResource, Stack } from '@aws-cdk/core';
+import { CustomResource, Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 import { StateMachineCustomResourceProvider } from '../../src';
 
 let stack: Stack;

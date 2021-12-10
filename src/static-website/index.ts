@@ -1,16 +1,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as acm from '@aws-cdk/aws-certificatemanager';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as origins from '@aws-cdk/aws-cloudfront-origins';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as patterns from '@aws-cdk/aws-route53-patterns';
-import * as targets from '@aws-cdk/aws-route53-targets';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as cdk from '@aws-cdk/core';
-import * as cr from '@aws-cdk/custom-resources';
+import { Stack } from 'aws-cdk-lib';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as patterns from 'aws-cdk-lib/aws-route53-patterns';
+import * as targets from 'aws-cdk-lib/aws-route53-targets';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as cr from 'aws-cdk-lib/custom-resources';
+import { Construct } from 'constructs';
 import { SECURITY_HEADERS } from './security-headers';
 
 /**
@@ -57,7 +58,7 @@ export interface StaticWebsiteProps {
 /**
  * A CloudFront static website hosted on S3
  */
-export class StaticWebsite extends cdk.Construct {
+export class StaticWebsite extends Construct {
   /**
    * The CloudFront distribution of this static website
    */
@@ -68,7 +69,7 @@ export class StaticWebsite extends cdk.Construct {
    */
   public readonly bucket: s3.Bucket;
 
-  constructor(scope: cdk.Construct, id: string, props: StaticWebsiteProps) {
+  constructor(scope: Construct, id: string, props: StaticWebsiteProps) {
     super(scope, id);
 
     this.bucket = new s3.Bucket(this, 'Bucket', {
@@ -147,7 +148,7 @@ export class StaticWebsite extends cdk.Construct {
           parameters: {
             Bucket: this.bucket.bucketName,
             Key: 'config.json',
-            Body: cdk.Stack.of(this).toJsonString(props.backendConfiguration),
+            Body: Stack.of(this).toJsonString(props.backendConfiguration),
             ContentType: 'application/json',
             CacheControl: 'max-age=0, no-cache, no-store, must-revalidate',
           },
