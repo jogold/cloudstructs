@@ -18,9 +18,6 @@ Version >= 0.41.0 requires AWS CDK v2.
 * [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
   and invoke a Lambda function
 
-* [`SamlIdentityProvider`](src/saml-identity-provider) Custom resource to create a SAML identity
-  provider
-
 * [`SlackEvents`](src/slack-events) Send Slack events to Amazon EventBridge
 
 * [`SlackTextract`](src/slack-textract) Extract text from images posted to Slack
