@@ -6,6 +6,8 @@ import { Construct } from 'constructs';
 
 /**
  * Properties for a SamlProvider
+ *
+ * @deprecated use `SamlProviderProps` from `aws-cdk-lib/aws-iam`
  */
 export interface SamlIdentityProviderProps {
   /**
@@ -28,6 +30,8 @@ export interface SamlIdentityProviderProps {
 
 /**
  * Create a SAML identity provider
+ *
+ * @deprecated use `SamlProvider` from `aws-cdk-lib/aws-iam`
  */
 export class SamlIdentityProvider extends Construct {
   /**
@@ -92,6 +96,8 @@ export class SamlIdentityProvider extends Construct {
 
 /**
  * Principal entity that represents a SAML federated identity provider.
+ *
+ * @deprecated use `SamlPrincipal` from `aws-cdk-lib/aws-iam`
  */
 export class SamlFederatedPrincipal extends iam.FederatedPrincipal {
   constructor(identityProvider: SamlIdentityProvider) {
