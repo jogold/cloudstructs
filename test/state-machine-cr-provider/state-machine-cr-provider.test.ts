@@ -1,4 +1,4 @@
-import * as assert from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import { CustomResource, Stack } from '@aws-cdk/core';
 import { StateMachineCustomResourceProvider } from '../../src';
 
@@ -19,5 +19,5 @@ test('StateMachineCustomResourceProvider', () => {
     serviceToken: provider.serviceToken,
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });

@@ -1,4 +1,4 @@
-import * as assert from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import * as ec2 from '@aws-cdk/aws-ec2';
 import * as route53 from '@aws-cdk/aws-route53';
 import * as cdk from '@aws-cdk/core';
@@ -17,7 +17,7 @@ test('UrlShortener', () => {
     expiration: cdk.Duration.days(60),
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
 
 
@@ -35,5 +35,5 @@ test('UrlShortener with API gateway endpoint', () => {
     apiGatewayEndpoint,
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });

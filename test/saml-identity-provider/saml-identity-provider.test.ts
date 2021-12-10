@@ -1,4 +1,4 @@
-import * as assert from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
 import { SamlFederatedPrincipal, SamlIdentityProvider } from '../../src';
@@ -17,5 +17,5 @@ test('SamlIdentityProvider', () => {
     assumedBy: new SamlFederatedPrincipal(identityProvider),
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });

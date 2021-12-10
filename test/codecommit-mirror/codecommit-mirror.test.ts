@@ -1,4 +1,4 @@
-import * as assert from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as events from '@aws-cdk/aws-events';
 import * as secretsmanager from '@aws-cdk/aws-secretsmanager';
@@ -18,7 +18,7 @@ test('CodeCommitMirror with a public GitHub repo', () => {
     cluster,
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
 
 test('CodeCommitMirror with a private GitHub repo', () => {
@@ -30,5 +30,5 @@ test('CodeCommitMirror with a private GitHub repo', () => {
     schedule: events.Schedule.rate(cdk.Duration.hours(6)),
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });

@@ -1,16 +1,13 @@
-import * as aws from 'aws-sdk';
-import * as awsMock from 'aws-sdk-mock';
+import * as AWS from 'aws-sdk-mock';
 import { handler } from '../../src/slack-events/index.handler';
 import * as signature from '../../src/slack-events/signature';
 
 process.env.SLACK_SIGNING_SECRET = 'secret';
 
-awsMock.setSDKInstance(aws);
-
 console.log = jest.fn();
 
 beforeEach(() => {
-  awsMock.restore();
+  AWS.restore();
 });
 
 test('returns 403 on invalid signature', async () => {
@@ -54,7 +51,7 @@ test('puts events', async () => {
   jest.spyOn(signature, 'verifyRequestSignature').mockReturnValueOnce(true);
 
   const putEventsMock = jest.fn().mockReturnValue({});
-  awsMock.mock('EventBridge', 'putEvents', (params: any, callback: any) => {
+  AWS.mock('EventBridge', 'putEvents', (params: any, callback: any) => {
     callback(null, putEventsMock(params));
   });
 
@@ -83,7 +80,7 @@ test('puts events', async () => {
         Time: new Date('2020-12-01T12:00:00.000Z'),
       },
     ],
-  } as aws.EventBridge.PutEventsRequest);
+  });
 
   expect(response).toEqual<AWSLambda.APIGatewayProxyResult>({
     body: '',

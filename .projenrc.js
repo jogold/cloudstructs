@@ -1,6 +1,6 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const { awscdk } = require('projen');
 
-const project = new AwsCdkConstructLibrary({
+const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'jonathan.goldwasser@gmail.com',
   authorName: 'Jonathan Goldwasser',
   description: 'High-level constructs for AWS CDK',

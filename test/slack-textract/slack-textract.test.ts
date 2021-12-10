@@ -1,4 +1,4 @@
-import * as assert from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import * as cdk from '@aws-cdk/core';
 import { SlackTextract } from '../../src';
 
@@ -14,5 +14,5 @@ test('SlackEvents', () => {
     botToken: cdk.SecretValue.secretsManager('my-slack-app', { jsonField: 'botToken' }),
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
