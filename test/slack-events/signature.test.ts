@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+import crypto from 'crypto';
 import { verifyRequestSignature } from '../../src/slack-events/signature';
 
 console.error = jest.fn();
