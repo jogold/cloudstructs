@@ -1,4 +1,4 @@
-import * as assert from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as ses from '@aws-cdk/aws-ses';
 import * as cdk from '@aws-cdk/core';
@@ -23,5 +23,5 @@ test('EmailReceiver', () => {
     receiptRuleSet: ruleSet,
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });

@@ -1,4 +1,4 @@
-import * as nock from 'nock';
+import nock from 'nock';
 import * as http from '../../src/state-machine-cr-provider/runtime/http';
 
 console.log = jest.fn();

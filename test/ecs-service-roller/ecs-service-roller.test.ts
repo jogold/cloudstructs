@@ -1,4 +1,4 @@
-import * as assert from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as events from '@aws-cdk/aws-events';
 import * as cdk from '@aws-cdk/core';
@@ -26,7 +26,7 @@ test('EcsServiceRoller with default', () => {
     service,
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
 
 test('EcsServiceRoller with schedule', () => {
@@ -36,7 +36,7 @@ test('EcsServiceRoller with schedule', () => {
     trigger: RollTrigger.fromSchedule(events.Schedule.rate(cdk.Duration.hours(5))),
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
 
 test('EcsServiceRoller with rule', () => {
@@ -52,5 +52,5 @@ test('EcsServiceRoller with rule', () => {
     trigger: RollTrigger.fromRule(rule),
   });
 
-  expect(assert.SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
