@@ -1,10 +1,11 @@
-import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2';
-import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations';
-import * as events from '@aws-cdk/aws-events';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as nodejs from '@aws-cdk/aws-lambda-nodejs';
-import * as logs from '@aws-cdk/aws-logs';
-import * as cdk from '@aws-cdk/core';
+import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2-alpha';
+import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
+import * as cdk from 'aws-cdk-lib';
+import * as events from 'aws-cdk-lib/aws-events';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as logs from 'aws-cdk-lib/aws-logs';
+import { Construct } from 'constructs';
 
 /**
  * Properties for a SlackEvents
@@ -33,13 +34,13 @@ export interface SlackEventsProps {
 /**
  * Send Slack events to Amazon EventBridge
  */
-export class SlackEvents extends cdk.Construct {
+export class SlackEvents extends Construct {
   /**
    * The custom event bus where Slack events are sent
    */
   public readonly eventBus?: events.EventBus;
 
-  constructor(scope: cdk.Construct, id: string, props: SlackEventsProps) {
+  constructor(scope: Construct, id: string, props: SlackEventsProps) {
     super(scope, id);
 
     if (props.customEventBus) {
@@ -59,13 +60,11 @@ export class SlackEvents extends cdk.Construct {
       handler.addEnvironment('EVENT_BUS_NAME', this.eventBus.eventBusName);
     }
 
-    events.EventBus.grantPutEvents(handler);
+    events.EventBus.grantAllPutEvents(handler);
 
     // HTTP API
     const httpApi = new apigatewayv2.HttpApi(this, 'SlackEventsApi', {
-      defaultIntegration: new integrations.LambdaProxyIntegration({
-        handler,
-      }),
+      defaultIntegration: new integrations.HttpLambdaIntegration('Integration', handler),
       apiName: props.apiName,
     });
 

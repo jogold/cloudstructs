@@ -13,29 +13,10 @@ Object {
     },
   },
   "Parameters": Object {
-    "AssetParametersb120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827ArtifactHash1355580A": Object {
-      "Description": "Artifact hash for asset \\"b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827\\"",
-      "Type": "String",
-    },
-    "AssetParametersb120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827S3Bucket2070BA0A": Object {
-      "Description": "S3 bucket for asset \\"b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827\\"",
-      "Type": "String",
-    },
-    "AssetParametersb120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827S3VersionKeyB95D17C3": Object {
-      "Description": "S3 key for asset version \\"b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827\\"",
-      "Type": "String",
-    },
-    "AssetParametersc1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71ArtifactHash5A2E70B3": Object {
-      "Description": "Artifact hash for asset \\"c1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71\\"",
-      "Type": "String",
-    },
-    "AssetParametersc1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71S3BucketE2AC30BD": Object {
-      "Description": "S3 bucket for asset \\"c1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71\\"",
-      "Type": "String",
-    },
-    "AssetParametersc1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71S3VersionKey0FC34CC1": Object {
-      "Description": "S3 key for asset version \\"c1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71\\"",
-      "Type": "String",
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
   "Resources": Object {
@@ -47,41 +28,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParametersb120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827S3Bucket2070BA0A",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersb120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827S3VersionKeyB95D17C3",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersb120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827S3VersionKeyB95D17C3",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
         },
         "Handler": "index.handler",
         "Role": Object {
@@ -162,7 +111,7 @@ Object {
             Array [
               "integrations/",
               Object {
-                "Ref": "SlackEventsSlackEventsApiDefaultRouteHttpIntegration95c2863a195028303cc9d1098100f33291053B17",
+                "Ref": "SlackEventsSlackEventsApiDefaultRouteIntegration9014E8DA",
               },
             ],
           ],
@@ -170,7 +119,7 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Route",
     },
-    "SlackEventsSlackEventsApiDefaultRouteHttpIntegration95c2863a195028303cc9d1098100f33291053B17": Object {
+    "SlackEventsSlackEventsApiDefaultRouteIntegration9014E8DA": Object {
       "Properties": Object {
         "ApiId": Object {
           "Ref": "SlackEventsSlackEventsApiE97C93CF",
@@ -186,7 +135,7 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Integration",
     },
-    "SlackEventsSlackEventsApiDefaultRouteSlackEventsSlackEventsApiDefaultRouteDA050C8APermission19510ADB": Object {
+    "SlackEventsSlackEventsApiDefaultRouteIntegrationPermissionF390614C": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -248,41 +197,9 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParametersc1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71S3BucketE2AC30BD",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersc1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71S3VersionKey0FC34CC1",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersc1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71S3VersionKey0FC34CC1",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
+          "S3Key": "c1c5fd573bac55dc1da0d05e168959ad19eb80173d61a7da016e46564603df71.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -375,6 +292,33 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
     },
   },
 }

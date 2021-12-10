@@ -10,12 +10,13 @@ encoded and then a zero-byte object with redirection is stored in S3.
 Define a `UrlShortener`:
 
 ```ts
-import * as route53 from '@aws-cdk/aws-route53';
-import * as cdk from '@aws-cdk/core';
+import { Stack, StackProps } from 'aws-cdk-lib';
+import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as cloudstructs from 'cloudstructs';
+import { Construct } from 'constructs';
 
-export class MyStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class MyStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // The hosted zone for the domain of the short urls

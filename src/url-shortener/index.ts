@@ -1,17 +1,18 @@
-import * as apigateway from '@aws-cdk/aws-apigateway';
-import * as acm from '@aws-cdk/aws-certificatemanager';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as origins from '@aws-cdk/aws-cloudfront-origins';
-import * as dynamodb from '@aws-cdk/aws-dynamodb';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as nodejs from '@aws-cdk/aws-lambda-nodejs';
-import * as logs from '@aws-cdk/aws-logs';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as targets from '@aws-cdk/aws-route53-targets';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as cdk from '@aws-cdk/core';
+import { Duration, Fn } from 'aws-cdk-lib';
+import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as logs from 'aws-cdk-lib/aws-logs';
+import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as targets from 'aws-cdk-lib/aws-route53-targets';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import { Construct } from 'constructs';
 
 /**
  * Properties for a UrlShortener
@@ -27,7 +28,7 @@ export interface UrlShortenerProps {
    *
    * @default cdk.Duration.days(365)
    */
-  readonly expiration?: cdk.Duration;
+  readonly expiration?: Duration;
 
   /**
    * An interface VPC endpoint for API gateway. Specifying this property will
@@ -43,7 +44,7 @@ export interface UrlShortenerProps {
 /**
  * URL shortener
  */
-export class UrlShortener extends cdk.Construct {
+export class UrlShortener extends Construct {
   /**
    * The endpoint of the URL shortener API
    */
@@ -54,7 +55,7 @@ export class UrlShortener extends cdk.Construct {
    */
   public readonly api: apigateway.LambdaRestApi;
 
-  constructor(scope: cdk.Construct, id: string, props: UrlShortenerProps) {
+  constructor(scope: Construct, id: string, props: UrlShortenerProps) {
     super(scope, id);
 
     // Table to save a counter
@@ -68,7 +69,7 @@ export class UrlShortener extends cdk.Construct {
     // Bucket to save redirects
     const bucket = new s3.Bucket(this, 'Bucket', {
       lifecycleRules: [{
-        expiration: props.expiration ?? cdk.Duration.days(365),
+        expiration: props.expiration ?? Duration.days(365),
       }],
       websiteIndexDocument: 'index.html',
     });
@@ -120,7 +121,7 @@ export class UrlShortener extends cdk.Construct {
               effect: iam.Effect.ALLOW,
               actions: ['execute-api:Invoke'],
               principals: [new iam.AnyPrincipal()],
-              resources: [cdk.Fn.join('', ['execute-api:/', '*'])],
+              resources: [Fn.join('', ['execute-api:/', '*'])],
               conditions: {
                 StringEquals: { 'aws:SourceVpce': props.apiGatewayEndpoint.vpcEndpointId },
               },

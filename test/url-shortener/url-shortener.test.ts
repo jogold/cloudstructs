@@ -1,12 +1,12 @@
-import { Template } from '@aws-cdk/assertions';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as cdk from '@aws-cdk/core';
+import { Duration, Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as route53 from 'aws-cdk-lib/aws-route53';
 import { UrlShortener } from '../../src';
 
-let stack: cdk.Stack;
+let stack: Stack;
 beforeEach(() => {
-  stack = new cdk.Stack();
+  stack = new Stack();
 });
 
 test('UrlShortener', () => {
@@ -14,7 +14,7 @@ test('UrlShortener', () => {
 
   new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
-    expiration: cdk.Duration.days(60),
+    expiration: Duration.days(60),
   });
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();

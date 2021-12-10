@@ -8,12 +8,13 @@ HTTP security headers and backend configuration saved to the bucket.
 Define a `StaticWebsite`:
 
 ```ts
-import * as deployment from '@aws-cdk/aws-s3-deployment';
-import * as cdk from '@aws-cdk/core';
+import { CustomResource, Stack, StackProps } from 'aws-cdk-lib';
+import * as deployment from 'aws-cdk-lib/aws-s3-deployment';
 import * as cloudstructs from 'cloudstructs';
+import { Construct } from 'constructs';
 
-export class MyStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class MyStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     const staticWebsite = new cloudstructs.StaticWebsite(this, 'StaticWebsite', {

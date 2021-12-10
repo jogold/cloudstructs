@@ -1,7 +1,8 @@
-import * as iam from '@aws-cdk/aws-iam';
-import * as cdk from '@aws-cdk/core';
-import * as cr from '@aws-cdk/custom-resources';
+import { Names, Stack } from 'aws-cdk-lib';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as cr from 'aws-cdk-lib/custom-resources';
 import { IAM } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { Construct } from 'constructs';
 
 /**
  * Properties for a SamlProvider
@@ -28,18 +29,18 @@ export interface SamlIdentityProviderProps {
 /**
  * Create a SAML identity provider
  */
-export class SamlIdentityProvider extends cdk.Construct {
+export class SamlIdentityProvider extends Construct {
   /**
    * The ARN of the SAML identity provider
    */
   public readonly samlIdentityProviderArn: string;
 
-  constructor(scope: cdk.Construct, id: string, props: SamlIdentityProviderProps) {
+  constructor(scope: Construct, id: string, props: SamlIdentityProviderProps) {
     super(scope, id);
 
-    const name = props.name ?? `${cdk.Names.uniqueId(this)}IdentityProvider`;
+    const name = props.name ?? `${Names.uniqueId(this)}IdentityProvider`;
 
-    const arn = cdk.Stack.of(this).formatArn({
+    const arn = Stack.of(this).formatArn({
       service: 'iam',
       region: '',
       resource: 'saml-provider',

@@ -23,17 +23,18 @@ aws secretsmanager create-secret --name my-slack-app --secret-string '{"appId":"
 Define a `SlackTextract` in your `Stack` and deploy it:
 
 ```ts
-import * as cdk from '@aws-cdk/core';
+import { SecretValue, Stack, StackProps } from 'aws-cdk-lib';
 import * as cloudstructs from 'cloudstructs';
+import { Construct } from 'constructs';
 
-export class MyStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class MyStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     new cloudstructs.SlackTextract(this, 'SlackTextract', {
-      signingSecret: cdk.SecretValue.secretsManager('my-slack-app', { jsonField: 'signingSecret' }),
-      appId: cdk.SecretValue.secretsManager('my-slack-app', { jsonField: 'appId' }).toString(),
-      botToken: cdk.SecretValue.secretsManager('my-slack-app', { jsonField: 'botToken' }),
+      signingSecret: SecretValue.secretsManager('my-slack-app', { jsonField: 'signingSecret' }),
+      appId: SecretValue.secretsManager('my-slack-app', { jsonField: 'appId' }).toString(),
+      botToken: SecretValue.secretsManager('my-slack-app', { jsonField: 'botToken' }),
     });
   }
 }

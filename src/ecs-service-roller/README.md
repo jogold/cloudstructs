@@ -7,11 +7,12 @@ Roll your ECS service tasks on schedule or with a rule
 Define a `EcsServiceRoller`:
 
 ```ts
-import * as cdk from '@aws-cdk/core';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import * as cloudstructs from 'cloudstructs';
+import { Construct } from 'constructs';
 
-export class MyStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class MyStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // code that defines or imports a cluster and a service

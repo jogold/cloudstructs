@@ -7,12 +7,15 @@ Mirror a repository to AWS CodeCommit on schedule.
 Define a `CodeCommitMirror`:
 
 ```ts
-import * as events from '@aws-cdk/aws-events';
-import * as cdk from '@aws-cdk/core';
+import * as events from 'aws-cdk-lib/aws-events';
+import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import * as cloudstructs from 'cloudstructs';
+import { Construct } from 'constructs';
 
-export class MyStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class MyStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // code that defines or imports a cluster where the Fargate tasks will run the mirroring

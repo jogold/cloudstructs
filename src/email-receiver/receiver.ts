@@ -1,13 +1,14 @@
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as destinations from '@aws-cdk/aws-lambda-destinations';
-import * as nodejs from '@aws-cdk/aws-lambda-nodejs';
-import * as logs from '@aws-cdk/aws-logs';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as ses from '@aws-cdk/aws-ses';
-import * as actions from '@aws-cdk/aws-ses-actions';
-import * as sns from '@aws-cdk/aws-sns';
-import * as subscriptions from '@aws-cdk/aws-sns-subscriptions';
-import * as cdk from '@aws-cdk/core';
+import { Duration } from 'aws-cdk-lib';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as destinations from 'aws-cdk-lib/aws-lambda-destinations';
+import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as logs from 'aws-cdk-lib/aws-logs';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as ses from 'aws-cdk-lib/aws-ses';
+import * as actions from 'aws-cdk-lib/aws-ses-actions';
+import * as sns from 'aws-cdk-lib/aws-sns';
+import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
+import { Construct } from 'constructs';
 
 /**
  * Properties for an EmailReceiver
@@ -48,8 +49,8 @@ export interface EmailReceiverProps {
  * Receive emails through SES, save them to S3 and invokes a
  * Lambda function
  */
-export class EmailReceiver extends cdk.Construct {
-  constructor(scope: cdk.Construct, id: string, props: EmailReceiverProps) {
+export class EmailReceiver extends Construct {
+  constructor(scope: Construct, id: string, props: EmailReceiverProps) {
     super(scope, id);
 
     const receiptRule = new ses.ReceiptRule(this, 'ReceiptRule', {
@@ -61,7 +62,7 @@ export class EmailReceiver extends cdk.Construct {
     const bucket = new s3.Bucket(this, 'Bucket', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       encryption: s3.BucketEncryption.S3_MANAGED,
-      lifecycleRules: [{ expiration: cdk.Duration.days(1) }],
+      lifecycleRules: [{ expiration: Duration.days(1) }],
     });
     bucket.grantRead(props.function); // Download email
 

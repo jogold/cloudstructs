@@ -6,6 +6,8 @@ High-level constructs for AWS CDK
 
 `npm install cloudstructs` or `yarn add cloudstructs`
 
+Version >= 0.41.0 requires AWS CDK v2.
+
 ## Constructs
 
 * [`CodeCommitMirror`](src/codecommit-mirror) Mirror a repository to AWS CodeCommit on schedule

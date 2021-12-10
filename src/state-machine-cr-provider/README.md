@@ -13,11 +13,12 @@ Define a `StateMachineCustomResourceProvider` and pass its `serviceToken` to a
 a `cdk.CustomResource`.
 
 ```ts
-import * as cdk from '@aws-cdk/core';
+import { CustomResource, Stack, StackProps } from 'aws-cdk-lib';
 import * as cloudstructs from 'cloudstructs';
+import { Construct } from 'constructs';
 
-export class MyStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class MyStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // Define a provider
@@ -26,7 +27,7 @@ export class MyStack extends cdk.Stack {
     });
 
     // Use the provider as a custom resource
-    new cdk.CustomResource(this, 'CustomResource', {
+    new CustomResource(this, 'CustomResource', {
       serviceToken: provider.serviceToken,
       properties: {
         Key: 'value',

@@ -7,16 +7,17 @@ Receive emails through SES, save them to S3 and invoke a Lambda function
 Define a `EmailReceiver`:
 
 ```ts
-import * as cdk from '@aws-cdk/core';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import * as cloudstructs from 'cloudstructs';
+import { Construct } from 'constructs';
 
-export class MyStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class MyStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // code that defines or imports a Lambda function and receipt rule set
 
-    new EmailReceiver(stack, 'EmailReceiver', {
+    new EmailReceiver(this, 'EmailReceiver', {
       recipients: ['support@cloudstructs.com'], // Process emails sent to this address
       sourceWhitelist: '@amazon.com$', // Reject emails that are not from @amazon.com
       function: myFn,
