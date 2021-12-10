@@ -6,7 +6,7 @@ High-level constructs for AWS CDK
 
 `npm install cloudstructs` or `yarn add cloudstructs`
 
-Version >= 0.41.0 requires AWS CDK v2.
+Version >= 0.2.0 requires AWS CDK v2.
 
 ## Constructs
 
