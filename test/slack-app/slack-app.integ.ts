@@ -12,7 +12,7 @@ class TestStack extends Stack {
       manifest: JSON.stringify({
         display_information: {
           name: 'My App',
-          description: 'A very cool Slack App deploy with CDK',
+          description: 'A very cool Slack App deployed with CDK',
         },
       }),
     });

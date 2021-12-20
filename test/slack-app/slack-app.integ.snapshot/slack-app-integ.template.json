@@ -9,7 +9,7 @@
             "Arn"
           ]
         },
-        "manifest": "{\"display_information\":{\"name\":\"My App\"}}",
+        "manifest": "{\"display_information\":{\"name\":\"My App\",\"description\":\"A very cool Slack App deployed with CDK\"}}",
         "configurationTokenSecretArn": {
           "Fn::Join": [
             "",
@@ -151,7 +151,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "8f11d562d81ca05aa6b44ca3863c2ddd6ba2685b9400a4f7e33ab1a41b76a493.zip"
+          "S3Key": "1216f34df934e676f2a8ca429f04c6b478afc4dd0981a6ce44a2006158bfd698.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -173,7 +173,7 @@
       ],
       "Metadata": {
         "aws:cdk:path": "slack-app-integ/SlackAppProvider/handler/Resource",
-        "aws:asset:path": "asset.8f11d562d81ca05aa6b44ca3863c2ddd6ba2685b9400a4f7e33ab1a41b76a493",
+        "aws:asset:path": "asset.1216f34df934e676f2a8ca429f04c6b478afc4dd0981a6ce44a2006158bfd698",
         "aws:asset:original-path": "/home/jogold/dev/cloudstructs",
         "aws:asset:is-bundled": true,
         "aws:asset:property": "Code"
