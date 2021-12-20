@@ -18,7 +18,7 @@
     },
     {
       "name": "@types/node",
-      "version": "^14.17.0",
+      "version": "^12",
       "type": "build"
     },
     {
@@ -33,6 +33,10 @@
     {
       "name": "@typescript-eslint/parser",
       "version": "^5",
+      "type": "build"
+    },
+    {
+      "name": "aws-cdk",
       "type": "build"
     },
     {
@@ -109,7 +113,7 @@
     },
     {
       "name": "npm-check-updates",
-      "version": "^11",
+      "version": "^12",
       "type": "build"
     },
     {
@@ -123,6 +127,10 @@
     },
     {
       "name": "ts-jest",
+      "type": "build"
+    },
+    {
+      "name": "ts-node",
       "type": "build"
     },
     {
