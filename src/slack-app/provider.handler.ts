@@ -37,6 +37,10 @@ type ManifestRequest = ManifestCreateRequest | ManifestUpdateRequest | ManifestD
 interface ManifestResponse {
   ok: boolean;
   error?: string;
+  errors?: {
+    message: string;
+    pointer: string;
+  }[];
   app_id?: string;
   credentials?: {
     client_id: string;
@@ -105,7 +109,10 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   }).json<ManifestResponse>();
 
   if (!response.ok) {
-    throw new Error(`Failed to ${operation} manifest: ${response.error}`);
+    const errors = response.errors
+      ? response.errors.map((err) => `${err.message} at ${err.pointer}`).join('\n')
+      : '';
+    throw new Error(`Failed to ${operation} manifest: ${response.error}.${errors}`);
   }
 
   return {
