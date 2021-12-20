@@ -117,69 +117,6 @@
         }
       ]
     },
-    "integ:slack-app:assert": {
-      "name": "integ:slack-app:assert",
-      "description": "assert the snapshot of integration test 'slack-app'",
-      "steps": [
-        {
-          "exec": "[ -d \"test/slack-app/slack-app.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'slack-app'. Run 'projen integ:slack-app:deploy' to capture.\" && exit 1)"
-        },
-        {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting -o test/slack-app/.tmp/slack-app.integ/synth.cdk.out > /dev/null"
-        },
-        {
-          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/slack-app/slack-app.integ.snapshot/ test/slack-app/.tmp/slack-app.integ/synth.cdk.out/"
-        }
-      ]
-    },
-    "integ:slack-app:deploy": {
-      "name": "integ:slack-app:deploy",
-      "description": "deploy integration test 'slack-app' and capture snapshot",
-      "steps": [
-        {
-          "exec": "rm -fr test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
-        },
-        {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --require-approval=never -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
-        },
-        {
-          "exec": "rm -fr test/slack-app/slack-app.integ.snapshot"
-        },
-        {
-          "exec": "mv test/slack-app/.tmp/slack-app.integ/deploy.cdk.out test/slack-app/slack-app.integ.snapshot"
-        },
-        {
-          "spawn": "integ:slack-app:destroy"
-        }
-      ]
-    },
-    "integ:slack-app:destroy": {
-      "name": "integ:slack-app:destroy",
-      "description": "destroy integration test 'slack-app'",
-      "steps": [
-        {
-          "exec": "cdk destroy --app test/slack-app/slack-app.integ.snapshot --no-version-reporting"
-        }
-      ]
-    },
-    "integ:slack-app:snapshot": {
-      "name": "integ:slack-app:snapshot",
-      "description": "update snapshot for integration test \"slack-app\"",
-      "steps": [
-        {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting -o test/slack-app/slack-app.integ.snapshot > /dev/null"
-        }
-      ]
-    },
-    "integ:slack-app:watch": {
-      "name": "integ:slack-app:watch",
-      "description": "watch integration test 'slack-app' (without updating snapshots)",
-      "steps": [
-        {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
-        }
-      ]
-    },
     "package": {
       "name": "package",
       "description": "Creates the distribution package",
@@ -235,9 +172,6 @@
         },
         {
           "spawn": "eslint"
-        },
-        {
-          "spawn": "integ:slack-app:assert"
         }
       ]
     },
@@ -300,7 +234,7 @@
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-cdk-lib aws-sdk aws-sdk-mock constructs esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii jsii-diff jsii-docgen jsii-pacmak json-schema nock npm-check-updates standard-version ts-jest ts-node typescript @slack/web-api got @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha aws-cdk-lib constructs"
+          "exec": "yarn upgrade @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-cdk-lib aws-sdk aws-sdk-mock constructs esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii jsii-diff jsii-docgen jsii-pacmak json-schema nock npm-check-updates standard-version ts-jest typescript @slack/web-api got @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"

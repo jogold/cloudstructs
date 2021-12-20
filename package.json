@@ -14,11 +14,6 @@
     "default": "npx projen default",
     "docgen": "npx projen docgen",
     "eslint": "npx projen eslint",
-    "integ:slack-app:assert": "npx projen integ:slack-app:assert",
-    "integ:slack-app:deploy": "npx projen integ:slack-app:deploy",
-    "integ:slack-app:destroy": "npx projen integ:slack-app:destroy",
-    "integ:slack-app:snapshot": "npx projen integ:slack-app:snapshot",
-    "integ:slack-app:watch": "npx projen integ:slack-app:watch",
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "pre-compile": "npx projen pre-compile",
@@ -68,7 +63,6 @@
     "projen": "^0.45.3",
     "standard-version": "^9",
     "ts-jest": "^26.5.6",
-    "ts-node": "^10.4.0",
     "typescript": "^3.9.10"
   },
   "peerDependencies": {
