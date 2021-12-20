@@ -1412,7 +1412,7 @@ aws-cdk-lib@2.1.0:
     semver "^7.3.5"
     yaml "1.10.2"
 
-aws-cdk@*:
+aws-cdk@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.2.0.tgz#a844871c29f8f1ded04778ceaa1cadc39960fabe"
   integrity sha512-rIG80pa1/Clpl0IhOGAgc/4RbH/qdd6pddq5wm5PsEP24cfiWyGjv5ODuUAdGHKn9gkcDLFsH4Yt1SERfB0I0Q==
