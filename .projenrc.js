@@ -7,7 +7,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: '2.1.0',
   name: 'cloudstructs',
   repository: 'https://github.com/jogold/cloudstructs.git',
-  workflowNodeVersion: '14.17.0',
   peerDeps: [
     '@aws-cdk/aws-apigatewayv2-alpha',
     '@aws-cdk/aws-apigatewayv2-integrations-alpha',
