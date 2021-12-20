@@ -68,6 +68,7 @@ export class SlackApp extends Construct {
 
     const resource = new CustomResource(this, 'Resource', {
       serviceToken: provider.serviceToken,
+      resourceType: 'Custom::SlackApp',
       properties: {
         manifest: props.manifest,
         configurationTokenSecretArn: props.configurationTokenSecret.secretArn,
