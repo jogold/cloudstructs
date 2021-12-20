@@ -1,6 +1,6 @@
 # SlackApp
 
-Custom resource to create a Slack App
+Custom resource to create a Slack App from a [manifest](https://api.slack.com/reference/manifests).
 
 ## Usage
 
@@ -28,7 +28,7 @@ export class MyStack extends Stack {
 }
 ```
 
-The secret `slack-app-config-token` is of the following form:
+The secret `slack-app-config-token` is expected to be of the following form:
 
 ```json
 {
@@ -37,4 +37,32 @@ The secret `slack-app-config-token` is of the following form:
 ```
 
 Go to [App configuration tokens](https://api.slack.com/authentication/config-tokens) to create
-a refresh token.
+a refresh token. The construct will automatically use the refresh token to retrieve a new access
+token when needed.
+
+By default, the construct creates an AWS Secrets Manager secret and stores the app credentials in
+it. You can use your own secret by specifying the `credentialsSecret` prop.
+
+## Consuming app credentials
+
+The `credentials` property of the `SlackApp` exposes a `secretsmanager.Secret` with the app
+credentials. The secret has the following form:
+
+```json
+{
+  "appId": "...",
+  "clientId": "...",
+  "clientSecret": "...",
+  "verificationToken": "...",
+  "signingSecret": "..."
+}
+```
+
+The credentials are also exposed as individual properties that create CloudFormation
+[dynamic references](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html):
+
+```ts
+const myApp = new cloudstructs.SlackApp(this, 'MyApp', { ... });
+
+myLambda.addEnvironment('CLIENT_ID', myApp.clientId);
+```

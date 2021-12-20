@@ -50,14 +50,14 @@ interface ManifestResponse {
   };
 }
 
+const secretsmanager = new SecretsManager({ apiVersion: '2017-10-17' });
+
 const slackClient = got.extend({
   prefixUrl: 'https://slack.com/api',
 });
 
 export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   console.log('Event: %j', event);
-
-  const secretsmanager = new SecretsManager({ apiVersion: '2017-10-17' });
 
   const data = await secretsmanager.getSecretValue({
     SecretId: event.ResourceProperties.configurationTokenSecretArn,
@@ -101,10 +101,9 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   }
 
   const operation = event.RequestType.toLowerCase();
+  console.log('Calling manifest API');
   const response = await slackClient.post(`apps.manifest.${operation}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: { Authorization: `Bearer ${accessToken}` },
     json: getManifestRequest(event),
   }).json<ManifestResponse>();
 
@@ -112,14 +111,30 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
     const errors = response.errors
       ? response.errors.map((err) => `${err.message} at ${err.pointer}`).join('\n')
       : '';
-    throw new Error(`Failed to ${operation} manifest: ${response.error}.${errors}`);
+    throw new Error(`Failed to ${operation} manifest: ${response.error}.${errors ? `\n${errors}}` : ''}`);
+  }
+
+  console.log(`Successfully ${operation}d Slack app ${event.PhysicalResourceId ?? response.app_id}`);
+
+  if (event.RequestType === 'Create' && response.credentials) {
+    console.log('Saving app credentials');
+    const putSecretValue = await secretsmanager.putSecretValue({
+      SecretId: event.ResourceProperties.credentialsSecretArn,
+      SecretString: JSON.stringify({
+        appId: response.app_id,
+        clientId: response.credentials.client_id,
+        clientSecret: response.credentials.client_secret,
+        verificationToken: response.credentials.verification_token,
+        signingSecret: response.credentials.signing_secret,
+      }),
+    }).promise();
+    console.log(`Successfully saved app credentials in secret ${putSecretValue.ARN}`);
   }
 
   return {
     PhysicalResourceId: response.app_id,
     Data: {
-      ...response.app_id ? { app_id: response.app_id } : {},
-      ...response.credentials ? { ...response.credentials } : {},
+      appId: response.app_id,
     },
   };
 }

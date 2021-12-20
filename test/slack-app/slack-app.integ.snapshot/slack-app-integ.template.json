@@ -1,7 +1,19 @@
 {
   "Resources": {
+    "MyAppCredentialsA49C5B90": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": "Credentials for Slack App MyApp",
+        "GenerateSecretString": {}
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "slack-app-integ/MyApp/Credentials/Resource"
+      }
+    },
     "MyApp3CE31C26": {
-      "Type": "AWS::CloudFormation::CustomResource",
+      "Type": "Custom::SlackApp",
       "Properties": {
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -29,6 +41,9 @@
               ":secret:slack-app-config-token"
             ]
           ]
+        },
+        "credentialsSecretArn": {
+          "Ref": "MyAppCredentialsA49C5B90"
         }
       },
       "UpdateReplacePolicy": "Delete",
@@ -129,6 +144,16 @@
                   ]
                 ]
               }
+            },
+            {
+              "Action": [
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:UpdateSecret"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Ref": "MyAppCredentialsA49C5B90"
+              }
             }
           ],
           "Version": "2012-10-17"
@@ -151,7 +176,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "1216f34df934e676f2a8ca429f04c6b478afc4dd0981a6ce44a2006158bfd698.zip"
+          "S3Key": "945cd7d9441a51c1ff66d173b463d1cc1b1cbd908970a93a6d46a3107222ec4a.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -173,7 +198,7 @@
       ],
       "Metadata": {
         "aws:cdk:path": "slack-app-integ/SlackAppProvider/handler/Resource",
-        "aws:asset:path": "asset.1216f34df934e676f2a8ca429f04c6b478afc4dd0981a6ce44a2006158bfd698",
+        "aws:asset:path": "asset.945cd7d9441a51c1ff66d173b463d1cc1b1cbd908970a93a6d46a3107222ec4a",
         "aws:asset:original-path": "/home/jogold/dev/cloudstructs",
         "aws:asset:is-bundled": true,
         "aws:asset:property": "Code"
@@ -403,11 +428,11 @@
     }
   },
   "Outputs": {
-    "ClientId": {
+    "AppId": {
       "Value": {
         "Fn::GetAtt": [
           "MyApp3CE31C26",
-          "app_id"
+          "appId"
         ]
       }
     }

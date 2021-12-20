@@ -17,7 +17,7 @@ class TestStack extends Stack {
       }),
     });
 
-    new CfnOutput(this, 'ClientId', {
+    new CfnOutput(this, 'AppId', {
       value: app.appId,
     });
   }

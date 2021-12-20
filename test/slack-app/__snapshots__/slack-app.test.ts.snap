@@ -117,9 +117,21 @@ Object {
             ],
           ],
         },
+        "credentialsSecretArn": Object {
+          "Ref": "MyAppCredentialsA49C5B90",
+        },
         "manifest": "{\\"display_information\\":{\\"name\\":\\"My App\\"}}",
       },
-      "Type": "AWS::CloudFormation::CustomResource",
+      "Type": "Custom::SlackApp",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "MyAppCredentialsA49C5B90": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "Description": "Credentials for Slack App MyApp",
+        "GenerateSecretString": Object {},
+      },
+      "Type": "AWS::SecretsManager::Secret",
       "UpdateReplacePolicy": "Delete",
     },
     "SlackAppProviderframeworkonEventF1145A70": Object {
@@ -224,7 +236,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "8f814d8f7aaa65f25c6f67e1a974b444e843bd7ac15ede4b77a12c309ec9fa8f.zip",
+          "S3Key": "945cd7d9441a51c1ff66d173b463d1cc1b1cbd908970a93a6d46a3107222ec4a.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -352,6 +364,16 @@ Object {
                     ":secret:slack-secret-??????",
                   ],
                 ],
+              },
+            },
+            Object {
+              "Action": Array [
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:UpdateSecret",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "MyAppCredentialsA49C5B90",
               },
             },
           ],
