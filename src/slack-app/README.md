@@ -21,10 +21,12 @@ export class MyStack extends Stack {
         display_information: {
           name: 'My App',
           description: 'A very cool Slack App deployed with CDK',
-        settings:
-          interactivity:
-            is_enabled: true
+        },
+        settings: {
+          interactivity: {
+            is_enabled: true,
             request_url: myApi.url // reference other construct's properties
+          },
         },
       }),
     });
