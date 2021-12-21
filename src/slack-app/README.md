@@ -17,10 +17,14 @@ export class MyStack extends Stack {
 
     new cloudstructs.SlackApp(this, 'MyApp', {
       configurationTokenSecret: secretsmanager.Secret.fromSecretNameV2(this, 'Secret', 'slack-app-config-token'),
-      manifest: JSON.stringify({
+      manifest: Stack.of(this).toJsonString({
         display_information: {
           name: 'My App',
           description: 'A very cool Slack App deployed with CDK',
+        settings:
+          interactivity:
+            is_enabled: true
+            request_url: myApi.url // reference other construct's properties
         },
       }),
     });
