@@ -447,8 +447,8 @@ new StaticWebsite(scope: Construct, id: string, props: StaticWebsiteProps)
   * **domainName** (<code>string</code>)  The domain name for this static website. 
   * **hostedZone** (<code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code>)  The hosted zone where records should be added. 
   * **backendConfiguration** (<code>any</code>)  A backend configuration that will be saved as `config.json` in the S3 bucket of the static website. __*Optional*__
-  * **httpHeaders** (<code>Map<string, string></code>)  Custom HTTP headers. __*Default*__: best practice security headers
   * **redirects** (<code>Array<string></code>)  A list of domain names that should redirect to `domainName`. __*Default*__: the domain name of the hosted zone
+  * **responseHeadersPolicy** (<code>[aws_cloudfront.ResponseHeadersPolicy](#aws-cdk-lib-aws-cloudfront-responseheaderspolicy)</code>)  Response headers policy for the default behavior. __*Default*__: a new policy is created with best practice security headers
 
 
 
@@ -459,6 +459,7 @@ Name | Type | Description
 -----|------|-------------
 **bucket** | <code>[aws_s3.Bucket](#aws-cdk-lib-aws-s3-bucket)</code> | The S3 bucket of this static website.
 **distribution** | <code>[aws_cloudfront.Distribution](#aws-cdk-lib-aws-cloudfront-distribution)</code> | The CloudFront distribution of this static website.
+*static* **defaultSecurityHeadersBehavior** | <code>[aws_cloudfront.ResponseSecurityHeadersBehavior](#aws-cdk-lib-aws-cloudfront-responsesecurityheadersbehavior)</code> | Best practice security headers used as default.
 
 
 
@@ -644,8 +645,8 @@ Name | Type | Description
 **domainName** | <code>string</code> | The domain name for this static website.
 **hostedZone** | <code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code> | The hosted zone where records should be added.
 **backendConfiguration**? | <code>any</code> | A backend configuration that will be saved as `config.json` in the S3 bucket of the static website.<br/>__*Optional*__
-**httpHeaders**? | <code>Map<string, string></code> | Custom HTTP headers.<br/>__*Default*__: best practice security headers
 **redirects**? | <code>Array<string></code> | A list of domain names that should redirect to `domainName`.<br/>__*Default*__: the domain name of the hosted zone
+**responseHeadersPolicy**? | <code>[aws_cloudfront.ResponseHeadersPolicy](#aws-cdk-lib-aws-cloudfront-responseheaderspolicy)</code> | Response headers policy for the default behavior.<br/>__*Default*__: a new policy is created with best practice security headers
 
 
 
