@@ -50,4 +50,15 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+test/slack-app/slack-app.integ.snapshot/asset.*
+test/slack-app/slack-app.integ.snapshot/**/asset.*
+test/slack-app/slack-app.integ.snapshot/cdk.out
+test/slack-app/slack-app.integ.snapshot/**/cdk.out
+test/slack-app/slack-app.integ.snapshot/manifest.json
+test/slack-app/slack-app.integ.snapshot/**/manifest.json
+test/slack-app/slack-app.integ.snapshot/tree.json
+test/slack-app/slack-app.integ.snapshot/**/tree.json
+test/slack-app/.tmp/slack-app.integ/deploy.cdk.out
+test/slack-app/.tmp/slack-app.integ/synth.cdk.out
+!test/slack-app/slack-app.integ.snapshot
 !/.github/workflows/upgrade-master.yml
