@@ -84,6 +84,7 @@ export class StaticWebsite extends Construct {
       override: true,
     },
   };
+
   /**
    * The CloudFront distribution of this static website
    */
