@@ -459,6 +459,7 @@ Name | Type | Description
 -----|------|-------------
 **bucket** | <code>[aws_s3.Bucket](#aws-cdk-lib-aws-s3-bucket)</code> | The S3 bucket of this static website.
 **distribution** | <code>[aws_cloudfront.Distribution](#aws-cdk-lib-aws-cloudfront-distribution)</code> | The CloudFront distribution of this static website.
+*static* **defaultSecurityHeadersBehavior** | <code>[aws_cloudfront.ResponseSecurityHeadersBehavior](#aws-cdk-lib-aws-cloudfront-responsesecurityheadersbehavior)</code> | Best practice security headers used as default.
 
 
 
