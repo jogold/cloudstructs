@@ -88,84 +88,6 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "OriginResponse488DDAA0": Object {
-      "DependsOn": Array [
-        "OriginResponseServiceRoleD33C7FC6",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-1",
-          },
-          "S3Key": "8c4903ca5c08be3259ee253c89a70180250220f7ec0e9b610b04db25420ab97b.zip",
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "OriginResponseServiceRoleD33C7FC6",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "OriginResponseCurrentVersion9FB3D014528d3bae92b6ff4ebee6cadfd6df6088": Object {
-      "Properties": Object {
-        "FunctionName": Object {
-          "Ref": "OriginResponse488DDAA0",
-        },
-      },
-      "Type": "AWS::Lambda::Version",
-    },
-    "OriginResponseParameter7A7C8B4F": Object {
-      "Properties": Object {
-        "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginResponse",
-        "Type": "String",
-        "Value": Object {
-          "Ref": "OriginResponseCurrentVersion9FB3D014528d3bae92b6ff4ebee6cadfd6df6088",
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "OriginResponseServiceRoleD33C7FC6": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "edgelambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
   },
   "Rules": Object {
     "CheckBootstrapVersion": Object {
@@ -740,16 +662,10 @@ Object {
                   ],
                 },
               },
-              Object {
-                "EventType": "origin-response",
-                "LambdaFunctionARN": Object {
-                  "Fn::GetAtt": Array [
-                    "StaticWebsiteOriginResponseArnReader75C7EB4A",
-                    "FunctionArn",
-                  ],
-                },
-              },
             ],
+            "ResponseHeadersPolicyId": Object {
+              "Ref": "StaticWebsiteResponseHeadersPolicyF3EBE566",
+            },
             "TargetOriginId": "StackStaticWebsiteDistributionOrigin103625211",
             "ViewerProtocolPolicy": "redirect-to-https",
           },
@@ -1095,22 +1011,6 @@ Object {
       "Type": "Custom::CrossRegionStringParameterReader",
       "UpdateReplacePolicy": "Delete",
     },
-    "StaticWebsiteOriginResponseArnReader75C7EB4A": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014528d3bae92b6ff4ebee6cadfd6df6088",
-        "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::CrossRegionStringParameterReader",
-      "UpdateReplacePolicy": "Delete",
-    },
     "StaticWebsitePutConfig8F8DD69A": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -1201,6 +1101,38 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "StaticWebsiteResponseHeadersPolicyF3EBE566": Object {
+      "Properties": Object {
+        "ResponseHeadersPolicyConfig": Object {
+          "Name": "StackStaticWebsiteResponseHeadersPolicyEF11926D",
+          "SecurityHeadersConfig": Object {
+            "ContentTypeOptions": Object {
+              "Override": true,
+            },
+            "FrameOptions": Object {
+              "FrameOption": "DENY",
+              "Override": true,
+            },
+            "ReferrerPolicy": Object {
+              "Override": true,
+              "ReferrerPolicy": "strict-origin-when-cross-origin",
+            },
+            "StrictTransportSecurity": Object {
+              "AccessControlMaxAgeSec": 31536000,
+              "IncludeSubdomains": true,
+              "Override": true,
+              "Preload": true,
+            },
+            "XSSProtection": Object {
+              "ModeBlock": true,
+              "Override": true,
+              "Protection": true,
+            },
+          },
+        },
+      },
+      "Type": "AWS::CloudFront::ResponseHeadersPolicy",
     },
   },
   "Rules": Object {
