@@ -1,6 +1,5 @@
-import * as fs from 'fs';
 import * as path from 'path';
-import { Stack } from 'aws-cdk-lib';
+import { Duration, Stack } from 'aws-cdk-lib';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
@@ -12,7 +11,6 @@ import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as cr from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
-import { SECURITY_HEADERS } from './security-headers';
 
 /**
  * Properties for a StaticWebsite
@@ -48,11 +46,11 @@ export interface StaticWebsiteProps {
   readonly redirects?: string[];
 
   /**
-   * Custom HTTP headers
+   * Response headers policy for the default behavior
    *
-   * @default - best practice security headers
+   * @default - a new policy is created with best practice security headers
    */
-  readonly httpHeaders?: { [key: string]: string };
+  readonly responseHeadersPolicy?: cloudfront.ResponseHeadersPolicy;
 }
 
 /**
@@ -88,18 +86,6 @@ export class StaticWebsite extends Construct {
       runtime: lambda.Runtime.NODEJS_14_X,
     });
 
-    // Lambda@Edge doesn't support environment variables so we write a JSON file with
-    // the HTTP headers
-    fs.writeFileSync(path.join(__dirname, 'origin-response-handler', 'headers.json'), JSON.stringify({
-      ...SECURITY_HEADERS,
-      ...props.httpHeaders,
-    }));
-    const originResponse = new cloudfront.experimental.EdgeFunction(this, 'OriginResponse', {
-      code: lambda.Code.fromAsset(path.join(__dirname, 'origin-response-handler')),
-      handler: 'index.handler',
-      runtime: lambda.Runtime.NODEJS_14_X,
-    });
-
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new origins.S3Origin(this.bucket),
@@ -109,11 +95,10 @@ export class StaticWebsite extends Construct {
             eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
             functionVersion: originRequest,
           },
-          {
-            eventType: cloudfront.LambdaEdgeEventType.ORIGIN_RESPONSE,
-            functionVersion: originResponse,
-          },
         ],
+        responseHeadersPolicy: props.responseHeadersPolicy ?? new cloudfront.ResponseHeadersPolicy(this, 'ResponseHeadersPolicy', {
+          securityHeadersBehavior: defaultSecurityHeadersBehavior,
+        }),
       },
       defaultRootObject: 'index.html',
       domainNames: [props.domainName],
@@ -166,3 +151,31 @@ export class StaticWebsite extends Construct {
     }
   }
 }
+
+/**
+ * Best practice security headers used as default
+ */
+export const defaultSecurityHeadersBehavior: cloudfront.ResponseSecurityHeadersBehavior = {
+  contentTypeOptions: {
+    override: true,
+  },
+  frameOptions: {
+    frameOption: cloudfront.HeadersFrameOption.DENY,
+    override: true,
+  },
+  referrerPolicy: {
+    referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
+    override: true,
+  },
+  strictTransportSecurity: {
+    accessControlMaxAge: Duration.seconds(31536000),
+    includeSubdomains: true,
+    preload: true,
+    override: true,
+  },
+  xssProtection: {
+    protection: true,
+    modeBlock: true,
+    override: true,
+  },
+};
