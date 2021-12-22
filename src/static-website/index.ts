@@ -58,6 +58,33 @@ export interface StaticWebsiteProps {
  */
 export class StaticWebsite extends Construct {
   /**
+  * Best practice security headers used as default
+  */
+  public static defaultSecurityHeadersBehavior: cloudfront.ResponseSecurityHeadersBehavior = {
+    contentTypeOptions: {
+      override: true,
+    },
+    frameOptions: {
+      frameOption: cloudfront.HeadersFrameOption.DENY,
+      override: true,
+    },
+    referrerPolicy: {
+      referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
+      override: true,
+    },
+    strictTransportSecurity: {
+      accessControlMaxAge: Duration.seconds(31536000),
+      includeSubdomains: true,
+      preload: true,
+      override: true,
+    },
+    xssProtection: {
+      protection: true,
+      modeBlock: true,
+      override: true,
+    },
+  };
+  /**
    * The CloudFront distribution of this static website
    */
   public readonly distribution: cloudfront.Distribution;
@@ -97,7 +124,7 @@ export class StaticWebsite extends Construct {
           },
         ],
         responseHeadersPolicy: props.responseHeadersPolicy ?? new cloudfront.ResponseHeadersPolicy(this, 'ResponseHeadersPolicy', {
-          securityHeadersBehavior: defaultSecurityHeadersBehavior,
+          securityHeadersBehavior: StaticWebsite.defaultSecurityHeadersBehavior,
         }),
       },
       defaultRootObject: 'index.html',
@@ -151,31 +178,3 @@ export class StaticWebsite extends Construct {
     }
   }
 }
-
-/**
- * Best practice security headers used as default
- */
-export const defaultSecurityHeadersBehavior: cloudfront.ResponseSecurityHeadersBehavior = {
-  contentTypeOptions: {
-    override: true,
-  },
-  frameOptions: {
-    frameOption: cloudfront.HeadersFrameOption.DENY,
-    override: true,
-  },
-  referrerPolicy: {
-    referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
-    override: true,
-  },
-  strictTransportSecurity: {
-    accessControlMaxAge: Duration.seconds(31536000),
-    includeSubdomains: true,
-    preload: true,
-    override: true,
-  },
-  xssProtection: {
-    protection: true,
-    modeBlock: true,
-    override: true,
-  },
-};
