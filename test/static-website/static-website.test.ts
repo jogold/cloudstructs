@@ -20,7 +20,7 @@ test('StaticWebsite', () => {
     defaultIntegration: new integrations.HttpLambdaIntegration('Integration', new lambda.Function(stack, 'Fn', {
       code: lambda.Code.fromInline('inline'),
       handler: 'index.handler',
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
     })),
   });
 

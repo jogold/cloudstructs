@@ -71,7 +71,6 @@ export class EmailReceiver extends Construct {
     // Actions
     if (props.sourceWhitelist) {
       const whitelistHandler = new nodejs.NodejsFunction(this, 'whitelist', {
-        runtime: lambda.Runtime.NODEJS_12_X,
         environment: {
           SOURCE_WHITELIST: props.sourceWhitelist,
         },
@@ -90,7 +89,7 @@ export class EmailReceiver extends Construct {
     }));
 
     const s3Handler = new nodejs.NodejsFunction(this, 's3', {
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
       logRetention: logs.RetentionDays.ONE_MONTH,
       onSuccess: new destinations.LambdaDestination(props.function, {
         responseOnly: true,

@@ -2,7 +2,6 @@ import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2-alpha';
 import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 import * as cdk from 'aws-cdk-lib';
 import * as events from 'aws-cdk-lib/aws-events';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
@@ -49,7 +48,6 @@ export class SlackEvents extends Construct {
 
     // Send event to the event bus
     const handler = new nodejs.NodejsFunction(this, 'handler', {
-      runtime: lambda.Runtime.NODEJS_12_X,
       logRetention: logs.RetentionDays.ONE_MONTH,
       environment: {
         SLACK_SIGNING_SECRET: props.signingSecret.toString(),
