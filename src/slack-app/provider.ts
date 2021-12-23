@@ -1,5 +1,4 @@
 import { Stack } from 'aws-cdk-lib';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as cr from 'aws-cdk-lib/custom-resources';
@@ -23,7 +22,6 @@ export class SlackAppProvider extends Construct {
     super(scope, id);
 
     this.handler = new nodejs.NodejsFunction(this, 'handler', {
-      runtime: lambda.Runtime.NODEJS_12_X,
       logRetention: logs.RetentionDays.ONE_MONTH,
     });
 
