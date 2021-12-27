@@ -28,15 +28,23 @@ Name|Description
 [EcsServiceRollerProps](#cloudstructs-ecsservicerollerprops)|Properties for a EcsServiceRoller.
 [EmailReceiverProps](#cloudstructs-emailreceiverprops)|Properties for an EmailReceiver.
 [SamlIdentityProviderProps](#cloudstructs-samlidentityproviderprops)|Properties for a SamlProvider.
-[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)|A group of settings that describe parts of an app's appearance within Slack.
-[SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)|[Events API](https://api.slack.com/events-api) configuration for the app.
+[SlackAppManifestAppHome](#cloudstructs-slackappmanifestapphome)|App Home configuration.
+[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)|App's appearance within Slack.
+[SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)|Events API configuration for the app.
+[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)|Features section of the app config pages.
 [SlackAppManifestInteractivity](#cloudstructs-slackappmanifestinteractivity)|Interactivity configuration for the app.
-[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)|A group of settings that describe parts of an app's appearance within Slack.
+[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)|Manifest metadata.
+[SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)|OAuth configuration for the app.
 [SlackAppManifestProps](#cloudstructs-slackappmanifestprops)|Properties for a Slack app manifest.
-[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)|A group of settings corresponding to the Settings section of the app config pages.
+[SlackAppManifestScopes](#cloudstructs-slackappmanifestscopes)|Permission scopes.
+[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)|Settings section of the app config pages.
+[SlackAppManifestShortcut](#cloudstructs-slackappmanifestshortcut)|Shortcut configuration.
+[SlackAppManifestSlashCommand](#cloudstructs-slackappmanifestslashcommand)|Slash command configuration.
+[SlackAppManifestWorkflowStep](#cloudstructs-slackappmanifestworkflowstep)|Workflow step.
 [SlackAppProps](#cloudstructs-slackappprops)|Properties for a SlackApp.
 [SlackEventsProps](#cloudstructs-slackeventsprops)|Properties for a SlackEvents.
 [SlackTextractProps](#cloudstructs-slacktextractprops)|Properties for a SlackTextract.
+[SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)|Bot user configuration.
 [StateMachineCustomResourceProviderProps](#cloudstructs-statemachinecustomresourceproviderprops)|Properties for a StateMachineCustomResourceProvider.
 [StaticWebsiteProps](#cloudstructs-staticwebsiteprops)|Properties for a StaticWebsite.
 [UrlShortenerProps](#cloudstructs-urlshortenerprops)|Properties for a UrlShortener.
@@ -47,6 +55,13 @@ Name|Description
 Name|Description
 ----|-----------
 [IStateMachine](#cloudstructs-istatemachine)|A State Machine.
+
+
+**Enums**
+
+Name|Description
+----|-----------
+[SlackAppManifestShortcutType](#cloudstructs-slackappmanifestshortcuttype)|Type of shortcuts.
 
 
 
@@ -350,10 +365,31 @@ A Slack app manifest.
 
 
 ```ts
-new SlackAppManifest()
+new SlackAppManifest(props: SlackAppManifestProps)
+```
+
+* **props** (<code>[SlackAppManifestProps](#cloudstructs-slackappmanifestprops)</code>)  *No description*
+  * **displayInformation** (<code>[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)</code>)  App's appearance within Slack. 
+  * **features** (<code>[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)</code>)  Features section of the app config pages. __*Optional*__
+  * **metadata** (<code>[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)</code>)  Manifest metadata. __*Default*__: no specific manifest schema version to target
+  * **oauthConfig** (<code>[SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)</code>)  OAuth configuration for the app. __*Optional*__
+  * **settings** (<code>[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)</code>)  Settings section of the app config pages. __*Optional*__
+
+
+### Methods
+
+
+#### render() <a id="cloudstructs-slackappmanifest-render"></a>
+
+
+
+```ts
+render(): any
 ```
 
 
+__Returns__:
+* <code>any</code>
 
 
 
@@ -599,10 +635,25 @@ Name | Type | Description
 
 
 
+## struct SlackAppManifestAppHome  <a id="cloudstructs-slackappmanifestapphome"></a>
+
+
+App Home configuration.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**homeTab**? | <code>boolean</code> | Wether the Home tab is enabled.<br/>__*Default*__: false
+**messagesTab**? | <code>boolean</code> | Wether the Messages is enabled.<br/>__*Default*__: false
+**messagesTabReadOnly**? | <code>boolean</code> | Whether the users can send messages to your app in the Messages tab of your App Home.<br/>__*Default*__: false
+
+
+
 ## struct SlackAppManifestDisplayInformation  <a id="cloudstructs-slackappmanifestdisplayinformation"></a>
 
 
-A group of settings that describe parts of an app's appearance within Slack.
+App's appearance within Slack.
 
 
 
@@ -618,15 +669,33 @@ Name | Type | Description
 ## struct SlackAppManifestEventSubscriptions  <a id="cloudstructs-slackappmanifesteventsubscriptions"></a>
 
 
-[Events API](https://api.slack.com/events-api) configuration for the app.
+Events API configuration for the app.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**requestUrl** | <code>string</code> | The full https URL that acts as the [Events API request URL](https://api.slack.com/events-api#the-events-api__subscribing-to-event-types__events-api-request-urls).
-**botEvents**? | <code>Array<string></code> | An array of [event types](https://api.slack.com/events) you want the app to subscribe to.<br/>__*Optional*__
+**requestUrl** | <code>string</code> | The full https URL that acts as the Events API request URL.
+**botEvents**? | <code>Array<string></code> | An array of event types you want the app to subscribe to.<br/>__*Optional*__
 **userEvents**? | <code>Array<string></code> | An array of event types you want the app to subscribe to on behalf of authorized users.<br/>__*Optional*__
+
+
+
+## struct SlackAppManifestFeatures  <a id="cloudstructs-slackappmanifestfeatures"></a>
+
+
+Features section of the app config pages.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**appHome**? | <code>[SlackAppManifestAppHome](#cloudstructs-slackappmanifestapphome)</code> | App Home configuration.<br/>__*Optional*__
+**botUser**? | <code>[SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)</code> | Bot user configuration.<br/>__*Optional*__
+**shortcuts**? | <code>Array<[SlackAppManifestShortcut](#cloudstructs-slackappmanifestshortcut)></code> | Shortcuts configuration.<br/>__*Optional*__
+**slashCommands**? | <code>Array<[SlackAppManifestSlashCommand](#cloudstructs-slackappmanifestslashcommand)></code> | Slash commands configuration.<br/>__*Optional*__
+**unfurlDomains**? | <code>Array<string></code> | Valid unfurl domains to register.<br/>__*Optional*__
+**workflowSteps**? | <code>Array<[SlackAppManifestWorkflowStep](#cloudstructs-slackappmanifestworkflowstep)></code> | Workflow steps.<br/>__*Optional*__
 
 
 
@@ -640,15 +709,15 @@ Interactivity configuration for the app.
 Name | Type | Description 
 -----|------|-------------
 **isEnabled**? | <code>boolean</code> | Whether or not interactivity features are enabled.<br/>__*Default*__: true
-**messageMenuOptionsUrl**? | <code>string</code> | The full https URL that acts as the [interactive Options Load URL](https://api.slack.com/interactivity/handling#setup).<br/>__*Optional*__
-**requestUrl**? | <code>string</code> | The full https URL that acts as the [interactive Request URL](https://api.slack.com/interactivity/handling#setup).<br/>__*Optional*__
+**messageMenuOptionsUrl**? | <code>string</code> | The full https URL that acts as th interactive Options Load URL.<br/>__*Optional*__
+**requestUrl**? | <code>string</code> | The full https URL that acts as the interactive Request URL.<br/>__*Optional*__
 
 
 
 ## struct SlackAppManifestMetadata  <a id="cloudstructs-slackappmanifestmetadata"></a>
 
 
-A group of settings that describe parts of an app's appearance within Slack.
+Manifest metadata.
 
 
 
@@ -656,6 +725,20 @@ Name | Type | Description
 -----|------|-------------
 **majorVersion**? | <code>number</code> | An integer that specifies the major version of the manifest schema to target.<br/>__*Optional*__
 **minorVersion**? | <code>number</code> | An integer that specifies the minor version of the manifest schema to target.<br/>__*Optional*__
+
+
+
+## struct SlackAppManifestOauthConfig  <a id="cloudstructs-slackappmanifestoauthconfig"></a>
+
+
+OAuth configuration for the app.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**redirectUrls**? | <code>Array<string></code> | OAuth redirect URLs.<br/>__*Optional*__
+**scopes**? | <code>[SlackAppManifestScopes](#cloudstructs-slackappmanifestscopes)</code> | Permission scopes.<br/>__*Optional*__
 
 
 
@@ -668,25 +751,89 @@ Properties for a Slack app manifest.
 
 Name | Type | Description 
 -----|------|-------------
-**displayInformation** | <code>[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)</code> | A group of settings that describe parts of an app's appearance within Slack.
-**metadata**? | <code>[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)</code> | A group of settings that describe the manifest.<br/>__*Default*__: no specific manifest schema version to target
-**settings**? | <code>[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)</code> | A group of settings corresponding to the Settings section of the app config pages.<br/>__*Optional*__
+**displayInformation** | <code>[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)</code> | App's appearance within Slack.
+**features**? | <code>[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)</code> | Features section of the app config pages.<br/>__*Optional*__
+**metadata**? | <code>[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)</code> | Manifest metadata.<br/>__*Default*__: no specific manifest schema version to target
+**oauthConfig**? | <code>[SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)</code> | OAuth configuration for the app.<br/>__*Optional*__
+**settings**? | <code>[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)</code> | Settings section of the app config pages.<br/>__*Optional*__
+
+
+
+## struct SlackAppManifestScopes  <a id="cloudstructs-slackappmanifestscopes"></a>
+
+
+Permission scopes.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**bot**? | <code>Array<string></code> | Bot scopes to request upon app installation.<br/>__*Optional*__
+**user**? | <code>Array<string></code> | User scopes to request upon app installation.<br/>__*Optional*__
 
 
 
 ## struct SlackAppManifestSettings  <a id="cloudstructs-slackappmanifestsettings"></a>
 
 
-A group of settings corresponding to the Settings section of the app config pages.
+Settings section of the app config pages.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**allowedIpAddressRanges**? | <code>Array<string></code> | An array of IP addresses that conform to the [Allowed IP Ranges feature](https://api.slack.com/authentication/best-practices#ip_allowlisting).<br/>__*Optional*__
-**eventSubscriptions**? | <code>[SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)</code> | [Events API](https://api.slack.com/events-api) configuration for the app.<br/>__*Optional*__
+**allowedIpAddressRanges**? | <code>Array<string></code> | An array of IP addresses that conform to the Allowed IP Ranges feature.<br/>__*Optional*__
+**eventSubscriptions**? | <code>[SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)</code> | Events API configuration for the app.<br/>__*Optional*__
 **interactivity**? | <code>[SlackAppManifestInteractivity](#cloudstructs-slackappmanifestinteractivity)</code> | Interactivity configuration for the app.<br/>__*Optional*__
-**orgDeployEnabled**? | <code>boolean</code> | Whether or not [org-wide deploy](https://api.slack.com/enterprise/apps) is enabled.<br/>__*Default*__: false
+**orgDeploy**? | <code>boolean</code> | Whether org-wide deploy is enabled.<br/>__*Default*__: false
+**socketMode**? | <code>boolean</code> | Whether Socket Mode is enabled.<br/>__*Default*__: false
+
+
+
+## struct SlackAppManifestShortcut  <a id="cloudstructs-slackappmanifestshortcut"></a>
+
+
+Shortcut configuration.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**callbackId** | <code>string</code> | The callback ID of the shortcut.
+**description** | <code>string</code> | A short description of the shortcut.
+**name** | <code>string</code> | The name of the shortcut.
+**type** | <code>[SlackAppManifestShortcutType](#cloudstructs-slackappmanifestshortcuttype)</code> | The type of shortcut.
+
+
+
+## struct SlackAppManifestSlashCommand  <a id="cloudstructs-slackappmanifestslashcommand"></a>
+
+
+Slash command configuration.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**command** | <code>string</code> | The actual slash command.
+**description** | <code>string</code> | The description of the slash command.
+**shouldEscape**? | <code>boolean</code> | Whether channels, users, and links typed with the slash command should be escaped.<br/>__*Default*__: false
+**url**? | <code>string</code> | The full https URL that acts as the slash command's request URL.<br/>__*Optional*__
+**usageHint**? | <code>string</code> | The short usage hint about the slash command for users.<br/>__*Optional*__
+
+
+
+## struct SlackAppManifestWorkflowStep  <a id="cloudstructs-slackappmanifestworkflowstep"></a>
+
+
+Workflow step.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**callbackId** | <code>string</code> | The callback ID of the workflow step.
+**name** | <code>string</code> | The name of the workflow step.
 
 
 
@@ -735,6 +882,20 @@ Name | Type | Description
 
 
 
+## struct SlackkAppManifestBotUser  <a id="cloudstructs-slackkappmanifestbotuser"></a>
+
+
+Bot user configuration.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**displayName** | <code>string</code> | The display name of the bot user.
+**alwaysOnline**? | <code>boolean</code> | Whether the bot user will always appear to be online.<br/>__*Default*__: false
+
+
+
 ## struct StateMachineCustomResourceProviderProps  <a id="cloudstructs-statemachinecustomresourceproviderprops"></a>
 
 
@@ -779,5 +940,15 @@ Name | Type | Description
 **apiGatewayEndpoint**? | <code>[aws_ec2.IInterfaceVpcEndpoint](#aws-cdk-lib-aws-ec2-iinterfacevpcendpoint)</code> | An interface VPC endpoint for API gateway.<br/>__*Default*__: API is public
 **expiration**? | <code>[Duration](#aws-cdk-lib-duration)</code> | Expiration for short urls.<br/>__*Default*__: cdk.Duration.days(365)
 
+
+
+## enum SlackAppManifestShortcutType  <a id="cloudstructs-slackappmanifestshortcuttype"></a>
+
+Type of shortcuts.
+
+Name | Description
+-----|-----
+**MESSAGE** |Message shortcuts are shown to users in the context menus of messages within Slack.
+**GLOBAL** |Global shortcuts are available to users via the shortcuts button in the composer, and when using search in Slack.
 
 
