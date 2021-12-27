@@ -150,7 +150,7 @@ export class SlackApp extends Construct {
       serviceToken: provider.serviceToken,
       resourceType: 'Custom::SlackApp',
       properties: {
-        manifest: props.manifest,
+        manifest: props.manifest.render(this),
         configurationTokenSecretArn: props.configurationTokenSecret.secretArn,
         credentialsSecretArn: this.credentials.secretArn,
       },
