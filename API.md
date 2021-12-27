@@ -13,6 +13,7 @@ Name|Description
 [SamlIdentityProvider](#cloudstructs-samlidentityprovider)|Create a SAML identity provider.
 [SlackApp](#cloudstructs-slackapp)|A Slack application deployed with a manifest.
 [SlackAppManifest](#cloudstructs-slackappmanifest)|A Slack app manifest.
+[SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)|A Slack app manifest definition.
 [SlackEvents](#cloudstructs-slackevents)|Send Slack events to Amazon EventBridge.
 [SlackTextract](#cloudstructs-slacktextract)|Extract text from images posted to Slack using Amazon Textract.
 [StateMachineCustomResourceProvider](#cloudstructs-statemachinecustomresourceprovider)|A state machine custom resource provider.
@@ -335,7 +336,7 @@ new SlackApp(scope: Construct, id: string, props: SlackAppProps)
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SlackAppProps](#cloudstructs-slackappprops)</code>)  *No description*
   * **configurationTokenSecret** (<code>[aws_secretsmanager.ISecret](#aws-cdk-lib-aws-secretsmanager-isecret)</code>)  An AWS Secrets Manager secret containing the app configuration token. 
-  * **manifest** (<code>string</code>)  The JSON app manifest encoded as a string. 
+  * **manifest** (<code>[SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)</code>)  The definition of the app manifest. 
   * **credentialsSecret** (<code>[aws_secretsmanager.ISecret](#aws-cdk-lib-aws-secretsmanager-isecret)</code>)  The AWS Secrets Manager secret where to store the app credentials. __*Default*__: a new secret is created
 
 
@@ -379,17 +380,96 @@ new SlackAppManifest(props: SlackAppManifestProps)
 ### Methods
 
 
-#### render() <a id="cloudstructs-slackappmanifest-render"></a>
+#### render(construct) <a id="cloudstructs-slackappmanifest-render"></a>
 
 
 
 ```ts
-render(): any
+render(construct: IConstruct): string
+```
+
+* **construct** (<code>[IConstruct](#constructs-iconstruct)</code>)  *No description*
+
+__Returns__:
+* <code>string</code>
+
+
+
+## class SlackAppManifestDefinition  <a id="cloudstructs-slackappmanifestdefinition"></a>
+
+A Slack app manifest definition.
+
+
+### Initializer
+
+
+
+
+```ts
+new SlackAppManifestDefinition()
 ```
 
 
+
+### Methods
+
+
+#### render(construct) <a id="cloudstructs-slackappmanifestdefinition-render"></a>
+
+Renders the JSON app manifest encoded as a string.
+
+```ts
+render(construct: IConstruct): string
+```
+
+* **construct** (<code>[IConstruct](#constructs-iconstruct)</code>)  *No description*
+
 __Returns__:
-* <code>any</code>
+* <code>string</code>
+
+#### *static* fromFile(file) <a id="cloudstructs-slackappmanifestdefinition-fromfile"></a>
+
+Creates a Slack app manifest from file containg a JSON app manifest.
+
+```ts
+static fromFile(file: string): SlackAppManifestDefinition
+```
+
+* **file** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)</code>
+
+#### *static* fromManifest(props) <a id="cloudstructs-slackappmanifestdefinition-frommanifest"></a>
+
+Creates a Slack app manifest by specifying properties.
+
+```ts
+static fromManifest(props: SlackAppManifestProps): SlackAppManifestDefinition
+```
+
+* **props** (<code>[SlackAppManifestProps](#cloudstructs-slackappmanifestprops)</code>)  *No description*
+  * **displayInformation** (<code>[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)</code>)  App's appearance within Slack. 
+  * **features** (<code>[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)</code>)  Features section of the app config pages. __*Optional*__
+  * **metadata** (<code>[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)</code>)  Manifest metadata. __*Default*__: no specific manifest schema version to target
+  * **oauthConfig** (<code>[SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)</code>)  OAuth configuration for the app. __*Optional*__
+  * **settings** (<code>[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)</code>)  Settings section of the app config pages. __*Optional*__
+
+__Returns__:
+* <code>[SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)</code>
+
+#### *static* fromString(manifest) <a id="cloudstructs-slackappmanifestdefinition-fromstring"></a>
+
+Create a Slack app manifest from JSON app manifest encoded as a string.
+
+```ts
+static fromString(manifest: string): SlackAppManifestDefinition
+```
+
+* **manifest** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)</code>
 
 
 
@@ -847,7 +927,7 @@ Properties for a SlackApp.
 Name | Type | Description 
 -----|------|-------------
 **configurationTokenSecret** | <code>[aws_secretsmanager.ISecret](#aws-cdk-lib-aws-secretsmanager-isecret)</code> | An AWS Secrets Manager secret containing the app configuration token.
-**manifest** | <code>string</code> | The JSON app manifest encoded as a string.
+**manifest** | <code>[SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)</code> | The definition of the app manifest.
 **credentialsSecret**? | <code>[aws_secretsmanager.ISecret](#aws-cdk-lib-aws-secretsmanager-isecret)</code> | The AWS Secrets Manager secret where to store the app credentials.<br/>__*Default*__: a new secret is created
 
 
