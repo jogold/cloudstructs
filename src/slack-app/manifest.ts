@@ -1,8 +1,11 @@
+import * as nodeUrl from 'url';
 import { Stack } from 'aws-cdk-lib';
 import { IConstruct } from 'constructs';
 
 /**
  * Properties for a Slack app manifest
+ *
+ * @see https://api.slack.com/reference/manifests
  */
 export interface SlackAppManifestProps {
   /**
@@ -144,7 +147,7 @@ export interface SlackAppManifestEventSubscriptions {
   readonly requestUrl: string;
 
   /**
-   * An array of event types you want the app to subscribe to.
+   * Event types you want the app to subscribe to.
    *
    * A maximum of 100 event types can be used
    *
@@ -153,7 +156,7 @@ export interface SlackAppManifestEventSubscriptions {
   readonly botEvents?: string[];
 
   /**
-   * An array of event types you want the app to subscribe to on behalf of authorized users.
+   * Event types you want the app to subscribe to on behalf of authorized users.
    *
    * A maximum of 100 event types can be used.
    */
@@ -455,11 +458,51 @@ export interface SlackAppManifestScopes {
 
 /**
  * A Slack app manifest
+ *
+ * @see https://api.slack.com/reference/manifests
  */
 export class SlackAppManifest {
   constructor(private readonly props: SlackAppManifestProps) {
-    validateLength(35, 'app name', props.displayInformation.name);
-    validateLength(140, 'app description', props.displayInformation.description);
+    validateLength('app name', 35, props.displayInformation.name);
+    validateLength('app description', 140, props.displayInformation.description);
+    validateLength('app long description', 140, props.displayInformation.longDescription);
+    validateColor(props.displayInformation.backgroundColor);
+
+    validateUrl(props.settings?.eventSubscriptions?.requestUrl);
+    validateItems('bot events', 100, props.settings?.eventSubscriptions?.botEvents);
+    validateItems('users events', 100, props.settings?.eventSubscriptions?.userEvents);
+
+    validateUrl(props.settings?.interactivity?.requestUrl);
+    validateUrl(props.settings?.interactivity?.messageMenuOptionsUrl);
+    validateLength('bot display name', 80, props.features?.botUser?.displayName);
+
+    validateItems('shortcuts', 5, props.features?.shortcuts);
+    props.features?.shortcuts?.forEach((shortcut) => {
+      validateLength('shortcut callback ID', 255, shortcut.callbackId);
+      validateLength('shortcut description', 150, shortcut.description);
+    });
+
+    validateItems('slash commands', 5, props.features?.slashCommands);
+    props.features?.slashCommands?.forEach((command) => {
+      validateLength('slash command', 32, command.command);
+      validateLength('slash command description', 2000, command.description),
+      validateLength('slash command use hint', 1000, command.usageHint);
+    });
+
+    validateItems('workflow steps', 10, props.features?.workflowSteps);
+    props.features?.workflowSteps?.forEach((step) => {
+      validateLength('workflow step name', 50, step.name);
+      validateLength('workflow step callback ID', 50, step.callbackId);
+    });
+
+    validateItems('unfurls domains', 5, props.features?.unfurlDomains);
+
+    validateItems('OAuth redirect URLs', 1000, props.oauthConfig?.redirectUrls);
+    props.oauthConfig?.redirectUrls?.forEach((url) => {
+      validateUrl(url, false);
+    });
+    validateItems('bot scopes', 255, props.oauthConfig?.scopes?.bot);
+    validateItems('user scopes', 255, props.oauthConfig?.scopes?.user);
   }
 
   public render(construct: IConstruct): string {
@@ -472,7 +515,7 @@ export class SlackAppManifest {
         name: this.props.displayInformation.name,
         description: this.props.displayInformation.description,
         long_description: this.props.displayInformation.longDescription,
-        background_color: prefixWith('#', this.props.displayInformation.backgroundColor),
+        background_color: prefixWith('#', this.props.displayInformation.backgroundColor)?.toLowerCase(),
       },
       settings: {
         allowed_ip_address_ranges: this.props.settings?.allowedIpAddressRanges,
@@ -611,9 +654,34 @@ function prefixWith<T extends string | undefined>(prefix: string, string: T): T 
   return `${prefix}${string}` as T;
 }
 
-function validateLength<T>(max: number, description: string, xs?: string | T[]): void {
+function validateLength(description: string, max: number, xs?: string): void {
   if (xs && xs.length > max) {
-    throw new Error(`Maximum length for ${description} is ${max}`);
+    throw new Error(`Maximum length for ${description} is ${max}, got ${xs.length}: ${xs}`);
+  }
+}
+
+function validateItems<T>(description: string, max: number, xs?: T[]): void {
+  if (xs && xs.length > max) {
+    throw new Error(`Maximum number of items for ${description} is ${max}, got ${xs.length}`);
+  }
+}
+
+function validateColor(color?: string): void {
+  if (color && !/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(color)) {
+    throw new Error(`Invalid hex color: ${color}`);
+  }
+}
+
+function validateUrl(url?: string, https = true): void {
+  if (url) {
+    try {
+      const parsed = new nodeUrl.URL(url);
+      if (https && parsed.protocol !== 'https:') {
+        throw new Error('Invalid protocol');
+      }
+    } catch (err) {
+      throw new Error(`${url} is not a valid HTTPS url`);
+    }
   }
 }
 
