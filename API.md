@@ -756,8 +756,8 @@ Events API configuration for the app.
 Name | Type | Description 
 -----|------|-------------
 **requestUrl** | <code>string</code> | The full https URL that acts as the Events API request URL.
-**botEvents**? | <code>Array<string></code> | An array of event types you want the app to subscribe to.<br/>__*Optional*__
-**userEvents**? | <code>Array<string></code> | An array of event types you want the app to subscribe to on behalf of authorized users.<br/>__*Optional*__
+**botEvents**? | <code>Array<string></code> | Event types you want the app to subscribe to.<br/>__*Optional*__
+**userEvents**? | <code>Array<string></code> | Event types you want the app to subscribe to on behalf of authorized users.<br/>__*Optional*__
 
 
 
