@@ -1,5 +1,4 @@
 import * as path from 'path';
-import * as cdk from 'aws-cdk-lib';
 import * as codecommit from 'aws-cdk-lib/aws-codecommit';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
@@ -108,7 +107,7 @@ export class CodeCommitMirror extends Construct {
       }),
       environment: {
         NAME: props.repository.name,
-        DESTINATION: `codecommit::${cdk.Stack.of(destination).region}://${destination.repositoryName}`,
+        DESTINATION: destination.repositoryCloneUrlGrc,
         ...props.repository.plainTextUrl
           ? { SOURCE: props.repository.plainTextUrl }
           : {},
