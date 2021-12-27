@@ -11,9 +11,7 @@ beforeEach(() => {
 test('SlackApp', () => {
   new SlackApp(stack, 'MyApp', {
     configurationTokenSecret: secrets.Secret.fromSecretNameV2(stack, 'SlackSecret', 'slack-secret'),
-    manifest: SlackAppManifestDefinition.fromManifest({
-      displayInformation: { name: 'My App' },
-    }),
+    manifest: SlackAppManifestDefinition.fromManifest({ name: 'My App' }),
   });
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();

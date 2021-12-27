@@ -9,57 +9,6 @@ import { IConstruct } from 'constructs';
  */
 export interface SlackAppManifestProps {
   /**
-   * Manifest metadata
-   *
-   * @default - no specific manifest schema version to target
-   */
-  readonly metadata?: SlackAppManifestMetadata;
-
-  /**
-   * App's appearance within Slack.
-   *
-   * If you're distributing the app via the App Directory, read the
-   * [listing guidelines](https://api.slack.com/start/distributing/guidelines#listing)
-   * to pick the best values for these settings.
-   */
-  readonly displayInformation: SlackAppManifestDisplayInformation;
-
-  /**
-   * Settings section of the app config pages
-   */
-  readonly settings?: SlackAppManifestSettings;
-
-  /**
-   * Features section of the app config pages
-   */
-  readonly features?: SlackAppManifestFeatures;
-
-  /**
-   * OAuth configuration for the app
-   */
-  readonly oauthConfig?: SlackAppManifestOauthConfig;
-}
-
-/**
- * Manifest metadata
- */
-export interface SlackAppManifestMetadata {
-  /**
-   * An integer that specifies the major version of the manifest schema to target.
-   */
-  readonly majorVersion?: number;
-
-  /**
-   * An integer that specifies the minor version of the manifest schema to target
-   */
-  readonly minorVersion?: number;
-}
-
-/**
- * App's appearance within Slack
- */
-export interface SlackAppManifestDisplayInformation {
-  /**
    * The name of the app.
    *
    * Maximum length is 35 characters.
@@ -89,6 +38,112 @@ export interface SlackAppManifestDisplayInformation {
    * Can be 3-digit (#000) or 6-digit (#000000) hex values with or without #
    */
   readonly backgroundColor?: string;
+
+  /**
+   * The major version of the manifest schema to target.
+   *
+   * @default - do not target a specific major version
+   */
+  readonly majorVersion?: number;
+
+  /**
+   * The minor version of the manifest schema to target
+   *
+   * @default - do not target a specific minor version
+   */
+  readonly minorVersion?: number;
+
+  /**
+   * An array of IP addresses that conform to the Allowed IP Ranges feature
+   *
+   * @see https://api.slack.com/authentication/best-practices#ip_allowlisting
+   */
+  readonly allowedIpAddressRanges?: string[];
+
+  /**
+   * Events API configuration for the app
+   *
+   * @see https://api.slack.com/events-api
+   */
+  readonly eventSubscriptions?: SlackAppManifestEventSubscriptions;
+
+  /**
+   * Interactivity configuration for the app
+   */
+  readonly interactivity?: SlackAppManifestInteractivity;
+
+  /**
+   * Whether org-wide deploy is enabled.
+   *
+   * @see https://api.slack.com/enterprise/apps
+   *
+   * @default false
+   */
+  readonly orgDeploy?: boolean;
+
+  /**
+   * Whether Socket Mode is enabled
+   *
+   * @see https://api.slack.com/apis/connections/socket
+   *
+   * @default false
+   */
+  readonly socketMode?: boolean;
+
+  /**
+   * App Home configuration
+   *
+   * @see https://api.slack.com/surfaces/tabs
+   */
+  readonly appHome?: SlackAppManifestAppHome;
+
+  /**
+   * Bot user configuration
+   *
+   * @see https://api.slack.com/bot-users
+   */
+  readonly botUser?: SlackkAppManifestBotUser;
+
+  /**
+   * Shortcuts configuration.
+   *
+   * A maximum of 5 shortcuts can be included.
+   *
+   * @see https://api.slack.com/interactivity/shortcuts
+   */
+  readonly shortcuts?: SlackAppManifestShortcut[];
+
+  /**
+   * Slash commands configuration.
+   *
+   * A maximum of 5 slash commands can be included.
+   *
+   * @see https://api.slack.com/interactivity/slash-commands
+   */
+  readonly slashCommands?: SlackAppManifestSlashCommand[];
+
+  /**
+   * Workflow steps.
+   *
+   * A maximum of 10 workflow steps can be included.
+   *
+   * @see https://api.slack.com/workflows/steps
+   */
+  readonly workflowSteps?: SlackAppManifestWorkflowStep[];
+
+  /**
+   * Valid unfurl domains to register.
+   *
+   * A maximum of 5 unfurl domains can be included.
+   *
+   * @see https://api.slack.com/reference/messaging/link-unfurling#configuring_domains
+   */
+  readonly unfurlDomains?: string[];
+
+  /**
+   * OAuth configuration for the app
+   */
+  readonly oauthConfig?: SlackAppManifestOauthConfig;
 }
 
 /**
@@ -174,7 +229,7 @@ export interface SlackAppManifestInteractivity {
    *
    * @default true
    */
-  readonly isEnabled?: boolean;
+  readonly enabled?: boolean;
 
   /**
    * The full https URL that acts as the interactive Request URL
@@ -185,61 +240,6 @@ export interface SlackAppManifestInteractivity {
    * The full https URL that acts as th interactive Options Load URL
    */
   readonly messageMenuOptionsUrl?: string;
-}
-
-/**
- * Features section of the app config pages
- */
-export interface SlackAppManifestFeatures {
-  /**
-   * App Home configuration
-   *
-   * @see https://api.slack.com/surfaces/tabs
-   */
-  readonly appHome?: SlackAppManifestAppHome;
-
-  /**
-   * Bot user configuration
-   *
-   * @see https://api.slack.com/bot-users
-   */
-  readonly botUser?: SlackkAppManifestBotUser;
-
-  /**
-   * Shortcuts configuration.
-   *
-   * A maximum of 5 shortcuts can be included.
-   *
-   * @see https://api.slack.com/interactivity/shortcuts
-   */
-  readonly shortcuts?: SlackAppManifestShortcut[];
-
-  /**
-   * Slash commands configuration.
-   *
-   * A maximum of 5 slash commands can be included.
-   *
-   * @see https://api.slack.com/interactivity/slash-commands
-   */
-  readonly slashCommands?: SlackAppManifestSlashCommand[];
-
-  /**
-   * Workflow steps.
-   *
-   * A maximum of 10 workflow steps can be included.
-   *
-   * @see https://api.slack.com/workflows/steps
-   */
-  readonly workflowSteps?: SlackAppManifestWorkflowStep[];
-
-  /**
-   * Valid unfurl domains to register.
-   *
-   * A maximum of 5 unfurl domains can be included.
-   *
-   * @see https://api.slack.com/reference/messaging/link-unfurling#configuring_domains
-   */
-  readonly unfurlDomains?: string[];
 }
 
 /**
@@ -424,27 +424,13 @@ export interface SlackAppManifestOauthConfig {
   readonly redirectUrls?: string[];
 
   /**
-   * Permission scopes
-   *
-   * @see https://api.slack.com/scopes
-   */
-  readonly scopes?: SlackAppManifestScopes;
-}
-
-/**
- * Permission scopes
- *
- * @see https://api.slack.com/scopes
- */
-export interface SlackAppManifestScopes {
-  /**
    * Bot scopes to request upon app installation.
    *
    * A maximum of 255 scopes can be included.
    *
    * @see https://api.slack.com/scopes
    */
-  readonly bot?: string[];
+  readonly botScopes?: string[];
 
   /**
    * User scopes to request upon app installation.
@@ -453,8 +439,9 @@ export interface SlackAppManifestScopes {
    *
    * @see https://api.slack.com/scopes
    */
-  readonly user?: string[];
+  readonly userScopes?: string[];
 }
+
 
 /**
  * A Slack app manifest
@@ -463,113 +450,114 @@ export interface SlackAppManifestScopes {
  */
 export class SlackAppManifest {
   constructor(private readonly props: SlackAppManifestProps) {
-    validateLength('app name', 35, props.displayInformation.name);
-    validateLength('app description', 140, props.displayInformation.description);
-    validateLength('app long description', 140, props.displayInformation.longDescription);
-    validateColor(props.displayInformation.backgroundColor);
+    validateLength('app name', 35, props.name);
+    validateLength('app description', 140, props.description);
+    validateLength('app long description', 140, props.longDescription);
+    validateColor(props.backgroundColor);
 
-    validateUrl(props.settings?.eventSubscriptions?.requestUrl);
-    validateItems('bot events', 100, props.settings?.eventSubscriptions?.botEvents);
-    validateItems('users events', 100, props.settings?.eventSubscriptions?.userEvents);
+    validateUrl(props.eventSubscriptions?.requestUrl);
+    validateItems('bot events', 100, props.eventSubscriptions?.botEvents);
+    validateItems('users events', 100, props.eventSubscriptions?.userEvents);
 
-    validateUrl(props.settings?.interactivity?.requestUrl);
-    validateUrl(props.settings?.interactivity?.messageMenuOptionsUrl);
-    validateLength('bot display name', 80, props.features?.botUser?.displayName);
+    validateUrl(props.interactivity?.requestUrl);
+    validateUrl(props.interactivity?.messageMenuOptionsUrl);
+    validateLength('bot display name', 80, props.botUser?.displayName);
 
-    validateItems('shortcuts', 5, props.features?.shortcuts);
-    props.features?.shortcuts?.forEach((shortcut) => {
+    validateItems('shortcuts', 5, props.shortcuts);
+    props.shortcuts?.forEach((shortcut) => {
       validateLength('shortcut callback ID', 255, shortcut.callbackId);
       validateLength('shortcut description', 150, shortcut.description);
     });
 
-    validateItems('slash commands', 5, props.features?.slashCommands);
-    props.features?.slashCommands?.forEach((command) => {
+    validateItems('slash commands', 5, props.slashCommands);
+    props.slashCommands?.forEach((command) => {
       validateLength('slash command', 32, command.command);
       validateLength('slash command description', 2000, command.description),
+      validateUrl(command.url);
       validateLength('slash command use hint', 1000, command.usageHint);
     });
 
-    validateItems('workflow steps', 10, props.features?.workflowSteps);
-    props.features?.workflowSteps?.forEach((step) => {
+    validateItems('workflow steps', 10, props.workflowSteps);
+    props.workflowSteps?.forEach((step) => {
       validateLength('workflow step name', 50, step.name);
       validateLength('workflow step callback ID', 50, step.callbackId);
     });
 
-    validateItems('unfurls domains', 5, props.features?.unfurlDomains);
+    validateItems('unfurls domains', 5, props.unfurlDomains);
 
     validateItems('OAuth redirect URLs', 1000, props.oauthConfig?.redirectUrls);
     props.oauthConfig?.redirectUrls?.forEach((url) => {
       validateUrl(url, false);
     });
-    validateItems('bot scopes', 255, props.oauthConfig?.scopes?.bot);
-    validateItems('user scopes', 255, props.oauthConfig?.scopes?.user);
+    validateItems('bot scopes', 255, props.oauthConfig?.botScopes);
+    validateItems('user scopes', 255, props.oauthConfig?.userScopes);
   }
 
   public render(construct: IConstruct): string {
     const schema: SlackAppManifestSchema = {
       _metadata: {
-        major_version: this.props.metadata?.majorVersion,
-        minor_version: this.props.metadata?.minorVersion,
+        major_version: this.props.majorVersion,
+        minor_version: this.props.minorVersion,
       },
       display_information: {
-        name: this.props.displayInformation.name,
-        description: this.props.displayInformation.description,
-        long_description: this.props.displayInformation.longDescription,
-        background_color: prefixWith('#', this.props.displayInformation.backgroundColor)?.toLowerCase(),
+        name: this.props.name,
+        description: this.props.description,
+        long_description: this.props.longDescription,
+        background_color: prefixWith('#', this.props.backgroundColor)?.toLowerCase(),
       },
       settings: {
-        allowed_ip_address_ranges: this.props.settings?.allowedIpAddressRanges,
+        allowed_ip_address_ranges: this.props.allowedIpAddressRanges,
         event_subscriptions: {
-          request_url: this.props.settings?.eventSubscriptions?.requestUrl,
-          bot_events: this.props.settings?.eventSubscriptions?.botEvents,
-          user_events: this.props.settings?.eventSubscriptions?.userEvents,
+          request_url: this.props.eventSubscriptions?.requestUrl,
+          bot_events: this.props.eventSubscriptions?.botEvents,
+          user_events: this.props.eventSubscriptions?.userEvents,
         },
-        interactivity: this.props.settings?.interactivity
+        interactivity: this.props.interactivity
           ? {
-            is_enabled: this.props.settings?.interactivity?.isEnabled ?? true,
-            request_url: this.props.settings?.interactivity?.requestUrl,
-            message_menu_options_url: this.props.settings?.interactivity?.messageMenuOptionsUrl,
+            is_enabled: this.props.interactivity?.enabled ?? true,
+            request_url: this.props.interactivity?.requestUrl,
+            message_menu_options_url: this.props.interactivity?.messageMenuOptionsUrl,
           }
           : undefined,
-        org_deploy_enabled: this.props.settings?.orgDeploy,
-        socket_mode_enabled: this.props.settings?.socketMode,
+        org_deploy_enabled: this.props.orgDeploy,
+        socket_mode_enabled: this.props.socketMode,
       },
       features: {
         app_home: {
-          home_tab_enabled: this.props.features?.appHome?.homeTab,
-          messages_tab_enabled: this.props.features?.appHome?.messagesTab,
-          messages_tab_read_only_enabled: this.props.features?.appHome?.messagesTabReadOnly,
+          home_tab_enabled: this.props.appHome?.homeTab,
+          messages_tab_enabled: this.props.appHome?.messagesTab,
+          messages_tab_read_only_enabled: this.props.appHome?.messagesTabReadOnly,
         },
-        bot_user: this.props.features?.botUser
+        bot_user: this.props.botUser
           ? {
-            display_name: this.props.features?.botUser?.displayName,
-            always_online: this.props.features?.botUser?.alwaysOnline,
+            display_name: this.props.botUser?.displayName,
+            always_online: this.props.botUser?.alwaysOnline,
           }
           : undefined,
-        shortcuts: this.props.features?.shortcuts?.map((shortcut) => ({
+        shortcuts: this.props.shortcuts?.map((shortcut) => ({
           name: shortcut.name,
           type: shortcut.type,
           callback_id: shortcut.callbackId,
           description: shortcut.description,
         })),
-        slash_commands: this.props.features?.slashCommands?.map((command) => ({
+        slash_commands: this.props.slashCommands?.map((command) => ({
           command: prefixWith('/', command.command),
           description: command.description,
           url: command.url,
           usage_hint: command.usageHint,
           should_escape: command.shouldEscape,
         })),
-        workflow_steps: this.props.features?.workflowSteps?.map((step) => ({
+        workflow_steps: this.props.workflowSteps?.map((step) => ({
           name: step.name,
           callback_id: step.callbackId,
         })),
-        unfurl_domains: this.props.features?.unfurlDomains,
+        unfurl_domains: this.props.unfurlDomains,
       },
       oauth_config: {
         redirect_urls: this.props.oauthConfig?.redirectUrls,
         scopes: {
-          bot: this.props.oauthConfig?.scopes?.bot,
-          users: this.props.oauthConfig?.scopes?.user,
+          bot: this.props.oauthConfig?.botScopes,
+          users: this.props.oauthConfig?.userScopes,
         },
       },
     };

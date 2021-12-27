@@ -10,11 +10,10 @@ class TestStack extends Stack {
     const app = new SlackApp(this, 'MyApp', {
       configurationTokenSecret: secretsmanager.Secret.fromSecretNameV2(this, 'Secret', 'slack-app-config-token'),
       manifest: SlackAppManifestDefinition.fromManifest({
-        displayInformation: {
-          name: 'My App',
-          description: 'A very cool Slack App deployed with CDK',
-        },
-      }),
+        name: 'My App',
+        description: 'A very cool Slack App deployed with CDK',
+      },
+      ),
     });
 
     new CfnOutput(this, 'AppId', {
