@@ -1,6 +1,8 @@
+import * as fs from 'fs';
 import { CustomResource } from 'aws-cdk-lib';
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
-import { Construct } from 'constructs';
+import { Construct, IConstruct } from 'constructs';
+import { SlackAppManifest, SlackAppManifestProps } from './manifest';
 import { SlackAppProvider } from './provider';
 
 /**
@@ -8,11 +10,11 @@ import { SlackAppProvider } from './provider';
  */
 export interface SlackAppProps {
   /**
-   * The JSON app manifest encoded as a string
+   * The definition of the app manifest
    *
    * @see https://api.slack.com/reference/manifests
    */
-  readonly manifest: string;
+  readonly manifest: SlackAppManifestDefinition;
 
   /**
    * An AWS Secrets Manager secret containing the app configuration token
@@ -33,6 +35,57 @@ export interface SlackAppProps {
    * @default - a new secret is created
    */
   readonly credentialsSecret?: secretsmanager.ISecret;
+}
+
+/**
+ * A Slack app manifest definition
+ */
+export abstract class SlackAppManifestDefinition {
+  /**
+   * Create a Slack app manifest from JSON app manifest encoded as a string
+   */
+  public static fromString(manifest: string): SlackAppManifestDefinition {
+    return new StringManifest(manifest);
+  }
+
+  /**
+   * Creates a Slack app manifest from file containg a JSON app manifest
+   */
+  public static fromFile(file: string): SlackAppManifestDefinition {
+    return new FileManifest(file);
+  }
+
+  /**
+   * Creates a Slack app manifest by specifying properties
+   */
+  public static fromManifest(props: SlackAppManifestProps): SlackAppManifestDefinition {
+    return new SlackAppManifest(props);
+  }
+
+  /**
+   * Renders the JSON app manifest encoded as a string
+   */
+  public abstract render(construct: IConstruct): string;
+}
+
+class StringManifest extends SlackAppManifestDefinition {
+  constructor(private readonly manifest: string) {
+    super();
+  }
+
+  public render(_construct: IConstruct): string {
+    return this.manifest;
+  }
+}
+
+class FileManifest extends SlackAppManifestDefinition {
+  constructor(private readonly file: string) {
+    super();
+  }
+
+  public render(_construct: IConstruct): string {
+    return fs.readFileSync(this.file, 'utf8');
+  }
 }
 
 /**

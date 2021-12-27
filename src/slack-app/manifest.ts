@@ -1,3 +1,6 @@
+import { Stack } from 'aws-cdk-lib';
+import { IConstruct } from 'constructs';
+
 /**
  * Properties for a Slack app manifest
  */
@@ -459,7 +462,7 @@ export class SlackAppManifest {
     validateLength(140, 'app description', props.displayInformation.description);
   }
 
-  public render(): any {
+  public render(construct: IConstruct): string {
     const schema: SlackAppManifestSchema = {
       _metadata: {
         major_version: this.props.metadata?.majorVersion,
@@ -528,7 +531,7 @@ export class SlackAppManifest {
       },
     };
 
-    return removeUndefined(schema);
+    return Stack.of(construct).toJsonString(removeUndefined(schema));
   }
 }
 

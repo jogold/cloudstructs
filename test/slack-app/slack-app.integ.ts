@@ -1,7 +1,7 @@
 import { App, CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
-import { SlackApp } from '../../src';
+import { SlackApp, SlackAppManifestDefinition } from '../../src';
 
 class TestStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -9,8 +9,8 @@ class TestStack extends Stack {
 
     const app = new SlackApp(this, 'MyApp', {
       configurationTokenSecret: secretsmanager.Secret.fromSecretNameV2(this, 'Secret', 'slack-app-config-token'),
-      manifest: Stack.of(this).toJsonString({
-        display_information: {
+      manifest: SlackAppManifestDefinition.fromManifest({
+        displayInformation: {
           name: 'My App',
           description: 'A very cool Slack App deployed with CDK',
         },
