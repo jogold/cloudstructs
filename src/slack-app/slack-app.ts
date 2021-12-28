@@ -42,14 +42,14 @@ export interface SlackAppProps {
  */
 export abstract class SlackAppManifestDefinition {
   /**
-   * Create a Slack app manifest from JSON app manifest encoded as a string
+   * Create a Slack app manifest from a JSON app manifest encoded as a string
    */
   public static fromString(manifest: string): SlackAppManifestDefinition {
     return new StringManifest(manifest);
   }
 
   /**
-   * Creates a Slack app manifest from file containg a JSON app manifest
+   * Creates a Slack app manifest from a file containg a JSON app manifest
    */
   public static fromFile(file: string): SlackAppManifestDefinition {
     return new FileManifest(file);

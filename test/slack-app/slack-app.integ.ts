@@ -12,8 +12,7 @@ class TestStack extends Stack {
       manifest: SlackAppManifestDefinition.fromManifest({
         name: 'My App',
         description: 'A very cool Slack App deployed with CDK',
-      },
-      ),
+      }),
     });
 
     new CfnOutput(this, 'AppId', {
