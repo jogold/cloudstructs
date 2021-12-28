@@ -452,7 +452,7 @@ export class SlackAppManifest {
   constructor(private readonly props: SlackAppManifestProps) {
     validateLength('app name', 35, props.name);
     validateLength('app description', 140, props.description);
-    validateLength('app long description', 140, props.longDescription);
+    validateLength('app long description', 4000, props.longDescription);
     validateColor(props.backgroundColor);
 
     validateUrl(props.eventSubscriptions?.requestUrl);
@@ -668,7 +668,7 @@ function validateUrl(url?: string, https = true): void {
         throw new Error('Invalid protocol');
       }
     } catch (err) {
-      throw new Error(`${url} is not a valid HTTPS url`);
+      throw new Error(`${url} is not a valid${https ? ' HTTPS' : ''} url`);
     }
   }
 }
