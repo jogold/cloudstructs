@@ -30,14 +30,10 @@ Name|Description
 [EmailReceiverProps](#cloudstructs-emailreceiverprops)|Properties for an EmailReceiver.
 [SamlIdentityProviderProps](#cloudstructs-samlidentityproviderprops)|Properties for a SamlProvider.
 [SlackAppManifestAppHome](#cloudstructs-slackappmanifestapphome)|App Home configuration.
-[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)|App's appearance within Slack.
 [SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)|Events API configuration for the app.
-[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)|Features section of the app config pages.
 [SlackAppManifestInteractivity](#cloudstructs-slackappmanifestinteractivity)|Interactivity configuration for the app.
-[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)|Manifest metadata.
 [SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)|OAuth configuration for the app.
 [SlackAppManifestProps](#cloudstructs-slackappmanifestprops)|Properties for a Slack app manifest.
-[SlackAppManifestScopes](#cloudstructs-slackappmanifestscopes)|Permission scopes.
 [SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)|Settings section of the app config pages.
 [SlackAppManifestShortcut](#cloudstructs-slackappmanifestshortcut)|Shortcut configuration.
 [SlackAppManifestSlashCommand](#cloudstructs-slackappmanifestslashcommand)|Slash command configuration.
@@ -370,11 +366,24 @@ new SlackAppManifest(props: SlackAppManifestProps)
 ```
 
 * **props** (<code>[SlackAppManifestProps](#cloudstructs-slackappmanifestprops)</code>)  *No description*
-  * **displayInformation** (<code>[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)</code>)  App's appearance within Slack. 
-  * **features** (<code>[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)</code>)  Features section of the app config pages. __*Optional*__
-  * **metadata** (<code>[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)</code>)  Manifest metadata. __*Default*__: no specific manifest schema version to target
+  * **name** (<code>string</code>)  The name of the app. 
+  * **allowedIpAddressRanges** (<code>Array<string></code>)  An array of IP addresses that conform to the Allowed IP Ranges feature. __*Optional*__
+  * **appHome** (<code>[SlackAppManifestAppHome](#cloudstructs-slackappmanifestapphome)</code>)  App Home configuration. __*Optional*__
+  * **backgroundColor** (<code>string</code>)  A hex color value that specifies the background color used on hovercards that display information about your app. __*Optional*__
+  * **botUser** (<code>[SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)</code>)  Bot user configuration. __*Optional*__
+  * **description** (<code>string</code>)  A short description of the app for display to users. __*Default*__: no short description
+  * **eventSubscriptions** (<code>[SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)</code>)  Events API configuration for the app. __*Optional*__
+  * **interactivity** (<code>[SlackAppManifestInteractivity](#cloudstructs-slackappmanifestinteractivity)</code>)  Interactivity configuration for the app. __*Optional*__
+  * **longDescription** (<code>string</code>)  A longer version of the description of the app. __*Optional*__
+  * **majorVersion** (<code>number</code>)  The major version of the manifest schema to target. __*Default*__: do not target a specific major version
+  * **minorVersion** (<code>number</code>)  The minor version of the manifest schema to target. __*Default*__: do not target a specific minor version
   * **oauthConfig** (<code>[SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)</code>)  OAuth configuration for the app. __*Optional*__
-  * **settings** (<code>[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)</code>)  Settings section of the app config pages. __*Optional*__
+  * **orgDeploy** (<code>boolean</code>)  Whether org-wide deploy is enabled. __*Default*__: false
+  * **shortcuts** (<code>Array<[SlackAppManifestShortcut](#cloudstructs-slackappmanifestshortcut)></code>)  Shortcuts configuration. __*Optional*__
+  * **slashCommands** (<code>Array<[SlackAppManifestSlashCommand](#cloudstructs-slackappmanifestslashcommand)></code>)  Slash commands configuration. __*Optional*__
+  * **socketMode** (<code>boolean</code>)  Whether Socket Mode is enabled. __*Default*__: false
+  * **unfurlDomains** (<code>Array<string></code>)  Valid unfurl domains to register. __*Optional*__
+  * **workflowSteps** (<code>Array<[SlackAppManifestWorkflowStep](#cloudstructs-slackappmanifestworkflowstep)></code>)  Workflow steps. __*Optional*__
 
 
 ### Methods
@@ -449,11 +458,24 @@ static fromManifest(props: SlackAppManifestProps): SlackAppManifestDefinition
 ```
 
 * **props** (<code>[SlackAppManifestProps](#cloudstructs-slackappmanifestprops)</code>)  *No description*
-  * **displayInformation** (<code>[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)</code>)  App's appearance within Slack. 
-  * **features** (<code>[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)</code>)  Features section of the app config pages. __*Optional*__
-  * **metadata** (<code>[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)</code>)  Manifest metadata. __*Default*__: no specific manifest schema version to target
+  * **name** (<code>string</code>)  The name of the app. 
+  * **allowedIpAddressRanges** (<code>Array<string></code>)  An array of IP addresses that conform to the Allowed IP Ranges feature. __*Optional*__
+  * **appHome** (<code>[SlackAppManifestAppHome](#cloudstructs-slackappmanifestapphome)</code>)  App Home configuration. __*Optional*__
+  * **backgroundColor** (<code>string</code>)  A hex color value that specifies the background color used on hovercards that display information about your app. __*Optional*__
+  * **botUser** (<code>[SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)</code>)  Bot user configuration. __*Optional*__
+  * **description** (<code>string</code>)  A short description of the app for display to users. __*Default*__: no short description
+  * **eventSubscriptions** (<code>[SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)</code>)  Events API configuration for the app. __*Optional*__
+  * **interactivity** (<code>[SlackAppManifestInteractivity](#cloudstructs-slackappmanifestinteractivity)</code>)  Interactivity configuration for the app. __*Optional*__
+  * **longDescription** (<code>string</code>)  A longer version of the description of the app. __*Optional*__
+  * **majorVersion** (<code>number</code>)  The major version of the manifest schema to target. __*Default*__: do not target a specific major version
+  * **minorVersion** (<code>number</code>)  The minor version of the manifest schema to target. __*Default*__: do not target a specific minor version
   * **oauthConfig** (<code>[SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)</code>)  OAuth configuration for the app. __*Optional*__
-  * **settings** (<code>[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)</code>)  Settings section of the app config pages. __*Optional*__
+  * **orgDeploy** (<code>boolean</code>)  Whether org-wide deploy is enabled. __*Default*__: false
+  * **shortcuts** (<code>Array<[SlackAppManifestShortcut](#cloudstructs-slackappmanifestshortcut)></code>)  Shortcuts configuration. __*Optional*__
+  * **slashCommands** (<code>Array<[SlackAppManifestSlashCommand](#cloudstructs-slackappmanifestslashcommand)></code>)  Slash commands configuration. __*Optional*__
+  * **socketMode** (<code>boolean</code>)  Whether Socket Mode is enabled. __*Default*__: false
+  * **unfurlDomains** (<code>Array<string></code>)  Valid unfurl domains to register. __*Optional*__
+  * **workflowSteps** (<code>Array<[SlackAppManifestWorkflowStep](#cloudstructs-slackappmanifestworkflowstep)></code>)  Workflow steps. __*Optional*__
 
 __Returns__:
 * <code>[SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)</code>
@@ -730,22 +752,6 @@ Name | Type | Description
 
 
 
-## struct SlackAppManifestDisplayInformation  <a id="cloudstructs-slackappmanifestdisplayinformation"></a>
-
-
-App's appearance within Slack.
-
-
-
-Name | Type | Description 
------|------|-------------
-**name** | <code>string</code> | The name of the app.
-**backgroundColor**? | <code>string</code> | A hex color value that specifies the background color used on hovercards that display information about your app.<br/>__*Optional*__
-**description**? | <code>string</code> | A short description of the app for display to users.<br/>__*Default*__: no short description
-**longDescription**? | <code>string</code> | A longer version of the description of the app.<br/>__*Optional*__
-
-
-
 ## struct SlackAppManifestEventSubscriptions  <a id="cloudstructs-slackappmanifesteventsubscriptions"></a>
 
 
@@ -761,24 +767,6 @@ Name | Type | Description
 
 
 
-## struct SlackAppManifestFeatures  <a id="cloudstructs-slackappmanifestfeatures"></a>
-
-
-Features section of the app config pages.
-
-
-
-Name | Type | Description 
------|------|-------------
-**appHome**? | <code>[SlackAppManifestAppHome](#cloudstructs-slackappmanifestapphome)</code> | App Home configuration.<br/>__*Optional*__
-**botUser**? | <code>[SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)</code> | Bot user configuration.<br/>__*Optional*__
-**shortcuts**? | <code>Array<[SlackAppManifestShortcut](#cloudstructs-slackappmanifestshortcut)></code> | Shortcuts configuration.<br/>__*Optional*__
-**slashCommands**? | <code>Array<[SlackAppManifestSlashCommand](#cloudstructs-slackappmanifestslashcommand)></code> | Slash commands configuration.<br/>__*Optional*__
-**unfurlDomains**? | <code>Array<string></code> | Valid unfurl domains to register.<br/>__*Optional*__
-**workflowSteps**? | <code>Array<[SlackAppManifestWorkflowStep](#cloudstructs-slackappmanifestworkflowstep)></code> | Workflow steps.<br/>__*Optional*__
-
-
-
 ## struct SlackAppManifestInteractivity  <a id="cloudstructs-slackappmanifestinteractivity"></a>
 
 
@@ -788,23 +776,9 @@ Interactivity configuration for the app.
 
 Name | Type | Description 
 -----|------|-------------
-**isEnabled**? | <code>boolean</code> | Whether or not interactivity features are enabled.<br/>__*Default*__: true
+**enabled**? | <code>boolean</code> | Whether or not interactivity features are enabled.<br/>__*Default*__: true
 **messageMenuOptionsUrl**? | <code>string</code> | The full https URL that acts as th interactive Options Load URL.<br/>__*Optional*__
 **requestUrl**? | <code>string</code> | The full https URL that acts as the interactive Request URL.<br/>__*Optional*__
-
-
-
-## struct SlackAppManifestMetadata  <a id="cloudstructs-slackappmanifestmetadata"></a>
-
-
-Manifest metadata.
-
-
-
-Name | Type | Description 
------|------|-------------
-**majorVersion**? | <code>number</code> | An integer that specifies the major version of the manifest schema to target.<br/>__*Optional*__
-**minorVersion**? | <code>number</code> | An integer that specifies the minor version of the manifest schema to target.<br/>__*Optional*__
 
 
 
@@ -817,8 +791,9 @@ OAuth configuration for the app.
 
 Name | Type | Description 
 -----|------|-------------
+**botScopes**? | <code>Array<string></code> | Bot scopes to request upon app installation.<br/>__*Optional*__
 **redirectUrls**? | <code>Array<string></code> | OAuth redirect URLs.<br/>__*Optional*__
-**scopes**? | <code>[SlackAppManifestScopes](#cloudstructs-slackappmanifestscopes)</code> | Permission scopes.<br/>__*Optional*__
+**userScopes**? | <code>Array<string></code> | User scopes to request upon app installation.<br/>__*Optional*__
 
 
 
@@ -831,25 +806,24 @@ Properties for a Slack app manifest.
 
 Name | Type | Description 
 -----|------|-------------
-**displayInformation** | <code>[SlackAppManifestDisplayInformation](#cloudstructs-slackappmanifestdisplayinformation)</code> | App's appearance within Slack.
-**features**? | <code>[SlackAppManifestFeatures](#cloudstructs-slackappmanifestfeatures)</code> | Features section of the app config pages.<br/>__*Optional*__
-**metadata**? | <code>[SlackAppManifestMetadata](#cloudstructs-slackappmanifestmetadata)</code> | Manifest metadata.<br/>__*Default*__: no specific manifest schema version to target
+**name** | <code>string</code> | The name of the app.
+**allowedIpAddressRanges**? | <code>Array<string></code> | An array of IP addresses that conform to the Allowed IP Ranges feature.<br/>__*Optional*__
+**appHome**? | <code>[SlackAppManifestAppHome](#cloudstructs-slackappmanifestapphome)</code> | App Home configuration.<br/>__*Optional*__
+**backgroundColor**? | <code>string</code> | A hex color value that specifies the background color used on hovercards that display information about your app.<br/>__*Optional*__
+**botUser**? | <code>[SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)</code> | Bot user configuration.<br/>__*Optional*__
+**description**? | <code>string</code> | A short description of the app for display to users.<br/>__*Default*__: no short description
+**eventSubscriptions**? | <code>[SlackAppManifestEventSubscriptions](#cloudstructs-slackappmanifesteventsubscriptions)</code> | Events API configuration for the app.<br/>__*Optional*__
+**interactivity**? | <code>[SlackAppManifestInteractivity](#cloudstructs-slackappmanifestinteractivity)</code> | Interactivity configuration for the app.<br/>__*Optional*__
+**longDescription**? | <code>string</code> | A longer version of the description of the app.<br/>__*Optional*__
+**majorVersion**? | <code>number</code> | The major version of the manifest schema to target.<br/>__*Default*__: do not target a specific major version
+**minorVersion**? | <code>number</code> | The minor version of the manifest schema to target.<br/>__*Default*__: do not target a specific minor version
 **oauthConfig**? | <code>[SlackAppManifestOauthConfig](#cloudstructs-slackappmanifestoauthconfig)</code> | OAuth configuration for the app.<br/>__*Optional*__
-**settings**? | <code>[SlackAppManifestSettings](#cloudstructs-slackappmanifestsettings)</code> | Settings section of the app config pages.<br/>__*Optional*__
-
-
-
-## struct SlackAppManifestScopes  <a id="cloudstructs-slackappmanifestscopes"></a>
-
-
-Permission scopes.
-
-
-
-Name | Type | Description 
------|------|-------------
-**bot**? | <code>Array<string></code> | Bot scopes to request upon app installation.<br/>__*Optional*__
-**user**? | <code>Array<string></code> | User scopes to request upon app installation.<br/>__*Optional*__
+**orgDeploy**? | <code>boolean</code> | Whether org-wide deploy is enabled.<br/>__*Default*__: false
+**shortcuts**? | <code>Array<[SlackAppManifestShortcut](#cloudstructs-slackappmanifestshortcut)></code> | Shortcuts configuration.<br/>__*Optional*__
+**slashCommands**? | <code>Array<[SlackAppManifestSlashCommand](#cloudstructs-slackappmanifestslashcommand)></code> | Slash commands configuration.<br/>__*Optional*__
+**socketMode**? | <code>boolean</code> | Whether Socket Mode is enabled.<br/>__*Default*__: false
+**unfurlDomains**? | <code>Array<string></code> | Valid unfurl domains to register.<br/>__*Optional*__
+**workflowSteps**? | <code>Array<[SlackAppManifestWorkflowStep](#cloudstructs-slackappmanifestworkflowstep)></code> | Workflow steps.<br/>__*Optional*__
 
 
 
