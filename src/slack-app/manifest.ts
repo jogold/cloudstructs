@@ -1,5 +1,5 @@
 import * as nodeUrl from 'url';
-import { Stack } from 'aws-cdk-lib';
+import { Stack, Token } from 'aws-cdk-lib';
 import { IConstruct } from 'constructs';
 
 /**
@@ -643,25 +643,25 @@ function prefixWith<T extends string | undefined>(prefix: string, string: T): T 
 }
 
 function validateLength(description: string, max: number, xs?: string): void {
-  if (xs && xs.length > max) {
+  if (xs && !Token.isUnresolved(xs) && xs.length > max) {
     throw new Error(`Maximum length for ${description} is ${max}, got ${xs.length}: ${xs}`);
   }
 }
 
 function validateItems<T>(description: string, max: number, xs?: T[]): void {
-  if (xs && xs.length > max) {
+  if (xs && !Token.isUnresolved(xs) && xs.length > max) {
     throw new Error(`Maximum number of items for ${description} is ${max}, got ${xs.length}`);
   }
 }
 
 function validateColor(color?: string): void {
-  if (color && !/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(color)) {
+  if (color && !Token.isUnresolved(color) && !/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(color)) {
     throw new Error(`Invalid hex color: ${color}`);
   }
 }
 
 function validateUrl(url?: string, https = true): void {
-  if (url) {
+  if (url && !Token.isUnresolved(url)) {
     try {
       const parsed = new nodeUrl.URL(url);
       if (https && parsed.protocol !== 'https:') {
