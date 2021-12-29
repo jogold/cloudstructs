@@ -101,10 +101,12 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   }
 
   const operation = event.RequestType.toLowerCase();
-  console.log('Calling manifest API');
+  const request = getManifestRequest(event);
+
+  console.log(`Calling ${operation} manifest API: %j`, request);
   const response = await slackClient.post(`apps.manifest.${operation}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
-    json: getManifestRequest(event),
+    json: request,
   }).json<ManifestResponse>();
 
   if (!response.ok) {
