@@ -438,7 +438,7 @@ __Returns__:
 
 #### *static* fromFile(file) <a id="cloudstructs-slackappmanifestdefinition-fromfile"></a>
 
-Creates a Slack app manifest from file containg a JSON app manifest.
+Creates a Slack app manifest from a file containg a JSON app manifest.
 
 ```ts
 static fromFile(file: string): SlackAppManifestDefinition
@@ -482,7 +482,7 @@ __Returns__:
 
 #### *static* fromString(manifest) <a id="cloudstructs-slackappmanifestdefinition-fromstring"></a>
 
-Create a Slack app manifest from JSON app manifest encoded as a string.
+Create a Slack app manifest from a JSON app manifest encoded as a string.
 
 ```ts
 static fromString(manifest: string): SlackAppManifestDefinition
