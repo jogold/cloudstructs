@@ -673,20 +673,20 @@ function validateUrl(url?: string, https = true): void {
   }
 }
 
-function removeUndefined(object: any): any {
-  const newObj: any = {};
+function removeUndefined(obj: any): any {
+  if (typeof obj === 'string') {
+    return obj;
+  }
 
-  Object.keys(object).forEach((key) => {
-    if (object[key] === Object(object[key])) {
-      newObj[key] = removeUndefined(object[key]);
+  if (Array.isArray(obj)) {
+    const ret = obj
+      .map(v => (v && typeof v === 'object') ? removeUndefined(v) : v)
+      .filter(v => !(v == null));
+    return ret.length !== 0 ? ret : undefined;
+  }
 
-      if (newObj[key] && Object.keys(newObj[key]).length === 0) {
-        delete newObj[key];
-      }
-    } else if (object[key] !== undefined) {
-      newObj[key] = object[key];
-    }
-  });
-
-  return newObj;
+  const ret = Object.entries(obj)
+    .map(([k, v]) => [k, v && typeof v === 'object' ? removeUndefined(v) : v])
+    .reduce((a: any, [k, v]) => (v == null ? a : (a[k]=v, a)), {});
+  return Object.keys(ret).length !== 0 ? ret : undefined;
 }
