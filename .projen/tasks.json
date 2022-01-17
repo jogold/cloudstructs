@@ -140,7 +140,7 @@
           "exec": "rm -fr test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata --require-approval=never -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' --require-approval=never -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/slack-app/slack-app.integ.snapshot"
@@ -158,7 +158,7 @@
       "description": "destroy integration test 'slack-app'",
       "steps": [
         {
-          "exec": "cdk destroy --app test/slack-app/slack-app.integ.snapshot --no-version-reporting"
+          "exec": "cdk destroy --app test/slack-app/slack-app.integ.snapshot '**' --no-version-reporting"
         }
       ]
     },
@@ -176,7 +176,7 @@
       "description": "watch integration test 'slack-app' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         }
       ]
     },
@@ -185,7 +185,31 @@
       "description": "Creates the distribution package",
       "steps": [
         {
-          "exec": "jsii-pacmak"
+          "exec": "mkdir -p dist"
+        },
+        {
+          "exec": "rsync -a . dist --exclude .git --exclude node_modules"
+        }
+      ]
+    },
+    "package-all": {
+      "name": "package-all",
+      "description": "Packages artifacts for all target languages",
+      "steps": [
+        {
+          "spawn": "package:js"
+        }
+      ]
+    },
+    "package:js": {
+      "name": "package:js",
+      "description": "Create js language bindings",
+      "steps": [
+        {
+          "exec": "jsii_version=$(node -p \"JSON.parse(fs.readFileSync('.jsii')).jsiiVersion.split(' ')[0]\")"
+        },
+        {
+          "exec": "npx jsii-pacmak@$jsii_version -v --target js"
         }
       ]
     },
@@ -197,6 +221,10 @@
           "spawn": "docgen"
         }
       ]
+    },
+    "post-upgrade": {
+      "name": "post-upgrade",
+      "description": "Runs after upgrading dependencies"
     },
     "pre-compile": {
       "name": "pre-compile",
@@ -300,10 +328,13 @@
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-cdk-lib aws-sdk aws-sdk-mock constructs esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii jsii-diff jsii-docgen jsii-pacmak json-schema nock npm-check-updates standard-version ts-jest ts-node typescript @slack/web-api got @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha aws-cdk-lib constructs"
+          "exec": "yarn upgrade @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-cdk-lib aws-sdk aws-sdk-mock constructs esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii jsii-diff jsii-docgen json-schema nock npm-check-updates standard-version ts-jest ts-node typescript @slack/web-api got @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
+        },
+        {
+          "spawn": "post-upgrade"
         }
       ]
     },
@@ -337,6 +368,9 @@
         },
         {
           "exec": "npx projen"
+        },
+        {
+          "spawn": "post-upgrade"
         }
       ]
     },

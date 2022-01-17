@@ -20,7 +20,10 @@
     "integ:slack-app:snapshot": "npx projen integ:slack-app:snapshot",
     "integ:slack-app:watch": "npx projen integ:slack-app:watch",
     "package": "npx projen package",
+    "package-all": "npx projen package-all",
+    "package:js": "npx projen package:js",
     "post-compile": "npx projen post-compile",
+    "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
     "release": "npx projen release",
     "test": "npx projen test",
@@ -61,11 +64,10 @@
     "jsii": "^1.48.0",
     "jsii-diff": "^1.48.0",
     "jsii-docgen": "^1.8.110",
-    "jsii-pacmak": "^1.48.0",
     "json-schema": "^0.4.0",
     "nock": "^13.2.1",
     "npm-check-updates": "^12",
-    "projen": "^0.45.4",
+    "projen": "^0.50.33",
     "standard-version": "^9",
     "ts-jest": "^26.5.6",
     "ts-node": "^10.4.0",
@@ -93,8 +95,8 @@
   "version": "0.0.0",
   "jest": {
     "testMatch": [
-      "**/__tests__/**/*.ts?(x)",
-      "**/?(*.)+(spec|test).ts?(x)"
+      "<rootDir>/src/**/__tests__/**/*.ts?(x)",
+      "<rootDir>/(test|src)/**/?(*.)+(spec|test).ts?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
@@ -102,6 +104,7 @@
       "json",
       "lcov",
       "clover",
+      "cobertura",
       "text"
     ],
     "coverageDirectory": "coverage",
