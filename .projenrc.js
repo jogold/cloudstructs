@@ -18,7 +18,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   devDeps: [
     '@types/aws-lambda',
     '@types/tsscmp',
-    'aws-cdk',
     'aws-sdk',
     'aws-sdk-mock',
     'esbuild',
