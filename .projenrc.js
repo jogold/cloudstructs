@@ -8,8 +8,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: 'cloudstructs',
   repository: 'https://github.com/jogold/cloudstructs.git',
   peerDeps: [
-    '@aws-cdk/aws-apigatewayv2-alpha',
-    '@aws-cdk/aws-apigatewayv2-integrations-alpha',
+    '@aws-cdk/aws-apigatewayv2-alpha@^2.1.0-alpha.0',
+    '@aws-cdk/aws-apigatewayv2-integrations-alpha@^2.1.0-alpha.0',
   ],
   bundledDeps: [
     'got',
