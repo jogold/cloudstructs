@@ -41,8 +41,8 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "^2.1.0-alpha.0",
-    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.1.0-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-alpha": "2.1.0-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.1.0-alpha.0",
     "@types/aws-lambda": "^8.10.87",
     "@types/jest": "^26.0.24",
     "@types/node": "^12",

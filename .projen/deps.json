@@ -2,10 +2,12 @@
   "dependencies": [
     {
       "name": "@aws-cdk/aws-apigatewayv2-alpha",
+      "version": "2.1.0-alpha.0",
       "type": "build"
     },
     {
       "name": "@aws-cdk/aws-apigatewayv2-integrations-alpha",
+      "version": "2.1.0-alpha.0",
       "type": "build"
     },
     {
@@ -143,10 +145,12 @@
     },
     {
       "name": "@aws-cdk/aws-apigatewayv2-alpha",
+      "version": "^2.1.0-alpha.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-apigatewayv2-integrations-alpha",
+      "version": "^2.1.0-alpha.0",
       "type": "peer"
     },
     {
