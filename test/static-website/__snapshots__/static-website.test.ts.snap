@@ -989,6 +989,7 @@ Object {
                 "Arn",
               ],
             },
+            "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
         },
