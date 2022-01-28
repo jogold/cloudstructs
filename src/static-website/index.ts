@@ -171,11 +171,15 @@ export class StaticWebsite extends Construct {
     }
 
     if (!props.redirects || props.redirects.length !== 0) {
-      new patterns.HttpsRedirect(this, 'HttpsRedirect', {
+      const httpsRedirect = new patterns.HttpsRedirect(this, 'HttpsRedirect', {
         targetDomain: props.domainName,
         zone: props.hostedZone,
         recordNames: props.redirects,
       });
+      // Force minimum protocol version
+      const redirectDistribution = httpsRedirect.node.tryFindChild('RedirectDistribution') as cloudfront.CloudFrontWebDistribution;
+      const cfnDistribution = redirectDistribution.node.tryFindChild('CFDistribution') as cloudfront.CfnDistribution;
+      cfnDistribution.addPropertyOverride('DistributionConfig.ViewerCertificate.MinimumProtocolVersion', 'TLSv1.2_2021');
     }
   }
 }
