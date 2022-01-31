@@ -20,7 +20,7 @@ export class MyStack extends Stack {
 }
 ```
 
-The `ToolkitCleaner` creates a state machine that runs every day and
-removes unused S3 and ECR assets from your CDK Toolkit.
+The `ToolkitCleaner` construct creates a state machine that runs every day
+and removes unused S3 and ECR assets from your CDK Toolkit.
 
 The running frequency can be customized using the `schedule` prop.

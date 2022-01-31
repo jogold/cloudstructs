@@ -465,6 +465,67 @@
         "ToolkitCleanerRole794E8158"
       ]
     },
+    "ToolkitCleanerEventsRole16CFA1D4": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
+    },
+    "ToolkitCleanerEventsRoleDefaultPolicyDD647319": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "states:StartExecution",
+              "Effect": "Allow",
+              "Resource": {
+                "Ref": "ToolkitCleanerC02E18EA"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ToolkitCleanerEventsRoleDefaultPolicyDD647319",
+        "Roles": [
+          {
+            "Ref": "ToolkitCleanerEventsRole16CFA1D4"
+          }
+        ]
+      }
+    },
+    "ToolkitCleanerRule910C293E": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 day)",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Ref": "ToolkitCleanerC02E18EA"
+            },
+            "Id": "Target0",
+            "RoleArn": {
+              "Fn::GetAtt": [
+                "ToolkitCleanerEventsRole16CFA1D4",
+                "Arn"
+              ]
+            }
+          }
+        ]
+      }
+    },
     "Evalda2d1181604e4a4586941a6abd7fe42dServiceRoleED144118": {
       "Type": "AWS::IAM::Role",
       "Properties": {
