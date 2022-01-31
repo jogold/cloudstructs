@@ -75,6 +75,7 @@ export class ToolkitCleaner extends Construct {
     });
     cleanObjectsHandler.addEnvironment('BUCKET_NAME', fileAsset.bucket.bucketName);
     fileAsset.bucket.grantRead(cleanObjectsHandler);
+    fileAsset.bucket.grantDelete(cleanObjectsHandler);
     const cleanObjects = new tasks.LambdaInvoke(this, 'CleanObjects', {
       lambdaFunction: cleanObjectsHandler,
     });
@@ -83,7 +84,7 @@ export class ToolkitCleaner extends Construct {
       timeout: Duration.minutes(5),
     });
     cleanImagesHandler.addEnvironment('REPOSITORY_NAME', dockerImageAsset.repository.repositoryName);
-    dockerImageAsset.repository.grant(cleanImagesHandler, 'ecr:ListImages');
+    dockerImageAsset.repository.grant(cleanImagesHandler, 'ecr:ListImages', 'ecr:BatchDeleteImage');
     const cleanImages = new tasks.LambdaInvoke(this, 'CleanImages', {
       lambdaFunction: cleanImagesHandler,
     });
