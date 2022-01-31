@@ -13,7 +13,7 @@ import { Construct } from 'constructs';
 /**
  * Properties for a ToolkitCleaner
  */
-interface ToolkitCleanerProps {
+export interface ToolkitCleanerProps {
   /**
    * The schedule for the cleaner
    *
