@@ -60,7 +60,7 @@ export class ToolkitCleaner extends Construct {
         StackName: sfn.JsonPath.stringAt('$'),
       },
       iamResources: ['*'],
-    }).addRetry({
+    }).addRetry({ // Avoid "Rate exceeded" error from CloudFormation
       errors: ['CloudFormation.CloudFormationException'],
     });
     const extractHashes = new tasks.EvaluateExpression(this, 'ExtractHashes', {
