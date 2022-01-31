@@ -64,7 +64,7 @@ export class ToolkitCleaner extends Construct {
       errors: ['CloudFormation.CloudFormationException'],
     });
     const extractHashes = new tasks.EvaluateExpression(this, 'ExtractHashes', {
-      expression: '[...new Set(($.TemplateBody).match(/[a-z0-9]{64}/g))]',
+      expression: '[...new Set(($.TemplateBody).match(/[a-f0-9]{64}/g))]',
     });
     const flattenHashes = new tasks.EvaluateExpression(this, 'FlattenHashes', {
       expression: '[...new Set(($.AssetHashes).flat())]',
