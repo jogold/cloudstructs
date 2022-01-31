@@ -186,6 +186,72 @@
       "steps": [
         {
           "spawn": "integ:slack-app:snapshot"
+        },
+        {
+          "spawn": "integ:toolkit-cleaner:snapshot"
+        }
+      ]
+    },
+    "integ:toolkit-cleaner:assert": {
+      "name": "integ:toolkit-cleaner:assert",
+      "description": "assert the snapshot of integration test 'toolkit-cleaner'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/toolkit-cleaner/toolkit-cleaner.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'toolkit-cleaner'. Run 'projen integ:toolkit-cleaner:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/synth.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/ test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/synth.cdk.out/"
+        }
+      ]
+    },
+    "integ:toolkit-cleaner:deploy": {
+      "name": "integ:toolkit-cleaner:deploy",
+      "description": "deploy integration test 'toolkit-cleaner' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' --require-approval=never -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/toolkit-cleaner/toolkit-cleaner.integ.snapshot"
+        },
+        {
+          "exec": "mv test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out test/toolkit-cleaner/toolkit-cleaner.integ.snapshot"
+        },
+        {
+          "spawn": "integ:toolkit-cleaner:destroy"
+        }
+      ]
+    },
+    "integ:toolkit-cleaner:destroy": {
+      "name": "integ:toolkit-cleaner:destroy",
+      "description": "destroy integration test 'toolkit-cleaner'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/toolkit-cleaner/toolkit-cleaner.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:toolkit-cleaner:snapshot": {
+      "name": "integ:toolkit-cleaner:snapshot",
+      "description": "update snapshot for integration test \"toolkit-cleaner\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata -o test/toolkit-cleaner/toolkit-cleaner.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:toolkit-cleaner:watch": {
+      "name": "integ:toolkit-cleaner:watch",
+      "description": "watch integration test 'toolkit-cleaner' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
         }
       ]
     },
@@ -275,6 +341,9 @@
         },
         {
           "spawn": "integ:slack-app:assert"
+        },
+        {
+          "spawn": "integ:toolkit-cleaner:assert"
         }
       ]
     },

@@ -18,6 +18,7 @@ Name|Description
 [SlackTextract](#cloudstructs-slacktextract)|Extract text from images posted to Slack using Amazon Textract.
 [StateMachineCustomResourceProvider](#cloudstructs-statemachinecustomresourceprovider)|A state machine custom resource provider.
 [StaticWebsite](#cloudstructs-staticwebsite)|A CloudFront static website hosted on S3.
+[ToolkitCleaner](#cloudstructs-toolkitcleaner)|*No description*
 [UrlShortener](#cloudstructs-urlshortener)|URL shortener.
 
 
@@ -623,6 +624,28 @@ Name | Type | Description
 **bucket** | <code>[aws_s3.Bucket](#aws-cdk-lib-aws-s3-bucket)</code> | The S3 bucket of this static website.
 **distribution** | <code>[aws_cloudfront.Distribution](#aws-cdk-lib-aws-cloudfront-distribution)</code> | The CloudFront distribution of this static website.
 *static* **defaultSecurityHeadersBehavior** | <code>[aws_cloudfront.ResponseSecurityHeadersBehavior](#aws-cdk-lib-aws-cloudfront-responsesecurityheadersbehavior)</code> | Best practice security headers used as default.
+
+
+
+## class ToolkitCleaner  <a id="cloudstructs-toolkitcleaner"></a>
+
+
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
+
+### Initializer
+
+
+
+
+```ts
+new ToolkitCleaner(scope: Construct, id: string)
+```
+
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+
 
 
 

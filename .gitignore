@@ -61,4 +61,15 @@ test/slack-app/slack-app.integ.snapshot/**/tree.json
 test/slack-app/.tmp/slack-app.integ/deploy.cdk.out
 test/slack-app/.tmp/slack-app.integ/synth.cdk.out
 !test/slack-app/slack-app.integ.snapshot
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/asset.*
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/asset.*
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/cdk.out
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/cdk.out
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/manifest.json
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/manifest.json
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/tree.json
+test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/tree.json
+test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out
+test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/synth.cdk.out
+!test/toolkit-cleaner/toolkit-cleaner.integ.snapshot
 !/.github/workflows/upgrade-master.yml
