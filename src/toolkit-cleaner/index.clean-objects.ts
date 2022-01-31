@@ -8,6 +8,9 @@ export async function handler(assetHashes: string[]) {
     throw new Error('Missing BUCKET_NAME');
   }
 
+  let deleted = 0;
+  let reclaimed = 0;
+
   let nextToken: string | undefined;
   let finished = false;
   while (!finished) {
@@ -23,9 +26,10 @@ export async function handler(assetHashes: string[]) {
         Bucket: process.env.BUCKET_NAME,
         Delete: {
           Objects: unused.map(x => ({ Key: x.Key! })),
-          Quiet: true,
         },
       }).promise();
+      deleted += unused.length;
+      reclaimed += unused.reduce((acc, x) => acc + (x.Size ?? 0), 0);
     }
 
     nextToken = response.NextContinuationToken;
@@ -33,4 +37,9 @@ export async function handler(assetHashes: string[]) {
       finished = true;
     }
   }
+
+  return {
+    Deleted: deleted,
+    Reclaimed: reclaimed,
+  };
 }

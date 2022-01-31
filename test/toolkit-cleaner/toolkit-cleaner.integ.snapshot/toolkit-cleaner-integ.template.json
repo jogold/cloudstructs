@@ -156,6 +156,26 @@
                   ]
                 }
               ]
+            },
+            {
+              "Action": "s3:DeleteObject*",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":s3:::",
+                    {
+                      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
             }
           ],
           "Version": "2012-10-17"
@@ -175,7 +195,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "04a5c15c63a8f15d221813d89a82553930d7a9cbc9b6eef6a2dd83560a5189db.zip"
+          "S3Key": "8573d9cf3779b4f4e2f274877e386ebe75dc220cb88263a7af3f7478d5afd4e5.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -237,7 +257,10 @@
         "PolicyDocument": {
           "Statement": [
             {
-              "Action": "ecr:ListImages",
+              "Action": [
+                "ecr:DescribeImages",
+                "ecr:BatchDeleteImage"
+              ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -281,7 +304,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "a0d488a15de8ff26db2e47d65adafb1f0fb60d16d030f4dca29990fd66b5bd72.zip"
+          "S3Key": "73be1d31d70f32a14647d6b98f7a95249a6d4a3629dd63bbcef7a2df56cc936b.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -426,36 +449,28 @@
                   "Arn"
                 ]
               },
-              "\",\"Parameters\":{\"expression\":\"[...new Set(($.TemplateBody).match(/[a-z0-9]{64}/g))]\",\"expressionAttributeValues\":{\"$.TemplateBody.$\":\"$.TemplateBody\"}}}}},\"MaxConcurrency\":1},\"FlattenHashes\":{\"Next\":\"Clean\",\"Type\":\"Task\",\"Resource\":\"",
+              "\",\"Parameters\":{\"expression\":\"[...new Set(($.TemplateBody).match(/[a-f0-9]{64}/g))]\",\"expressionAttributeValues\":{\"$.TemplateBody.$\":\"$.TemplateBody\"}}}}},\"MaxConcurrency\":1},\"FlattenHashes\":{\"Next\":\"Clean\",\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
                   "Evalda2d1181604e4a4586941a6abd7fe42dF371675D",
                   "Arn"
                 ]
               },
-              "\",\"Parameters\":{\"expression\":\"[...new Set(($.AssetHashes).flat())]\",\"expressionAttributeValues\":{\"$.AssetHashes.$\":\"$.AssetHashes\"}}},\"Clean\":{\"Type\":\"Parallel\",\"End\":true,\"Branches\":[{\"StartAt\":\"CleanObjects\",\"States\":{\"CleanObjects\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+              "\",\"Parameters\":{\"expression\":\"[...new Set(($.AssetHashes).flat())]\",\"expressionAttributeValues\":{\"$.AssetHashes.$\":\"$.AssetHashes\"}}},\"Clean\":{\"Type\":\"Parallel\",\"End\":true,\"Branches\":[{\"StartAt\":\"CleanObjects\",\"States\":{\"CleanObjects\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
                   "ToolkitCleanercleanobjects9CFBF169",
                   "Arn"
                 ]
               },
-              "\",\"Payload.$\":\"$\"}}}},{\"StartAt\":\"CleanImages\",\"States\":{\"CleanImages\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":states:::lambda:invoke\",\"Parameters\":{\"FunctionName\":\"",
+              "\"}}},{\"StartAt\":\"CleanImages\",\"States\":{\"CleanImages\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
                   "ToolkitCleanercleanimages45A78876",
                   "Arn"
                 ]
               },
-              "\",\"Payload.$\":\"$\"}}}}]}}}"
+              "\"}}}]}}}"
             ]
           ]
         }

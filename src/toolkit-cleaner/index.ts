@@ -78,15 +78,17 @@ export class ToolkitCleaner extends Construct {
     fileAsset.bucket.grantDelete(cleanObjectsHandler);
     const cleanObjects = new tasks.LambdaInvoke(this, 'CleanObjects', {
       lambdaFunction: cleanObjectsHandler,
+      payloadResponseOnly: true,
     });
 
     const cleanImagesHandler = new NodejsFunction(this, 'clean-images', {
       timeout: Duration.minutes(5),
     });
     cleanImagesHandler.addEnvironment('REPOSITORY_NAME', dockerImageAsset.repository.repositoryName);
-    dockerImageAsset.repository.grant(cleanImagesHandler, 'ecr:ListImages', 'ecr:BatchDeleteImage');
+    dockerImageAsset.repository.grant(cleanImagesHandler, 'ecr:DescribeImages', 'ecr:BatchDeleteImage');
     const cleanImages = new tasks.LambdaInvoke(this, 'CleanImages', {
       lambdaFunction: cleanImagesHandler,
+      payloadResponseOnly: true,
     });
 
     const stateMachine = new sfn.StateMachine(this, 'Resource', {
