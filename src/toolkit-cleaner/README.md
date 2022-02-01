@@ -15,7 +15,7 @@ export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    new ToolkitCleaner(this, 'ToolkitCleaner');
+    new cloudstructs.ToolkitCleaner(this, 'ToolkitCleaner');
   }
 }
 ```
