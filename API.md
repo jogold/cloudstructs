@@ -18,6 +18,7 @@ Name|Description
 [SlackTextract](#cloudstructs-slacktextract)|Extract text from images posted to Slack using Amazon Textract.
 [StateMachineCustomResourceProvider](#cloudstructs-statemachinecustomresourceprovider)|A state machine custom resource provider.
 [StaticWebsite](#cloudstructs-staticwebsite)|A CloudFront static website hosted on S3.
+[ToolkitCleaner](#cloudstructs-toolkitcleaner)|Clean unused S3 and ECR assets from your CDK Toolkit.
 [UrlShortener](#cloudstructs-urlshortener)|URL shortener.
 
 
@@ -44,6 +45,7 @@ Name|Description
 [SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)|Bot user configuration.
 [StateMachineCustomResourceProviderProps](#cloudstructs-statemachinecustomresourceproviderprops)|Properties for a StateMachineCustomResourceProvider.
 [StaticWebsiteProps](#cloudstructs-staticwebsiteprops)|Properties for a StaticWebsite.
+[ToolkitCleanerProps](#cloudstructs-toolkitcleanerprops)|Properties for a ToolkitCleaner.
 [UrlShortenerProps](#cloudstructs-urlshortenerprops)|Properties for a UrlShortener.
 
 
@@ -626,6 +628,32 @@ Name | Type | Description
 
 
 
+## class ToolkitCleaner  <a id="cloudstructs-toolkitcleaner"></a>
+
+Clean unused S3 and ECR assets from your CDK Toolkit.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
+
+### Initializer
+
+
+
+
+```ts
+new ToolkitCleaner(scope: Construct, id: string, props?: ToolkitCleanerProps)
+```
+
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[ToolkitCleanerProps](#cloudstructs-toolkitcleanerprops)</code>)  *No description*
+  * **dryRun** (<code>boolean</code>)  Only output number of assets and total size that would be deleted but without actually deleting assets. __*Optional*__
+  * **retainAssetsNewerThan** (<code>[Duration](#aws-cdk-lib-duration)</code>)  Retain unused assets that were created recently. __*Default*__: all unused assets are removed
+  * **schedule** (<code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code>)  The schedule for the cleaner. __*Default*__: every day
+
+
+
+
 ## class UrlShortener  <a id="cloudstructs-urlshortener"></a>
 
 URL shortener.
@@ -978,6 +1006,21 @@ Name | Type | Description
 **backendConfiguration**? | <code>any</code> | A backend configuration that will be saved as `config.json` in the S3 bucket of the static website.<br/>__*Optional*__
 **redirects**? | <code>Array<string></code> | A list of domain names that should redirect to `domainName`.<br/>__*Default*__: the domain name of the hosted zone
 **responseHeadersPolicy**? | <code>[aws_cloudfront.ResponseHeadersPolicy](#aws-cdk-lib-aws-cloudfront-responseheaderspolicy)</code> | Response headers policy for the default behavior.<br/>__*Default*__: a new policy is created with best practice security headers
+
+
+
+## struct ToolkitCleanerProps  <a id="cloudstructs-toolkitcleanerprops"></a>
+
+
+Properties for a ToolkitCleaner.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**dryRun**? | <code>boolean</code> | Only output number of assets and total size that would be deleted but without actually deleting assets.<br/>__*Optional*__
+**retainAssetsNewerThan**? | <code>[Duration](#aws-cdk-lib-duration)</code> | Retain unused assets that were created recently.<br/>__*Default*__: all unused assets are removed
+**schedule**? | <code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code> | The schedule for the cleaner.<br/>__*Default*__: every day
 
 
 

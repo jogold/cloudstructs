@@ -33,4 +33,7 @@ Version >= 0.2.0 requires AWS CDK v2.
   HTTPS redirect, SPA redirect, HTTP security headers and backend configuration saved
   to the bucket.
 
+* [`ToolkitCleaner`](src/toolkit-cleaner) Clean unused S3 and ECR assets from your CDK
+  Toolkit.
+
 * [`UrlShortener`](src/url-shortener) Deploy an URL shortener API

@@ -8,3 +8,4 @@ export * from './url-shortener';
 export * from './saml-identity-provider';
 export * from './codecommit-mirror';
 export * from './slack-app';
+export * from './toolkit-cleaner';
