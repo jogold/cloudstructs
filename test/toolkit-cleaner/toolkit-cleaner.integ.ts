@@ -6,7 +6,9 @@ class TestStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    new ToolkitCleaner(this, 'ToolkitCleaner');
+    new ToolkitCleaner(this, 'ToolkitCleaner', {
+      dryRun: true,
+    });
   }
 }
 

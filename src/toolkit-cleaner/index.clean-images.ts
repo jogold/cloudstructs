@@ -21,10 +21,12 @@ export async function handler(assetHashes: string[]) {
     const unused = response.imageDetails?.filter(x => x.imageTags && !assetHashes.includes(x.imageTags[0]));
 
     if (unused) {
-      await ecr.batchDeleteImage({
-        repositoryName: process.env.REPOSITORY_NAME,
-        imageIds: unused.map(x => ({ imageTag: x.imageTags![0] })),
-      }).promise();
+      if (process.env.RUN) {
+        await ecr.batchDeleteImage({
+          repositoryName: process.env.REPOSITORY_NAME,
+          imageIds: unused.map(x => ({ imageTag: x.imageTags![0] })),
+        }).promise();
+      }
       deleted += unused.length;
       reclaimed += unused.reduce((acc, x) => acc + (x.imageSizeInBytes ?? 0), 0);
     }

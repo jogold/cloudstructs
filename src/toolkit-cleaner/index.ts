@@ -20,6 +20,12 @@ export interface ToolkitCleanerProps {
    * @default - every day
    */
   readonly schedule?: Schedule;
+
+  /**
+   * Only output number of assets and total size that would be deleted
+   * but without actually deleting assets.
+   */
+  readonly dryRun?: boolean;
 }
 
 /**
@@ -91,13 +97,23 @@ export class ToolkitCleaner extends Construct {
       payloadResponseOnly: true,
     });
 
+    if (!props.dryRun) {
+      cleanObjectsHandler.addEnvironment('RUN', 'true');
+      cleanImagesHandler.addEnvironment('RUN', 'true');
+    }
+
+    const sumReclaimed = new tasks.EvaluateExpression(this, 'SumReclaimed', {
+      expression: '({ Deleted: $[0].Deleted + $[1].Deleted, Reclaimed: $[0].Reclaimed + $[1].Reclaimed })',
+    });
+
     const stateMachine = new sfn.StateMachine(this, 'Resource', {
       definition: getStackNames
         .next(stacksMap.iterator(getTemplate.next(extractHashes)))
         .next(flattenHashes)
         .next(new sfn.Parallel(this, 'Clean')
           .branch(cleanObjects)
-          .branch(cleanImages)),
+          .branch(cleanImages))
+        .next(sumReclaimed),
     });
 
     const rule = new Rule(this, 'Rule', {

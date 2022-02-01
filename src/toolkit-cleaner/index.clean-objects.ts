@@ -22,12 +22,14 @@ export async function handler(assetHashes: string[]) {
     const unused = response.Contents?.filter(x => x.Key && !assetHashes.includes(path.basename(x.Key)));
 
     if (unused) {
-      await s3.deleteObjects({
-        Bucket: process.env.BUCKET_NAME,
-        Delete: {
-          Objects: unused.map(x => ({ Key: x.Key! })),
-        },
-      }).promise();
+      if (process.env.RUN) {
+        await s3.deleteObjects({
+          Bucket: process.env.BUCKET_NAME,
+          Delete: {
+            Objects: unused.map(x => ({ Key: x.Key! })),
+          },
+        }).promise();
+      }
       deleted += unused.length;
       reclaimed += unused.reduce((acc, x) => acc + (x.Size ?? 0), 0);
     }
