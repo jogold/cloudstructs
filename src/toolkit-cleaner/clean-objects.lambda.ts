@@ -19,19 +19,26 @@ export async function handler(assetHashes: string[]) {
       ContinuationToken: nextToken,
     }).promise();
 
-    const unused = response.Contents?.filter(x => x.Key && !assetHashes.includes(path.basename(x.Key)));
+    const toDelete = response.Contents?.filter(x => {
+      let pred = x.Key && !assetHashes.includes(path.basename(x.Key));
+      if (process.env.RETAIN_MILLISECONDS) {
+        const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
+        pred = pred && x.LastModified && x.LastModified < limitDate;
+      }
+      return pred;
+    });
 
-    if (unused) {
+    if (toDelete) {
       if (process.env.RUN) {
         await s3.deleteObjects({
           Bucket: process.env.BUCKET_NAME,
           Delete: {
-            Objects: unused.map(x => ({ Key: x.Key! })),
+            Objects: toDelete.map(x => ({ Key: x.Key! })),
           },
         }).promise();
       }
-      deleted += unused.length;
-      reclaimed += unused.reduce((acc, x) => acc + (x.Size ?? 0), 0);
+      deleted += toDelete.length;
+      reclaimed += toDelete.reduce((acc, x) => acc + (x.Size ?? 0), 0);
     }
 
     nextToken = response.NextContinuationToken;

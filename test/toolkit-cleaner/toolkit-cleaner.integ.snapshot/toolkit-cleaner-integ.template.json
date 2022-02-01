@@ -191,7 +191,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "2395d41997dcd38fbe7b04f6b5039c916c03ce17305a5840f479fada4ad2b7da.zip"
+          "S3Key": "ec0cb5547707e167611db5857f48dcd79546bef3a55993c68b5d34bf48349363.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -204,7 +204,8 @@
           "Variables": {
             "BUCKET_NAME": {
               "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-            }
+            },
+            "RETAIN_MILLISECONDS": "7776000000"
           }
         },
         "Handler": "index.handler",
@@ -300,7 +301,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "6b3f92c29238253871af68fbf43377bc312568703498624b3ddf6d8053046562.zip"
+          "S3Key": "6e0f2fe220913ab1f34f742e1b167a18ba581057e0df00babb51c0fc2fc95de8.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -313,7 +314,8 @@
           "Variables": {
             "REPOSITORY_NAME": {
               "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
-            }
+            },
+            "RETAIN_MILLISECONDS": "7776000000"
           }
         },
         "Handler": "index.handler",

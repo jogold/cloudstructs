@@ -18,17 +18,24 @@ export async function handler(assetHashes: string[]) {
       nextToken,
     }).promise();
 
-    const unused = response.imageDetails?.filter(x => x.imageTags && !assetHashes.includes(x.imageTags[0]));
+    const toDelete = response.imageDetails?.filter(x => {
+      let pred = x.imageTags && !assetHashes.includes(x.imageTags[0]);
+      if (process.env.RETAIN_MILLISECONDS) {
+        const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
+        pred = pred && x.imagePushedAt && x.imagePushedAt < limitDate;
+      }
+      return pred;
+    });
 
-    if (unused) {
+    if (toDelete) {
       if (process.env.RUN) {
         await ecr.batchDeleteImage({
           repositoryName: process.env.REPOSITORY_NAME,
-          imageIds: unused.map(x => ({ imageTag: x.imageTags![0] })),
+          imageIds: toDelete.map(x => ({ imageTag: x.imageTags![0] })),
         }).promise();
       }
-      deleted += unused.length;
-      reclaimed += unused.reduce((acc, x) => acc + (x.imageSizeInBytes ?? 0), 0);
+      deleted += toDelete.length;
+      reclaimed += toDelete.reduce((acc, x) => acc + (x.imageSizeInBytes ?? 0), 0);
     }
 
     nextToken = response.nextToken;

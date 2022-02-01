@@ -28,6 +28,13 @@ export interface ToolkitCleanerProps {
    * but without actually deleting assets.
    */
   readonly dryRun?: boolean;
+
+  /**
+   * Retain unused assets that were created recently
+   *
+   * @default - all unused assets are removed
+   */
+  readonly retainAssetsNewerThan?: Duration;
 }
 
 /**
@@ -100,8 +107,14 @@ export class ToolkitCleaner extends Construct {
     });
 
     if (!props.dryRun) {
+      cleanObjectsFunction.addEnvironment('RUN', 'true');
       cleanImagesFunction.addEnvironment('RUN', 'true');
-      cleanImagesFunction.addEnvironment('RUN', 'true');
+    }
+
+    if (props.retainAssetsNewerThan) {
+      const retainMilliseconds = props.retainAssetsNewerThan.toMilliseconds().toString();
+      cleanObjectsFunction.addEnvironment('RETAIN_MILLISECONDS', retainMilliseconds);
+      cleanImagesFunction.addEnvironment('RETAIN_MILLISECONDS', retainMilliseconds);
     }
 
     const sumReclaimed = new tasks.EvaluateExpression(this, 'SumReclaimed', {

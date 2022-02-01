@@ -648,6 +648,7 @@ new ToolkitCleaner(scope: Construct, id: string, props?: ToolkitCleanerProps)
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ToolkitCleanerProps](#cloudstructs-toolkitcleanerprops)</code>)  *No description*
   * **dryRun** (<code>boolean</code>)  Only output number of assets and total size that would be deleted but without actually deleting assets. __*Optional*__
+  * **retainAssetsNewerThan** (<code>[Duration](#aws-cdk-lib-duration)</code>)  Retain unused assets that were created recently. __*Default*__: all unused assets are removed
   * **schedule** (<code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code>)  The schedule for the cleaner. __*Default*__: every day
 
 
@@ -1018,6 +1019,7 @@ Properties for a ToolkitCleaner.
 Name | Type | Description 
 -----|------|-------------
 **dryRun**? | <code>boolean</code> | Only output number of assets and total size that would be deleted but without actually deleting assets.<br/>__*Optional*__
+**retainAssetsNewerThan**? | <code>[Duration](#aws-cdk-lib-duration)</code> | Retain unused assets that were created recently.<br/>__*Default*__: all unused assets are removed
 **schedule**? | <code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code> | The schedule for the cleaner.<br/>__*Default*__: every day
 
 
