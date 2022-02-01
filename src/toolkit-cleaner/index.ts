@@ -54,7 +54,7 @@ export class ToolkitCleaner extends Construct {
     });
 
     const stacksMap = new sfn.Map(this, 'StacksMap', {
-      maxConcurrency: 1,
+      maxConcurrency: 1, // Avoid "Rate exceeded" error from CloudFormation
       resultSelector: {
         AssetHashes: sfn.JsonPath.stringAt('$'),
       },
