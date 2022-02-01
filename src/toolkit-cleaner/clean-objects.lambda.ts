@@ -28,7 +28,7 @@ export async function handler(assetHashes: string[]) {
       return pred;
     });
 
-    if (toDelete) {
+    if (toDelete && toDelete.length !== 0) {
       if (process.env.RUN) {
         await s3.deleteObjects({
           Bucket: process.env.BUCKET_NAME,

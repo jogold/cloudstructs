@@ -27,7 +27,7 @@ export async function handler(assetHashes: string[]) {
       return pred;
     });
 
-    if (toDelete) {
+    if (toDelete && toDelete.length !== 0) {
       if (process.env.RUN) {
         await ecr.batchDeleteImage({
           repositoryName: process.env.REPOSITORY_NAME,
