@@ -145,7 +145,10 @@
       {
         "devDependencies": [
           "**/test/**",
-          "**/build-tools/**"
+          "**/build-tools/**",
+          "src/toolkit-cleaner/clean-images.lambda.ts",
+          "src/toolkit-cleaner/clean-objects.lambda.ts",
+          "src/toolkit-cleaner/get-stack-names.lambda.ts"
         ],
         "optionalDependencies": false,
         "peerDependencies": true

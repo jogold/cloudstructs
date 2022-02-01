@@ -50,6 +50,10 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+/assets/
+!/src/toolkit-cleaner/clean-images-function.ts
+!/src/toolkit-cleaner/clean-objects-function.ts
+!/src/toolkit-cleaner/get-stack-names-function.ts
 test/slack-app/slack-app.integ.snapshot/asset.*
 test/slack-app/slack-app.integ.snapshot/**/asset.*
 test/slack-app/slack-app.integ.snapshot/cdk.out

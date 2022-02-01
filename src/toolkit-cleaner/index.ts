@@ -4,11 +4,13 @@ import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 import { Rule, Schedule } from 'aws-cdk-lib/aws-events';
 import { SfnStateMachine } from 'aws-cdk-lib/aws-events-targets';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Asset } from 'aws-cdk-lib/aws-s3-assets';
 import * as sfn from 'aws-cdk-lib/aws-stepfunctions';
 import * as tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { Construct } from 'constructs';
+import { CleanImagesFunction } from './clean-images-function';
+import { CleanObjectsFunction } from './clean-objects-function';
+import { GetStackNamesFunction } from './get-stack-names-function';
 
 /**
  * Properties for a ToolkitCleaner
@@ -43,13 +45,13 @@ export class ToolkitCleaner extends Construct {
       directory: path.join(__dirname, '..', '..', 'assets', 'toolkit-cleaner', 'docker'),
     });
 
-    const getStackNamesHandler = new NodejsFunction(this, 'get-stack-names');
-    getStackNamesHandler.addToRolePolicy(new PolicyStatement({
+    const getStackNamesFunction = new GetStackNamesFunction(this, 'GetStackNamesFunction');
+    getStackNamesFunction.addToRolePolicy(new PolicyStatement({
       actions: ['cloudformation:DescribeStacks'],
       resources: ['*'],
     }));
     const getStackNames = new tasks.LambdaInvoke(this, 'GetStackNames', {
-      lambdaFunction: getStackNamesHandler,
+      lambdaFunction: getStackNamesFunction,
       payloadResponseOnly: true,
     });
 
@@ -76,30 +78,30 @@ export class ToolkitCleaner extends Construct {
       expression: '[...new Set(($.AssetHashes).flat())]',
     });
 
-    const cleanObjectsHandler = new NodejsFunction(this, 'clean-objects', {
+    const cleanObjectsFunction = new CleanObjectsFunction(this, 'CleanObjectsFunction', {
       timeout: Duration.minutes(5),
     });
-    cleanObjectsHandler.addEnvironment('BUCKET_NAME', fileAsset.bucket.bucketName);
-    fileAsset.bucket.grantRead(cleanObjectsHandler);
-    fileAsset.bucket.grantDelete(cleanObjectsHandler);
+    cleanObjectsFunction.addEnvironment('BUCKET_NAME', fileAsset.bucket.bucketName);
+    fileAsset.bucket.grantRead(cleanObjectsFunction);
+    fileAsset.bucket.grantDelete(cleanObjectsFunction);
     const cleanObjects = new tasks.LambdaInvoke(this, 'CleanObjects', {
-      lambdaFunction: cleanObjectsHandler,
+      lambdaFunction: cleanObjectsFunction,
       payloadResponseOnly: true,
     });
 
-    const cleanImagesHandler = new NodejsFunction(this, 'clean-images', {
+    const cleanImagesFunction = new CleanImagesFunction(this, 'CleanImagesFunction', {
       timeout: Duration.minutes(5),
     });
-    cleanImagesHandler.addEnvironment('REPOSITORY_NAME', dockerImageAsset.repository.repositoryName);
-    dockerImageAsset.repository.grant(cleanImagesHandler, 'ecr:DescribeImages', 'ecr:BatchDeleteImage');
+    cleanImagesFunction.addEnvironment('REPOSITORY_NAME', dockerImageAsset.repository.repositoryName);
+    dockerImageAsset.repository.grant(cleanImagesFunction, 'ecr:DescribeImages', 'ecr:BatchDeleteImage');
     const cleanImages = new tasks.LambdaInvoke(this, 'CleanImages', {
-      lambdaFunction: cleanImagesHandler,
+      lambdaFunction: cleanImagesFunction,
       payloadResponseOnly: true,
     });
 
     if (!props.dryRun) {
-      cleanObjectsHandler.addEnvironment('RUN', 'true');
-      cleanImagesHandler.addEnvironment('RUN', 'true');
+      cleanImagesFunction.addEnvironment('RUN', 'true');
+      cleanImagesFunction.addEnvironment('RUN', 'true');
     }
 
     const sumReclaimed = new tasks.EvaluateExpression(this, 'SumReclaimed', {

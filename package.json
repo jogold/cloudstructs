@@ -8,6 +8,13 @@
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",
+    "bundle": "npx projen bundle",
+    "bundle:toolkit-cleaner/clean-images.lambda": "npx projen bundle:toolkit-cleaner/clean-images.lambda",
+    "bundle:toolkit-cleaner/clean-images.lambda:watch": "npx projen bundle:toolkit-cleaner/clean-images.lambda:watch",
+    "bundle:toolkit-cleaner/clean-objects.lambda": "npx projen bundle:toolkit-cleaner/clean-objects.lambda",
+    "bundle:toolkit-cleaner/clean-objects.lambda:watch": "npx projen bundle:toolkit-cleaner/clean-objects.lambda:watch",
+    "bundle:toolkit-cleaner/get-stack-names.lambda": "npx projen bundle:toolkit-cleaner/get-stack-names.lambda",
+    "bundle:toolkit-cleaner/get-stack-names.lambda:watch": "npx projen bundle:toolkit-cleaner/get-stack-names.lambda:watch",
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
     "compile": "npx projen compile",

@@ -21,6 +21,7 @@ dist
 tsconfig.tsbuildinfo
 /.eslintrc.json
 !.jsii
+!/assets/
 test/slack-app/.tmp/slack-app.integ/deploy.cdk.out
 test/slack-app/.tmp/slack-app.integ/synth.cdk.out
 test/slack-app/slack-app.integ.snapshot

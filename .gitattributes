@@ -18,5 +18,8 @@
 /.projen/tasks.json linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
+/src/toolkit-cleaner/clean-images-function.ts linguist-generated
+/src/toolkit-cleaner/clean-objects-function.ts linguist-generated
+/src/toolkit-cleaner/get-stack-names-function.ts linguist-generated
 /tsconfig.dev.json linguist-generated
 /yarn.lock linguist-generated

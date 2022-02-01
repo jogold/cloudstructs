@@ -40,6 +40,75 @@
       ],
       "condition": "! git log --oneline -1 | grep -q \"chore(release):\""
     },
+    "bundle": {
+      "name": "bundle",
+      "description": "Prepare assets",
+      "steps": [
+        {
+          "spawn": "bundle:toolkit-cleaner/clean-images.lambda"
+        },
+        {
+          "spawn": "bundle:toolkit-cleaner/clean-objects.lambda"
+        },
+        {
+          "spawn": "bundle:toolkit-cleaner/get-stack-names.lambda"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/clean-images.lambda": {
+      "name": "bundle:toolkit-cleaner/clean-images.lambda",
+      "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/clean-images.lambda:watch": {
+      "name": "bundle:toolkit-cleaner/clean-images.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/clean-objects.lambda": {
+      "name": "bundle:toolkit-cleaner/clean-objects.lambda",
+      "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/clean-objects.lambda:watch": {
+      "name": "bundle:toolkit-cleaner/clean-objects.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/get-stack-names.lambda": {
+      "name": "bundle:toolkit-cleaner/get-stack-names.lambda",
+      "description": "Create a JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/get-stack-names.lambda:watch": {
+      "name": "bundle:toolkit-cleaner/get-stack-names.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",
@@ -303,7 +372,12 @@
     },
     "pre-compile": {
       "name": "pre-compile",
-      "description": "Prepare the project for compilation"
+      "description": "Prepare the project for compilation",
+      "steps": [
+        {
+          "spawn": "bundle"
+        }
+      ]
     },
     "release": {
       "name": "release",
