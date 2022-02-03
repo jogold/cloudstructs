@@ -1,8 +1,9 @@
 import { Stack } from 'aws-cdk-lib';
-import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as cr from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
+import { ProviderFunction } from './provider-function';
 
 export class SlackAppProvider extends Construct {
   /**
@@ -16,12 +17,12 @@ export class SlackAppProvider extends Construct {
 
   public readonly serviceToken: string;
 
-  public readonly handler: nodejs.NodejsFunction;
+  public readonly handler: lambda.Function;
 
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    this.handler = new nodejs.NodejsFunction(this, 'handler', {
+    this.handler = new ProviderFunction(this, 'handler', {
       logRetention: logs.RetentionDays.ONE_MONTH,
     });
 

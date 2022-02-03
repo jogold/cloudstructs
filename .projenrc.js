@@ -21,7 +21,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/tsscmp',
     'aws-sdk',
     'aws-sdk-mock',
-    'esbuild',
     'nock',
   ],
   defaultReleaseBranch: 'master',

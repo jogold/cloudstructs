@@ -45,6 +45,21 @@
       "description": "Prepare assets",
       "steps": [
         {
+          "spawn": "bundle:email-receiver/s3.lambda"
+        },
+        {
+          "spawn": "bundle:email-receiver/whitelist.lambda"
+        },
+        {
+          "spawn": "bundle:slack-app/provider.lambda"
+        },
+        {
+          "spawn": "bundle:slack-events/events.lambda"
+        },
+        {
+          "spawn": "bundle:slack-textract/detect.lambda"
+        },
+        {
           "spawn": "bundle:toolkit-cleaner/clean-images.lambda"
         },
         {
@@ -52,6 +67,99 @@
         },
         {
           "spawn": "bundle:toolkit-cleaner/get-stack-names.lambda"
+        },
+        {
+          "spawn": "bundle:url-shortener/shortener.lambda"
+        }
+      ]
+    },
+    "bundle:email-receiver/s3.lambda": {
+      "name": "bundle:email-receiver/s3.lambda",
+      "description": "Create a JavaScript bundle from src/email-receiver/s3.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:email-receiver/s3.lambda:watch": {
+      "name": "bundle:email-receiver/s3.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/email-receiver/s3.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:email-receiver/whitelist.lambda": {
+      "name": "bundle:email-receiver/whitelist.lambda",
+      "description": "Create a JavaScript bundle from src/email-receiver/whitelist.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:email-receiver/whitelist.lambda:watch": {
+      "name": "bundle:email-receiver/whitelist.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/email-receiver/whitelist.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:slack-app/provider.lambda": {
+      "name": "bundle:slack-app/provider.lambda",
+      "description": "Create a JavaScript bundle from src/slack-app/provider.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:slack-app/provider.lambda:watch": {
+      "name": "bundle:slack-app/provider.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/slack-app/provider.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:slack-events/events.lambda": {
+      "name": "bundle:slack-events/events.lambda",
+      "description": "Create a JavaScript bundle from src/slack-events/events.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:slack-events/events.lambda:watch": {
+      "name": "bundle:slack-events/events.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/slack-events/events.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:slack-textract/detect.lambda": {
+      "name": "bundle:slack-textract/detect.lambda",
+      "description": "Create a JavaScript bundle from src/slack-textract/detect.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:slack-textract/detect.lambda:watch": {
+      "name": "bundle:slack-textract/detect.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/slack-textract/detect.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -106,6 +214,24 @@
       "steps": [
         {
           "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:url-shortener/shortener.lambda": {
+      "name": "bundle:url-shortener/shortener.lambda",
+      "description": "Create a JavaScript bundle from src/url-shortener/shortener.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:url-shortener/shortener.lambda:watch": {
+      "name": "bundle:url-shortener/shortener.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/url-shortener/shortener.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --external:aws-sdk --watch"
         }
       ]
     },

@@ -1,7 +1,7 @@
 import { WebClient } from '@slack/web-api';
 import { Textract } from 'aws-sdk';
 import got from 'got';
-import { handler, FilesInfoResult } from '../../src/slack-textract/index.handler';
+import { handler, FilesInfoResult } from '../../src/slack-textract/detect.lambda';
 
 process.env.SLACK_TOKEN = 'token';
 console.log = jest.fn();
