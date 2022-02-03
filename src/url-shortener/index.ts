@@ -6,12 +6,12 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
+import { ShortenerFunction } from './shortener-function';
 
 /**
  * Properties for a UrlShortener
@@ -97,7 +97,7 @@ export class UrlShortener extends Construct {
     });
 
     // Lambda function to increment counter and write redirect in bucket
-    const handler = new nodejs.NodejsFunction(this, 'handler', {
+    const handler = new ShortenerFunction(this, 'handler', {
       logRetention: logs.RetentionDays.ONE_MONTH,
       environment: {
         DOMAIN_NAME: props.hostedZone.zoneName,

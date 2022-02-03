@@ -164,7 +164,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "c21c9e592dd8aa6f5be5afdec8b35b9216d7fb3885fc702109a6eb0526fcdbd1.zip"
+          "S3Key": "ce9b92a30cd8c5984fdbb8ae0cf284f44f383c36c8e5ee6ce9d8421920a92324.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -172,11 +172,7 @@
             "Arn"
           ]
         },
-        "Environment": {
-          "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
-          }
-        },
+        "Description": "src/slack-app/provider.lambda.ts",
         "Handler": "index.handler",
         "Runtime": "nodejs14.x"
       },

@@ -51,9 +51,15 @@ junit.xml
 tsconfig.json
 !/API.md
 /assets/
+!/src/email-receiver/s3-function.ts
+!/src/email-receiver/whitelist-function.ts
+!/src/slack-app/provider-function.ts
+!/src/slack-events/events-function.ts
+!/src/slack-textract/detect-function.ts
 !/src/toolkit-cleaner/clean-images-function.ts
 !/src/toolkit-cleaner/clean-objects-function.ts
 !/src/toolkit-cleaner/get-stack-names-function.ts
+!/src/url-shortener/shortener-function.ts
 test/slack-app/slack-app.integ.snapshot/asset.*
 test/slack-app/slack-app.integ.snapshot/**/asset.*
 test/slack-app/slack-app.integ.snapshot/cdk.out

@@ -2,10 +2,10 @@ import { Duration, SecretValue } from 'aws-cdk-lib';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
 import { SlackEvents } from '../slack-events';
+import { DetectFunction } from './detect-function';
 
 /**
  * Properties for a SlackTextract
@@ -36,7 +36,7 @@ export class SlackTextract extends Construct {
   constructor(scope: Construct, id: string, props: SlackTextractProps) {
     super(scope, id);
 
-    const handler = new nodejs.NodejsFunction(this, 'handler', {
+    const handler = new DetectFunction(this, 'handler', {
       timeout: Duration.seconds(30),
       logRetention: logs.RetentionDays.ONE_MONTH,
       environment: {

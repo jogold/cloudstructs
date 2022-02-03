@@ -18,8 +18,14 @@
 /.projen/tasks.json linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
+/src/email-receiver/s3-function.ts linguist-generated
+/src/email-receiver/whitelist-function.ts linguist-generated
+/src/slack-app/provider-function.ts linguist-generated
+/src/slack-events/events-function.ts linguist-generated
+/src/slack-textract/detect-function.ts linguist-generated
 /src/toolkit-cleaner/clean-images-function.ts linguist-generated
 /src/toolkit-cleaner/clean-objects-function.ts linguist-generated
 /src/toolkit-cleaner/get-stack-names-function.ts linguist-generated
+/src/url-shortener/shortener-function.ts linguist-generated
 /tsconfig.dev.json linguist-generated
 /yarn.lock linguist-generated
