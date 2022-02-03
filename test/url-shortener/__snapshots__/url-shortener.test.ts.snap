@@ -751,6 +751,7 @@ Object {
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
           "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "BUCKET_NAME": Object {
               "Ref": "UrlShortenerBucket14C129A7",
             },
@@ -1766,6 +1767,7 @@ Object {
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
           "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "BUCKET_NAME": Object {
               "Ref": "UrlShortenerBucket14C129A7",
             },

@@ -256,6 +256,7 @@ Object {
         "Description": "src/slack-events/events.lambda.ts",
         "Environment": Object {
           "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "SLACK_SIGNING_SECRET": "{{resolve:secretsmanager:my-slack-app:SecretString:signingSecret::}}",
           },
         },
@@ -360,6 +361,7 @@ Object {
         "Description": "src/slack-textract/detect.lambda.ts",
         "Environment": Object {
           "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "SLACK_TOKEN": "{{resolve:secretsmanager:my-slack-app:SecretString:botToken::}}",
           },
         },
