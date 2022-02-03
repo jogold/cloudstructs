@@ -21,5 +21,6 @@ export class ShortenerFunction extends lambda.Function {
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/url-shortener/shortener.lambda')),
     });
+    this.addEnvironment('AWS_NODEJS_CONNECTION_REUSE_ENABLED', '1', { removeInEdge: true });
   }
 }

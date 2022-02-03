@@ -21,5 +21,6 @@ export class CleanObjectsFunction extends lambda.Function {
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/toolkit-cleaner/clean-objects.lambda')),
     });
+    this.addEnvironment('AWS_NODEJS_CONNECTION_REUSE_ENABLED', '1', { removeInEdge: true });
   }
 }
