@@ -1,5 +1,5 @@
 import * as AWS from 'aws-sdk-mock';
-import { handler } from '../../src/slack-events/index.handler';
+import { handler } from '../../src/slack-events/events.lambda';
 import * as signature from '../../src/slack-events/signature';
 
 process.env.SLACK_SIGNING_SECRET = 'secret';

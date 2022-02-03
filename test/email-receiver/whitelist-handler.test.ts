@@ -1,4 +1,4 @@
-import { handler } from '../../src/email-receiver/receiver.whitelist';
+import { handler } from '../../src/email-receiver/whitelist.lambda';
 
 console.log = jest.fn();
 

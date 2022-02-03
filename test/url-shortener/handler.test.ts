@@ -13,7 +13,7 @@ const documentClientMock = {
   }),
 };
 
-import { handler } from '../../src/url-shortener/index.handler';
+import { handler } from '../../src/url-shortener/shortener.lambda';
 
 jest.mock('aws-sdk', () => {
   return {

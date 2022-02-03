@@ -42,7 +42,7 @@ jest.mock('got', () => {
   };
 });
 
-import { handler } from '../../src/slack-app/provider.handler';
+import { handler } from '../../src/slack-app/provider.lambda';
 
 const event: AWSLambda.CloudFormationCustomResourceEvent & { PhysicalResourceId?: string } = {
   RequestType: 'Create',

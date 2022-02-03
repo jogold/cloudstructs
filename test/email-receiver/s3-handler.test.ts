@@ -1,4 +1,4 @@
-import { handler } from '../../src/email-receiver/receiver.s3';
+import { handler } from '../../src/email-receiver/s3.lambda';
 
 console.log = jest.fn();
 
