@@ -35,7 +35,8 @@ const packageExports = {
 for (const dirent of fs.readdirSync('./src', { withFileTypes: true })) {
   if (dirent.isDirectory()) {
     const construct = dirent.name;
-    packageExports[`./${construct}`] = `./lib/${construct}/index.js`;
+    // TODO: remove "lib" when TypeScript supports "exports"
+    packageExports[`./lib/${construct}`] = `./lib/${construct}/index.js`;
   }
 }
 project.tryFindObjectFile('package.json').addOverride('exports', packageExports);
