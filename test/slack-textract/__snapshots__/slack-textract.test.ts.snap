@@ -251,11 +251,11 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "bda4f2a67c0645d068159b5c55d68c8d62cc26f0abd847ccafdead03999308a8.zip",
+          "S3Key": "06ba2b9fdfdd5ed5dcfceb6635ffc2a67564019122eca4f104e1ab400354b566.zip",
         },
+        "Description": "src/slack-events/events.lambda.ts",
         "Environment": Object {
           "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "SLACK_SIGNING_SECRET": "{{resolve:secretsmanager:my-slack-app:SecretString:signingSecret::}}",
           },
         },
@@ -355,11 +355,11 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "ed68981e47657aa12deac65a3f4c4d6867ac13adfe09b48de17368100c14c69b.zip",
+          "S3Key": "73045d68e0158683148e267daec48dd97d1d9486ed74620bbacb229162190a83.zip",
         },
+        "Description": "src/slack-textract/detect.lambda.ts",
         "Environment": Object {
           "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "SLACK_TOKEN": "{{resolve:secretsmanager:my-slack-app:SecretString:botToken::}}",
           },
         },

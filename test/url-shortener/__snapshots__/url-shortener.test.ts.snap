@@ -746,11 +746,11 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "ba69909a8399b02accb39958b5a0ef8f637549fe7977e3a16e069193470c5d62.zip",
+          "S3Key": "e84fef79ba6d807f28430c2d51c3d4ad1c4d307f2f353d4d59aba833551f89ec.zip",
         },
+        "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
           "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "BUCKET_NAME": Object {
               "Ref": "UrlShortenerBucket14C129A7",
             },
@@ -1761,11 +1761,11 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "ba69909a8399b02accb39958b5a0ef8f637549fe7977e3a16e069193470c5d62.zip",
+          "S3Key": "e84fef79ba6d807f28430c2d51c3d4ad1c4d307f2f353d4d59aba833551f89ec.zip",
         },
+        "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
           "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "BUCKET_NAME": Object {
               "Ref": "UrlShortenerBucket14C129A7",
             },
