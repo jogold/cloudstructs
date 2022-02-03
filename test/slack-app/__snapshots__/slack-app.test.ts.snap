@@ -239,6 +239,11 @@ Object {
           "S3Key": "ce9b92a30cd8c5984fdbb8ae0cf284f44f383c36c8e5ee6ce9d8421920a92324.zip",
         },
         "Description": "src/slack-app/provider.lambda.ts",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
         "Handler": "index.handler",
         "Role": Object {
           "Fn::GetAtt": Array [

@@ -68,6 +68,11 @@
           ]
         },
         "Description": "src/toolkit-cleaner/get-stack-names.lambda.ts",
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+          }
+        },
         "Handler": "index.handler",
         "Runtime": "nodejs14.x"
       },
@@ -202,6 +207,7 @@
         "Description": "src/toolkit-cleaner/clean-objects.lambda.ts",
         "Environment": {
           "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "BUCKET_NAME": {
               "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
             },
@@ -312,6 +318,7 @@
         "Description": "src/toolkit-cleaner/clean-images.lambda.ts",
         "Environment": {
           "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "REPOSITORY_NAME": {
               "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
             },

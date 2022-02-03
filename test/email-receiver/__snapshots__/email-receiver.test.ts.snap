@@ -152,6 +152,11 @@ Object {
           "S3Key": "7ede63d4ab06157a91614c5356fce5258282d266e8af4f4efaf3085a2b54771b.zip",
         },
         "Description": "src/email-receiver/s3.lambda.ts",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
         "Handler": "index.handler",
         "Role": Object {
           "Fn::GetAtt": Array [
@@ -380,6 +385,7 @@ Object {
         "Description": "src/email-receiver/whitelist.lambda.ts",
         "Environment": Object {
           "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "SOURCE_WHITELIST": "@amazon.com$",
           },
         },
