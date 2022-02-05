@@ -24,6 +24,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'nock',
   ],
   defaultReleaseBranch: 'master',
+  releaseToNpm: true,
+  publishToPypi: {
+    distName: 'cloudstructs',
+    module: 'cloudstructs',
+  },
 });
 
 // Add "exports"
