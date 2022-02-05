@@ -17,11 +17,19 @@ import { GetStackNamesFunction } from './get-stack-names-function';
  */
 export interface ToolkitCleanerProps {
   /**
-   * The schedule for the cleaner
+   * The schedule for the cleaner.
    *
    * @default - every day
    */
   readonly schedule?: Schedule;
+
+  /**
+   * Is the schedule active? If you'd like to run the cleanup manually via the
+   * UI, set to `false`.
+   *
+   * @default - true
+   */
+  readonly scheduleEnabled?: boolean;
 
   /**
    * Only output number of assets and total size that would be deleted
@@ -132,6 +140,7 @@ export class ToolkitCleaner extends Construct {
     });
 
     const rule = new Rule(this, 'Rule', {
+      enabled: props.scheduleEnabled ?? true,
       schedule: props.schedule ?? Schedule.rate(Duration.days(1)),
     });
     rule.addTarget(new SfnStateMachine(stateMachine));
