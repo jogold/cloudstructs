@@ -24,7 +24,9 @@ The `ToolkitCleaner` construct creates a state machine that runs every day
 and removes unused S3 and ECR assets from your CDK Toolkit. The state machine
 outputs the number of deleted assets and the total reclaimed size in bytes.
 
-The running frequency can be customized using the `schedule` prop.
+The running frequency can be customized using the `schedule` prop. You can also
+choose to only run the Step Function manually by passing
+`scheduleEnabled: false`.
 
 By default all unused assets are removed. If you wish to retain assets that
 were created recently, specify the `retainAssetsNewerThan` prop:
