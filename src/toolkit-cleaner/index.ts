@@ -24,7 +24,7 @@ export interface ToolkitCleanerProps {
   readonly schedule?: Schedule;
 
   /**
-   * Whether to clean on schedule. If you'd like to run the cleanup manually 
+   * Whether to clean on schedule. If you'd like to run the cleanup manually
    * via the console, set to `false`.
    *
    * @default true
