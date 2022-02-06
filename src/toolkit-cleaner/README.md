@@ -8,14 +8,14 @@ Define a `ToolkitCleaner`:
 
 ```ts
 import { Stack, StackProps } from 'aws-cdk-lib';
-import * as cloudstructs from 'cloudstructs';
+import { ToolkitCleaner } from 'cloudstructs/lib/toolkit-cleaner';
 import { Construct } from 'constructs';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    new cloudstructs.ToolkitCleaner(this, 'ToolkitCleaner');
+    new ToolkitCleaner(this, 'ToolkitCleaner');
   }
 }
 ```
