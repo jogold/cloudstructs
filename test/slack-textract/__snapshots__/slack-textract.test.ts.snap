@@ -356,7 +356,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "73045d68e0158683148e267daec48dd97d1d9486ed74620bbacb229162190a83.zip",
+          "S3Key": "457f76508e0e4aeebd9172a749e767be7ff16075a4e31702263739ccaab02db4.zip",
         },
         "Description": "src/slack-textract/detect.lambda.ts",
         "Environment": Object {
