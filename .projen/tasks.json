@@ -66,6 +66,9 @@
           "spawn": "bundle:toolkit-cleaner/clean-objects.lambda"
         },
         {
+          "spawn": "bundle:toolkit-cleaner/extract-template-hashes.lambda"
+        },
+        {
           "spawn": "bundle:toolkit-cleaner/get-stack-names.lambda"
         },
         {
@@ -196,6 +199,24 @@
       "steps": [
         {
           "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/extract-template-hashes.lambda": {
+      "name": "bundle:toolkit-cleaner/extract-template-hashes.lambda",
+      "description": "Create a JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:toolkit-cleaner/extract-template-hashes.lambda:watch": {
+      "name": "bundle:toolkit-cleaner/extract-template-hashes.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --external:aws-sdk --watch"
         }
       ]
     },

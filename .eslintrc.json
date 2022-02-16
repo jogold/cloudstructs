@@ -153,6 +153,7 @@
           "src/slack-textract/detect.lambda.ts",
           "src/toolkit-cleaner/clean-images.lambda.ts",
           "src/toolkit-cleaner/clean-objects.lambda.ts",
+          "src/toolkit-cleaner/extract-template-hashes.lambda.ts",
           "src/toolkit-cleaner/get-stack-names.lambda.ts",
           "src/url-shortener/shortener.lambda.ts"
         ],

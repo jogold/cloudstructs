@@ -10,6 +10,7 @@ import * as tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { Construct } from 'constructs';
 import { CleanImagesFunction } from './clean-images-function';
 import { CleanObjectsFunction } from './clean-objects-function';
+import { ExtractTemplateHashesFunction } from './extract-template-hashes-function';
 import { GetStackNamesFunction } from './get-stack-names-function';
 
 /**
@@ -76,19 +77,21 @@ export class ToolkitCleaner extends Construct {
         AssetHashes: sfn.JsonPath.stringAt('$'),
       },
     });
-    const getTemplate = new tasks.CallAwsService(this, 'GetTemplate', {
-      service: 'cloudformation',
-      action: 'getTemplate',
-      parameters: {
-        StackName: sfn.JsonPath.stringAt('$'),
-      },
-      iamResources: ['*'],
-    }).addRetry({ // Avoid "Rate exceeded" error from CloudFormation
-      errors: ['CloudFormation.CloudFormationException'],
+
+    const extractTemplateHashesFunction = new ExtractTemplateHashesFunction(this, 'ExtractTemplateHashesFunction', {
+      timeout: Duration.seconds(30),
     });
-    const extractHashes = new tasks.EvaluateExpression(this, 'ExtractHashes', {
-      expression: '[...new Set(($.TemplateBody).match(/[a-f0-9]{64}/g))]',
+    extractTemplateHashesFunction.addToRolePolicy(new PolicyStatement({
+      actions: ['cloudformation:GetTemplate'],
+      resources: ['*'],
+    }));
+    const extractTemplateHashes = new tasks.LambdaInvoke(this, 'ExtractTemplateHashes', {
+      lambdaFunction: extractTemplateHashesFunction,
+      payloadResponseOnly: true,
+    }).addRetry({
+      errors: ['Throttling'], // Avoid "Rate exceeded" error from CloudFormation
     });
+
     const flattenHashes = new tasks.EvaluateExpression(this, 'FlattenHashes', {
       expression: '[...new Set(($.AssetHashes).flat())]',
     });
@@ -131,7 +134,7 @@ export class ToolkitCleaner extends Construct {
 
     const stateMachine = new sfn.StateMachine(this, 'Resource', {
       definition: getStackNames
-        .next(stacksMap.iterator(getTemplate.next(extractHashes)))
+        .next(stacksMap.iterator(extractTemplateHashes))
         .next(flattenHashes)
         .next(new sfn.Parallel(this, 'Clean')
           .branch(cleanObjects)
