@@ -81,6 +81,88 @@
         "ToolkitCleanerGetStackNamesFunctionServiceRole0620C307"
       ]
     },
+    "ToolkitCleanerExtractTemplateHashesFunctionServiceRoleAFA05EEB": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "ToolkitCleanerExtractTemplateHashesFunctionServiceRoleDefaultPolicy77851779": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "cloudformation:GetTemplate",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ToolkitCleanerExtractTemplateHashesFunctionServiceRoleDefaultPolicy77851779",
+        "Roles": [
+          {
+            "Ref": "ToolkitCleanerExtractTemplateHashesFunctionServiceRoleAFA05EEB"
+          }
+        ]
+      }
+    },
+    "ToolkitCleanerExtractTemplateHashesFunctionFFDFB6D1": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+          },
+          "S3Key": "118fbf5b8aa902a441e6e11bf92dca4b56ddb0aba2bb0c6b62bc7c2e5622b463.zip"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "ToolkitCleanerExtractTemplateHashesFunctionServiceRoleAFA05EEB",
+            "Arn"
+          ]
+        },
+        "Description": "src/toolkit-cleaner/extract-template-hashes.lambda.ts",
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+          }
+        },
+        "Handler": "index.handler",
+        "Runtime": "nodejs14.x",
+        "Timeout": 30
+      },
+      "DependsOn": [
+        "ToolkitCleanerExtractTemplateHashesFunctionServiceRoleDefaultPolicy77851779",
+        "ToolkitCleanerExtractTemplateHashesFunctionServiceRoleAFA05EEB"
+      ]
+    },
     "ToolkitCleanerCleanObjectsFunctionServiceRole7B7993E1": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -408,9 +490,14 @@
               }
             },
             {
-              "Action": "cloudformation:getTemplate",
+              "Action": "lambda:InvokeFunction",
               "Effect": "Allow",
-              "Resource": "*"
+              "Resource": {
+                "Fn::GetAtt": [
+                  "ToolkitCleanerExtractTemplateHashesFunctionFFDFB6D1",
+                  "Arn"
+                ]
+              }
             }
           ],
           "Version": "2012-10-17"
@@ -443,18 +530,14 @@
                   "Arn"
                 ]
               },
-              "\"},\"StacksMap\":{\"Type\":\"Map\",\"Next\":\"FlattenHashes\",\"ResultSelector\":{\"AssetHashes.$\":\"$\"},\"Iterator\":{\"StartAt\":\"GetTemplate\",\"States\":{\"GetTemplate\":{\"Next\":\"ExtractHashes\",\"Retry\":[{\"ErrorEquals\":[\"CloudFormation.CloudFormationException\"]}],\"Type\":\"Task\",\"Resource\":\"arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":states:::aws-sdk:cloudformation:getTemplate\",\"Parameters\":{\"StackName.$\":\"$\"}},\"ExtractHashes\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"",
+              "\"},\"StacksMap\":{\"Type\":\"Map\",\"Next\":\"FlattenHashes\",\"ResultSelector\":{\"AssetHashes.$\":\"$\"},\"Iterator\":{\"StartAt\":\"ExtractTemplateHashes\",\"States\":{\"ExtractTemplateHashes\":{\"End\":true,\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Throttling\"]}],\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
-                  "Evalda2d1181604e4a4586941a6abd7fe42dF371675D",
+                  "ToolkitCleanerExtractTemplateHashesFunctionFFDFB6D1",
                   "Arn"
                 ]
               },
-              "\",\"Parameters\":{\"expression\":\"[...new Set(($.TemplateBody).match(/[a-f0-9]{64}/g))]\",\"expressionAttributeValues\":{\"$.TemplateBody.$\":\"$.TemplateBody\"}}}}},\"MaxConcurrency\":1},\"FlattenHashes\":{\"Next\":\"Clean\",\"Type\":\"Task\",\"Resource\":\"",
+              "\"}}},\"MaxConcurrency\":1},\"FlattenHashes\":{\"Next\":\"Clean\",\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
                   "Evalda2d1181604e4a4586941a6abd7fe42dF371675D",

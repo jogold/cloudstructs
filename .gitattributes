@@ -25,6 +25,7 @@
 /src/slack-textract/detect-function.ts linguist-generated
 /src/toolkit-cleaner/clean-images-function.ts linguist-generated
 /src/toolkit-cleaner/clean-objects-function.ts linguist-generated
+/src/toolkit-cleaner/extract-template-hashes-function.ts linguist-generated
 /src/toolkit-cleaner/get-stack-names-function.ts linguist-generated
 /src/url-shortener/shortener-function.ts linguist-generated
 /tsconfig.dev.json linguist-generated
