@@ -19,11 +19,21 @@ export async function handler(assetHashes: string[]) {
     }).promise();
 
     const toDelete = response.imageDetails?.filter(x => {
-      let pred = x.imageTags && !assetHashes.includes(x.imageTags[0]);
+      if (!x.imageTags) {
+        return false;
+      }
+
+      let pred = !assetHashes.includes(x.imageTags[0]);
+
       if (process.env.RETAIN_MILLISECONDS) {
+        if (!x.imagePushedAt) {
+          return false;
+        }
+
         const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
         pred = pred && x.imagePushedAt && x.imagePushedAt < limitDate;
       }
+
       return pred;
     });
 
