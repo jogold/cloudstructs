@@ -112,20 +112,6 @@ test('with dry run', () => {
   });
 });
 
-test('with dry run', () => {
-  new ToolkitCleaner(stack, 'ToolkitCleaner', {
-    dryRun: true,
-  });
-
-  Template.fromStack(stack).hasResourceProperties('AWS::Lambda::Function', {
-    Environment: {
-      Variables: Match.objectLike({
-        RUN: Match.absent(),
-      }),
-    },
-  });
-});
-
 test('with retainAssetsNewerThan', () => {
   new ToolkitCleaner(stack, 'ToolkitCleaner', {
     retainAssetsNewerThan: Duration.days(90),
