@@ -25,11 +25,15 @@ export async function handler(assetHashes: string[]) {
       }
 
       const hash = path.basename(x.Key, path.extname(x.Key));
-      let pred: boolean | undefined = !assetHashes.includes(hash);
+      let pred = !assetHashes.includes(hash);
 
       if (process.env.RETAIN_MILLISECONDS) {
+        if (!x.LastModified) {
+          return false;
+        }
+
         const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
-        pred = pred && x.LastModified && x.LastModified < limitDate;
+        pred = pred && x.LastModified < limitDate;
       }
 
       return pred;
