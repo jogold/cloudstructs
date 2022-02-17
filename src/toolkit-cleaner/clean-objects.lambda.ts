@@ -20,7 +20,7 @@ export async function handler(assetHashes: string[]) {
     }).promise();
 
     const toDelete = response.Contents?.filter(x => {
-      let pred = x.Key && !assetHashes.includes(path.basename(x.Key));
+      let pred = x.Key && !assetHashes.includes(path.basename(x.Key, path.extname(x.Key)));
       if (process.env.RETAIN_MILLISECONDS) {
         const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
         pred = pred && x.LastModified && x.LastModified < limitDate;
