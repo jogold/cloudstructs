@@ -1,6 +1,7 @@
 import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2-alpha';
 import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 import { App, Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import { StaticWebsite } from '../../src';
@@ -39,4 +40,15 @@ test('StaticWebsite', () => {
   for (const stackArtifact of assembly.stacks) {
     expect(stackArtifact.template).toMatchSnapshot();
   }
+});
+
+test('no default redirect if domainName is zoneName', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'test.zone.com' });
+
+  new StaticWebsite(stack, 'StaticWebsite', {
+    domainName: 'test.zone.com',
+    hostedZone,
+  });
+
+  Template.fromStack(stack).resourceCountIs('AWS::CloudFront::Distribution', 1);
 });
