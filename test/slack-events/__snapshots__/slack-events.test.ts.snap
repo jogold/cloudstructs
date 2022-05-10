@@ -199,7 +199,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "06ba2b9fdfdd5ed5dcfceb6635ffc2a67564019122eca4f104e1ab400354b566.zip",
+          "S3Key": "db68ceea2d2bc7009a426b75ed50e63f9c992351e09b6631bf448042e4670aab.zip",
         },
         "Description": "src/slack-events/events.lambda.ts",
         "Environment": Object {
