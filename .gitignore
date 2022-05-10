@@ -4,7 +4,6 @@
 !/.projen/deps.json
 !/.projen/files.json
 !/.github/workflows/pull-request-lint.yml
-!/.github/workflows/stale.yml
 !/package.json
 !/LICENSE
 !/.npmignore
@@ -40,6 +39,7 @@ junit.xml
 /dist/version.txt
 !/.github/workflows/release.yml
 !/.mergify.yml
+!/.github/workflows/upgrade-master.yml
 !/.github/pull_request_template.md
 !/test/
 !/tsconfig.dev.json
@@ -61,6 +61,7 @@ tsconfig.json
 !/src/toolkit-cleaner/extract-template-hashes-function.ts
 !/src/toolkit-cleaner/get-stack-names-function.ts
 !/src/url-shortener/shortener-function.ts
+test/slack-app/.tmp
 test/slack-app/slack-app.integ.snapshot/asset.*
 test/slack-app/slack-app.integ.snapshot/**/asset.*
 test/slack-app/slack-app.integ.snapshot/cdk.out
@@ -69,9 +70,7 @@ test/slack-app/slack-app.integ.snapshot/manifest.json
 test/slack-app/slack-app.integ.snapshot/**/manifest.json
 test/slack-app/slack-app.integ.snapshot/tree.json
 test/slack-app/slack-app.integ.snapshot/**/tree.json
-test/slack-app/.tmp/slack-app.integ/deploy.cdk.out
-test/slack-app/.tmp/slack-app.integ/synth.cdk.out
-!test/slack-app/slack-app.integ.snapshot
+test/toolkit-cleaner/.tmp
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/asset.*
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/asset.*
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/cdk.out
@@ -80,7 +79,3 @@ test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/manifest.json
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/manifest.json
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/tree.json
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/tree.json
-test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out
-test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/synth.cdk.out
-!test/toolkit-cleaner/toolkit-cleaner.integ.snapshot
-!/.github/workflows/upgrade-master.yml

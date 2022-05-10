@@ -31,7 +31,8 @@
         "OUTFILE": "package.json",
         "CHANGELOG": "dist/changelog.md",
         "BUMPFILE": "dist/version.txt",
-        "RELEASETAG": "dist/releasetag.txt"
+        "RELEASETAG": "dist/releasetag.txt",
+        "RELEASE_TAG_PREFIX": ""
       },
       "steps": [
         {
@@ -302,7 +303,7 @@
       "description": "Only compile",
       "steps": [
         {
-          "exec": "jsii --silence-warnings=reserved-word --no-fix-peer-dependencies"
+          "exec": "jsii --silence-warnings=reserved-word"
         }
       ]
     },
@@ -353,10 +354,10 @@
           "exec": "[ -d \"test/slack-app/slack-app.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'slack-app'. Run 'projen integ:slack-app:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata -o test/slack-app/.tmp/slack-app.integ/synth.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/slack-app/.tmp/slack-app.integ/assert.cdk.out > /dev/null"
         },
         {
-          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/slack-app/slack-app.integ.snapshot/ test/slack-app/.tmp/slack-app.integ/synth.cdk.out/"
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/slack-app/slack-app.integ.snapshot/ test/slack-app/.tmp/slack-app.integ/assert.cdk.out/"
         }
       ]
     },
@@ -368,7 +369,7 @@
           "exec": "rm -fr test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' --require-approval=never -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/slack-app/slack-app.integ.snapshot"
@@ -395,7 +396,7 @@
       "description": "update snapshot for integration test \"slack-app\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata -o test/slack-app/slack-app.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/slack-app/slack-app.integ.snapshot > /dev/null"
         }
       ]
     },
@@ -404,7 +405,7 @@
       "description": "watch integration test 'slack-app' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         }
       ]
     },
@@ -428,10 +429,10 @@
           "exec": "[ -d \"test/toolkit-cleaner/toolkit-cleaner.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'toolkit-cleaner'. Run 'projen integ:toolkit-cleaner:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/synth.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/assert.cdk.out > /dev/null"
         },
         {
-          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/ test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/synth.cdk.out/"
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/ test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/assert.cdk.out/"
         }
       ]
     },
@@ -443,7 +444,7 @@
           "exec": "rm -fr test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' --require-approval=never -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/toolkit-cleaner/toolkit-cleaner.integ.snapshot"
@@ -470,7 +471,7 @@
       "description": "update snapshot for integration test \"toolkit-cleaner\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata -o test/toolkit-cleaner/toolkit-cleaner.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/toolkit-cleaner/toolkit-cleaner.integ.snapshot > /dev/null"
         }
       ]
     },
@@ -479,7 +480,7 @@
       "description": "watch integration test 'toolkit-cleaner' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-path-metadata --no-asset-metadata '**' -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
         }
       ]
     },
@@ -488,10 +489,7 @@
       "description": "Creates the distribution package",
       "steps": [
         {
-          "exec": "mkdir -p dist"
-        },
-        {
-          "exec": "rsync -a . dist --exclude .git --exclude node_modules"
+          "exec": "if [ ! -z ${CI} ]; then mkdir -p dist && rsync -a . dist --exclude .git --exclude node_modules; else npx projen package-all; fi"
         }
       ]
     },
@@ -512,10 +510,7 @@
       "description": "Create js language bindings",
       "steps": [
         {
-          "exec": "jsii_version=$(node -p \"JSON.parse(fs.readFileSync('.jsii')).jsiiVersion.split(' ')[0]\")"
-        },
-        {
-          "exec": "npx jsii-pacmak@$jsii_version -v --target js"
+          "exec": "jsii-pacmak -v --target js"
         }
       ]
     },
@@ -524,10 +519,7 @@
       "description": "Create python language bindings",
       "steps": [
         {
-          "exec": "jsii_version=$(node -p \"JSON.parse(fs.readFileSync('.jsii')).jsiiVersion.split(' ')[0]\")"
-        },
-        {
-          "exec": "npx jsii-pacmak@$jsii_version -v --target python"
+          "exec": "jsii-pacmak -v --target python"
         }
       ]
     },
@@ -620,7 +612,8 @@
         "OUTFILE": "package.json",
         "CHANGELOG": "dist/changelog.md",
         "BUMPFILE": "dist/version.txt",
-        "RELEASETAG": "dist/releasetag.txt"
+        "RELEASETAG": "dist/releasetag.txt",
+        "RELEASE_TAG_PREFIX": ""
       },
       "steps": [
         {
@@ -636,61 +629,28 @@
       },
       "steps": [
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='projen'"
+          "exec": "yarn upgrade npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='projen'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@aws-cdk/aws-apigatewayv2-alpha,@aws-cdk/aws-apigatewayv2-integrations-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='projen'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@aws-cdk/aws-apigatewayv2-alpha,@aws-cdk/aws-apigatewayv2-integrations-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='projen'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@aws-cdk/aws-apigatewayv2-alpha,@aws-cdk/aws-apigatewayv2-integrations-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@aws-cdk/aws-apigatewayv2-alpha,@aws-cdk/aws-apigatewayv2-integrations-alpha,aws-cdk-lib,constructs'"
         },
         {
-          "exec": "yarn install --check-files"
-        },
-        {
-          "exec": "yarn upgrade @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib aws-cdk aws-sdk aws-sdk-mock constructs esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii jsii-diff jsii-docgen json-schema nock npm-check-updates standard-version ts-jest ts-node typescript @slack/web-api got @aws-cdk/aws-apigatewayv2-alpha @aws-cdk/aws-apigatewayv2-integrations-alpha aws-cdk-lib constructs"
-        },
-        {
-          "exec": "npx projen"
-        },
-        {
-          "spawn": "post-upgrade"
-        }
-      ]
-    },
-    "upgrade-projen": {
-      "name": "upgrade-projen",
-      "description": "upgrade projen",
-      "env": {
-        "CI": "0"
-      },
-      "steps": [
-        {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --filter='projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --filter='projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --filter='projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --filter='projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --filter='projen'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@aws-cdk/aws-apigatewayv2-alpha,@aws-cdk/aws-apigatewayv2-integrations-alpha,aws-cdk-lib,constructs'"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade projen"
+          "exec": "yarn upgrade"
         },
         {
           "exec": "npx projen"
@@ -705,7 +665,7 @@
       "description": "Watch & compile in the background",
       "steps": [
         {
-          "exec": "jsii -w --silence-warnings=reserved-word --no-fix-peer-dependencies"
+          "exec": "jsii -w --silence-warnings=reserved-word"
         }
       ]
     }
