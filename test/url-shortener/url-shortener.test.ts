@@ -57,7 +57,7 @@ test('UrlShortener with authorizer', () => {
   new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
     apiGatewayAuthorizer: new apigateway.CognitoUserPoolsAuthorizer(stack, 'Cognito', {
-      cognitoUserPools: [new cognito.UserPool(this, 'UserPool')],
+      cognitoUserPools: [new cognito.UserPool(stack, 'UserPool')],
     }),
   });
 
