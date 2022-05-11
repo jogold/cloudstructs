@@ -46,3 +46,6 @@ and replies with:
 
 By default, the API is public. It can be made private by specifying
 the `apiGatewayEndpoint` prop.
+
+An authorizer can be added to the API by specifying the `apiGatewayAuthorizer`
+prop.

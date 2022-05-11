@@ -23,6 +23,13 @@ export interface UrlShortenerProps {
   readonly hostedZone: route53.IHostedZone;
 
   /**
+   * The record name to use in the hosted zone
+   *
+   * @default - zone root
+   */
+  readonly recordName?: string;
+
+  /**
    * Expiration for short urls
    *
    * @default cdk.Duration.days(365)
@@ -38,6 +45,13 @@ export interface UrlShortenerProps {
    * @default - API is public
    */
   readonly apiGatewayEndpoint?: ec2.IInterfaceVpcEndpoint;
+
+  /**
+   * Authorizer for API gateway.
+   *
+   * @default - do not use an authorizer for the API
+   */
+  readonly apiGatewayAuthorizer?: apigateway.IAuthorizer;
 }
 
 /**
@@ -74,43 +88,51 @@ export class UrlShortener extends Construct {
     });
 
     // CloudFront distribution
+    const domainName = props.recordName ? `${props.recordName}.${props.hostedZone.zoneName}` : props.hostedZone.zoneName;
     const certificate = new acm.DnsValidatedCertificate(this, 'Certificate', {
-      domainName: props.hostedZone.zoneName,
+      domainName,
       hostedZone: props.hostedZone,
+      region: 'us-east-1',
     });
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new origins.S3Origin(bucket),
       },
       certificate,
-      domainNames: [props.hostedZone.zoneName],
+      domainNames: [domainName],
     });
 
     // Route53 records
     new route53.ARecord(this, 'ARecord', {
       zone: props.hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+      recordName: props.recordName,
     });
     new route53.AaaaRecord(this, 'AaaaRecord', {
       zone: props.hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+      recordName: props.recordName,
     });
 
     // Lambda function to increment counter and write redirect in bucket
     const handler = new ShortenerFunction(this, 'handler', {
       logRetention: logs.RetentionDays.ONE_MONTH,
       environment: {
-        DOMAIN_NAME: props.hostedZone.zoneName,
+        DOMAIN_NAME: domainName,
         BUCKET_NAME: bucket.bucketName,
         TABLE_NAME: table.tableName,
       },
     });
     bucket.grantPut(handler);
+    bucket.grantPutAcl(handler);
     table.grant(handler, 'dynamodb:UpdateItem');
 
     // API
     this.api = new apigateway.LambdaRestApi(this, `UrlShortener${props.hostedZone.zoneName}`, {
       handler,
+      defaultMethodOptions: props.apiGatewayAuthorizer
+        ? { authorizer: props.apiGatewayAuthorizer }
+        : undefined,
       endpointTypes: props.apiGatewayEndpoint ? [apigateway.EndpointType.PRIVATE] : undefined,
       policy: props.apiGatewayEndpoint
         ? new iam.PolicyDocument({

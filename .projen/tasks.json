@@ -418,6 +418,9 @@
         },
         {
           "spawn": "integ:toolkit-cleaner:snapshot"
+        },
+        {
+          "spawn": "integ:url-shortener:snapshot"
         }
       ]
     },
@@ -481,6 +484,69 @@
       "steps": [
         {
           "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
+        }
+      ]
+    },
+    "integ:url-shortener:assert": {
+      "name": "integ:url-shortener:assert",
+      "description": "assert the snapshot of integration test 'url-shortener'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/url-shortener/url-shortener.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'url-shortener'. Run 'projen integ:url-shortener:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/url-shortener/.tmp/url-shortener.integ/assert.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/url-shortener/url-shortener.integ.snapshot/ test/url-shortener/.tmp/url-shortener.integ/assert.cdk.out/"
+        }
+      ]
+    },
+    "integ:url-shortener:deploy": {
+      "name": "integ:url-shortener:deploy",
+      "description": "deploy integration test 'url-shortener' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/url-shortener/url-shortener.integ.snapshot"
+        },
+        {
+          "exec": "mv test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out test/url-shortener/url-shortener.integ.snapshot"
+        },
+        {
+          "spawn": "integ:url-shortener:destroy"
+        }
+      ]
+    },
+    "integ:url-shortener:destroy": {
+      "name": "integ:url-shortener:destroy",
+      "description": "destroy integration test 'url-shortener'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/url-shortener/url-shortener.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:url-shortener:snapshot": {
+      "name": "integ:url-shortener:snapshot",
+      "description": "update snapshot for integration test \"url-shortener\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/url-shortener/url-shortener.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:url-shortener:watch": {
+      "name": "integ:url-shortener:watch",
+      "description": "watch integration test 'url-shortener' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
         }
       ]
     },
@@ -584,6 +650,9 @@
         },
         {
           "spawn": "integ:toolkit-cleaner:assert"
+        },
+        {
+          "spawn": "integ:url-shortener:assert"
         }
       ]
     },

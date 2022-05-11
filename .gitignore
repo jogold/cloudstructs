@@ -79,3 +79,12 @@ test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/manifest.json
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/manifest.json
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/tree.json
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/tree.json
+test/url-shortener/.tmp
+test/url-shortener/url-shortener.integ.snapshot/asset.*
+test/url-shortener/url-shortener.integ.snapshot/**/asset.*
+test/url-shortener/url-shortener.integ.snapshot/cdk.out
+test/url-shortener/url-shortener.integ.snapshot/**/cdk.out
+test/url-shortener/url-shortener.integ.snapshot/manifest.json
+test/url-shortener/url-shortener.integ.snapshot/**/manifest.json
+test/url-shortener/url-shortener.integ.snapshot/tree.json
+test/url-shortener/url-shortener.integ.snapshot/**/tree.json
