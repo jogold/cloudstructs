@@ -84,6 +84,10 @@
             }
           ]
         },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true
+        },
         "WebsiteConfiguration": {
           "IndexDocument": "index.html"
         }
