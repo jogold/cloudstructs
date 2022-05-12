@@ -677,6 +677,7 @@ new UrlShortener(scope: Construct, id: string, props: UrlShortenerProps)
   * **hostedZone** (<code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code>)  The hosted zone for the short URLs domain. 
   * **apiGatewayAuthorizer** (<code>[aws_apigateway.IAuthorizer](#aws-cdk-lib-aws-apigateway-iauthorizer)</code>)  Authorizer for API gateway. __*Default*__: do not use an authorizer for the API
   * **apiGatewayEndpoint** (<code>[aws_ec2.IInterfaceVpcEndpoint](#aws-cdk-lib-aws-ec2-iinterfacevpcendpoint)</code>)  An interface VPC endpoint for API gateway. __*Default*__: API is public
+  * **corsAllowOrigins** (<code>Array<string></code>)  Allowed origins for CORS. __*Default*__: CORS is not enabled
   * **expiration** (<code>[Duration](#aws-cdk-lib-duration)</code>)  Expiration for short urls. __*Default*__: cdk.Duration.days(365)
   * **recordName** (<code>string</code>)  The record name to use in the hosted zone. __*Default*__: zone root
 
@@ -1040,6 +1041,7 @@ Name | Type | Description
 **hostedZone** | <code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code> | The hosted zone for the short URLs domain.
 **apiGatewayAuthorizer**? | <code>[aws_apigateway.IAuthorizer](#aws-cdk-lib-aws-apigateway-iauthorizer)</code> | Authorizer for API gateway.<br/>__*Default*__: do not use an authorizer for the API
 **apiGatewayEndpoint**? | <code>[aws_ec2.IInterfaceVpcEndpoint](#aws-cdk-lib-aws-ec2-iinterfacevpcendpoint)</code> | An interface VPC endpoint for API gateway.<br/>__*Default*__: API is public
+**corsAllowOrigins**? | <code>Array<string></code> | Allowed origins for CORS.<br/>__*Default*__: CORS is not enabled
 **expiration**? | <code>[Duration](#aws-cdk-lib-duration)</code> | Expiration for short urls.<br/>__*Default*__: cdk.Duration.days(365)
 **recordName**? | <code>string</code> | The record name to use in the hosted zone.<br/>__*Default*__: zone root
 
