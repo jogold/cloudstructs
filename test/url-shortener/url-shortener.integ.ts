@@ -37,5 +37,9 @@ class TestStack extends Stack {
 }
 
 const app = new App();
-new TestStack(app, 'url-shortener-integ');
+new TestStack(app, 'url-shortener-integ', {
+  env: {
+    region: 'eu-west-1',
+  },
+});
 app.synth();

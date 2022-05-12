@@ -53,7 +53,6 @@ test('returns 201 with short url', async () => {
   });
 
   expect(s3ClientMock.putObject).toHaveBeenCalledWith({
-    ACL: 'public-read',
     Bucket: 'bucket',
     Key: 'QI',
     WebsiteRedirectLocation: 'https://www.url.com/very/long',

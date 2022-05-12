@@ -85,15 +85,53 @@
           ]
         },
         "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
           "RestrictPublicBuckets": true
-        },
-        "WebsiteConfiguration": {
-          "IndexDocument": "index.html"
         }
       },
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
+    },
+    "UrlShortenerBucketPolicy54D38B43": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "UrlShortenerBucket14C129A7"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Principal": {
+                "CanonicalUser": {
+                  "Fn::GetAtt": [
+                    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
+                    "S3CanonicalUserId"
+                  ]
+                }
+              },
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    {
+                      "Fn::GetAtt": [
+                        "UrlShortenerBucket14C129A7",
+                        "Arn"
+                      ]
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      }
     },
     "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
       "Type": "AWS::IAM::Role",
@@ -178,7 +216,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
           },
           "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip"
         },
@@ -213,6 +251,30 @@
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
     },
+    "UrlShortenerRedirectArnReaderA9D24530": {
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn"
+          ]
+        },
+        "Region": "us-east-1",
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
+    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
+      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Properties": {
+        "CloudFrontOriginAccessIdentityConfig": {
+          "Comment": "Identity for urlshortenerintegUrlShortenerDistributionOrigin145A8F93E"
+        }
+      }
+    },
     "UrlShortenerDistributionA56BF25C": {
       "Type": "AWS::CloudFront::Distribution",
       "Properties": {
@@ -223,6 +285,17 @@
           "DefaultCacheBehavior": {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
+            "LambdaFunctionAssociations": [
+              {
+                "EventType": "origin-response",
+                "LambdaFunctionARN": {
+                  "Fn::GetAtt": [
+                    "UrlShortenerRedirectArnReaderA9D24530",
+                    "FunctionArn"
+                  ]
+                }
+              }
+            ],
             "TargetOriginId": "urlshortenerintegUrlShortenerDistributionOrigin145A8F93E",
             "ViewerProtocolPolicy": "allow-all"
           },
@@ -231,29 +304,26 @@
           "IPV6Enabled": true,
           "Origins": [
             {
-              "CustomOriginConfig": {
-                "OriginProtocolPolicy": "http-only",
-                "OriginSSLProtocols": [
-                  "TLSv1.2"
+              "DomainName": {
+                "Fn::GetAtt": [
+                  "UrlShortenerBucket14C129A7",
+                  "RegionalDomainName"
                 ]
               },
-              "DomainName": {
-                "Fn::Select": [
-                  2,
-                  {
-                    "Fn::Split": [
-                      "/",
+              "Id": "urlshortenerintegUrlShortenerDistributionOrigin145A8F93E",
+              "S3OriginConfig": {
+                "OriginAccessIdentity": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "origin-access-identity/cloudfront/",
                       {
-                        "Fn::GetAtt": [
-                          "UrlShortenerBucket14C129A7",
-                          "WebsiteURL"
-                        ]
+                        "Ref": "UrlShortenerDistributionOrigin1S3OriginCE2F6C05"
                       }
                     ]
-                  }
-                ]
-              },
-              "Id": "urlshortenerintegUrlShortenerDistributionOrigin145A8F93E"
+                  ]
+                }
+              }
             }
           ],
           "ViewerCertificate": {
@@ -425,9 +495,9 @@
       "Properties": {
         "Code": {
           "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
           },
-          "S3Key": "567bad664319e045e4d08e3cdff139f63816ea34642a8d1bd56be520a7b800e8.zip"
+          "S3Key": "cd19966b2e9aafb5ee1ff6de6626ed5967586ac0d58d51dcc32358bbc72478af.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -531,7 +601,7 @@
         "UrlShortenerUrlShortenergoldexbe049505BC"
       ]
     },
-    "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A610dac373efbc17f025f53355c131a4ea": {
+    "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A62b6fb66d255eaf1dd8fba97fbefdc795": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -554,7 +624,7 @@
           "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
         },
         "DeploymentId": {
-          "Ref": "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A610dac373efbc17f025f53355c131a4ea"
+          "Ref": "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A62b6fb66d255eaf1dd8fba97fbefdc795"
         },
         "StageName": "prod"
       }
@@ -620,11 +690,7 @@
               {
                 "Ref": "AWS::Partition"
               },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
+              ":execute-api:eu-west-1:",
               {
                 "Ref": "AWS::AccountId"
               },
@@ -661,11 +727,7 @@
               {
                 "Ref": "AWS::Partition"
               },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
+              ":execute-api:eu-west-1:",
               {
                 "Ref": "AWS::AccountId"
               },
@@ -707,11 +769,7 @@
                 {
                   "Ref": "AWS::Partition"
                 },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region"
-                },
-                ":lambda:path/2015-03-31/functions/",
+                ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
                     "UrlShortenerhandlerD2CB0241",
@@ -798,11 +856,7 @@
               {
                 "Ref": "AWS::Partition"
               },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
+              ":execute-api:eu-west-1:",
               {
                 "Ref": "AWS::AccountId"
               },
@@ -839,11 +893,7 @@
               {
                 "Ref": "AWS::Partition"
               },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
+              ":execute-api:eu-west-1:",
               {
                 "Ref": "AWS::AccountId"
               },
@@ -882,11 +932,7 @@
                 {
                   "Ref": "AWS::Partition"
                 },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region"
-                },
-                ":lambda:path/2015-03-31/functions/",
+                ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
                     "UrlShortenerhandlerD2CB0241",
@@ -899,6 +945,84 @@
           }
         }
       }
+    },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+          }
+        ],
+        "Policies": [
+          {
+            "PolicyName": "Inline",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":ssm:us-east-1:",
+                        {
+                          "Ref": "AWS::AccountId"
+                        },
+                        ":parameter/cdk/EdgeFunctionArn/*"
+                      ]
+                    ]
+                  },
+                  "Action": [
+                    "ssm:GetParameter"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
+          },
+          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip"
+        },
+        "Timeout": 900,
+        "MemorySize": 128,
+        "Handler": "__entrypoint__.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs12.x"
+      },
+      "DependsOn": [
+        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825"
+      ]
     },
     "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
       "Type": "AWS::IAM::Role",
@@ -962,7 +1086,7 @@
         "Runtime": "nodejs14.x",
         "Code": {
           "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
           },
           "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip"
         },
@@ -989,11 +1113,7 @@
             {
               "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
             },
-            ".execute-api.",
-            {
-              "Ref": "AWS::Region"
-            },
-            ".",
+            ".execute-api.eu-west-1.",
             {
               "Ref": "AWS::URLSuffix"
             },
@@ -1015,11 +1135,7 @@
             {
               "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
             },
-            ".execute-api.",
-            {
-              "Ref": "AWS::Region"
-            },
-            ".",
+            ".execute-api.eu-west-1.",
             {
               "Ref": "AWS::URLSuffix"
             },
