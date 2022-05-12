@@ -1,6 +1,6 @@
 {
   "Resources": {
-    "OriginResponseServiceRoleD33C7FC6": {
+    "RedirectServiceRole39B6C513": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -38,44 +38,45 @@
         ]
       }
     },
-    "OriginResponse488DDAA0": {
+    "Redirect7D9319B2": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
           },
-          "S3Key": "0b7894e55940dc3ea06a1a1830221032b9cb6e6e0aba53605f754207ed855630.zip"
+          "S3Key": "f8c8a0bcdb94303c7f093a60268d717aec20f9f4e0a3049b360fc21b81d0545e.zip"
         },
         "Role": {
           "Fn::GetAtt": [
-            "OriginResponseServiceRoleD33C7FC6",
+            "RedirectServiceRole39B6C513",
             "Arn"
           ]
         },
+        "Description": "src/url-shortener/redirect.edge-lambda.ts",
         "Handler": "index.handler",
         "Runtime": "nodejs14.x"
       },
       "DependsOn": [
-        "OriginResponseServiceRoleD33C7FC6"
+        "RedirectServiceRole39B6C513"
       ]
     },
-    "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3": {
+    "RedirectCurrentVersion479E25ECb0678640e344d0d52184fed29dfa16d9": {
       "Type": "AWS::Lambda::Version",
       "Properties": {
         "FunctionName": {
-          "Ref": "OriginResponse488DDAA0"
+          "Ref": "Redirect7D9319B2"
         }
       }
     },
-    "OriginResponseParameter7A7C8B4F": {
+    "RedirectParameter0BB48857": {
       "Type": "AWS::SSM::Parameter",
       "Properties": {
         "Type": "String",
         "Value": {
-          "Ref": "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3"
+          "Ref": "RedirectCurrentVersion479E25ECb0678640e344d0d52184fed29dfa16d9"
         },
-        "Name": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/OriginResponse"
+        "Name": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/Redirect"
       }
     }
   },

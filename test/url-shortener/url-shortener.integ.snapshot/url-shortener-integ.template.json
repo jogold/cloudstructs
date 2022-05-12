@@ -133,22 +133,6 @@
         }
       }
     },
-    "UrlShortenerOriginResponseArnReader113BBC96": {
-      "Type": "Custom::CrossRegionStringParameterReader",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
-            "Arn"
-          ]
-        },
-        "Region": "us-east-1",
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3"
-      },
-      "UpdateReplacePolicy": "Delete",
-      "DeletionPolicy": "Delete"
-    },
     "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -267,6 +251,22 @@
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
     },
+    "UrlShortenerRedirectArnReaderA9D24530": {
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn"
+          ]
+        },
+        "Region": "us-east-1",
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25ECb0678640e344d0d52184fed29dfa16d9"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    },
     "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
       "Properties": {
@@ -290,7 +290,7 @@
                 "EventType": "origin-response",
                 "LambdaFunctionARN": {
                   "Fn::GetAtt": [
-                    "UrlShortenerOriginResponseArnReader113BBC96",
+                    "UrlShortenerRedirectArnReaderA9D24530",
                     "FunctionArn"
                   ]
                 }

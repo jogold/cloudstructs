@@ -46,4 +46,10 @@ for (const dirent of fs.readdirSync('./src', { withFileTypes: true })) {
 }
 project.tryFindObjectFile('package.json').addOverride('exports', packageExports);
 
+new awscdk.EdgeLambdaAutoDiscover(project, {
+  cdkDeps: project.cdkDeps,
+  srcdir: project.srcdir,
+  tsconfigPath: project.tsconfigPath,
+});
+
 project.synth();

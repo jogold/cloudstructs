@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { Duration, Fn } from 'aws-cdk-lib';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
@@ -7,12 +6,12 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
+import { RedirectFunction } from './redirect-function';
 import { ShortenerFunction } from './shortener-function';
 
 /**
@@ -96,14 +95,6 @@ export class UrlShortener extends Construct {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
     });
 
-    // Origin response Lambda@Edge to redirect, this way we can fully block
-    // public access on the bucket.
-    const originResponse = new cloudfront.experimental.EdgeFunction(this, 'OriginResponse', {
-      code: lambda.Code.fromAsset(path.join(__dirname, '../../lib/url-shortener/origin-response-handler')),
-      handler: 'index.handler',
-      runtime: lambda.Runtime.NODEJS_14_X,
-    });
-
     // CloudFront distribution
     const domainName = props.recordName ? `${props.recordName}.${props.hostedZone.zoneName}` : props.hostedZone.zoneName;
     const certificate = new acm.DnsValidatedCertificate(this, 'Certificate', {
@@ -117,7 +108,7 @@ export class UrlShortener extends Construct {
         edgeLambdas: [
           {
             eventType: cloudfront.LambdaEdgeEventType.ORIGIN_RESPONSE,
-            functionVersion: originResponse,
+            functionVersion: new RedirectFunction(this, 'Redirect'),
           },
         ],
       },
