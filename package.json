@@ -19,6 +19,8 @@
     "bundle:slack-events/events.lambda:watch": "npx projen bundle:slack-events/events.lambda:watch",
     "bundle:slack-textract/detect.lambda": "npx projen bundle:slack-textract/detect.lambda",
     "bundle:slack-textract/detect.lambda:watch": "npx projen bundle:slack-textract/detect.lambda:watch",
+    "bundle:static-website/origin-request.edge-lambda": "npx projen bundle:static-website/origin-request.edge-lambda",
+    "bundle:static-website/origin-request.edge-lambda:watch": "npx projen bundle:static-website/origin-request.edge-lambda:watch",
     "bundle:toolkit-cleaner/clean-images.lambda": "npx projen bundle:toolkit-cleaner/clean-images.lambda",
     "bundle:toolkit-cleaner/clean-images.lambda:watch": "npx projen bundle:toolkit-cleaner/clean-images.lambda:watch",
     "bundle:toolkit-cleaner/clean-objects.lambda": "npx projen bundle:toolkit-cleaner/clean-objects.lambda",

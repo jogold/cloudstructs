@@ -1,4 +1,4 @@
-import { handler } from '../../src/static-website/origin-request-handler';
+import { handler } from '../../src/static-website/origin-request.edge-lambda';
 
 test('without extension', async () => {
   const request = await handler({
