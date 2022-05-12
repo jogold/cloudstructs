@@ -197,6 +197,10 @@ Object {
             },
           ],
         },
+        "PublicAccessBlockConfiguration": Object {
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true,
+        },
         "WebsiteConfiguration": Object {
           "IndexDocument": "index.html",
         },
@@ -1206,6 +1210,10 @@ Object {
               "Status": "Enabled",
             },
           ],
+        },
+        "PublicAccessBlockConfiguration": Object {
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true,
         },
         "WebsiteConfiguration": Object {
           "IndexDocument": "index.html",
@@ -2543,6 +2551,10 @@ Object {
             },
           ],
         },
+        "PublicAccessBlockConfiguration": Object {
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true,
+        },
         "WebsiteConfiguration": Object {
           "IndexDocument": "index.html",
         },
@@ -3578,6 +3590,10 @@ Object {
             },
           ],
         },
+        "PublicAccessBlockConfiguration": Object {
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true,
+        },
         "WebsiteConfiguration": Object {
           "IndexDocument": "index.html",
         },
@@ -4542,6 +4558,10 @@ Object {
               "Status": "Enabled",
             },
           ],
+        },
+        "PublicAccessBlockConfiguration": Object {
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true,
         },
         "WebsiteConfiguration": Object {
           "IndexDocument": "index.html",
