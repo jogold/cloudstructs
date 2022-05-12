@@ -457,7 +457,7 @@ Object {
                 "EventType": "origin-response",
                 "LambdaFunctionARN": Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerOriginResponseArnReader113BBC96",
+                    "UrlShortenerRedirectArnReaderA9D24530",
                     "FunctionArn",
                   ],
                 },
@@ -515,11 +515,11 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
-    "UrlShortenerOriginResponseArnReader113BBC96": Object {
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3",
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -1580,7 +1580,7 @@ Object {
                 "EventType": "origin-response",
                 "LambdaFunctionARN": Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerOriginResponseArnReader113BBC96",
+                    "UrlShortenerRedirectArnReaderA9D24530",
                     "FunctionArn",
                   ],
                 },
@@ -1638,11 +1638,11 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
-    "UrlShortenerOriginResponseArnReader113BBC96": Object {
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3",
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -3040,7 +3040,7 @@ Object {
                 "EventType": "origin-response",
                 "LambdaFunctionARN": Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerOriginResponseArnReader113BBC96",
+                    "UrlShortenerRedirectArnReaderA9D24530",
                     "FunctionArn",
                   ],
                 },
@@ -3098,11 +3098,11 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
-    "UrlShortenerOriginResponseArnReader113BBC96": Object {
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3",
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -4199,7 +4199,7 @@ Object {
                 "EventType": "origin-response",
                 "LambdaFunctionARN": Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerOriginResponseArnReader113BBC96",
+                    "UrlShortenerRedirectArnReaderA9D24530",
                     "FunctionArn",
                   ],
                 },
@@ -4257,11 +4257,11 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
-    "UrlShortenerOriginResponseArnReader113BBC96": Object {
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3",
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -5288,7 +5288,7 @@ Object {
                 "EventType": "origin-response",
                 "LambdaFunctionARN": Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerOriginResponseArnReader113BBC96",
+                    "UrlShortenerRedirectArnReaderA9D24530",
                     "FunctionArn",
                   ],
                 },
@@ -5346,11 +5346,11 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
-    "UrlShortenerOriginResponseArnReader113BBC96": Object {
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/OriginResponse",
-        "RefreshToken": "OriginResponseCurrentVersion9FB3D014f575df120390f531cd051af003f17eb3",
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
