@@ -27,15 +27,23 @@ const documentClient = new DynamoDB.DocumentClient({ apiVersion: '2012-08-10' })
 const s3 = new S3({ apiVersion: '2006-03-01' });
 
 export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AWSLambda.APIGatewayProxyResult> {
-  try {
-    console.log('Event: %j', event);
+  console.log('Event: %j', event);
 
+  const response: AWSLambda.APIGatewayProxyResult = {
+    statusCode: 201,
+    body: '',
+    headers: process.env.CORS_ALLOW_ORIGINS
+      ? { 'Access-Control-Allow-Origin': process.env.CORS_ALLOW_ORIGINS }
+      : undefined,
+  };
+
+  try {
     const body = JSON.parse(event.body ?? '{}');
 
     if (!body.url) {
       return {
+        ...response,
         statusCode: 400,
-        body: '',
       };
     }
 
@@ -69,7 +77,7 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
 
     // Return short url
     return {
-      statusCode: 201,
+      ...response,
       body: JSON.stringify({
         url: body.url,
         shortUrl: `https://${getEnv('DOMAIN_NAME')}/${key}`,
@@ -79,8 +87,8 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
     console.log(err);
 
     return {
+      ...response,
       statusCode: 500,
-      body: '',
     };
   }
 }

@@ -49,3 +49,5 @@ the `apiGatewayEndpoint` prop.
 
 An authorizer can be added to the API by specifying the `apiGatewayAuthorizer`
 prop.
+
+Enable CORS by passing the `corsAllowOrigins` prop.

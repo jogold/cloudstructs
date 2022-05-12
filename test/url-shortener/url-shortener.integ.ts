@@ -24,6 +24,7 @@ class TestStack extends Stack {
       apiGatewayAuthorizer: new apigateway.CognitoUserPoolsAuthorizer(this, 'Authorizer', {
         cognitoUserPools: [userPool],
       }),
+      corsAllowOrigins: ['*'],
     });
 
     const bucket = urlShortener.node.tryFindChild('Bucket') as s3.Bucket;
