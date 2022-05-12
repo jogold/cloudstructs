@@ -1,16 +1,15 @@
-import * as path from 'path';
 import { Duration, Stack, Token } from 'aws-cdk-lib';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as patterns from 'aws-cdk-lib/aws-route53-patterns';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as cr from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
+import { OriginRequestFunction } from './origin-request-function';
 
 /**
  * Properties for a StaticWebsite
@@ -108,12 +107,6 @@ export class StaticWebsite extends Construct {
       region: 'us-east-1',
     });
 
-    const originRequest = new cloudfront.experimental.EdgeFunction(this, 'OriginRequest', {
-      code: lambda.Code.fromAsset(path.join(__dirname, 'origin-request-handler')),
-      handler: 'index.handler',
-      runtime: lambda.Runtime.NODEJS_14_X,
-    });
-
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new origins.S3Origin(this.bucket),
@@ -121,7 +114,7 @@ export class StaticWebsite extends Construct {
         edgeLambdas: [
           {
             eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
-            functionVersion: originRequest,
+            functionVersion: new OriginRequestFunction(this, 'OriginRequest'),
           },
         ],
         responseHeadersPolicy: props.responseHeadersPolicy ?? new cloudfront.ResponseHeadersPolicy(this, 'ResponseHeadersPolicy', {
