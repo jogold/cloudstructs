@@ -63,3 +63,14 @@ test('UrlShortener with authorizer', () => {
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
+
+test('UrlShortener with CORS', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    corsAllowOrigins: ['https://www.example.com'],
+  });
+
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
+});
