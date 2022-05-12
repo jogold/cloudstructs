@@ -61,6 +61,7 @@ tsconfig.json
 !/src/toolkit-cleaner/extract-template-hashes-function.ts
 !/src/toolkit-cleaner/get-stack-names-function.ts
 !/src/url-shortener/shortener-function.ts
+!/src/url-shortener/redirect-function.ts
 test/slack-app/.tmp
 test/slack-app/slack-app.integ.snapshot/asset.*
 test/slack-app/slack-app.integ.snapshot/**/asset.*
@@ -88,4 +89,3 @@ test/url-shortener/url-shortener.integ.snapshot/manifest.json
 test/url-shortener/url-shortener.integ.snapshot/**/manifest.json
 test/url-shortener/url-shortener.integ.snapshot/tree.json
 test/url-shortener/url-shortener.integ.snapshot/**/tree.json
-!/src/url-shortener/redirect-function.ts
