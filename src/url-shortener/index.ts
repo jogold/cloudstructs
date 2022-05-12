@@ -92,6 +92,10 @@ export class UrlShortener extends Construct {
         expiration: props.expiration ?? Duration.days(365),
       }],
       websiteIndexDocument: 'index.html',
+      blockPublicAccess: new s3.BlockPublicAccess({
+        blockPublicPolicy: true,
+        restrictPublicBuckets: true,
+      }),
     });
 
     // CloudFront distribution
