@@ -423,7 +423,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "1079e916fadfab42c5f88109573413345c175bd24757a54e4c80800495ea070a.zip"
+          "S3Key": "567bad664319e045e4d08e3cdff139f63816ea34642a8d1bd56be520a7b800e8.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -441,7 +441,8 @@
             "TABLE_NAME": {
               "Ref": "UrlShortenerTable9C0A20BB"
             },
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "CORS_ALLOW_ORIGINS": "*"
           }
         },
         "Handler": "index.handler",
@@ -526,7 +527,7 @@
         "UrlShortenerUrlShortenergoldexbe049505BC"
       ]
     },
-    "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A64042efad8f16da0db21ab012b075b6fd": {
+    "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A610dac373efbc17f025f53355c131a4ea": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -536,8 +537,10 @@
       },
       "DependsOn": [
         "UrlShortenerUrlShortenergoldexbeproxyANY8BD34AAE",
+        "UrlShortenerUrlShortenergoldexbeproxyOPTIONS09EF47CE",
         "UrlShortenerUrlShortenergoldexbeproxyA27529BB",
-        "UrlShortenerUrlShortenergoldexbeANYE4A1D40F"
+        "UrlShortenerUrlShortenergoldexbeANYE4A1D40F",
+        "UrlShortenerUrlShortenergoldexbeOPTIONS341F249C"
       ]
     },
     "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D": {
@@ -547,145 +550,51 @@
           "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
         },
         "DeploymentId": {
-          "Ref": "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A64042efad8f16da0db21ab012b075b6fd"
+          "Ref": "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A610dac373efbc17f025f53355c131a4ea"
         },
         "StageName": "prod"
       }
     },
-    "UrlShortenerUrlShortenergoldexbeproxyA27529BB": {
-      "Type": "AWS::ApiGateway::Resource",
+    "UrlShortenerUrlShortenergoldexbeOPTIONS341F249C": {
+      "Type": "AWS::ApiGateway::Method",
       "Properties": {
-        "ParentId": {
+        "HttpMethod": "OPTIONS",
+        "ResourceId": {
           "Fn::GetAtt": [
             "UrlShortenerUrlShortenergoldexbe049505BC",
             "RootResourceId"
           ]
         },
-        "PathPart": "{proxy+}",
-        "RestApiId": {
-          "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
-        }
-      }
-    },
-    "UrlShortenerUrlShortenergoldexbeproxyANYApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYproxyE8B5093D": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "UrlShortenerhandlerD2CB0241",
-            "Arn"
-          ]
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
-              },
-              "/",
-              {
-                "Ref": "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D"
-              },
-              "/*/*"
-            ]
-          ]
-        }
-      }
-    },
-    "UrlShortenerUrlShortenergoldexbeproxyANYApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYproxy59B520BD": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "UrlShortenerhandlerD2CB0241",
-            "Arn"
-          ]
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
-              },
-              "/test-invoke-stage/*/*"
-            ]
-          ]
-        }
-      }
-    },
-    "UrlShortenerUrlShortenergoldexbeproxyANY8BD34AAE": {
-      "Type": "AWS::ApiGateway::Method",
-      "Properties": {
-        "HttpMethod": "ANY",
-        "ResourceId": {
-          "Ref": "UrlShortenerUrlShortenergoldexbeproxyA27529BB"
-        },
         "RestApiId": {
           "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
         },
-        "AuthorizationType": "COGNITO_USER_POOLS",
-        "AuthorizerId": {
-          "Ref": "AuthorizerBD825682"
-        },
+        "AuthorizationType": "NONE",
         "Integration": {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition"
-                },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region"
-                },
-                ":lambda:path/2015-03-31/functions/",
-                {
-                  "Fn::GetAtt": [
-                    "UrlShortenerhandlerD2CB0241",
-                    "Arn"
-                  ]
-                },
-                "/invocations"
-              ]
-            ]
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+              },
+              "StatusCode": "204"
+            }
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }"
+          },
+          "Type": "MOCK"
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "StatusCode": "204"
           }
-        }
+        ]
       }
     },
     "UrlShortenerUrlShortenergoldexbeANYApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYBDFCD415": {
@@ -775,6 +684,181 @@
             "UrlShortenerUrlShortenergoldexbe049505BC",
             "RootResourceId"
           ]
+        },
+        "RestApiId": {
+          "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
+        },
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "AuthorizerBD825682"
+        },
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UrlShortenerhandlerD2CB0241",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "UrlShortenerUrlShortenergoldexbeproxyA27529BB": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "UrlShortenerUrlShortenergoldexbe049505BC",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "{proxy+}",
+        "RestApiId": {
+          "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
+        }
+      }
+    },
+    "UrlShortenerUrlShortenergoldexbeproxyOPTIONS09EF47CE": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "OPTIONS",
+        "ResourceId": {
+          "Ref": "UrlShortenerUrlShortenergoldexbeproxyA27529BB"
+        },
+        "RestApiId": {
+          "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
+        },
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+              },
+              "StatusCode": "204"
+            }
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }"
+          },
+          "Type": "MOCK"
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "StatusCode": "204"
+          }
+        ]
+      }
+    },
+    "UrlShortenerUrlShortenergoldexbeproxyANYApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYproxyE8B5093D": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UrlShortenerhandlerD2CB0241",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
+              },
+              "/",
+              {
+                "Ref": "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "UrlShortenerUrlShortenergoldexbeproxyANYApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYproxy59B520BD": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UrlShortenerhandlerD2CB0241",
+            "Arn"
+          ]
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
+              },
+              "/test-invoke-stage/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "UrlShortenerUrlShortenergoldexbeproxyANY8BD34AAE": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "ANY",
+        "ResourceId": {
+          "Ref": "UrlShortenerUrlShortenergoldexbeproxyA27529BB"
         },
         "RestApiId": {
           "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"

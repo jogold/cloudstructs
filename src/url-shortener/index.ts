@@ -52,6 +52,13 @@ export interface UrlShortenerProps {
    * @default - do not use an authorizer for the API
    */
   readonly apiGatewayAuthorizer?: apigateway.IAuthorizer;
+
+  /**
+   * Allowed origins for CORS
+   *
+   * @default - CORS is not enabled
+   */
+  readonly corsAllowOrigins?: string[];
 }
 
 /**
@@ -123,16 +130,15 @@ export class UrlShortener extends Construct {
         TABLE_NAME: table.tableName,
       },
     });
+    if (props.corsAllowOrigins) {
+      handler.addEnvironment('CORS_ALLOW_ORIGINS', props.corsAllowOrigins.join(' '));
+    }
     bucket.grantPut(handler);
     bucket.grantPutAcl(handler);
     table.grant(handler, 'dynamodb:UpdateItem');
 
     // API
-    this.api = new apigateway.LambdaRestApi(this, `UrlShortener${props.hostedZone.zoneName}`, {
-      handler,
-      defaultMethodOptions: props.apiGatewayAuthorizer
-        ? { authorizer: props.apiGatewayAuthorizer }
-        : undefined,
+    this.api = new apigateway.RestApi(this, `UrlShortener${props.hostedZone.zoneName}`, {
       endpointTypes: props.apiGatewayEndpoint ? [apigateway.EndpointType.PRIVATE] : undefined,
       policy: props.apiGatewayEndpoint
         ? new iam.PolicyDocument({
@@ -149,7 +155,19 @@ export class UrlShortener extends Construct {
           ],
         })
         : undefined,
+      defaultCorsPreflightOptions: props.corsAllowOrigins
+        ? { allowOrigins: props.corsAllowOrigins }
+        : undefined,
     });
+
+    this.api.root.addMethod('ANY', new apigateway.LambdaIntegration(handler), {
+      authorizer: props.apiGatewayAuthorizer,
+    });
+    this.api.root
+      .addResource('{proxy+}')
+      .addMethod('ANY', new apigateway.LambdaIntegration(handler), {
+        authorizer: props.apiGatewayAuthorizer,
+      });
 
     this.apiEndpoint = this.api.url;
   }
