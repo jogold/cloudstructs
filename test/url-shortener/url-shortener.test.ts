@@ -1,4 +1,4 @@
-import { Duration, Stack } from 'aws-cdk-lib';
+import { App, Duration, Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
@@ -7,8 +7,12 @@ import * as route53 from 'aws-cdk-lib/aws-route53';
 import { UrlShortener } from '../../src';
 
 let stack: Stack;
+let app: App;
 beforeEach(() => {
-  stack = new Stack();
+  app = new App();
+  stack = new Stack(app, 'Stack', {
+    env: { region: 'eu-west-1' },
+  });
 });
 
 test('UrlShortener', () => {
