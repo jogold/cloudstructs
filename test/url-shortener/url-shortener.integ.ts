@@ -1,7 +1,6 @@
 import { App, CfnOutput, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
@@ -29,8 +28,6 @@ class TestStack extends Stack {
 
     const bucket = urlShortener.node.tryFindChild('Bucket') as s3.Bucket;
     bucket.applyRemovalPolicy(RemovalPolicy.DESTROY);
-    const table = urlShortener.node.tryFindChild('Table') as dynamodb.Table;
-    table.applyRemovalPolicy(RemovalPolicy.DESTROY);
 
     new CfnOutput(this, 'ApiEndpoint', { value: urlShortener.apiEndpoint });
   }

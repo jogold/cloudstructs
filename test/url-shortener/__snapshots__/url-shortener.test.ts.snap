@@ -532,7 +532,7 @@ Object {
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
-      "DeletionPolicy": "Retain",
+      "DeletionPolicy": "Delete",
       "Properties": Object {
         "AttributeDefinitions": Array [
           Object {
@@ -552,7 +552,7 @@ Object {
         },
       },
       "Type": "AWS::DynamoDB::Table",
-      "UpdateReplacePolicy": "Retain",
+      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomANY6C46864B": Object {
       "Properties": Object {
@@ -1655,7 +1655,7 @@ Object {
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
-      "DeletionPolicy": "Retain",
+      "DeletionPolicy": "Delete",
       "Properties": Object {
         "AttributeDefinitions": Array [
           Object {
@@ -1675,7 +1675,7 @@ Object {
         },
       },
       "Type": "AWS::DynamoDB::Table",
-      "UpdateReplacePolicy": "Retain",
+      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomANY6C46864B": Object {
       "Properties": Object {
@@ -3115,7 +3115,7 @@ Object {
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
-      "DeletionPolicy": "Retain",
+      "DeletionPolicy": "Delete",
       "Properties": Object {
         "AttributeDefinitions": Array [
           Object {
@@ -3135,7 +3135,7 @@ Object {
         },
       },
       "Type": "AWS::DynamoDB::Table",
-      "UpdateReplacePolicy": "Retain",
+      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomANY6C46864B": Object {
       "Properties": Object {
@@ -4274,7 +4274,7 @@ Object {
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
-      "DeletionPolicy": "Retain",
+      "DeletionPolicy": "Delete",
       "Properties": Object {
         "AttributeDefinitions": Array [
           Object {
@@ -4294,7 +4294,7 @@ Object {
         },
       },
       "Type": "AWS::DynamoDB::Table",
-      "UpdateReplacePolicy": "Retain",
+      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomANY6C46864B": Object {
       "Properties": Object {
@@ -5363,7 +5363,7 @@ Object {
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
-      "DeletionPolicy": "Retain",
+      "DeletionPolicy": "Delete",
       "Properties": Object {
         "AttributeDefinitions": Array [
           Object {
@@ -5383,7 +5383,7 @@ Object {
         },
       },
       "Type": "AWS::DynamoDB::Table",
-      "UpdateReplacePolicy": "Retain",
+      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomANY6C46864B": Object {
       "Properties": Object {
