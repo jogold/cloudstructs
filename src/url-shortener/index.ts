@@ -1,4 +1,4 @@
-import { Duration, Fn } from 'aws-cdk-lib';
+import { Duration, Fn, RemovalPolicy } from 'aws-cdk-lib';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
@@ -85,6 +85,7 @@ export class UrlShortener extends Construct {
         name: 'key',
         type: dynamodb.AttributeType.STRING,
       },
+      removalPolicy: RemovalPolicy.DESTROY,
     });
 
     // Bucket to save redirects

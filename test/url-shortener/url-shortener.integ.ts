@@ -29,8 +29,6 @@ class TestStack extends Stack {
 
     const bucket = urlShortener.node.tryFindChild('Bucket') as s3.Bucket;
     bucket.applyRemovalPolicy(RemovalPolicy.DESTROY);
-    const table = urlShortener.node.tryFindChild('Table') as dynamodb.Table;
-    table.applyRemovalPolicy(RemovalPolicy.DESTROY);
 
     new CfnOutput(this, 'ApiEndpoint', { value: urlShortener.apiEndpoint });
   }
