@@ -59,3 +59,20 @@ test('returns 201 with short url', async () => {
     Body: '<html><head><meta http-equiv="Refresh" content="0;url=https://www.url.com/very/long"/></head></html>',
   });
 });
+
+test('returns 400 with invalid url', async () => {
+  const response = await handler({
+    body: JSON.stringify({
+      url: 'hello',
+    }),
+  } as AWSLambda.APIGatewayProxyEvent);
+
+  expect(response).toEqual({
+    statusCode: 400,
+    body: '',
+  });
+
+  expect(documentClientMock.update). not.toHaveBeenCalled();
+
+  expect(s3ClientMock.putObject).not.toHaveBeenCalled();
+});

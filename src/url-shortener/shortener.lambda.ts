@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { URL } from 'url';
 import { DynamoDB, S3 } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 
 function base62Encode(int: number): string {
@@ -22,6 +23,21 @@ function getEnv(name: string): string {
   return value;
 }
 
+function isUrlValid(url?: string): boolean {
+  if (!url) {
+    return false;
+  }
+  try {
+    new URL(url);
+    return true;
+  } catch (err: any) {
+    if (err.code === 'ERR_INVALID_URL') {
+      return false;
+    }
+    throw err;
+  }
+}
+
 const documentClient = new DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 
 const s3 = new S3({ apiVersion: '2006-03-01' });
@@ -40,7 +56,7 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
   try {
     const body = JSON.parse(event.body ?? '{}');
 
-    if (!body.url) {
+    if (!isUrlValid(body.url)) {
       return {
         ...response,
         statusCode: 400,
