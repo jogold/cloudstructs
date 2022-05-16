@@ -55,7 +55,7 @@ test('returns 201 with short url', async () => {
   expect(s3ClientMock.putObject).toHaveBeenCalledWith({
     Bucket: 'bucket',
     Key: 'QI',
-    ContentTyoe: 'text/html',
+    ContentType: 'text/html',
     Body: '<html><head><meta http-equiv="Refresh" content="0;url=https://www.url.com/very/long"/></head></html>',
   });
 });
