@@ -11,7 +11,6 @@ import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
-import { RedirectFunction } from './redirect-function';
 import { ShortenerFunction } from './shortener-function';
 
 /**
@@ -106,12 +105,6 @@ export class UrlShortener extends Construct {
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new origins.S3Origin(bucket),
-        edgeLambdas: [
-          {
-            eventType: cloudfront.LambdaEdgeEventType.ORIGIN_RESPONSE,
-            functionVersion: new RedirectFunction(this, 'Redirect'),
-          },
-        ],
       },
       certificate,
       domainNames: [domainName],

@@ -44,84 +44,6 @@ Object {
     },
   },
   "Resources": Object {
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
-      "DependsOn": Array [
-        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
-        },
-        "Handler": "__entrypoint__.handler",
-        "MemorySize": 128,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-          },
-        ],
-        "Policies": Array [
-          Object {
-            "PolicyDocument": Object {
-              "Statement": Array [
-                Object {
-                  "Action": Array [
-                    "ssm:GetParameter",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": Object {
-                    "Fn::Join": Array [
-                      "",
-                      Array [
-                        "arn:",
-                        Object {
-                          "Ref": "AWS::Partition",
-                        },
-                        ":ssm:us-east-1:",
-                        Object {
-                          "Ref": "AWS::AccountId",
-                        },
-                        ":parameter/cdk/EdgeFunctionArn/*",
-                      ],
-                    ],
-                  },
-                },
-              ],
-              "Version": "2012-10-17",
-            },
-            "PolicyName": "Inline",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -452,17 +374,6 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
-            "LambdaFunctionAssociations": Array [
-              Object {
-                "EventType": "origin-response",
-                "LambdaFunctionARN": Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerRedirectArnReaderA9D24530",
-                    "FunctionArn",
-                  ],
-                },
-              },
-            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -514,22 +425,6 @@ Object {
         },
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
-    },
-    "UrlShortenerRedirectArnReaderA9D24530": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
-        "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::CrossRegionStringParameterReader",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
@@ -871,7 +766,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "cd19966b2e9aafb5ee1ff6de6626ed5967586ac0d58d51dcc32358bbc72478af.zip",
+          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -1166,84 +1061,6 @@ Object {
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
-    },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
-      "DependsOn": Array [
-        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
-        },
-        "Handler": "__entrypoint__.handler",
-        "MemorySize": 128,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-          },
-        ],
-        "Policies": Array [
-          Object {
-            "PolicyDocument": Object {
-              "Statement": Array [
-                Object {
-                  "Action": Array [
-                    "ssm:GetParameter",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": Object {
-                    "Fn::Join": Array [
-                      "",
-                      Array [
-                        "arn:",
-                        Object {
-                          "Ref": "AWS::Partition",
-                        },
-                        ":ssm:us-east-1:",
-                        Object {
-                          "Ref": "AWS::AccountId",
-                        },
-                        ":parameter/cdk/EdgeFunctionArn/*",
-                      ],
-                    ],
-                  },
-                },
-              ],
-              "Version": "2012-10-17",
-            },
-            "PolicyName": "Inline",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
     },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
@@ -1575,17 +1392,6 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
-            "LambdaFunctionAssociations": Array [
-              Object {
-                "EventType": "origin-response",
-                "LambdaFunctionARN": Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerRedirectArnReaderA9D24530",
-                    "FunctionArn",
-                  ],
-                },
-              },
-            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -1637,22 +1443,6 @@ Object {
         },
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
-    },
-    "UrlShortenerRedirectArnReaderA9D24530": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
-        "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::CrossRegionStringParameterReader",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
@@ -2019,7 +1809,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "cd19966b2e9aafb5ee1ff6de6626ed5967586ac0d58d51dcc32358bbc72478af.zip",
+          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -2627,84 +2417,6 @@ Object {
     },
   },
   "Resources": Object {
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
-      "DependsOn": Array [
-        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
-        },
-        "Handler": "__entrypoint__.handler",
-        "MemorySize": 128,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-          },
-        ],
-        "Policies": Array [
-          Object {
-            "PolicyDocument": Object {
-              "Statement": Array [
-                Object {
-                  "Action": Array [
-                    "ssm:GetParameter",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": Object {
-                    "Fn::Join": Array [
-                      "",
-                      Array [
-                        "arn:",
-                        Object {
-                          "Ref": "AWS::Partition",
-                        },
-                        ":ssm:us-east-1:",
-                        Object {
-                          "Ref": "AWS::AccountId",
-                        },
-                        ":parameter/cdk/EdgeFunctionArn/*",
-                      ],
-                    ],
-                  },
-                },
-              ],
-              "Version": "2012-10-17",
-            },
-            "PolicyName": "Inline",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -3035,17 +2747,6 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
-            "LambdaFunctionAssociations": Array [
-              Object {
-                "EventType": "origin-response",
-                "LambdaFunctionARN": Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerRedirectArnReaderA9D24530",
-                    "FunctionArn",
-                  ],
-                },
-              },
-            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -3097,22 +2798,6 @@ Object {
         },
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
-    },
-    "UrlShortenerRedirectArnReaderA9D24530": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
-        "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::CrossRegionStringParameterReader",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
@@ -3541,7 +3226,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "cd19966b2e9aafb5ee1ff6de6626ed5967586ac0d58d51dcc32358bbc72478af.zip",
+          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -3785,84 +3470,6 @@ Object {
         "Type": "COGNITO_USER_POOLS",
       },
       "Type": "AWS::ApiGateway::Authorizer",
-    },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
-      "DependsOn": Array [
-        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
-        },
-        "Handler": "__entrypoint__.handler",
-        "MemorySize": 128,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-          },
-        ],
-        "Policies": Array [
-          Object {
-            "PolicyDocument": Object {
-              "Statement": Array [
-                Object {
-                  "Action": Array [
-                    "ssm:GetParameter",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": Object {
-                    "Fn::Join": Array [
-                      "",
-                      Array [
-                        "arn:",
-                        Object {
-                          "Ref": "AWS::Partition",
-                        },
-                        ":ssm:us-east-1:",
-                        Object {
-                          "Ref": "AWS::AccountId",
-                        },
-                        ":parameter/cdk/EdgeFunctionArn/*",
-                      ],
-                    ],
-                  },
-                },
-              ],
-              "Version": "2012-10-17",
-            },
-            "PolicyName": "Inline",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
     },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
@@ -4194,17 +3801,6 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
-            "LambdaFunctionAssociations": Array [
-              Object {
-                "EventType": "origin-response",
-                "LambdaFunctionARN": Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerRedirectArnReaderA9D24530",
-                    "FunctionArn",
-                  ],
-                },
-              },
-            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -4256,22 +3852,6 @@ Object {
         },
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
-    },
-    "UrlShortenerRedirectArnReaderA9D24530": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
-        "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::CrossRegionStringParameterReader",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
@@ -4619,7 +4199,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "cd19966b2e9aafb5ee1ff6de6626ed5967586ac0d58d51dcc32358bbc72478af.zip",
+          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -4875,84 +4455,6 @@ Object {
     },
   },
   "Resources": Object {
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
-      "DependsOn": Array [
-        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
-        },
-        "Handler": "__entrypoint__.handler",
-        "MemorySize": 128,
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-          },
-        ],
-        "Policies": Array [
-          Object {
-            "PolicyDocument": Object {
-              "Statement": Array [
-                Object {
-                  "Action": Array [
-                    "ssm:GetParameter",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": Object {
-                    "Fn::Join": Array [
-                      "",
-                      Array [
-                        "arn:",
-                        Object {
-                          "Ref": "AWS::Partition",
-                        },
-                        ":ssm:us-east-1:",
-                        Object {
-                          "Ref": "AWS::AccountId",
-                        },
-                        ":parameter/cdk/EdgeFunctionArn/*",
-                      ],
-                    ],
-                  },
-                },
-              ],
-              "Version": "2012-10-17",
-            },
-            "PolicyName": "Inline",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -5283,17 +4785,6 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
-            "LambdaFunctionAssociations": Array [
-              Object {
-                "EventType": "origin-response",
-                "LambdaFunctionARN": Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerRedirectArnReaderA9D24530",
-                    "FunctionArn",
-                  ],
-                },
-              },
-            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -5345,22 +4836,6 @@ Object {
         },
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
-    },
-    "UrlShortenerRedirectArnReaderA9D24530": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC31844da5cedb5924a634cb817f47a07b",
-        "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::CrossRegionStringParameterReader",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
@@ -5702,7 +5177,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "cd19966b2e9aafb5ee1ff6de6626ed5967586ac0d58d51dcc32358bbc72478af.zip",
+          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {

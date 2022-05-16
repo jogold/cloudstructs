@@ -29,8 +29,6 @@
     "bundle:toolkit-cleaner/extract-template-hashes.lambda:watch": "npx projen bundle:toolkit-cleaner/extract-template-hashes.lambda:watch",
     "bundle:toolkit-cleaner/get-stack-names.lambda": "npx projen bundle:toolkit-cleaner/get-stack-names.lambda",
     "bundle:toolkit-cleaner/get-stack-names.lambda:watch": "npx projen bundle:toolkit-cleaner/get-stack-names.lambda:watch",
-    "bundle:url-shortener/redirect.edge-lambda": "npx projen bundle:url-shortener/redirect.edge-lambda",
-    "bundle:url-shortener/redirect.edge-lambda:watch": "npx projen bundle:url-shortener/redirect.edge-lambda:watch",
     "bundle:url-shortener/shortener.lambda": "npx projen bundle:url-shortener/shortener.lambda",
     "bundle:url-shortener/shortener.lambda:watch": "npx projen bundle:url-shortener/shortener.lambda:watch",
     "clobber": "npx projen clobber",

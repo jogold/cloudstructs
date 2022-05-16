@@ -66,11 +66,11 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
     const key = base62Encode(value);
     console.log('Key: %j', key);
 
-    // Put zero-byte object with redirection on S3
     const putObject = await s3.putObject({
       Bucket: getEnv('BUCKET_NAME'),
       Key: key,
-      WebsiteRedirectLocation: body.url,
+      ContentType: 'text/html',
+      Body: `<html><head><meta http-equiv="Refresh" content="0;url=${body.url}"/></head></html>`,
     }).promise();
     console.log('Put object: %j', putObject);
 
