@@ -23,7 +23,6 @@
     "src/toolkit-cleaner/clean-objects-function.ts",
     "src/toolkit-cleaner/extract-template-hashes-function.ts",
     "src/toolkit-cleaner/get-stack-names-function.ts",
-    "src/url-shortener/redirect-function.ts",
     "src/url-shortener/shortener-function.ts",
     "tsconfig.dev.json"
   ],
