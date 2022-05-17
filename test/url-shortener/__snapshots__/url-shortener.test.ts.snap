@@ -44,6 +44,84 @@ Object {
     },
   },
   "Resources": Object {
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
+      "DependsOn": Array [
+        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": Array [
+                    "ssm:GetParameter",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ssm:us-east-1:",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":parameter/cdk/EdgeFunctionArn/*",
+                      ],
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -128,6 +206,42 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
+    "UrlShortener201C0678": Object {
+      "DependsOn": Array [
+        "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "UrlShortenerServiceRoleD261E374",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "bce4daf348d015830e691d16bcd8e4fb0419ada1375d75e8352d30aa849d46bc.zip",
+        },
+        "Description": "src/url-shortener/shortener.lambda.ts",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_NAME": Object {
+              "Ref": "UrlShortenerBucket14C129A7",
+            },
+            "DOMAIN_NAME": "cstructs.com",
+            "TABLE_NAME": Object {
+              "Ref": "UrlShortenerTable9C0A20BB",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "UrlShortenerServiceRoleD261E374",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
     "UrlShortenerARecord899EAFB0": Object {
       "Properties": Object {
         "AliasTarget": Object {
@@ -185,6 +299,7 @@ Object {
     "UrlShortenerBucket14C129A7": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
+        "BucketName": "cloudstructs-url-shortener-cstructs.com",
         "LifecycleConfiguration": Object {
           "Rules": Array [
             Object {
@@ -374,6 +489,17 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "origin-request",
+                "LambdaFunctionARN": Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerRedirectArnReaderA9D24530",
+                    "FunctionArn",
+                  ],
+                },
+              },
+            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -426,6 +552,128 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
+    "UrlShortenerLogRetention2FFA6E68": Object {
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "UrlShortener201C0678",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "Region": "us-east-1",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "UrlShortenerServiceRoleD261E374": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "UrlShortenerServiceRoleDefaultPolicyC2E011EF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:PutObject",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "UrlShortenerBucket14C129A7",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "Roles": Array [
+          Object {
+            "Ref": "UrlShortenerServiceRoleD261E374",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -467,7 +715,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -493,7 +741,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -530,7 +778,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -609,7 +857,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "UrlShortenerUrlShortenercstructscomDeployment4A14831A04b47005d9ceb4e8abcd1d5514ec3fcd": Object {
+    "UrlShortenerUrlShortenercstructscomDeployment4A14831A7a644111767b00d711232dd231d8ca61": Object {
       "DependsOn": Array [
         "UrlShortenerUrlShortenercstructscomproxyANY3B815CE9",
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
@@ -626,7 +874,7 @@ Object {
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A04b47005d9ceb4e8abcd1d5514ec3fcd",
+          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A7a644111767b00d711232dd231d8ca61",
         },
         "RestApiId": Object {
           "Ref": "UrlShortenerUrlShortenercstructscomC0F539C8",
@@ -653,7 +901,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -676,7 +924,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -713,7 +961,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -755,166 +1003,6 @@ Object {
         },
       },
       "Type": "AWS::ApiGateway::Resource",
-    },
-    "UrlShortenerhandlerD2CB0241": Object {
-      "DependsOn": Array [
-        "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "UrlShortenerhandlerServiceRole8E82EA82",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
-        },
-        "Description": "src/url-shortener/shortener.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_NAME": Object {
-              "Ref": "UrlShortenerBucket14C129A7",
-            },
-            "DOMAIN_NAME": "cstructs.com",
-            "TABLE_NAME": Object {
-              "Ref": "UrlShortenerTable9C0A20BB",
-            },
-          },
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "UrlShortenerhandlerServiceRole8E82EA82",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerhandlerLogRetentionB95230D2": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "UrlShortenerhandlerD2CB0241",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "UrlShortenerhandlerServiceRole8E82EA82": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "s3:PutObject",
-                "s3:Abort*",
-              ],
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "s3:PutObjectAcl",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "dynamodb:UpdateItem",
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "Roles": Array [
-          Object {
-            "Ref": "UrlShortenerhandlerServiceRole8E82EA82",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
   },
   "Rules": Object {
@@ -1062,6 +1150,84 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
+      "DependsOn": Array [
+        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": Array [
+                    "ssm:GetParameter",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ssm:us-east-1:",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":parameter/cdk/EdgeFunctionArn/*",
+                      ],
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -1146,6 +1312,42 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
+    "UrlShortener201C0678": Object {
+      "DependsOn": Array [
+        "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "UrlShortenerServiceRoleD261E374",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "bce4daf348d015830e691d16bcd8e4fb0419ada1375d75e8352d30aa849d46bc.zip",
+        },
+        "Description": "src/url-shortener/shortener.lambda.ts",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_NAME": Object {
+              "Ref": "UrlShortenerBucket14C129A7",
+            },
+            "DOMAIN_NAME": "cstructs.com",
+            "TABLE_NAME": Object {
+              "Ref": "UrlShortenerTable9C0A20BB",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "UrlShortenerServiceRoleD261E374",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
     "UrlShortenerARecord899EAFB0": Object {
       "Properties": Object {
         "AliasTarget": Object {
@@ -1203,6 +1405,7 @@ Object {
     "UrlShortenerBucket14C129A7": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
+        "BucketName": "cloudstructs-url-shortener-cstructs.com",
         "LifecycleConfiguration": Object {
           "Rules": Array [
             Object {
@@ -1392,6 +1595,17 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "origin-request",
+                "LambdaFunctionARN": Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerRedirectArnReaderA9D24530",
+                    "FunctionArn",
+                  ],
+                },
+              },
+            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -1444,6 +1658,128 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
+    "UrlShortenerLogRetention2FFA6E68": Object {
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "UrlShortener201C0678",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "Region": "us-east-1",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "UrlShortenerServiceRoleD261E374": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "UrlShortenerServiceRoleDefaultPolicyC2E011EF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:PutObject",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "UrlShortenerBucket14C129A7",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "Roles": Array [
+          Object {
+            "Ref": "UrlShortenerServiceRoleD261E374",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -1485,7 +1821,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -1511,7 +1847,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -1548,7 +1884,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -1652,7 +1988,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "UrlShortenerUrlShortenercstructscomDeployment4A14831A7068665b53b83f5f1140db654aa44b41": Object {
+    "UrlShortenerUrlShortenercstructscomDeployment4A14831A5619cc2fcee0636f5c7f2cee31dd84cd": Object {
       "DependsOn": Array [
         "UrlShortenerUrlShortenercstructscomproxyANY3B815CE9",
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
@@ -1669,7 +2005,7 @@ Object {
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A7068665b53b83f5f1140db654aa44b41",
+          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A5619cc2fcee0636f5c7f2cee31dd84cd",
         },
         "RestApiId": Object {
           "Ref": "UrlShortenerUrlShortenercstructscomC0F539C8",
@@ -1696,7 +2032,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -1719,7 +2055,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -1756,7 +2092,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -1798,166 +2134,6 @@ Object {
         },
       },
       "Type": "AWS::ApiGateway::Resource",
-    },
-    "UrlShortenerhandlerD2CB0241": Object {
-      "DependsOn": Array [
-        "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "UrlShortenerhandlerServiceRole8E82EA82",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
-        },
-        "Description": "src/url-shortener/shortener.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_NAME": Object {
-              "Ref": "UrlShortenerBucket14C129A7",
-            },
-            "DOMAIN_NAME": "cstructs.com",
-            "TABLE_NAME": Object {
-              "Ref": "UrlShortenerTable9C0A20BB",
-            },
-          },
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "UrlShortenerhandlerServiceRole8E82EA82",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerhandlerLogRetentionB95230D2": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "UrlShortenerhandlerD2CB0241",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "UrlShortenerhandlerServiceRole8E82EA82": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "s3:PutObject",
-                "s3:Abort*",
-              ],
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "s3:PutObjectAcl",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "dynamodb:UpdateItem",
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "Roles": Array [
-          Object {
-            "Ref": "UrlShortenerhandlerServiceRole8E82EA82",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
     "Vpc8378EB38": Object {
       "Properties": Object {
@@ -2417,6 +2593,84 @@ Object {
     },
   },
   "Resources": Object {
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
+      "DependsOn": Array [
+        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": Array [
+                    "ssm:GetParameter",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ssm:us-east-1:",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":parameter/cdk/EdgeFunctionArn/*",
+                      ],
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -2501,6 +2755,43 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
+    "UrlShortener201C0678": Object {
+      "DependsOn": Array [
+        "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "UrlShortenerServiceRoleD261E374",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "bce4daf348d015830e691d16bcd8e4fb0419ada1375d75e8352d30aa849d46bc.zip",
+        },
+        "Description": "src/url-shortener/shortener.lambda.ts",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_NAME": Object {
+              "Ref": "UrlShortenerBucket14C129A7",
+            },
+            "CORS_ALLOW_ORIGINS": "https://www.example.com",
+            "DOMAIN_NAME": "cstructs.com",
+            "TABLE_NAME": Object {
+              "Ref": "UrlShortenerTable9C0A20BB",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "UrlShortenerServiceRoleD261E374",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
     "UrlShortenerARecord899EAFB0": Object {
       "Properties": Object {
         "AliasTarget": Object {
@@ -2558,6 +2849,7 @@ Object {
     "UrlShortenerBucket14C129A7": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
+        "BucketName": "cloudstructs-url-shortener-cstructs.com",
         "LifecycleConfiguration": Object {
           "Rules": Array [
             Object {
@@ -2747,6 +3039,17 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "origin-request",
+                "LambdaFunctionARN": Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerRedirectArnReaderA9D24530",
+                    "FunctionArn",
+                  ],
+                },
+              },
+            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -2799,6 +3102,128 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
+    "UrlShortenerLogRetention2FFA6E68": Object {
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "UrlShortener201C0678",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "Region": "us-east-1",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "UrlShortenerServiceRoleD261E374": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "UrlShortenerServiceRoleDefaultPolicyC2E011EF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:PutObject",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "UrlShortenerBucket14C129A7",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "Roles": Array [
+          Object {
+            "Ref": "UrlShortenerServiceRoleD261E374",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -2840,7 +3265,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -2866,7 +3291,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -2903,7 +3328,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -2982,7 +3407,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "UrlShortenerUrlShortenercstructscomDeployment4A14831A8a6f3e7a582db1865ee851da66569f6b": Object {
+    "UrlShortenerUrlShortenercstructscomDeployment4A14831A06bbf67a4ddbf44fa4acfea3ead536d6": Object {
       "DependsOn": Array [
         "UrlShortenerUrlShortenercstructscomproxyANY3B815CE9",
         "UrlShortenerUrlShortenercstructscomproxyOPTIONSC9A0AB8C",
@@ -3001,7 +3426,7 @@ Object {
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A8a6f3e7a582db1865ee851da66569f6b",
+          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A06bbf67a4ddbf44fa4acfea3ead536d6",
         },
         "RestApiId": Object {
           "Ref": "UrlShortenerUrlShortenercstructscomC0F539C8",
@@ -3072,7 +3497,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -3095,7 +3520,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -3132,7 +3557,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -3215,167 +3640,6 @@ Object {
         },
       },
       "Type": "AWS::ApiGateway::Method",
-    },
-    "UrlShortenerhandlerD2CB0241": Object {
-      "DependsOn": Array [
-        "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "UrlShortenerhandlerServiceRole8E82EA82",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
-        },
-        "Description": "src/url-shortener/shortener.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_NAME": Object {
-              "Ref": "UrlShortenerBucket14C129A7",
-            },
-            "CORS_ALLOW_ORIGINS": "https://www.example.com",
-            "DOMAIN_NAME": "cstructs.com",
-            "TABLE_NAME": Object {
-              "Ref": "UrlShortenerTable9C0A20BB",
-            },
-          },
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "UrlShortenerhandlerServiceRole8E82EA82",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerhandlerLogRetentionB95230D2": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "UrlShortenerhandlerD2CB0241",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "UrlShortenerhandlerServiceRole8E82EA82": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "s3:PutObject",
-                "s3:Abort*",
-              ],
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "s3:PutObjectAcl",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "dynamodb:UpdateItem",
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "Roles": Array [
-          Object {
-            "Ref": "UrlShortenerhandlerServiceRole8E82EA82",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
   },
   "Rules": Object {
@@ -3471,6 +3735,84 @@ Object {
       },
       "Type": "AWS::ApiGateway::Authorizer",
     },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
+      "DependsOn": Array [
+        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": Array [
+                    "ssm:GetParameter",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ssm:us-east-1:",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":parameter/cdk/EdgeFunctionArn/*",
+                      ],
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -3555,6 +3897,42 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
+    "UrlShortener201C0678": Object {
+      "DependsOn": Array [
+        "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "UrlShortenerServiceRoleD261E374",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "bce4daf348d015830e691d16bcd8e4fb0419ada1375d75e8352d30aa849d46bc.zip",
+        },
+        "Description": "src/url-shortener/shortener.lambda.ts",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_NAME": Object {
+              "Ref": "UrlShortenerBucket14C129A7",
+            },
+            "DOMAIN_NAME": "cstructs.com",
+            "TABLE_NAME": Object {
+              "Ref": "UrlShortenerTable9C0A20BB",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "UrlShortenerServiceRoleD261E374",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
     "UrlShortenerARecord899EAFB0": Object {
       "Properties": Object {
         "AliasTarget": Object {
@@ -3612,6 +3990,7 @@ Object {
     "UrlShortenerBucket14C129A7": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
+        "BucketName": "cloudstructs-url-shortener-cstructs.com",
         "LifecycleConfiguration": Object {
           "Rules": Array [
             Object {
@@ -3801,6 +4180,17 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "origin-request",
+                "LambdaFunctionARN": Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerRedirectArnReaderA9D24530",
+                    "FunctionArn",
+                  ],
+                },
+              },
+            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -3853,6 +4243,128 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
+    "UrlShortenerLogRetention2FFA6E68": Object {
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "UrlShortener201C0678",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "Region": "us-east-1",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "UrlShortenerServiceRoleD261E374": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "UrlShortenerServiceRoleDefaultPolicyC2E011EF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:PutObject",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "UrlShortenerBucket14C129A7",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "Roles": Array [
+          Object {
+            "Ref": "UrlShortenerServiceRoleD261E374",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -3897,7 +4409,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -3923,7 +4435,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -3960,7 +4472,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -4039,7 +4551,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "UrlShortenerUrlShortenercstructscomDeployment4A14831A8141da84c0b52bd002cca400d0838677": Object {
+    "UrlShortenerUrlShortenercstructscomDeployment4A14831A81f89293accf2984109814f6ac13744e": Object {
       "DependsOn": Array [
         "UrlShortenerUrlShortenercstructscomproxyANY3B815CE9",
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
@@ -4056,7 +4568,7 @@ Object {
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A8141da84c0b52bd002cca400d0838677",
+          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A81f89293accf2984109814f6ac13744e",
         },
         "RestApiId": Object {
           "Ref": "UrlShortenerUrlShortenercstructscomC0F539C8",
@@ -4086,7 +4598,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -4109,7 +4621,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -4146,7 +4658,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -4188,166 +4700,6 @@ Object {
         },
       },
       "Type": "AWS::ApiGateway::Resource",
-    },
-    "UrlShortenerhandlerD2CB0241": Object {
-      "DependsOn": Array [
-        "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "UrlShortenerhandlerServiceRole8E82EA82",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
-        },
-        "Description": "src/url-shortener/shortener.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_NAME": Object {
-              "Ref": "UrlShortenerBucket14C129A7",
-            },
-            "DOMAIN_NAME": "cstructs.com",
-            "TABLE_NAME": Object {
-              "Ref": "UrlShortenerTable9C0A20BB",
-            },
-          },
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "UrlShortenerhandlerServiceRole8E82EA82",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerhandlerLogRetentionB95230D2": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "UrlShortenerhandlerD2CB0241",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "UrlShortenerhandlerServiceRole8E82EA82": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "s3:PutObject",
-                "s3:Abort*",
-              ],
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "s3:PutObjectAcl",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "dynamodb:UpdateItem",
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "Roles": Array [
-          Object {
-            "Ref": "UrlShortenerhandlerServiceRole8E82EA82",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
     "UserPool6BA7E5F2": Object {
       "DeletionPolicy": "Retain",
@@ -4455,6 +4807,84 @@ Object {
     },
   },
   "Resources": Object {
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
+      "DependsOn": Array [
+        "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": Array [
+                    "ssm:GetParameter",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:",
+                        Object {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":ssm:us-east-1:",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":parameter/cdk/EdgeFunctionArn/*",
+                      ],
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "HostedZoneDB99F866": Object {
       "Properties": Object {
         "Name": "cstructs.com.",
@@ -4539,6 +4969,42 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
+    "UrlShortener201C0678": Object {
+      "DependsOn": Array [
+        "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "UrlShortenerServiceRoleD261E374",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
+          },
+          "S3Key": "bce4daf348d015830e691d16bcd8e4fb0419ada1375d75e8352d30aa849d46bc.zip",
+        },
+        "Description": "src/url-shortener/shortener.lambda.ts",
+        "Environment": Object {
+          "Variables": Object {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "BUCKET_NAME": Object {
+              "Ref": "UrlShortenerBucket14C129A7",
+            },
+            "DOMAIN_NAME": "short.cstructs.com",
+            "TABLE_NAME": Object {
+              "Ref": "UrlShortenerTable9C0A20BB",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "UrlShortenerServiceRoleD261E374",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
     "UrlShortenerARecord899EAFB0": Object {
       "Properties": Object {
         "AliasTarget": Object {
@@ -4596,6 +5062,7 @@ Object {
     "UrlShortenerBucket14C129A7": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
+        "BucketName": "cloudstructs-url-shortener-short.cstructs.com",
         "LifecycleConfiguration": Object {
           "Rules": Array [
             Object {
@@ -4785,6 +5252,17 @@ Object {
           "DefaultCacheBehavior": Object {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "origin-request",
+                "LambdaFunctionARN": Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerRedirectArnReaderA9D24530",
+                    "FunctionArn",
+                  ],
+                },
+              },
+            ],
             "TargetOriginId": "StackUrlShortenerDistributionOrigin13B4BC1F2",
             "ViewerProtocolPolicy": "allow-all",
           },
@@ -4837,6 +5315,128 @@ Object {
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
+    "UrlShortenerLogRetention2FFA6E68": Object {
+      "Properties": Object {
+        "LogGroupName": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "/aws/lambda/",
+              Object {
+                "Ref": "UrlShortener201C0678",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 30,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "UrlShortenerRedirectArnReaderA9D24530": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
+        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "Region": "us-east-1",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::CrossRegionStringParameterReader",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "UrlShortenerServiceRoleD261E374": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "UrlShortenerServiceRoleDefaultPolicyC2E011EF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:PutObject",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "UrlShortenerBucket14C129A7",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
+        "Roles": Array [
+          Object {
+            "Ref": "UrlShortenerServiceRoleD261E374",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "UrlShortenerTable9C0A20BB": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -4878,7 +5478,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -4904,7 +5504,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -4941,7 +5541,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -5020,7 +5620,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "UrlShortenerUrlShortenercstructscomDeployment4A14831A04b47005d9ceb4e8abcd1d5514ec3fcd": Object {
+    "UrlShortenerUrlShortenercstructscomDeployment4A14831A7a644111767b00d711232dd231d8ca61": Object {
       "DependsOn": Array [
         "UrlShortenerUrlShortenercstructscomproxyANY3B815CE9",
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
@@ -5037,7 +5637,7 @@ Object {
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A04b47005d9ceb4e8abcd1d5514ec3fcd",
+          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A7a644111767b00d711232dd231d8ca61",
         },
         "RestApiId": Object {
           "Ref": "UrlShortenerUrlShortenercstructscomC0F539C8",
@@ -5064,7 +5664,7 @@ Object {
                 ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
                 Object {
                   "Fn::GetAtt": Array [
-                    "UrlShortenerhandlerD2CB0241",
+                    "UrlShortener201C0678",
                     "Arn",
                   ],
                 },
@@ -5087,7 +5687,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -5124,7 +5724,7 @@ Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "UrlShortenerhandlerD2CB0241",
+            "UrlShortener201C0678",
             "Arn",
           ],
         },
@@ -5166,166 +5766,6 @@ Object {
         },
       },
       "Type": "AWS::ApiGateway::Resource",
-    },
-    "UrlShortenerhandlerD2CB0241": Object {
-      "DependsOn": Array [
-        "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "UrlShortenerhandlerServiceRole8E82EA82",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "ee5ed94a2c5081636dbbc63a01fc2db702bc27ee31f2ec6e508be56bd148e159.zip",
-        },
-        "Description": "src/url-shortener/shortener.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "BUCKET_NAME": Object {
-              "Ref": "UrlShortenerBucket14C129A7",
-            },
-            "DOMAIN_NAME": "short.cstructs.com",
-            "TABLE_NAME": Object {
-              "Ref": "UrlShortenerTable9C0A20BB",
-            },
-          },
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "UrlShortenerhandlerServiceRole8E82EA82",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs14.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerhandlerLogRetentionB95230D2": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "/aws/lambda/",
-              Object {
-                "Ref": "UrlShortenerhandlerD2CB0241",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "UrlShortenerhandlerServiceRole8E82EA82": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "s3:PutObject",
-                "s3:Abort*",
-              ],
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "s3:PutObjectAcl",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
-                        "UrlShortenerBucket14C129A7",
-                        "Arn",
-                      ],
-                    },
-                    "/*",
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "dynamodb:UpdateItem",
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerhandlerServiceRoleDefaultPolicy2839E987",
-        "Roles": Array [
-          Object {
-            "Ref": "UrlShortenerhandlerServiceRole8E82EA82",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
   },
   "Rules": Object {
