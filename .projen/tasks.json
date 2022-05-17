@@ -77,6 +77,9 @@
         },
         {
           "spawn": "bundle:static-website/origin-request.edge-lambda"
+        },
+        {
+          "spawn": "bundle:url-shortener/redirect.edge-lambda"
         }
       ]
     },
@@ -257,6 +260,24 @@
       "steps": [
         {
           "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:url-shortener/redirect.edge-lambda": {
+      "name": "bundle:url-shortener/redirect.edge-lambda",
+      "description": "Create a JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:url-shortener/redirect.edge-lambda:watch": {
+      "name": "bundle:url-shortener/redirect.edge-lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --external:aws-sdk --watch"
         }
       ]
     },

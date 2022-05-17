@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { URL } from 'url';
 import { DynamoDB, S3 } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 
 function base62Encode(int: number): string {
@@ -22,6 +23,18 @@ function getEnv(name: string): string {
   return value;
 }
 
+function isUrlValid(url?: string): boolean {
+  if (!url) {
+    return false;
+  }
+  try {
+    new URL(url);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
 const documentClient = new DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 
 const s3 = new S3({ apiVersion: '2006-03-01' });
@@ -40,7 +53,7 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
   try {
     const body = JSON.parse(event.body ?? '{}');
 
-    if (!body.url) {
+    if (!isUrlValid(body.url)) {
       return {
         ...response,
         statusCode: 400,
@@ -69,8 +82,8 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
     const putObject = await s3.putObject({
       Bucket: getEnv('BUCKET_NAME'),
       Key: key,
-      ContentType: 'text/html',
-      Body: `<html><head><meta http-equiv="Refresh" content="0;url=${body.url}"/></head></html>`,
+      ContentType: 'application/json',
+      Body: JSON.stringify({ url: body.url }),
     }).promise();
     console.log('Put object: %j', putObject);
 

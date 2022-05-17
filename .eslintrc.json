@@ -156,7 +156,8 @@
           "src/toolkit-cleaner/extract-template-hashes.lambda.ts",
           "src/toolkit-cleaner/get-stack-names.lambda.ts",
           "src/url-shortener/shortener.lambda.ts",
-          "src/static-website/origin-request.edge-lambda.ts"
+          "src/static-website/origin-request.edge-lambda.ts",
+          "src/url-shortener/redirect.edge-lambda.ts"
         ],
         "optionalDependencies": false,
         "peerDependencies": true

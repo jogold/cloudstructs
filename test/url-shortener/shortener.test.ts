@@ -55,7 +55,24 @@ test('returns 201 with short url', async () => {
   expect(s3ClientMock.putObject).toHaveBeenCalledWith({
     Bucket: 'bucket',
     Key: 'QI',
-    ContentType: 'text/html',
-    Body: '<html><head><meta http-equiv="Refresh" content="0;url=https://www.url.com/very/long"/></head></html>',
+    ContentType: 'application/json',
+    Body: JSON.stringify({ url: 'https://www.url.com/very/long' }),
   });
+});
+
+test('returns 400 with invalid url', async () => {
+  const response = await handler({
+    body: JSON.stringify({
+      url: 'hello',
+    }),
+  } as AWSLambda.APIGatewayProxyEvent);
+
+  expect(response).toEqual({
+    statusCode: 400,
+    body: '',
+  });
+
+  expect(documentClientMock.update). not.toHaveBeenCalled();
+
+  expect(s3ClientMock.putObject).not.toHaveBeenCalled();
 });
