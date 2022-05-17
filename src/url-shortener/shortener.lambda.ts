@@ -31,10 +31,7 @@ function isUrlValid(url?: string): boolean {
     new URL(url);
     return true;
   } catch (err) {
-    if (err instanceof TypeError) {
-      return false;
-    }
-    throw err;
+    return false;
   }
 }
 
