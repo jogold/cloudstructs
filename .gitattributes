@@ -27,6 +27,7 @@
 /src/toolkit-cleaner/clean-objects-function.ts linguist-generated
 /src/toolkit-cleaner/extract-template-hashes-function.ts linguist-generated
 /src/toolkit-cleaner/get-stack-names-function.ts linguist-generated
+/src/url-shortener/redirect-function.ts linguist-generated
 /src/url-shortener/shortener-function.ts linguist-generated
 /tsconfig.dev.json linguist-generated
 /yarn.lock linguist-generated

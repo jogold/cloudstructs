@@ -1,0 +1,34 @@
+{
+  "version": "15.0.0",
+  "files": {
+    "5564aa1aac2caec99ff03ab9da329a02e6d9ee4b40944f514a46013bc37f2649": {
+      "source": {
+        "path": "asset.5564aa1aac2caec99ff03ab9da329a02e6d9ee4b40944f514a46013bc37f2649.edge-lambda",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1",
+          "objectKey": "5564aa1aac2caec99ff03ab9da329a02e6d9ee4b40944f514a46013bc37f2649.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-east-1"
+        }
+      }
+    },
+    "4d642984d9011f32d20fb747514734899954f2a04e3f50dba52710c1ab9c6c81": {
+      "source": {
+        "path": "edge-lambda-stack-c8e731c8ad0787291628b399d525c90dc78319b7d7.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1",
+          "objectKey": "4d642984d9011f32d20fb747514734899954f2a04e3f50dba52710c1ab9c6c81.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

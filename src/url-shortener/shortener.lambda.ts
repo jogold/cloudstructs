@@ -30,8 +30,8 @@ function isUrlValid(url?: string): boolean {
   try {
     new URL(url);
     return true;
-  } catch (err: any) {
-    if (err.code === 'ERR_INVALID_URL') {
+  } catch (err) {
+    if (err instanceof TypeError) {
       return false;
     }
     throw err;
@@ -85,8 +85,8 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
     const putObject = await s3.putObject({
       Bucket: getEnv('BUCKET_NAME'),
       Key: key,
-      ContentType: 'text/html',
-      Body: `<html><head><meta http-equiv="Refresh" content="0;url=${body.url}"/></head></html>`,
+      ContentType: 'application/json',
+      Body: JSON.stringify({ url: body.url }),
     }).promise();
     console.log('Put object: %j', putObject);
 
