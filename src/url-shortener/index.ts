@@ -110,59 +110,6 @@ export class UrlShortener extends Construct {
     const redirectFunction = new RedirectFunction(this, 'Redirect');
     bucket.grantRead(redirectFunction);
 
-    // const redirectRole = new iam.Role(this, 'RedirectRole', {
-    //   assumedBy: new iam.ServicePrincipal('apigateway.amazonaws.com'),
-    // });
-    // bucket.grantRead(redirectRole);
-    // const redirectApi = new apigateway.RestApi(this, 'RedirectApi', { endpointTypes: [apigateway.EndpointType.REGIONAL] });
-    // const linkResource = redirectApi.root.addResource('{link}');
-    // linkResource.addMethod('GET', new apigateway.AwsIntegration({
-    //   service: 's3',
-    //   integrationHttpMethod: 'GET',
-    //   path: `${bucket.bucketName}/{link}`,
-    //   options: {
-    //     credentialsRole: redirectRole,
-    //     integrationResponses: [
-    //       {
-    //         statusCode: '200',
-    //         responseTemplates: {
-    //           'application/json': [
-    //             "#set($url = $input.path('$.url'))",
-    //             "#if($url != '')",
-    //             '#set($context.responseOverride.header.Location = $url)',
-    //             '#set($context.responseOverride.status = 301)',
-    //             '#else',
-    //             '#set($context.responseOverride.status = 400)',
-    //             'Bad Request',
-    //             '#end',
-    //           ].join('\n'),
-    //         },
-    //       },
-    //       {
-    //         statusCode: '404',
-    //         selectionPattern: '404',
-    //         responseTemplates: {
-    //           'application/xml': [
-    //             "#set($context.responseOverride.header.Content-Type='text/plain')",
-    //             'Not Found',
-    //           ].join('\n'),
-    //         },
-    //       },
-    //     ],
-    //     requestParameters: {
-    //       'integration.request.path.link': 'method.request.path.link',
-    //     },
-    //   },
-    // }), {
-    //   requestParameters: {
-    //     'method.request.path.link': true,
-    //   },
-    //   methodResponses: [
-    //     { statusCode: '200' },
-    //     { statusCode: '404' },
-    //   ],
-    // });
-
     // CloudFront distribution
     const certificate = new acm.DnsValidatedCertificate(this, 'Certificate', {
       domainName,
