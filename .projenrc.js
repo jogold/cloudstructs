@@ -29,6 +29,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     distName: 'cloudstructs',
     module: 'cloudstructs',
   },
+  publishToGo: {
+    moduleName: 'github.com/jogold/cloudstructs-go',
+  },
 });
 
 // Add "exports"
