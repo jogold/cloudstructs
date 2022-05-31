@@ -32,6 +32,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
   publishToGo: {
     moduleName: 'github.com/jogold/cloudstructs-go',
   },
+  publishToMaven: {
+    mavenGroupId: 'io.github.jogold',
+    javaPackage: 'io.github.jogold.cloudstructs',
+    mavenArtifactId: 'cloudstructs',
+    mavenEndpoint: 'https://s01.oss.sonatype.org',
+  },
 });
 
 // Add "exports"
