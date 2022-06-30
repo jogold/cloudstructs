@@ -5,7 +5,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'jonathan.goldwasser@gmail.com',
   authorName: 'Jonathan Goldwasser',
   description: 'High-level constructs for AWS CDK',
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.29.1',
   name: 'cloudstructs',
   repository: 'https://github.com/jogold/cloudstructs.git',
   peerDeps: [
@@ -37,6 +37,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     javaPackage: 'io.github.jogold.cloudstructs',
     mavenArtifactId: 'cloudstructs',
     mavenEndpoint: 'https://s01.oss.sonatype.org',
+  },
+  lambdaOptions: {
+    runtime: awscdk.LambdaRuntime.NODEJS_16_X,
   },
 });
 
