@@ -149,7 +149,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "056e6896d429e3644365b09c369078ff5c1c53dde871ef189448a33a14ac57d3.zip",
+          "S3Key": "3d78437d64ccf325f4a2ea52c0f2ff10b36acb4bf8d1077b2ad1811284aa4b46.zip",
         },
         "Description": "src/email-receiver/s3.lambda.ts",
         "Environment": Object {
@@ -164,7 +164,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -380,7 +380,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "51076cc84ce8c927b116e853b62e8aa9a61e52d26610330961017add24d144a3.zip",
+          "S3Key": "2f040bbe2b6a11136d43cd35c29e11397d9f27344f65b7324551fc77410a902e.zip",
         },
         "Description": "src/email-receiver/whitelist.lambda.ts",
         "Environment": Object {
@@ -396,7 +396,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },

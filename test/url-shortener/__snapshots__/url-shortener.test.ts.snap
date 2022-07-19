@@ -216,7 +216,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "e113d7efaeaa36f212ea115a2bb402352154f4cfaf8d00385d68f607f7b32247.zip",
+          "S3Key": "fd4294b00b8217bca0a7259abdc10316d0b1eef18ca87517535c650ef2ec1c6e.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -238,7 +238,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -579,7 +579,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -1322,7 +1322,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "e113d7efaeaa36f212ea115a2bb402352154f4cfaf8d00385d68f607f7b32247.zip",
+          "S3Key": "fd4294b00b8217bca0a7259abdc10316d0b1eef18ca87517535c650ef2ec1c6e.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -1344,7 +1344,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -1685,7 +1685,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -2765,7 +2765,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "e113d7efaeaa36f212ea115a2bb402352154f4cfaf8d00385d68f607f7b32247.zip",
+          "S3Key": "fd4294b00b8217bca0a7259abdc10316d0b1eef18ca87517535c650ef2ec1c6e.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -2788,7 +2788,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -3129,7 +3129,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -3907,7 +3907,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "e113d7efaeaa36f212ea115a2bb402352154f4cfaf8d00385d68f607f7b32247.zip",
+          "S3Key": "fd4294b00b8217bca0a7259abdc10316d0b1eef18ca87517535c650ef2ec1c6e.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -3929,7 +3929,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -4270,7 +4270,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -4979,7 +4979,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "e113d7efaeaa36f212ea115a2bb402352154f4cfaf8d00385d68f607f7b32247.zip",
+          "S3Key": "fd4294b00b8217bca0a7259abdc10316d0b1eef18ca87517535c650ef2ec1c6e.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": Object {
@@ -5001,7 +5001,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -5342,7 +5342,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
