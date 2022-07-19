@@ -251,7 +251,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "e5490f8d7e3a6db37918eed3cdda5008550e55beaa0d847847bab838896980c5.zip",
+          "S3Key": "db68ceea2d2bc7009a426b75ed50e63f9c992351e09b6631bf448042e4670aab.zip",
         },
         "Description": "src/slack-events/events.lambda.ts",
         "Environment": Object {
@@ -356,7 +356,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "2c2326e2dbd58551c987d5b7b00235ba7a01f86fd788fa8c13bffffc70b43923.zip",
+          "S3Key": "b1fc748d5de054f0b10ab8b1e883e0f9b30329964e1b2cd96f71e784e7aca82f.zip",
         },
         "Description": "src/slack-textract/detect.lambda.ts",
         "Environment": Object {
