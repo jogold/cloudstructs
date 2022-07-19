@@ -17,7 +17,7 @@ export class DetectFunction extends lambda.Function {
     super(scope, id, {
       description: 'src/slack-textract/detect.lambda.ts',
       ...props,
-      runtime: lambda.Runtime.NODEJS_16_X,
+      runtime: new lambda.Runtime('nodejs16.x', lambda.RuntimeFamily.NODEJS),
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/slack-textract/detect.lambda')),
     });

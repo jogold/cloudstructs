@@ -17,7 +17,7 @@ export class ShortenerFunction extends lambda.Function {
     super(scope, id, {
       description: 'src/url-shortener/shortener.lambda.ts',
       ...props,
-      runtime: lambda.Runtime.NODEJS_16_X,
+      runtime: new lambda.Runtime('nodejs16.x', lambda.RuntimeFamily.NODEJS),
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/url-shortener/shortener.lambda')),
     });
