@@ -480,7 +480,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
           },
-          "S3Key": "bce4daf348d015830e691d16bcd8e4fb0419ada1375d75e8352d30aa849d46bc.zip"
+          "S3Key": "e113d7efaeaa36f212ea115a2bb402352154f4cfaf8d00385d68f607f7b32247.zip"
         },
         "Role": {
           "Fn::GetAtt": [
