@@ -43,6 +43,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
 });
 
+// Update integ test snapshots after upgrade
+project.upgradeWorkflow?.postUpgradeTask.spawn(project.tasks.tryFind('bundle'));
+project.upgradeWorkflow?.postUpgradeTask.spawn(project.tasks.tryFind('integ:snapshot-all'));
+
 // Add "exports"
 const packageExports = {
   '.': './lib/index.js',
