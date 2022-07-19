@@ -238,7 +238,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -579,7 +579,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC30dd22eb92f7fc7a7d7e9014525863e1",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -1344,7 +1344,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -1685,7 +1685,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC30dd22eb92f7fc7a7d7e9014525863e1",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -2788,7 +2788,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -3129,7 +3129,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC30dd22eb92f7fc7a7d7e9014525863e1",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -3929,7 +3929,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -4270,7 +4270,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC30dd22eb92f7fc7a7d7e9014525863e1",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -5001,7 +5001,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -5342,7 +5342,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25ECda1b9edd03e41d4db79c5a7d5d4dda7a",
+        "RefreshToken": "RedirectCurrentVersion479E25EC30dd22eb92f7fc7a7d7e9014525863e1",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [

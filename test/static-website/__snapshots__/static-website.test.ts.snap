@@ -29,11 +29,11 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginRequestCurrentVersionD6F77E9Feae57919d23bbef94635eb8bca470577": Object {
+    "OriginRequestCurrentVersionD6F77E9F73ed53a3486e4ef68ede5a64b3ac9994": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "OriginRequest0052232D",
@@ -46,7 +46,7 @@ Object {
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
         "Type": "String",
         "Value": Object {
-          "Ref": "OriginRequestCurrentVersionD6F77E9Feae57919d23bbef94635eb8bca470577",
+          "Ref": "OriginRequestCurrentVersionD6F77E9F73ed53a3486e4ef68ede5a64b3ac9994",
         },
       },
       "Type": "AWS::SSM::Parameter",
@@ -1001,7 +1001,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
-        "RefreshToken": "OriginRequestCurrentVersionD6F77E9Feae57919d23bbef94635eb8bca470577",
+        "RefreshToken": "OriginRequestCurrentVersionD6F77E9F73ed53a3486e4ef68ede5a64b3ac9994",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
