@@ -80,8 +80,8 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "2.1.0-alpha.0",
-    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.1.0-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-alpha": "2.32.1-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.32.1-alpha.0",
     "@types/aws-lambda": "^8.10.101",
     "@types/jest": "^27",
     "@types/node": "^14",
@@ -89,7 +89,7 @@
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "aws-cdk": "^2",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.32.1",
     "aws-sdk": "^2.1177.0",
     "aws-sdk-mock": "^5.7.0",
     "constructs": "10.0.5",
@@ -114,9 +114,9 @@
     "typescript": "^3.9.10"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "^2.1.0-alpha.0",
-    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.1.0-alpha.0",
-    "aws-cdk-lib": "^2.1.0",
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.32.1-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.32.1-alpha.0",
+    "aws-cdk-lib": "^2.32.1",
     "constructs": "^10.0.5"
   },
   "dependencies": {

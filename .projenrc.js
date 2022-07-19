@@ -38,6 +38,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     mavenArtifactId: 'cloudstructs',
     mavenEndpoint: 'https://s01.oss.sonatype.org',
   },
+  lambdaOptions: {
+    runtime: awscdk.LambdaRuntime.NODEJS_16_X,
+  }
 });
 
 // Add "exports"

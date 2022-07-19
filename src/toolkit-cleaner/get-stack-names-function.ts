@@ -17,7 +17,7 @@ export class GetStackNamesFunction extends lambda.Function {
     super(scope, id, {
       description: 'src/toolkit-cleaner/get-stack-names.lambda.ts',
       ...props,
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_16_X,
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/toolkit-cleaner/get-stack-names.lambda')),
     });
