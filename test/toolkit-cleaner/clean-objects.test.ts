@@ -105,7 +105,7 @@ test('with RETAIN_MILLISECONDS', async () => {
   expect(ServiceMock.deleteObjects).toHaveBeenCalledWith({
     Bucket: 'bucket',
     Delete: {
-      Objects: [{ Key: 'hash3.zip' }],
+      Objects: [{ Key: 'hash3.zip', VersionId: 'hash3-version-id' }],
     },
   });
 
