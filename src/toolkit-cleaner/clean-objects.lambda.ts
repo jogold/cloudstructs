@@ -11,29 +11,29 @@ export async function handler(assetHashes: string[]) {
   let deleted = 0;
   let reclaimed = 0;
 
-  let nextToken: string | undefined;
+  let nextKeyMarker: string | undefined;
   let finished = false;
   while (!finished) {
-    const response = await s3.listObjectsV2({
+    const response = await s3.listObjectVersions({
       Bucket: process.env.BUCKET_NAME,
-      ContinuationToken: nextToken,
+      KeyMarker: nextKeyMarker,
     }).promise();
 
-    const toDelete = response.Contents?.filter(x => {
-      if (!x.Key) {
+    const toDelete = response.Versions?.filter(v => {
+      if (!v.Key) {
         return false;
       }
 
-      const hash = path.basename(x.Key, path.extname(x.Key));
+      const hash = path.basename(v.Key, path.extname(v.Key));
       let pred = !assetHashes.includes(hash);
 
       if (process.env.RETAIN_MILLISECONDS) {
-        if (!x.LastModified) {
+        if (!v.LastModified) {
           return false;
         }
 
         const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
-        pred = pred && x.LastModified < limitDate;
+        pred = pred && v.LastModified < limitDate;
       }
 
       return pred;
@@ -44,7 +44,7 @@ export async function handler(assetHashes: string[]) {
         await s3.deleteObjects({
           Bucket: process.env.BUCKET_NAME,
           Delete: {
-            Objects: toDelete.map(x => ({ Key: x.Key! })),
+            Objects: toDelete.map(v => ({ Key: v.Key!, VersionId: v.VersionId })),
           },
         }).promise();
       }
@@ -52,8 +52,8 @@ export async function handler(assetHashes: string[]) {
       reclaimed += toDelete.reduce((acc, x) => acc + (x.Size ?? 0), 0);
     }
 
-    nextToken = response.NextContinuationToken;
-    if (nextToken === undefined) {
+    nextKeyMarker = response.NextKeyMarker;
+    if (nextKeyMarker === undefined) {
       finished = true;
     }
   }
