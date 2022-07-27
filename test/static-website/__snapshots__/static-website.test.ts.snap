@@ -19,7 +19,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-1",
           },
-          "S3Key": "9d71d0d09e09ea23906808e78421aaba8a3208f5f2b0ccd61427089733095f59.zip",
+          "S3Key": "997b02ba8df33321c5504dc622f704e181e24452cc8dc84de0083b7c901b733f.zip",
         },
         "Description": "src/static-website/origin-request.edge-lambda.ts",
         "Handler": "index.handler",
@@ -29,11 +29,11 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginRequestCurrentVersionD6F77E9Feae57919d23bbef94635eb8bca470577": Object {
+    "OriginRequestCurrentVersionD6F77E9Fc7b98fb9c832c426c6f23a5635bcfd3a": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "OriginRequest0052232D",
@@ -46,7 +46,7 @@ Object {
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
         "Type": "String",
         "Value": Object {
-          "Ref": "OriginRequestCurrentVersionD6F77E9Feae57919d23bbef94635eb8bca470577",
+          "Ref": "OriginRequestCurrentVersionD6F77E9Fc7b98fb9c832c426c6f23a5635bcfd3a",
         },
       },
       "Type": "AWS::SSM::Parameter",
@@ -1001,7 +1001,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
-        "RefreshToken": "OriginRequestCurrentVersionD6F77E9Feae57919d23bbef94635eb8bca470577",
+        "RefreshToken": "OriginRequestCurrentVersionD6F77E9Fc7b98fb9c832c426c6f23a5635bcfd3a",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
