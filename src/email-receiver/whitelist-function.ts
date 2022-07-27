@@ -17,7 +17,7 @@ export class WhitelistFunction extends lambda.Function {
     super(scope, id, {
       description: 'src/email-receiver/whitelist.lambda.ts',
       ...props,
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: new lambda.Runtime('nodejs16.x', lambda.RuntimeFamily.NODEJS),
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/email-receiver/whitelist.lambda')),
     });

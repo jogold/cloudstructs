@@ -74,7 +74,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs14.x"
+        "Runtime": "nodejs16.x"
       },
       "DependsOn": [
         "ToolkitCleanerGetStackNamesFunctionServiceRoleDefaultPolicy8FBA731D",
@@ -155,7 +155,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 30
       },
       "DependsOn": [
@@ -297,7 +297,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 300
       },
       "DependsOn": [
@@ -408,7 +408,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 300
       },
       "DependsOn": [

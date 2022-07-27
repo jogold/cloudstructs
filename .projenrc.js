@@ -38,7 +38,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
     mavenArtifactId: 'cloudstructs',
     mavenEndpoint: 'https://s01.oss.sonatype.org',
   },
+  lambdaOptions: {
+    runtime: awscdk.LambdaRuntime.NODEJS_16_X,
+  },
 });
+
+// Update integ test snapshots after upgrade
+project.upgradeWorkflow?.postUpgradeTask.spawn(project.tasks.tryFind('bundle'));
+project.upgradeWorkflow?.postUpgradeTask.spawn(project.tasks.tryFind('integ:snapshot-all'));
 
 // Add "exports"
 const packageExports = {
