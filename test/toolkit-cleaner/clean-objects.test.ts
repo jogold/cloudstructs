@@ -1,5 +1,5 @@
 const ServiceMock = {
-  listObjectsV2: jest.fn(),
+  listObjectVersions: jest.fn(),
   deleteObjects: jest.fn().mockImplementation(() => ({
     promise: jest.fn().mockResolvedValue({}),
   })),
@@ -14,34 +14,38 @@ jest.mock('aws-sdk', () => {
 import { handler } from '../../src/toolkit-cleaner/clean-objects.lambda';
 
 beforeEach(() => {
-  ServiceMock.listObjectsV2.mockImplementationOnce(() => ({
+  ServiceMock.listObjectVersions.mockImplementationOnce(() => ({
     promise: jest.fn().mockResolvedValue({
-      Contents: [
+      Versions: [
         {
           Key: 'hash1.json',
           LastModified: daysAgo(5),
           Size: 12,
+          VersionId: 'hash1-version-id',
         },
         {
           Key: 'hash2.zip',
           LastModified: new Date(),
           Size: 15,
+          VersionId: 'hash2-version-id',
         },
       ],
-      NextContinuationToken: 'token',
+      NextKeyMarker: 'marker',
     }),
   })).mockImplementationOnce(() => ({
     promise: jest.fn().mockResolvedValue({
-      Contents: [
+      Versions: [
         {
           Key: 'hash3.zip',
           LastModified: daysAgo(30),
           Size: 9,
+          VersionId: 'hash3-version-id',
         },
         {
           Key: 'hash4.zip',
           LastModified: new Date(),
           Size: 11,
+          VersionId: 'hash4-version-id',
         },
       ],
     }),
@@ -54,7 +58,7 @@ beforeEach(() => {
 test('cleans unused objects', async () => {
   const response = await handler(['hash2', 'hash4']);
 
-  expect(ServiceMock.listObjectsV2).toHaveBeenCalledWith(expect.objectContaining({
+  expect(ServiceMock.listObjectVersions).toHaveBeenCalledWith(expect.objectContaining({
     Bucket: 'bucket',
   }));
 
@@ -62,13 +66,13 @@ test('cleans unused objects', async () => {
   expect(ServiceMock.deleteObjects).toHaveBeenCalledWith({
     Bucket: 'bucket',
     Delete: {
-      Objects: [{ Key: 'hash1.json' }],
+      Objects: [{ Key: 'hash1.json', VersionId: 'hash1-version-id' }],
     },
   });
   expect(ServiceMock.deleteObjects).toHaveBeenCalledWith({
     Bucket: 'bucket',
     Delete: {
-      Objects: [{ Key: 'hash3.zip' }],
+      Objects: [{ Key: 'hash3.zip', VersionId: 'hash3-version-id' }],
     },
   });
 
@@ -101,7 +105,7 @@ test('with RETAIN_MILLISECONDS', async () => {
   expect(ServiceMock.deleteObjects).toHaveBeenCalledWith({
     Bucket: 'bucket',
     Delete: {
-      Objects: [{ Key: 'hash3.zip' }],
+      Objects: [{ Key: 'hash3.zip', VersionId: 'hash3-version-id' }],
     },
   });
 
