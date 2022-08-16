@@ -125,6 +125,7 @@ export class StaticWebsite extends Construct {
       domainNames: [props.domainName],
       certificate,
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
+      httpVersion: 'http2and3' as cloudfront.HttpVersion,
     });
 
     new route53.ARecord(this, 'ARecord', {
