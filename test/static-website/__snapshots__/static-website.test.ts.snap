@@ -672,7 +672,7 @@ Object {
           },
           "DefaultRootObject": "index.html",
           "Enabled": true,
-          "HttpVersion": "http2",
+          "HttpVersion": "http2and3",
           "IPV6Enabled": true,
           "Origins": Array [
             Object {
