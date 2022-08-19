@@ -56,6 +56,8 @@ tsconfig.json
 !/src/slack-app/provider-function.ts
 !/src/slack-events/events-function.ts
 !/src/slack-textract/detect-function.ts
+!/src/ssl-server-test/analyze-function.ts
+!/src/ssl-server-test/extract-grade-function.ts
 !/src/toolkit-cleaner/clean-images-function.ts
 !/src/toolkit-cleaner/clean-objects-function.ts
 !/src/toolkit-cleaner/extract-template-hashes-function.ts
@@ -72,6 +74,15 @@ test/slack-app/slack-app.integ.snapshot/manifest.json
 test/slack-app/slack-app.integ.snapshot/**/manifest.json
 test/slack-app/slack-app.integ.snapshot/tree.json
 test/slack-app/slack-app.integ.snapshot/**/tree.json
+test/ssl-server-test/.tmp
+test/ssl-server-test/ssl-server-test.integ.snapshot/asset.*
+test/ssl-server-test/ssl-server-test.integ.snapshot/**/asset.*
+test/ssl-server-test/ssl-server-test.integ.snapshot/cdk.out
+test/ssl-server-test/ssl-server-test.integ.snapshot/**/cdk.out
+test/ssl-server-test/ssl-server-test.integ.snapshot/manifest.json
+test/ssl-server-test/ssl-server-test.integ.snapshot/**/manifest.json
+test/ssl-server-test/ssl-server-test.integ.snapshot/tree.json
+test/ssl-server-test/ssl-server-test.integ.snapshot/**/tree.json
 test/toolkit-cleaner/.tmp
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/asset.*
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/**/asset.*
