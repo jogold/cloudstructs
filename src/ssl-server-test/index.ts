@@ -1,7 +1,7 @@
 import { Duration } from 'aws-cdk-lib';
 import { Rule, RuleTargetInput, Schedule } from 'aws-cdk-lib/aws-events';
 import { SfnStateMachine } from 'aws-cdk-lib/aws-events-targets';
-import { ITopic } from 'aws-cdk-lib/aws-sns';
+import { ITopic, Topic } from 'aws-cdk-lib/aws-sns';
 import { Choice, Condition, Fail, JsonPath, Pass, StateMachine, TaskInput, Wait, WaitTime } from 'aws-cdk-lib/aws-stepfunctions';
 import { LambdaInvoke, SnsPublish } from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { Construct } from 'constructs';
@@ -30,8 +30,10 @@ export interface SslServerTestProps {
   /**
    * The topic to which the results must be sent when the
    * grade is below the minimum grade.
+   *
+   * @default - a new topic is created
    */
-  readonly alarmTopic: ITopic;
+  readonly alarmTopic?: ITopic;
 
   /**
    * The schedule for the test
@@ -59,6 +61,12 @@ export enum SslServerTestGrade {
  * Perform SSL server test for a hostname
  */
 export class SslServerTest extends Construct {
+  /**
+   * The topic to which the SSL test results are sent when the grade is
+   * below the minimum grade
+   */
+  public readonly alarmTopic: ITopic;
+
   constructor(scope: Construct, id: string, props: SslServerTestProps) {
     super(scope, id);
 
@@ -92,8 +100,9 @@ export class SslServerTest extends Construct {
       resultPath: '$.grade',
     });
 
+    this.alarmTopic = props.alarmTopic ?? new Topic(this, 'AlarmTopic');
     const notify = new SnsPublish(this, 'Notify', {
-      topic: props.alarmTopic,
+      topic: this.alarmTopic,
       message: TaskInput.fromJsonPathAt('States.JsonToString($)'),
     });
 
