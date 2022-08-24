@@ -74,7 +74,8 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs16.x",
+        "Timeout": 30
       },
       "DependsOn": [
         "ToolkitCleanerGetStackNamesFunctionServiceRoleDefaultPolicy8FBA731D",
