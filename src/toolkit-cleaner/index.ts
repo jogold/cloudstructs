@@ -61,7 +61,9 @@ export class ToolkitCleaner extends Construct {
       directory: path.join(__dirname, '..', '..', 'assets', 'toolkit-cleaner', 'docker'),
     });
 
-    const getStackNamesFunction = new GetStackNamesFunction(this, 'GetStackNamesFunction');
+    const getStackNamesFunction = new GetStackNamesFunction(this, 'GetStackNamesFunction', {
+      timeout: Duration.seconds(30),
+    });
     getStackNamesFunction.addToRolePolicy(new PolicyStatement({
       actions: ['cloudformation:DescribeStacks'],
       resources: ['*'],
