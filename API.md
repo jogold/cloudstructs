@@ -579,11 +579,19 @@ new SslServerTest(scope: Construct, id: string, props: SslServerTestProps)
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SslServerTestProps](#cloudstructs-sslservertestprops)</code>)  *No description*
-  * **alarmTopic** (<code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code>)  The topic to which the results must be sent when the grade is below the minimum grade. 
   * **host** (<code>string</code>)  The hostname to test. 
+  * **alarmTopic** (<code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code>)  The topic to which the results must be sent when the grade is below the minimum grade. __*Default*__: a new topic is created
   * **minimumGrade** (<code>[SslServerTestGrade](#cloudstructs-sslservertestgrade)</code>)  Minimum grade for the test. The grade is calculated using the worst grade of all endpoints. __*Default*__: SslServerTestGrade.A_PLUS
   * **schedule** (<code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code>)  The schedule for the test. __*Default*__: every day
 
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**alarmTopic** | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | The topic to which the SSL test results are sent when the grade is below the minimum grade.
 
 
 
@@ -1022,8 +1030,8 @@ Properties for a SslServerTest.
 
 Name | Type | Description 
 -----|------|-------------
-**alarmTopic** | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | The topic to which the results must be sent when the grade is below the minimum grade.
 **host** | <code>string</code> | The hostname to test.
+**alarmTopic**? | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | The topic to which the results must be sent when the grade is below the minimum grade.<br/>__*Default*__: a new topic is created
 **minimumGrade**? | <code>[SslServerTestGrade](#cloudstructs-sslservertestgrade)</code> | Minimum grade for the test. The grade is calculated using the worst grade of all endpoints.<br/>__*Default*__: SslServerTestGrade.A_PLUS
 **schedule**? | <code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code> | The schedule for the test.<br/>__*Default*__: every day
 
