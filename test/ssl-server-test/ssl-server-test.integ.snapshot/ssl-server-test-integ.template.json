@@ -1,8 +1,5 @@
 {
   "Resources": {
-    "TopicBFC7AF6E": {
-      "Type": "AWS::SNS::Topic"
-    },
     "SslServerTestAnalyzeFunctionServiceRoleFFCA6140": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -121,6 +118,9 @@
         "SslServerTestExtractGradeFunctionServiceRoleFF5F036B"
       ]
     },
+    "SslServerTestAlarmTopicE0FFB32B": {
+      "Type": "AWS::SNS::Topic"
+    },
     "SslServerTestStateMachineRoleAD7B9849": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -178,7 +178,7 @@
               "Action": "sns:Publish",
               "Effect": "Allow",
               "Resource": {
-                "Ref": "TopicBFC7AF6E"
+                "Ref": "SslServerTestAlarmTopicE0FFB32B"
               }
             }
           ],
@@ -232,7 +232,7 @@
               },
               ":states:::sns:publish\",\"Parameters\":{\"TopicArn\":\"",
               {
-                "Ref": "TopicBFC7AF6E"
+                "Ref": "SslServerTestAlarmTopicE0FFB32B"
               },
               "\",\"Message.$\":\"States.JsonToString($)\"}},\"Fail\":{\"Type\":\"Fail\"}},\"TimeoutSeconds\":1800}"
             ]
