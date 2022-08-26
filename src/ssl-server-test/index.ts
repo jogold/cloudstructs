@@ -136,7 +136,7 @@ class SslServerTestStateMachine extends Construct {
     const notify = new SnsPublishToTopicAtPath(this, 'Notify', {
       path: '$$.Execution.Input.alarmTopicArn',
       message: TaskInput.fromJsonPathAt('States.JsonToString($)'),
-      subject: "States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)",
+      subject: JsonPath.stringAt("States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)"),
     });
 
     const fail = new Fail(this, 'Fail');

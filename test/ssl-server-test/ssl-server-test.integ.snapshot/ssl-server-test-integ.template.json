@@ -270,7 +270,7 @@
               {
                 "Ref": "AWS::Partition"
               },
-              ":states:::sns:publish\",\"Parameters\":{\"TopicArn.$\":\"$$.Execution.Input.alarmTopicArn\",\"Message.$\":\"States.JsonToString($)\"}},\"Fail\":{\"Type\":\"Fail\"}},\"TimeoutSeconds\":1800}"
+              ":states:::sns:publish\",\"Parameters\":{\"TopicArn.$\":\"$$.Execution.Input.alarmTopicArn\",\"Message.$\":\"States.JsonToString($)\",\"Subject.$\":\"States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)\"}},\"Fail\":{\"Type\":\"Fail\"}},\"TimeoutSeconds\":1800}"
             ]
           ]
         }
