@@ -1,9 +1,10 @@
-import { Duration } from 'aws-cdk-lib';
+import { Duration, Stack } from 'aws-cdk-lib';
 import { Rule, RuleTargetInput, Schedule } from 'aws-cdk-lib/aws-events';
 import { SfnStateMachine } from 'aws-cdk-lib/aws-events-targets';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { ITopic, Topic } from 'aws-cdk-lib/aws-sns';
-import { Choice, Condition, Fail, JsonPath, Pass, StateMachine, TaskInput, Wait, WaitTime } from 'aws-cdk-lib/aws-stepfunctions';
-import { LambdaInvoke, SnsPublish } from 'aws-cdk-lib/aws-stepfunctions-tasks';
+import { Choice, Condition, Fail, FieldUtils, JsonPath, Pass, StateMachine, TaskInput, TaskMetricsConfig, TaskStateBase, TaskStateBaseProps, Wait, WaitTime } from 'aws-cdk-lib/aws-stepfunctions';
+import { LambdaInvoke } from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { Construct } from 'constructs';
 import { AnalyzeFunction } from './analyze-function';
 import { ExtractGradeFunction } from './extract-grade-function';
@@ -70,6 +71,38 @@ export class SslServerTest extends Construct {
   constructor(scope: Construct, id: string, props: SslServerTestProps) {
     super(scope, id);
 
+    this.alarmTopic = props.alarmTopic ?? new Topic(this, 'AlarmTopic');
+
+    const stateMachine = SslServerTestStateMachine.getOrCreate(this);
+    this.alarmTopic.grantPublish(stateMachine);
+
+    const rule = new Rule(this, 'Rule', {
+      schedule: props.schedule ?? Schedule.rate(Duration.days(1)),
+    });
+
+    rule.addTarget(new SfnStateMachine(stateMachine, {
+      input: RuleTargetInput.fromObject({
+        host: props.host,
+        minimumGrade: props.minimumGrade ?? SslServerTestGrade.A_PLUS,
+        alarmTopicArn: this.alarmTopic.topicArn,
+      }),
+    }));
+  }
+}
+
+class SslServerTestStateMachine extends Construct {
+  public static getOrCreate(scope: Construct): StateMachine {
+    const stack = Stack.of(scope);
+    const uid = 'cloudstructs/ssl-server-test.StateMachine';
+    const construct = stack.node.tryFindChild(uid) as SslServerTestStateMachine ?? new SslServerTestStateMachine(stack, uid);
+    return construct.stateMachine;
+  }
+
+  private readonly stateMachine: StateMachine;
+
+  private constructor(scope: Construct, id: string) {
+    super(scope, id);
+
     const analyzeFunction = new AnalyzeFunction(this, 'AnalyzeFunction');
 
     const startAnalysis = new LambdaInvoke(this, 'Start Analysis', {
@@ -100,15 +133,15 @@ export class SslServerTest extends Construct {
       resultPath: '$.grade',
     });
 
-    this.alarmTopic = props.alarmTopic ?? new Topic(this, 'AlarmTopic');
-    const notify = new SnsPublish(this, 'Notify', {
-      topic: this.alarmTopic,
+    const notify = new SnsPublishToTopicAtPath(this, 'Notify', {
+      path: '$$.Execution.Input.alarmTopicArn',
       message: TaskInput.fromJsonPathAt('States.JsonToString($)'),
+      subject: "States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)",
     });
 
     const fail = new Fail(this, 'Fail');
 
-    const stateMachine = new StateMachine(this, 'StateMachine', {
+    this.stateMachine = new StateMachine(this, 'StateMachine', {
       definition: startAnalysis
         .next(wait)
         .next(pollAnalysis)
@@ -123,15 +156,31 @@ export class SslServerTest extends Construct {
         ),
       timeout: Duration.minutes(30),
     });
+  }
+}
 
-    const rule = new Rule(this, 'Rule', {
-      schedule: props.schedule ?? Schedule.rate(Duration.days(1)),
-    });
-    rule.addTarget(new SfnStateMachine(stateMachine, {
-      input: RuleTargetInput.fromObject({
-        host: props.host,
-        minimumGrade: props.minimumGrade ?? SslServerTestGrade.A_PLUS,
+interface SnsPublishToTopicAtPathProps extends TaskStateBaseProps {
+  readonly path: string;
+  readonly message: TaskInput;
+  readonly subject?: string;
+}
+
+class SnsPublishToTopicAtPath extends TaskStateBase {
+  protected readonly taskMetrics: TaskMetricsConfig | undefined;
+  protected readonly taskPolicies: PolicyStatement[] | undefined;
+
+  constructor(scope: Construct, id: string, private readonly props: SnsPublishToTopicAtPathProps) {
+    super(scope, id, props);
+  }
+
+  public _renderTask(): any {
+    return {
+      Resource: `arn:${Stack.of(this).partition}:states:::sns:publish`,
+      Parameters: FieldUtils.renderObject({
+        TopicArn: JsonPath.stringAt(this.props.path),
+        Message: this.props.message.value,
+        Subject: this.props.subject,
       }),
-    }));
+    };
   }
 }

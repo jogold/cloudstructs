@@ -6,8 +6,12 @@ class TestStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    new SslServerTest(this, 'SslServerTest', {
+    new SslServerTest(this, 'SslServerTestCdkDev', {
       host: 'cdk.dev',
+    });
+
+    new SslServerTest(this, 'SslServerTestWwwCdkDev', {
+      host: 'www.cdk.dev',
     });
   }
 }
