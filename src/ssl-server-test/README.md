@@ -11,7 +11,7 @@ Define a `SslServerTest`:
 
 ```ts
 import { Stack, StackProps } from 'aws-cdk-lib';
-import { SslServerTest } from 'cloudstructs/lib/toolkit-cleaner';
+import { SslServerTest } from 'cloudstructs';
 import { Construct } from 'constructs';
 
 export class MyStack extends Stack {
