@@ -61,6 +61,12 @@
           "spawn": "bundle:slack-textract/detect.lambda"
         },
         {
+          "spawn": "bundle:ssl-server-test/analyze.lambda"
+        },
+        {
+          "spawn": "bundle:ssl-server-test/extract-grade.lambda"
+        },
+        {
           "spawn": "bundle:toolkit-cleaner/clean-images.lambda"
         },
         {
@@ -170,6 +176,42 @@
       "steps": [
         {
           "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:ssl-server-test/analyze.lambda": {
+      "name": "bundle:ssl-server-test/analyze.lambda",
+      "description": "Create a JavaScript bundle from src/ssl-server-test/analyze.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:ssl-server-test/analyze.lambda:watch": {
+      "name": "bundle:ssl-server-test/analyze.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/ssl-server-test/analyze.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --external:aws-sdk --watch"
+        }
+      ]
+    },
+    "bundle:ssl-server-test/extract-grade.lambda": {
+      "name": "bundle:ssl-server-test/extract-grade.lambda",
+      "description": "Create a JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --external:aws-sdk"
+        }
+      ]
+    },
+    "bundle:ssl-server-test/extract-grade.lambda:watch": {
+      "name": "bundle:ssl-server-test/extract-grade.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -459,10 +501,76 @@
           "spawn": "integ:slack-app:snapshot"
         },
         {
+          "spawn": "integ:ssl-server-test:snapshot"
+        },
+        {
           "spawn": "integ:toolkit-cleaner:snapshot"
         },
         {
           "spawn": "integ:url-shortener:snapshot"
+        }
+      ]
+    },
+    "integ:ssl-server-test:assert": {
+      "name": "integ:ssl-server-test:assert",
+      "description": "assert the snapshot of integration test 'ssl-server-test'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/ssl-server-test/ssl-server-test.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'ssl-server-test'. Run 'projen integ:ssl-server-test:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/ssl-server-test/.tmp/ssl-server-test.integ/assert.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/ssl-server-test/ssl-server-test.integ.snapshot/ test/ssl-server-test/.tmp/ssl-server-test.integ/assert.cdk.out/"
+        }
+      ]
+    },
+    "integ:ssl-server-test:deploy": {
+      "name": "integ:ssl-server-test:deploy",
+      "description": "deploy integration test 'ssl-server-test' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/ssl-server-test/ssl-server-test.integ.snapshot"
+        },
+        {
+          "exec": "mv test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out test/ssl-server-test/ssl-server-test.integ.snapshot"
+        },
+        {
+          "spawn": "integ:ssl-server-test:destroy"
+        }
+      ]
+    },
+    "integ:ssl-server-test:destroy": {
+      "name": "integ:ssl-server-test:destroy",
+      "description": "destroy integration test 'ssl-server-test'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/ssl-server-test/ssl-server-test.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:ssl-server-test:snapshot": {
+      "name": "integ:ssl-server-test:snapshot",
+      "description": "update snapshot for integration test \"ssl-server-test\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/ssl-server-test/ssl-server-test.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:ssl-server-test:watch": {
+      "name": "integ:ssl-server-test:watch",
+      "description": "watch integration test 'ssl-server-test' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
         }
       ]
     },
@@ -721,6 +829,9 @@
         },
         {
           "spawn": "integ:slack-app:assert"
+        },
+        {
+          "spawn": "integ:ssl-server-test:assert"
         },
         {
           "spawn": "integ:toolkit-cleaner:assert"

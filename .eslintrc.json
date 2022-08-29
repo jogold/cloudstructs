@@ -151,6 +151,8 @@
           "src/slack-app/provider.lambda.ts",
           "src/slack-events/events.lambda.ts",
           "src/slack-textract/detect.lambda.ts",
+          "src/ssl-server-test/analyze.lambda.ts",
+          "src/ssl-server-test/extract-grade.lambda.ts",
           "src/toolkit-cleaner/clean-images.lambda.ts",
           "src/toolkit-cleaner/clean-objects.lambda.ts",
           "src/toolkit-cleaner/extract-template-hashes.lambda.ts",

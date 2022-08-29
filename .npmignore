@@ -24,6 +24,8 @@ tsconfig.tsbuildinfo
 !/assets/
 test/slack-app/.tmp
 test/slack-app/slack-app.integ.snapshot
+test/ssl-server-test/.tmp
+test/ssl-server-test/ssl-server-test.integ.snapshot
 test/toolkit-cleaner/.tmp
 test/toolkit-cleaner/toolkit-cleaner.integ.snapshot
 test/url-shortener/.tmp

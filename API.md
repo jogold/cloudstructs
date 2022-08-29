@@ -16,6 +16,7 @@ Name|Description
 [SlackAppManifestDefinition](#cloudstructs-slackappmanifestdefinition)|A Slack app manifest definition.
 [SlackEvents](#cloudstructs-slackevents)|Send Slack events to Amazon EventBridge.
 [SlackTextract](#cloudstructs-slacktextract)|Extract text from images posted to Slack using Amazon Textract.
+[SslServerTest](#cloudstructs-sslservertest)|Perform SSL server test for a hostname.
 [StateMachineCustomResourceProvider](#cloudstructs-statemachinecustomresourceprovider)|A state machine custom resource provider.
 [StaticWebsite](#cloudstructs-staticwebsite)|A CloudFront static website hosted on S3.
 [ToolkitCleaner](#cloudstructs-toolkitcleaner)|Clean unused S3 and ECR assets from your CDK Toolkit.
@@ -43,6 +44,7 @@ Name|Description
 [SlackEventsProps](#cloudstructs-slackeventsprops)|Properties for a SlackEvents.
 [SlackTextractProps](#cloudstructs-slacktextractprops)|Properties for a SlackTextract.
 [SlackkAppManifestBotUser](#cloudstructs-slackkappmanifestbotuser)|Bot user configuration.
+[SslServerTestProps](#cloudstructs-sslservertestprops)|Properties for a SslServerTest.
 [StateMachineCustomResourceProviderProps](#cloudstructs-statemachinecustomresourceproviderprops)|Properties for a StateMachineCustomResourceProvider.
 [StaticWebsiteProps](#cloudstructs-staticwebsiteprops)|Properties for a StaticWebsite.
 [ToolkitCleanerProps](#cloudstructs-toolkitcleanerprops)|Properties for a ToolkitCleaner.
@@ -61,6 +63,7 @@ Name|Description
 Name|Description
 ----|-----------
 [SlackAppManifestShortcutType](#cloudstructs-slackappmanifestshortcuttype)|Type of shortcuts.
+[SslServerTestGrade](#cloudstructs-sslservertestgrade)|SSL Server test grade.
 
 
 
@@ -557,6 +560,41 @@ new SlackTextract(scope: Construct, id: string, props: SlackTextractProps)
 
 
 
+## class SslServerTest  <a id="cloudstructs-sslservertest"></a>
+
+Perform SSL server test for a hostname.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
+
+### Initializer
+
+
+
+
+```ts
+new SslServerTest(scope: Construct, id: string, props: SslServerTestProps)
+```
+
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[SslServerTestProps](#cloudstructs-sslservertestprops)</code>)  *No description*
+  * **host** (<code>string</code>)  The hostname to test. 
+  * **alarmTopic** (<code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code>)  The topic to which the results must be sent when the grade is below the minimum grade. __*Default*__: a new topic is created
+  * **minimumGrade** (<code>[SslServerTestGrade](#cloudstructs-sslservertestgrade)</code>)  Minimum grade for the test. The grade is calculated using the worst grade of all endpoints. __*Default*__: SslServerTestGrade.A_PLUS
+  * **schedule** (<code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code>)  The schedule for the test. __*Default*__: every day
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**alarmTopic** | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | The topic to which the SSL test results are sent when the grade is below the minimum grade.
+
+
+
 ## class StateMachineCustomResourceProvider  <a id="cloudstructs-statemachinecustomresourceprovider"></a>
 
 A state machine custom resource provider.
@@ -983,6 +1021,22 @@ Name | Type | Description
 
 
 
+## struct SslServerTestProps  <a id="cloudstructs-sslservertestprops"></a>
+
+
+Properties for a SslServerTest.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**host** | <code>string</code> | The hostname to test.
+**alarmTopic**? | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | The topic to which the results must be sent when the grade is below the minimum grade.<br/>__*Default*__: a new topic is created
+**minimumGrade**? | <code>[SslServerTestGrade](#cloudstructs-sslservertestgrade)</code> | Minimum grade for the test. The grade is calculated using the worst grade of all endpoints.<br/>__*Default*__: SslServerTestGrade.A_PLUS
+**schedule**? | <code>[aws_events.Schedule](#aws-cdk-lib-aws-events-schedule)</code> | The schedule for the test.<br/>__*Default*__: every day
+
+
+
 ## struct StateMachineCustomResourceProviderProps  <a id="cloudstructs-statemachinecustomresourceproviderprops"></a>
 
 
@@ -1057,5 +1111,21 @@ Name | Description
 -----|-----
 **MESSAGE** |Message shortcuts are shown to users in the context menus of messages within Slack.
 **GLOBAL** |Global shortcuts are available to users via the shortcuts button in the composer, and when using search in Slack.
+
+
+## enum SslServerTestGrade  <a id="cloudstructs-sslservertestgrade"></a>
+
+SSL Server test grade.
+
+Name | Description
+-----|-----
+**A_PLUS** |
+**A** |
+**A_MINUS** |
+**B** |
+**C** |
+**D** |
+**E** |
+**F** |
 
 
