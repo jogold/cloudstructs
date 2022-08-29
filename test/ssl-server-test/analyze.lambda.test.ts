@@ -5,7 +5,7 @@ test('calls SSL Labs API', async () => {
   const scope = nock('https://api.ssllabs.com/api/v3')
     .get('/analyze')
     .query({ key: 'value' })
-    .reply(200, { response: 'body' })
+    .reply(200, { response: 'body' });
 
   const response = await handler({ key: 'value' });
   expect(scope.isDone()).toBeTruthy();
