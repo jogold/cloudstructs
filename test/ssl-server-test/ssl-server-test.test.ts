@@ -79,3 +79,15 @@ test('SslServerTest', () => {
     },
   });
 });
+
+test('Singleton state machine', () => {
+  new SslServerTest(stack, 'SslServerTest1', {
+    host: 'host1',
+  });
+
+  new SslServerTest(stack, 'SslServerTest2', {
+    host: 'host2',
+  });
+
+  Template.fromStack(stack).resourceCountIs('AWS::StepFunctions::StateMachine', 1);
+});
