@@ -40,3 +40,7 @@ myTest.alarmTopic.addSubscription(/* your subscription here */)
 
 Use the `minimumGrade`, `alarmTopic` or `schedule` props to customize the
 behavior of the construct.
+
+<p align="center">
+  <img src="ssl-server-test.svg" width="50%">
+</p>
