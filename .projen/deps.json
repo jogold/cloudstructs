@@ -118,7 +118,7 @@
     },
     {
       "name": "npm-check-updates",
-      "version": "^15",
+      "version": "^16",
       "type": "build"
     },
     {
@@ -150,6 +150,21 @@
     {
       "name": "got",
       "type": "bundled"
+    },
+    {
+      "name": "@types/prettier",
+      "version": "2.6.0",
+      "type": "override"
+    },
+    {
+      "name": "@types/responselike",
+      "version": "1.0.0",
+      "type": "override"
+    },
+    {
+      "name": "got",
+      "version": "12.3.1",
+      "type": "override"
     },
     {
       "name": "@aws-cdk/aws-apigatewayv2-alpha",
