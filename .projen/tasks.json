@@ -94,7 +94,7 @@
       "description": "Create a JavaScript bundle from src/email-receiver/s3.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -103,7 +103,7 @@
       "description": "Continuously update the JavaScript bundle from src/email-receiver/s3.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -112,7 +112,7 @@
       "description": "Create a JavaScript bundle from src/email-receiver/whitelist.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -121,7 +121,7 @@
       "description": "Continuously update the JavaScript bundle from src/email-receiver/whitelist.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -130,7 +130,7 @@
       "description": "Create a JavaScript bundle from src/slack-app/provider.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -139,7 +139,7 @@
       "description": "Continuously update the JavaScript bundle from src/slack-app/provider.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -148,7 +148,7 @@
       "description": "Create a JavaScript bundle from src/slack-events/events.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -157,7 +157,7 @@
       "description": "Continuously update the JavaScript bundle from src/slack-events/events.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -166,7 +166,7 @@
       "description": "Create a JavaScript bundle from src/slack-textract/detect.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -175,7 +175,7 @@
       "description": "Continuously update the JavaScript bundle from src/slack-textract/detect.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -184,7 +184,7 @@
       "description": "Create a JavaScript bundle from src/ssl-server-test/analyze.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -193,7 +193,7 @@
       "description": "Continuously update the JavaScript bundle from src/ssl-server-test/analyze.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -202,7 +202,7 @@
       "description": "Create a JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -211,7 +211,7 @@
       "description": "Continuously update the JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -220,7 +220,7 @@
       "description": "Create a JavaScript bundle from src/static-website/origin-request.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -229,7 +229,7 @@
       "description": "Continuously update the JavaScript bundle from src/static-website/origin-request.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -238,7 +238,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -247,7 +247,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -256,7 +256,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -265,7 +265,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -274,7 +274,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -283,7 +283,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -292,7 +292,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -301,7 +301,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -310,7 +310,7 @@
       "description": "Create a JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -319,7 +319,7 @@
       "description": "Continuously update the JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -328,7 +328,7 @@
       "description": "Create a JavaScript bundle from src/url-shortener/shortener.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
@@ -337,7 +337,7 @@
       "description": "Continuously update the JavaScript bundle from src/url-shortener/shortener.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
@@ -438,7 +438,7 @@
           "exec": "[ -d \"test/slack-app/slack-app.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'slack-app'. Run 'projen integ:slack-app:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/slack-app/.tmp/slack-app.integ/assert.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/slack-app/.tmp/slack-app.integ/assert.cdk.out > /dev/null"
         },
         {
           "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/slack-app/slack-app.integ.snapshot/ test/slack-app/.tmp/slack-app.integ/assert.cdk.out/"
@@ -453,7 +453,7 @@
           "exec": "rm -fr test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/slack-app/slack-app.integ.snapshot"
@@ -480,7 +480,7 @@
       "description": "update snapshot for integration test \"slack-app\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/slack-app/slack-app.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/slack-app/slack-app.integ.snapshot > /dev/null"
         }
       ]
     },
@@ -489,7 +489,7 @@
       "description": "watch integration test 'slack-app' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/slack-app/slack-app.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/slack-app/.tmp/slack-app.integ/deploy.cdk.out"
         }
       ]
     },
@@ -519,7 +519,7 @@
           "exec": "[ -d \"test/ssl-server-test/ssl-server-test.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'ssl-server-test'. Run 'projen integ:ssl-server-test:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/ssl-server-test/.tmp/ssl-server-test.integ/assert.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/ssl-server-test/.tmp/ssl-server-test.integ/assert.cdk.out > /dev/null"
         },
         {
           "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/ssl-server-test/ssl-server-test.integ.snapshot/ test/ssl-server-test/.tmp/ssl-server-test.integ/assert.cdk.out/"
@@ -534,7 +534,7 @@
           "exec": "rm -fr test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/ssl-server-test/ssl-server-test.integ.snapshot"
@@ -561,7 +561,7 @@
       "description": "update snapshot for integration test \"ssl-server-test\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/ssl-server-test/ssl-server-test.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/ssl-server-test/ssl-server-test.integ.snapshot > /dev/null"
         }
       ]
     },
@@ -570,7 +570,7 @@
       "description": "watch integration test 'ssl-server-test' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/ssl-server-test/ssl-server-test.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/ssl-server-test/.tmp/ssl-server-test.integ/deploy.cdk.out"
         }
       ]
     },
@@ -582,7 +582,7 @@
           "exec": "[ -d \"test/toolkit-cleaner/toolkit-cleaner.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'toolkit-cleaner'. Run 'projen integ:toolkit-cleaner:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/assert.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/assert.cdk.out > /dev/null"
         },
         {
           "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/toolkit-cleaner/toolkit-cleaner.integ.snapshot/ test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/assert.cdk.out/"
@@ -597,7 +597,7 @@
           "exec": "rm -fr test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/toolkit-cleaner/toolkit-cleaner.integ.snapshot"
@@ -624,7 +624,7 @@
       "description": "update snapshot for integration test \"toolkit-cleaner\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/toolkit-cleaner/toolkit-cleaner.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/toolkit-cleaner/toolkit-cleaner.integ.snapshot > /dev/null"
         }
       ]
     },
@@ -633,7 +633,7 @@
       "description": "watch integration test 'toolkit-cleaner' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/toolkit-cleaner/toolkit-cleaner.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/toolkit-cleaner/.tmp/toolkit-cleaner.integ/deploy.cdk.out"
         }
       ]
     },
@@ -645,7 +645,7 @@
           "exec": "[ -d \"test/url-shortener/url-shortener.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'url-shortener'. Run 'projen integ:url-shortener:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/url-shortener/.tmp/url-shortener.integ/assert.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/url-shortener/.tmp/url-shortener.integ/assert.cdk.out > /dev/null"
         },
         {
           "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/url-shortener/url-shortener.integ.snapshot/ test/url-shortener/.tmp/url-shortener.integ/assert.cdk.out/"
@@ -660,7 +660,7 @@
           "exec": "rm -fr test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/url-shortener/url-shortener.integ.snapshot"
@@ -687,7 +687,7 @@
       "description": "update snapshot for integration test \"url-shortener\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/url-shortener/url-shortener.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/url-shortener/url-shortener.integ.snapshot > /dev/null"
         }
       ]
     },
@@ -696,7 +696,7 @@
       "description": "watch integration test 'url-shortener' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/url-shortener/url-shortener.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/url-shortener/.tmp/url-shortener.integ/deploy.cdk.out"
         }
       ]
     },
@@ -838,15 +838,6 @@
         },
         {
           "spawn": "integ:url-shortener:assert"
-        }
-      ]
-    },
-    "test:update": {
-      "name": "test:update",
-      "description": "Update jest snapshots",
-      "steps": [
-        {
-          "exec": "jest --updateSnapshot"
         }
       ]
     },
