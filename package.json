@@ -98,10 +98,10 @@
     "@typescript-eslint/parser": "^5",
     "aws-cdk": "^2",
     "aws-cdk-lib": "2.1.0",
-    "aws-sdk": "^2.1244.0",
+    "aws-sdk": "^2.1247.0",
     "aws-sdk-mock": "^5.8.0",
     "constructs": "10.0.5",
-    "esbuild": "^0.15.12",
+    "esbuild": "^0.15.13",
     "eslint": "^8",
     "eslint-import-resolver-node": "^0.3.6",
     "eslint-import-resolver-typescript": "^2.7.1",
@@ -115,7 +115,7 @@
     "json-schema": "^0.4.0",
     "nock": "^13.2.9",
     "npm-check-updates": "^16",
-    "projen": "^0.65.7",
+    "projen": "^0.65.13",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
@@ -207,8 +207,6 @@
     }
   },
   "resolutions": {
-    "@types/responselike": "1.0.0",
-    "got": "12.3.1",
     "@types/prettier": "2.6.0"
   },
   "exports": {
