@@ -94,6 +94,7 @@ export class UrlShortener extends Construct {
         name: 'key',
         type: dynamodb.AttributeType.STRING,
       },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: RemovalPolicy.DESTROY,
     });
 
