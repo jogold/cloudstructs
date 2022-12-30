@@ -119,7 +119,7 @@ export class StateMachineCustomResourceProvider extends Construct {
     const startExecution = new lambda.Function(this, 'StartExecution', {
       code: lambda.Code.fromAsset(path.join(__dirname, 'runtime')),
       handler: 'index.startExecution',
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
     });
     startExecution.addToRolePolicy(new iam.PolicyStatement({
       actions: ['states:StartExecution'],
@@ -134,7 +134,7 @@ export class StateMachineCustomResourceProvider extends Construct {
     return new lambda.Function(this, `CfnResponse${status}`, {
       code: lambda.Code.fromAsset(path.join(__dirname, 'runtime')),
       handler: `index.cfnResponse${status}`,
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
     });
   }
 }
