@@ -134,7 +134,7 @@ export class StateMachineCustomResourceProvider extends Construct {
     return new lambda.Function(this, `CfnResponse${status}`, {
       code: lambda.Code.fromAsset(path.join(__dirname, 'runtime')),
       handler: `index.cfnResponse${status}`,
-      runtime: new lambda.Runtime('nodejs18.x', lambda.RuntimeFamily.NODEJS,
+      runtime: new lambda.Runtime('nodejs18.x', lambda.RuntimeFamily.NODEJS),
     });
   }
 }
