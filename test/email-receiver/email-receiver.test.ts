@@ -12,7 +12,7 @@ beforeEach(() => {
 test('EmailReceiver', () => {
   const fn = new lambda.Function(stack, 'Fn', {
     code: lambda.Code.fromInline('export.handler=() => void;'),
-    runtime: lambda.Runtime.NODEJS_14_X,
+    runtime: new lambda.Runtime('nodejs16.x', lambda.RuntimeFamily.NODEJS),
     handler: 'index.handler',
   });
   const ruleSet = ses.ReceiptRuleSet.fromReceiptRuleSetName(stack, 'RuleSet', 'rule-set');
