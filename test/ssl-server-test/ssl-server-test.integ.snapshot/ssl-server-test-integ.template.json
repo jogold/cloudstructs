@@ -89,7 +89,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs18.x"
       },
       "DependsOn": [
         "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299"
@@ -148,7 +148,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs18.x"
       },
       "DependsOn": [
         "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19"

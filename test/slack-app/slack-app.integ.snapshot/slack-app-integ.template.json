@@ -179,7 +179,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs18.x"
       },
       "DependsOn": [
         "SlackAppProviderhandlerServiceRoleDefaultPolicyBAEEA75E",
