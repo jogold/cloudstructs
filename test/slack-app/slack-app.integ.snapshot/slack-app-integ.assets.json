@@ -40,7 +40,7 @@
         }
       }
     },
-    "8b916e811962ebbf6bf76a9aea5b9a7aae0d6a56ffb779a570e8cfcfe1b6e767": {
+    "b8e1068726700716c557f11bb8c69cc506b3e28b3d08434ba05460a76ae65f76": {
       "source": {
         "path": "slack-app-integ.template.json",
         "packaging": "file"
@@ -48,7 +48,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "8b916e811962ebbf6bf76a9aea5b9a7aae0d6a56ffb779a570e8cfcfe1b6e767.json",
+          "objectKey": "b8e1068726700716c557f11bb8c69cc506b3e28b3d08434ba05460a76ae65f76.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
