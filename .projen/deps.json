@@ -109,10 +109,6 @@
       "type": "build"
     },
     {
-      "name": "json-schema",
-      "type": "build"
-    },
-    {
       "name": "nock",
       "type": "build"
     },
