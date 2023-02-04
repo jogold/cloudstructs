@@ -37,7 +37,10 @@
         "PolicyDocument": {
           "Statement": [
             {
-              "Action": "cloudformation:DescribeStacks",
+              "Action": [
+                "cloudformation:DescribeStacks",
+                "cloudformation:ListStacks"
+              ],
               "Effect": "Allow",
               "Resource": "*"
             }

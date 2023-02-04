@@ -65,7 +65,7 @@ export class ToolkitCleaner extends Construct {
       timeout: Duration.seconds(30),
     });
     getStackNamesFunction.addToRolePolicy(new PolicyStatement({
-      actions: ['cloudformation:DescribeStacks'],
+      actions: ['cloudformation:DescribeStacks', 'cloudformation:ListStacks'],
       resources: ['*'],
     }));
     const getStackNames = new tasks.LambdaInvoke(this, 'GetStackNames', {
