@@ -581,7 +581,7 @@
         "UrlShortenerUrlShortenergoldexbe049505BC"
       ]
     },
-    "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A67148600c93510290bfbed6cd40bb26aa": {
+    "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A6ebe18e14c1528c94ea494f0b19094863": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -590,11 +590,11 @@
         "Description": "Automatically created by the RestApi construct"
       },
       "DependsOn": [
-        "UrlShortenerUrlShortenergoldexbeproxyANY8BD34AAE",
         "UrlShortenerUrlShortenergoldexbeproxyOPTIONS09EF47CE",
+        "UrlShortenerUrlShortenergoldexbeproxyPOST1417E6E0",
         "UrlShortenerUrlShortenergoldexbeproxyA27529BB",
-        "UrlShortenerUrlShortenergoldexbeANYE4A1D40F",
-        "UrlShortenerUrlShortenergoldexbeOPTIONS341F249C"
+        "UrlShortenerUrlShortenergoldexbeOPTIONS341F249C",
+        "UrlShortenerUrlShortenergoldexbePOSTF5C18C34"
       ]
     },
     "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D": {
@@ -604,7 +604,7 @@
           "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
         },
         "DeploymentId": {
-          "Ref": "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A67148600c93510290bfbed6cd40bb26aa"
+          "Ref": "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A6ebe18e14c1528c94ea494f0b19094863"
         },
         "StageName": "prod"
       }
@@ -651,7 +651,7 @@
         ]
       }
     },
-    "UrlShortenerUrlShortenergoldexbeANYApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYBDFCD415": {
+    "UrlShortenerUrlShortenergoldexbePOSTApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POST4C864057": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "Action": "lambda:InvokeFunction",
@@ -682,13 +682,13 @@
               {
                 "Ref": "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D"
               },
-              "/*/"
+              "/POST/"
             ]
           ]
         }
       }
     },
-    "UrlShortenerUrlShortenergoldexbeANYApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANY7A04153C": {
+    "UrlShortenerUrlShortenergoldexbePOSTApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POSTF5DF609E": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "Action": "lambda:InvokeFunction",
@@ -715,16 +715,16 @@
               {
                 "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
               },
-              "/test-invoke-stage/*/"
+              "/test-invoke-stage/POST/"
             ]
           ]
         }
       }
     },
-    "UrlShortenerUrlShortenergoldexbeANYE4A1D40F": {
+    "UrlShortenerUrlShortenergoldexbePOSTF5C18C34": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
-        "HttpMethod": "ANY",
+        "HttpMethod": "POST",
         "ResourceId": {
           "Fn::GetAtt": [
             "UrlShortenerUrlShortenergoldexbe049505BC",
@@ -817,7 +817,7 @@
         ]
       }
     },
-    "UrlShortenerUrlShortenergoldexbeproxyANYApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYproxyE8B5093D": {
+    "UrlShortenerUrlShortenergoldexbeproxyPOSTApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POSTproxy884BC62E": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "Action": "lambda:InvokeFunction",
@@ -848,13 +848,13 @@
               {
                 "Ref": "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D"
               },
-              "/*/*"
+              "/POST/*"
             ]
           ]
         }
       }
     },
-    "UrlShortenerUrlShortenergoldexbeproxyANYApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8ANYproxy59B520BD": {
+    "UrlShortenerUrlShortenergoldexbeproxyPOSTApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POSTproxyB623C212": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "Action": "lambda:InvokeFunction",
@@ -881,16 +881,16 @@
               {
                 "Ref": "UrlShortenerUrlShortenergoldexbe049505BC"
               },
-              "/test-invoke-stage/*/*"
+              "/test-invoke-stage/POST/*"
             ]
           ]
         }
       }
     },
-    "UrlShortenerUrlShortenergoldexbeproxyANY8BD34AAE": {
+    "UrlShortenerUrlShortenergoldexbeproxyPOST1417E6E0": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
-        "HttpMethod": "ANY",
+        "HttpMethod": "POST",
         "ResourceId": {
           "Ref": "UrlShortenerUrlShortenergoldexbeproxyA27529BB"
         },

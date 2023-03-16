@@ -55,6 +55,13 @@ export interface UrlShortenerProps {
   readonly apiGatewayAuthorizer?: apigateway.IAuthorizer;
 
   /**
+   * Whether to use IAM authorization
+   *
+   * @default - do not use IAM authorization
+   */
+  readonly iamAuthorization?: boolean;
+
+  /**
    * Allowed origins for CORS
    *
    * @default - CORS is not enabled
@@ -81,7 +88,9 @@ export class UrlShortener extends Construct {
   /**
    * The underlying API Gateway REST API
    */
-  public readonly api: apigateway.LambdaRestApi;
+  public readonly api: apigateway.RestApi;
+
+  private readonly iamAuthorization?: boolean;
 
   constructor(scope: Construct, id: string, props: UrlShortenerProps) {
     super(scope, id);
@@ -182,15 +191,38 @@ export class UrlShortener extends Construct {
         : undefined,
     });
 
-    this.api.root.addMethod('ANY', new apigateway.LambdaIntegration(shortenerFunction), {
+    if (props.iamAuthorization && props.apiGatewayAuthorizer) {
+      throw new Error('Cannot use both IAM authorization and an authorizer');
+    }
+
+    this.iamAuthorization = props.iamAuthorization;
+
+    this.api.root.addMethod('POST', new apigateway.LambdaIntegration(shortenerFunction), {
       authorizer: props.apiGatewayAuthorizer,
+      authorizationType: props.iamAuthorization ? apigateway.AuthorizationType.IAM : undefined,
     });
     this.api.root
       .addResource('{proxy+}')
-      .addMethod('ANY', new apigateway.LambdaIntegration(shortenerFunction), {
+      .addMethod('POST', new apigateway.LambdaIntegration(shortenerFunction), {
         authorizer: props.apiGatewayAuthorizer,
+        authorizationType: this.iamAuthorization ? apigateway.AuthorizationType.IAM : undefined,
       });
 
     this.apiEndpoint = this.api.url;
+  }
+
+  /**
+   * Grant access to invoke the URL shortener if protected by IAM authorization
+   */
+  public grantInvoke(grantee: iam.IGrantable): iam.Grant {
+    if (this.iamAuthorization === false) {
+      throw new Error('The URL shortener is not protected by IAM authorization');
+    }
+
+    return iam.Grant.addToPrincipal({
+      grantee,
+      actions: ['execute-api:Invoke'],
+      resourceArns: [`arn:aws:execute-api:${this.api.env.region}:${this.api.env.account}:${this.api.restApiId}/${this.api.deploymentStage.stageName}/POST/*`],
+    });
   }
 }
