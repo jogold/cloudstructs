@@ -3905,7 +3905,11 @@ Object {
                     Object {
                       "Ref": "UrlShortenerUrlShortenercstructscomC0F539C8",
                     },
-                    "/Stack/UrlShortener/UrlShortenercstructs.com/DeploymentStage.prod/POST/*",
+                    "/",
+                    Object {
+                      "Ref": "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2",
+                    },
+                    "/POST/*",
                   ],
                 ],
               },
