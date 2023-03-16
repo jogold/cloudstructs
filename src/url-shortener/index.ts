@@ -222,7 +222,7 @@ export class UrlShortener extends Construct {
     return iam.Grant.addToPrincipal({
       grantee,
       actions: ['execute-api:Invoke'],
-      resourceArns: [`arn:aws:execute-api:${this.api.env.region}:${this.api.env.account}:${this.api.restApiId}/${this.api.deploymentStage}/POST/*`]
-    })
+      resourceArns: [`arn:aws:execute-api:${this.api.env.region}:${this.api.env.account}:${this.api.restApiId}/${this.api.deploymentStage}/POST/*`],
+    });
   }
 }
