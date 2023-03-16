@@ -3,6 +3,7 @@ import { Template } from 'aws-cdk-lib/assertions';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import { UrlShortener } from '../../src';
 
@@ -82,10 +83,16 @@ test('UrlShortener with CORS', () => {
 test('UrlShortener with IAM authorization', () => {
   const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
 
-  new UrlShortener(stack, 'UrlShortener', {
+  const urlShortener = new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
     iamAuthorization: true,
   });
+
+  const role = new iam.Role(this, 'Role', {
+    assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+  });
+
+  urlShortener.grantInvoke(role);
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });

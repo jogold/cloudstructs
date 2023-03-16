@@ -88,7 +88,9 @@ export class UrlShortener extends Construct {
   /**
    * The underlying API Gateway REST API
    */
-  public readonly api: apigateway.LambdaRestApi;
+  public readonly api: apigateway.RestApi;
+
+  private readonly iamAuthorization?: boolean;
 
   constructor(scope: Construct, id: string, props: UrlShortenerProps) {
     super(scope, id);
@@ -193,17 +195,27 @@ export class UrlShortener extends Construct {
       throw new Error('Cannot use both IAM authorization and an authorizer');
     }
 
-    this.api.root.addMethod('ANY', new apigateway.LambdaIntegration(shortenerFunction), {
+    this.iamAuthorization = props.iamAuthorization;
+
+    this.api.root.addMethod('POST', new apigateway.LambdaIntegration(shortenerFunction), {
       authorizer: props.apiGatewayAuthorizer,
       authorizationType: props.iamAuthorization ? apigateway.AuthorizationType.IAM : undefined,
     });
     this.api.root
       .addResource('{proxy+}')
-      .addMethod('ANY', new apigateway.LambdaIntegration(shortenerFunction), {
+      .addMethod('POST', new apigateway.LambdaIntegration(shortenerFunction), {
         authorizer: props.apiGatewayAuthorizer,
-        authorizationType: props.iamAuthorization ? apigateway.AuthorizationType.IAM : undefined,
+        authorizationType: this.iamAuthorization ? apigateway.AuthorizationType.IAM : undefined,
       });
 
     this.apiEndpoint = this.api.url;
+  }
+
+  public grantInvoke(grantee: iam.IGrantable): iam.Grant {
+    return iam.Grant.addToPrincipal({
+      grantee,
+      actions: ['execute-api:Invoke'],
+      resourceArns: [`arn:aws:execute-api:${this.api.env.region}:${this.api.env.account}:${this.api.restApiId}/${this.api.deploymentStage}/POST/*`]
+    })
   }
 }
