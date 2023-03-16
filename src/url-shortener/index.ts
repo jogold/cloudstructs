@@ -211,7 +211,14 @@ export class UrlShortener extends Construct {
     this.apiEndpoint = this.api.url;
   }
 
+  /**
+   * Grant access to invoke the URL shortener if protected by IAM authorization
+   */
   public grantInvoke(grantee: iam.IGrantable): iam.Grant {
+    if (this.iamAuthorization === false) {
+      throw new Error('The URL shortener is not protected by IAM authorization');
+    }
+
     return iam.Grant.addToPrincipal({
       grantee,
       actions: ['execute-api:Invoke'],
