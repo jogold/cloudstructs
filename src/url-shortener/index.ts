@@ -55,6 +55,13 @@ export interface UrlShortenerProps {
   readonly apiGatewayAuthorizer?: apigateway.IAuthorizer;
 
   /**
+   * Whether to use IAM authorization
+   *
+   * @default - do not use IAM authorization
+   */
+  readonly iamAuthorization?: boolean;
+
+  /**
    * Allowed origins for CORS
    *
    * @default - CORS is not enabled
@@ -182,13 +189,19 @@ export class UrlShortener extends Construct {
         : undefined,
     });
 
+    if (props.iamAuthorization && props.apiGatewayAuthorizer) {
+      throw new Error('Cannot use both IAM authorization and an authorizer');
+    }
+
     this.api.root.addMethod('ANY', new apigateway.LambdaIntegration(shortenerFunction), {
       authorizer: props.apiGatewayAuthorizer,
+      authorizationType: props.iamAuthorization ? apigateway.AuthorizationType.IAM : undefined,
     });
     this.api.root
       .addResource('{proxy+}')
       .addMethod('ANY', new apigateway.LambdaIntegration(shortenerFunction), {
         authorizer: props.apiGatewayAuthorizer,
+        authorizationType: props.iamAuthorization ? apigateway.AuthorizationType.IAM : undefined,
       });
 
     this.apiEndpoint = this.api.url;

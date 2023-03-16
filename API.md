@@ -718,6 +718,7 @@ new UrlShortener(scope: Construct, id: string, props: UrlShortenerProps)
   * **bucketName** (<code>string</code>)  A name for the bucket saving the redirects. __*Default*__: derived from short link domain name
   * **corsAllowOrigins** (<code>Array<string></code>)  Allowed origins for CORS. __*Default*__: CORS is not enabled
   * **expiration** (<code>[Duration](#aws-cdk-lib-duration)</code>)  Expiration for short urls. __*Default*__: cdk.Duration.days(365)
+  * **iamAuthorization** (<code>boolean</code>)  Whether to use IAM authorization. __*Default*__: do not use IAM authorization
   * **recordName** (<code>string</code>)  The record name to use in the hosted zone. __*Default*__: zone root
 
 
@@ -1099,6 +1100,7 @@ Name | Type | Description
 **bucketName**? | <code>string</code> | A name for the bucket saving the redirects.<br/>__*Default*__: derived from short link domain name
 **corsAllowOrigins**? | <code>Array<string></code> | Allowed origins for CORS.<br/>__*Default*__: CORS is not enabled
 **expiration**? | <code>[Duration](#aws-cdk-lib-duration)</code> | Expiration for short urls.<br/>__*Default*__: cdk.Duration.days(365)
+**iamAuthorization**? | <code>boolean</code> | Whether to use IAM authorization.<br/>__*Default*__: do not use IAM authorization
 **recordName**? | <code>string</code> | The record name to use in the hosted zone.<br/>__*Default*__: zone root
 
 

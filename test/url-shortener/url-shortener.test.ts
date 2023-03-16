@@ -78,3 +78,14 @@ test('UrlShortener with CORS', () => {
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
+
+test('UrlShortener with IAM authorization', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    iamAuthorization: true,
+  });
+
+  expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
+});
