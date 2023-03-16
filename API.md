@@ -728,8 +728,24 @@ new UrlShortener(scope: Construct, id: string, props: UrlShortenerProps)
 
 Name | Type | Description 
 -----|------|-------------
-**api** | <code>[aws_apigateway.LambdaRestApi](#aws-cdk-lib-aws-apigateway-lambdarestapi)</code> | The underlying API Gateway REST API.
+**api** | <code>[aws_apigateway.RestApi](#aws-cdk-lib-aws-apigateway-restapi)</code> | The underlying API Gateway REST API.
 **apiEndpoint** | <code>string</code> | The endpoint of the URL shortener API.
+
+### Methods
+
+
+#### grantInvoke(grantee) <a id="cloudstructs-urlshortener-grantinvoke"></a>
+
+Grant access to invoke the URL shortener if protected by IAM authorization.
+
+```ts
+grantInvoke(grantee: IGrantable): Grant
+```
+
+* **grantee** (<code>[aws_iam.IGrantable](#aws-cdk-lib-aws-iam-igrantable)</code>)  *No description*
+
+__Returns__:
+* <code>[aws_iam.Grant](#aws-cdk-lib-aws-iam-grant)</code>
 
 
 
