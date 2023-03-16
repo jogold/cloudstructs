@@ -88,7 +88,7 @@ test('UrlShortener with IAM authorization', () => {
     iamAuthorization: true,
   });
 
-  const role = new iam.Role(this, 'Role', {
+  const role = new iam.Role(stack, 'Role', {
     assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
   });
 
