@@ -120,7 +120,7 @@ class SslServerTestStateMachine extends Construct {
     });
 
     const wait = new Wait(this, 'Wait', {
-      time: WaitTime.duration(Duration.seconds(20)),
+      time: WaitTime.duration(Duration.seconds(30)),
     });
 
     const pollAnalysis = new LambdaInvoke(this, 'Poll Analysis', {

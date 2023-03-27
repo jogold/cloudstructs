@@ -253,7 +253,7 @@
                   "Arn"
                 ]
               },
-              "\",\"Parameters\":{\"host.$\":\"$.host\",\"startNew\":\"on\"}},\"Wait\":{\"Type\":\"Wait\",\"Seconds\":20,\"Next\":\"Poll Analysis\"},\"Poll Analysis\":{\"Next\":\"Is Ready ?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
+              "\",\"Parameters\":{\"host.$\":\"$.host\",\"startNew\":\"on\"}},\"Wait\":{\"Type\":\"Wait\",\"Seconds\":30,\"Next\":\"Poll Analysis\"},\"Poll Analysis\":{\"Next\":\"Is Ready ?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
                   "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
