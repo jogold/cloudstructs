@@ -89,7 +89,8 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs16.x",
+        "Timeout": 30
       },
       "DependsOn": [
         "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299"
@@ -245,14 +246,14 @@
           "Fn::Join": [
             "",
             [
-              "{\"StartAt\":\"Start Analysis\",\"States\":{\"Start Analysis\":{\"Next\":\"Wait\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"",
+              "{\"StartAt\":\"Start Analysis\",\"States\":{\"Start Analysis\":{\"Next\":\"Wait\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
                   "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
                   "Arn"
                 ]
               },
-              "\",\"Parameters\":{\"host.$\":\"$.host\",\"startNew\":\"on\"}},\"Wait\":{\"Type\":\"Wait\",\"Seconds\":10,\"Next\":\"Poll Analysis\"},\"Poll Analysis\":{\"Next\":\"Is Ready ?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"",
+              "\",\"Parameters\":{\"host.$\":\"$.host\",\"startNew\":\"on\"}},\"Wait\":{\"Type\":\"Wait\",\"Seconds\":30,\"Next\":\"Poll Analysis\"},\"Poll Analysis\":{\"Next\":\"Is Ready ?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
               {
                 "Fn::GetAtt": [
                   "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
@@ -270,7 +271,7 @@
               {
                 "Ref": "AWS::Partition"
               },
-              ":states:::sns:publish\",\"Parameters\":{\"TopicArn.$\":\"$$.Execution.Input.alarmTopicArn\",\"Message.$\":\"States.JsonToString($)\",\"Subject.$\":\"States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)\"}},\"Fail\":{\"Type\":\"Fail\"}},\"TimeoutSeconds\":1800}"
+              ":states:::sns:publish\",\"Parameters\":{\"TopicArn.$\":\"$$.Execution.Input.alarmTopicArn\",\"Message.$\":\"States.JsonToString($)\",\"Subject.$\":\"States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)\"}},\"Fail\":{\"Type\":\"Fail\"}},\"TimeoutSeconds\":3600}"
             ]
           ]
         }

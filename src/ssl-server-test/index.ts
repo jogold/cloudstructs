@@ -103,7 +103,9 @@ class SslServerTestStateMachine extends Construct {
   private constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const analyzeFunction = new AnalyzeFunction(this, 'AnalyzeFunction');
+    const analyzeFunction = new AnalyzeFunction(this, 'AnalyzeFunction', {
+      timeout: Duration.seconds(30),
+    });
 
     const startAnalysis = new LambdaInvoke(this, 'Start Analysis', {
       lambdaFunction: analyzeFunction,
@@ -112,10 +114,13 @@ class SslServerTestStateMachine extends Construct {
         startNew: 'on',
       }),
       payloadResponseOnly: true,
+    }).addRetry({
+      interval: Duration.seconds(2),
+      errors: ['Lambda.Unknown'],
     });
 
     const wait = new Wait(this, 'Wait', {
-      time: WaitTime.duration(Duration.seconds(10)),
+      time: WaitTime.duration(Duration.seconds(30)),
     });
 
     const pollAnalysis = new LambdaInvoke(this, 'Poll Analysis', {
@@ -124,7 +129,10 @@ class SslServerTestStateMachine extends Construct {
         host: JsonPath.stringAt('$.host'),
       }),
       payloadResponseOnly: true,
-    });
+    }).addRetry({
+      interval: Duration.seconds(2),
+      errors: ['Lambda.Unknown'],
+    });;
 
     const extractGradeFunction = new ExtractGradeFunction(this, 'ExtractGradeFunction');
     const extractGrade = new LambdaInvoke(this, 'Extract Grade', {
@@ -154,7 +162,7 @@ class SslServerTestStateMachine extends Construct {
           .when(Condition.stringEquals('$.status', 'ERROR'), fail)
           .otherwise(wait),
         ),
-      timeout: Duration.minutes(30),
+      timeout: Duration.hours(1),
     });
   }
 }
