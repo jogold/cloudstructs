@@ -116,7 +116,7 @@ class SslServerTestStateMachine extends Construct {
       payloadResponseOnly: true,
     }).addRetry({
       interval: Duration.seconds(2),
-      errors: ['Lambda.Unknown']
+      errors: ['Lambda.Unknown'],
     });
 
     const wait = new Wait(this, 'Wait', {
@@ -131,7 +131,7 @@ class SslServerTestStateMachine extends Construct {
       payloadResponseOnly: true,
     }).addRetry({
       interval: Duration.seconds(2),
-      errors: ['Lambda.Unknown']
+      errors: ['Lambda.Unknown'],
     });;
 
     const extractGradeFunction = new ExtractGradeFunction(this, 'ExtractGradeFunction');
