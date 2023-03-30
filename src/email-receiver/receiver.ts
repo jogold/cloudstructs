@@ -44,13 +44,13 @@ export interface EmailReceiverProps {
    * @default - The new rule is inserted at the beginning of the rule list.
    */
   readonly afterRule?: ses.IReceiptRule;
-  
+
   /**
    * Whether the receiver is active.
    *
    * @default true
    */
-  readonly enabled?: boolean;  
+  readonly enabled?: boolean;
 }
 
 /**

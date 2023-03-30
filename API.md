@@ -202,6 +202,7 @@ new EmailReceiver(scope: Construct, id: string, props: EmailReceiverProps)
   * **receiptRuleSet** (<code>[aws_ses.IReceiptRuleSet](#aws-cdk-lib-aws-ses-ireceiptruleset)</code>)  The SES receipt rule set where a receipt rule will be added. 
   * **recipients** (<code>Array<string></code>)  The recipients for which emails should be received. 
   * **afterRule** (<code>[aws_ses.IReceiptRule](#aws-cdk-lib-aws-ses-ireceiptrule)</code>)  An existing rule after which the new rule will be placed in the rule set. __*Default*__: The new rule is inserted at the beginning of the rule list.
+  * **enabled** (<code>boolean</code>)  Whether the receiver is active. __*Default*__: true
   * **sourceWhitelist** (<code>string</code>)  A regular expression to whitelist source email addresses. __*Default*__: no whitelisting of source email addresses
 
 
@@ -793,6 +794,7 @@ Name | Type | Description
 **receiptRuleSet** | <code>[aws_ses.IReceiptRuleSet](#aws-cdk-lib-aws-ses-ireceiptruleset)</code> | The SES receipt rule set where a receipt rule will be added.
 **recipients** | <code>Array<string></code> | The recipients for which emails should be received.
 **afterRule**? | <code>[aws_ses.IReceiptRule](#aws-cdk-lib-aws-ses-ireceiptrule)</code> | An existing rule after which the new rule will be placed in the rule set.<br/>__*Default*__: The new rule is inserted at the beginning of the rule list.
+**enabled**? | <code>boolean</code> | Whether the receiver is active.<br/>__*Default*__: true
 **sourceWhitelist**? | <code>string</code> | A regular expression to whitelist source email addresses.<br/>__*Default*__: no whitelisting of source email addresses
 
 
