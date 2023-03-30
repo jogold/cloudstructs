@@ -44,6 +44,13 @@ export interface EmailReceiverProps {
    * @default - The new rule is inserted at the beginning of the rule list.
    */
   readonly afterRule?: ses.IReceiptRule;
+
+  /**
+   * Whether the receiver is active.
+   *
+   * @default true
+   */
+  readonly enabled?: boolean;
 }
 
 /**
@@ -58,6 +65,7 @@ export class EmailReceiver extends Construct {
       ruleSet: props.receiptRuleSet,
       recipients: props.recipients,
       after: props.afterRule,
+      enabled: props.enabled,
     });
 
     const bucket = new s3.Bucket(this, 'Bucket', {
