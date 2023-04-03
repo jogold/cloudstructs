@@ -5,7 +5,7 @@ import { handler } from '../../src/slack-events/events.lambda';
 import * as signature from '../../src/slack-events/signature';
 
 process.env.SLACK_SIGNING_SECRET = 'secret';
-process.env.AWR_REGION = 'eu-west-1';
+process.env.AWS_REGION = 'eu-west-1';
 
 const eventBridgeClientMock = mockClient(EventBridgeClient);
 
