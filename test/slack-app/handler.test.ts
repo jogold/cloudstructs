@@ -62,6 +62,9 @@ beforeEach(() => {
       exp: Date.now() / 1000 + 3600,
     }),
   })
+  secretsManagerClientMock.on(PutSecretValueCommand).resolves({
+    ARN: 'arn'
+  })
 
   postResponseMock.mockResolvedValue({
     ok: true,
