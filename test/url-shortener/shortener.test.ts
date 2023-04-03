@@ -1,8 +1,3 @@
-const s3ClientMock = {
-  putObject: jest.fn().mockReturnThis(),
-  promise: jest.fn(),
-};
-
 const documentClientMock = {
   update: jest.fn().mockReturnValue({
     promise: () => ({
@@ -13,16 +8,19 @@ const documentClientMock = {
   }),
 };
 
+import 'aws-sdk-client-mock-jest';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/url-shortener/shortener.lambda';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { DynamoDBClient, UpdateItemCommand } from '@aws-sdk/client-dynamodb';
 
-jest.mock('aws-sdk', () => {
-  return {
-    S3: jest.fn(() => s3ClientMock),
-    DynamoDB: {
-      DocumentClient: jest.fn(() => documentClientMock),
-    },
-  };
-});
+const s3ClientMock = mockClient(S3Client);
+const dynamodbMockClient = mockClient(DynamoDBClient);
+
+beforeEach(() => {
+  s3ClientMock.reset();
+  dynamodbMockClient.reset();
+})
 
 process.env.TABLE_NAME = 'my-table';
 process.env.DOMAIN_NAME = 'short.com';
@@ -43,7 +41,7 @@ test('returns 201 with short url', async () => {
     }),
   });
 
-  expect(documentClientMock.update).toHaveBeenCalledWith({
+  expect(dynamodbMockClient).toHaveBeenCalledWith(UpdateItemCommand, {
     TableName: 'my-table',
     Key: { key: 'counter' },
     UpdateExpression: 'ADD #value :incr',
@@ -52,7 +50,7 @@ test('returns 201 with short url', async () => {
     ReturnValues: 'UPDATED_NEW',
   });
 
-  expect(s3ClientMock.putObject).toHaveBeenCalledWith({
+  expect(s3ClientMock).toHaveReceivedCommandWith(PutObjectCommand, {
     Bucket: 'bucket',
     Key: 'QI',
     ContentType: 'application/json',
@@ -74,5 +72,5 @@ test('returns 400 with invalid url', async () => {
 
   expect(documentClientMock.update). not.toHaveBeenCalled();
 
-  expect(s3ClientMock.putObject).not.toHaveBeenCalled();
+  expect(s3ClientMock).not.toHaveReceivedCommand(PutObjectCommand);
 });

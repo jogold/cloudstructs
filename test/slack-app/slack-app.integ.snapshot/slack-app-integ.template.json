@@ -164,7 +164,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "ed4e01ce89b54c5c739f73491f4f7f2d8955b84479890ee8b3d4c03eeeda45bd.zip"
+          "S3Key": "277fd9541645068dad6cf3ebc43d582a5f2cb2b5eb0160de90fd087194fb1539.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -179,7 +179,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs18.x"
       },
       "DependsOn": [
         "SlackAppProviderhandlerServiceRoleDefaultPolicyBAEEA75E",

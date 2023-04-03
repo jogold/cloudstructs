@@ -3,6 +3,7 @@ import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import { UpdateServiceCommandInput } from '@aws-sdk/client-ecs';
 import { Construct } from 'constructs';
 
 /**
@@ -75,14 +76,15 @@ export class EcsServiceRoller extends Construct {
     });
 
 
+    const parameters: UpdateServiceCommandInput = {
+      service: props.service.serviceName,
+      cluster: props.cluster.clusterName,
+      forceNewDeployment: true,
+    };
     rule.addTarget(new targets.AwsApi({
       service: 'ECS',
       action: 'updateService',
-      parameters: {
-        service: props.service.serviceName,
-        cluster: props.cluster.clusterName,
-        forceNewDeployment: true,
-      } as AWS.ECS.UpdateServiceRequest,
+      parameters,
       // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-supported-iam-actions-resources.html
       // arn:aws:ecs:<region>:<account>:service/<cluster-name>/<service-name>
       policyStatement: new iam.PolicyStatement({

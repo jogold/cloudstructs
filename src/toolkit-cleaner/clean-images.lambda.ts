@@ -1,6 +1,6 @@
-import { ECR } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { BatchDeleteImageCommand, DescribeImagesCommand, ECRClient } from '@aws-sdk/client-ecr'; // eslint-disable-line import/no-extraneous-dependencies
 
-const ecr = new ECR();
+const ecrClient = new ECRClient({});
 
 export async function handler(assetHashes: string[]) {
   if (!process.env.REPOSITORY_NAME) {
@@ -13,10 +13,10 @@ export async function handler(assetHashes: string[]) {
   let nextToken: string | undefined;
   let finished = false;
   while (!finished) {
-    const response = await ecr.describeImages({
+    const response = await ecrClient.send(new DescribeImagesCommand({
       repositoryName: process.env.REPOSITORY_NAME,
       nextToken,
-    }).promise();
+    }));
 
     const toDelete = response.imageDetails?.filter(x => {
       if (!x.imageTags) {
@@ -39,10 +39,10 @@ export async function handler(assetHashes: string[]) {
 
     if (toDelete && toDelete.length !== 0) {
       if (process.env.RUN) {
-        await ecr.batchDeleteImage({
+        await ecrClient.send(new BatchDeleteImageCommand({
           repositoryName: process.env.REPOSITORY_NAME,
           imageIds: toDelete.map(x => ({ imageTag: x.imageTags![0] })),
-        }).promise();
+        }));
       }
       deleted += toDelete.length;
       reclaimed += toDelete.reduce((acc, x) => acc + (x.imageSizeInBytes ?? 0), 0);

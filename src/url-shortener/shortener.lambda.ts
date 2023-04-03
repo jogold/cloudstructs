@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import { URL } from 'url';
-import { DynamoDB, S3 } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
 function base62Encode(int: number): string {
   const characterSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -35,9 +37,10 @@ function isUrlValid(url?: string): boolean {
   }
 }
 
-const documentClient = new DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
+const dynamoDBClient = new DynamoDBClient({});
+const documentClient = DynamoDBDocumentClient.from(dynamoDBClient);
 
-const s3 = new S3({ apiVersion: '2006-03-01' });
+const s3Client = new S3Client({});
 
 export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AWSLambda.APIGatewayProxyResult> {
   console.log('Event: %j', event);
@@ -61,14 +64,14 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
     }
 
     // Get next counter value
-    const update = await documentClient.update({
+    const update = await documentClient.send(new UpdateCommand({
       TableName: getEnv('TABLE_NAME'),
       Key: { key: 'counter' },
       UpdateExpression: 'ADD #value :incr',
       ExpressionAttributeNames: { '#value': 'value' },
       ExpressionAttributeValues: { ':incr': 1 },
       ReturnValues: 'UPDATED_NEW',
-    }).promise();
+    }));
 
     const value = update.Attributes?.value;
 
@@ -79,12 +82,12 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
     const key = base62Encode(value);
     console.log('Key: %j', key);
 
-    const putObject = await s3.putObject({
+    const putObject = await s3Client.send(new PutObjectCommand({
       Bucket: getEnv('BUCKET_NAME'),
       Key: key,
       ContentType: 'application/json',
       Body: JSON.stringify({ url: body.url }),
-    }).promise();
+    }));
     console.log('Put object: %j', putObject);
 
     // Return short url

@@ -1,13 +1,17 @@
-import * as AWS from 'aws-sdk-mock';
+import 'aws-sdk-client-mock-jest';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/slack-events/events.lambda';
 import * as signature from '../../src/slack-events/signature';
+import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge';
 
 process.env.SLACK_SIGNING_SECRET = 'secret';
 
 console.log = jest.fn();
 
+const eventBridgeClientMock = mockClient(EventBridgeClient);
+
 beforeEach(() => {
-  AWS.restore();
+  eventBridgeClientMock.restore();
 });
 
 test('returns 403 on invalid signature', async () => {
@@ -50,11 +54,6 @@ test('url verification', async () => {
 test('puts events', async () => {
   jest.spyOn(signature, 'verifyRequestSignature').mockReturnValueOnce(true);
 
-  const putEventsMock = jest.fn().mockReturnValue({});
-  AWS.mock('EventBridge', 'putEvents', (params: any, callback: any) => {
-    callback(null, putEventsMock(params));
-  });
-
   const body = JSON.stringify({
     type: 'event',
     api_app_id: 'app-id',
@@ -69,7 +68,7 @@ test('puts events', async () => {
     },
   } as unknown as AWSLambda.APIGatewayProxyEvent);
 
-  expect(putEventsMock).toHaveBeenCalledWith({
+  expect(eventBridgeClientMock).toHaveReceivedCommandWith(PutEventsCommand, {
     Entries: [
       {
         Detail: body,

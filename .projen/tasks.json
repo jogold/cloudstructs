@@ -94,7 +94,7 @@
       "description": "Create a JavaScript bundle from src/email-receiver/s3.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -103,7 +103,7 @@
       "description": "Continuously update the JavaScript bundle from src/email-receiver/s3.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -112,7 +112,7 @@
       "description": "Create a JavaScript bundle from src/email-receiver/whitelist.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -121,7 +121,7 @@
       "description": "Continuously update the JavaScript bundle from src/email-receiver/whitelist.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/email-receiver/whitelist.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/email-receiver/whitelist.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -130,7 +130,7 @@
       "description": "Create a JavaScript bundle from src/slack-app/provider.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -139,7 +139,7 @@
       "description": "Continuously update the JavaScript bundle from src/slack-app/provider.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/slack-app/provider.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/slack-app/provider.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -148,7 +148,7 @@
       "description": "Create a JavaScript bundle from src/slack-events/events.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -157,7 +157,7 @@
       "description": "Continuously update the JavaScript bundle from src/slack-events/events.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/slack-events/events.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/slack-events/events.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -166,7 +166,7 @@
       "description": "Create a JavaScript bundle from src/slack-textract/detect.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -175,7 +175,7 @@
       "description": "Continuously update the JavaScript bundle from src/slack-textract/detect.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/slack-textract/detect.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/slack-textract/detect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -184,7 +184,7 @@
       "description": "Create a JavaScript bundle from src/ssl-server-test/analyze.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -193,7 +193,7 @@
       "description": "Continuously update the JavaScript bundle from src/ssl-server-test/analyze.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -202,7 +202,7 @@
       "description": "Create a JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -211,7 +211,7 @@
       "description": "Continuously update the JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -220,7 +220,7 @@
       "description": "Create a JavaScript bundle from src/static-website/origin-request.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -229,7 +229,7 @@
       "description": "Continuously update the JavaScript bundle from src/static-website/origin-request.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -238,7 +238,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -247,7 +247,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -256,7 +256,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -265,7 +265,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -274,7 +274,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -283,7 +283,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -292,7 +292,7 @@
       "description": "Create a JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -301,7 +301,7 @@
       "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -310,7 +310,7 @@
       "description": "Create a JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -319,7 +319,7 @@
       "description": "Continuously update the JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -328,7 +328,7 @@
       "description": "Create a JavaScript bundle from src/url-shortener/shortener.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -337,7 +337,7 @@
       "description": "Continuously update the JavaScript bundle from src/url-shortener/shortener.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node16\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/url-shortener/shortener.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/url-shortener/shortener.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },

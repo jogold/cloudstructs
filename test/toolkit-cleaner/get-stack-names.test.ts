@@ -1,24 +1,18 @@
-const ServiceMock = {
-  describeStacks: jest.fn()
-    .mockImplementationOnce(() => ({
-      promise: jest.fn().mockResolvedValue({
-        Stacks: [{ StackName: 'stack1' }, { StackName: 'stack2' }],
-        NextToken: 'token',
-      }),
-    })).mockImplementationOnce(() => ({
-      promise: jest.fn().mockResolvedValue({
-        Stacks: [{ StackName: 'stack3' }],
-      }),
-    })),
-};
-
-jest.mock('aws-sdk', () => {
-  return {
-    CloudFormation: jest.fn(() => ServiceMock),
-  };
-});
-
+import 'aws-sdk-client-mock-jest';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/toolkit-cleaner/get-stack-names.lambda';
+import { CloudFormationClient, DescribeStacksCommand } from '@aws-sdk/client-cloudformation';
+
+const cloudFormationClientMock = mockClient(CloudFormationClient);
+cloudFormationClientMock.on(DescribeStacksCommand).resolves({
+  Stacks: [
+    { StackName: 'stack1', CreationTime: new Date(), StackStatus: 'status' }, 
+    { StackName: 'stack2', CreationTime: new Date(), StackStatus: 'status' }
+  ],
+  NextToken: 'token',
+}).resolves({
+  Stacks: [{ StackName: 'stack3', CreationTime: new Date(), StackStatus: 'status' }],
+})
 
 test('returns a list of stack names', async () => {
 

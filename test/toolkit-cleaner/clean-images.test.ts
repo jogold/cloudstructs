@@ -1,51 +1,40 @@
-const ServiceMock = {
-  describeImages: jest.fn(),
-  batchDeleteImage: jest.fn().mockImplementation(() => ({
-    promise: jest.fn().mockResolvedValue({}),
-  })),
-};
-
-jest.mock('aws-sdk', () => {
-  return {
-    ECR: jest.fn(() => ServiceMock),
-  };
-});
-
+import 'aws-sdk-client-mock-jest';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/toolkit-cleaner/clean-images.lambda';
+import { BatchDeleteImageCommand, DescribeImagesCommand, ECRClient } from '@aws-sdk/client-ecr';
+
+const ecrClientMock = mockClient(ECRClient);
 
 beforeEach(() => {
-  ServiceMock.describeImages.mockImplementationOnce(() => ({
-    promise: jest.fn().mockResolvedValue({
-      imageDetails: [
-        {
-          imageTags: ['hash1'],
-          imagePushedAt: daysAgo(5),
-          imageSizeInBytes: 12,
-        },
-        {
-          imageTags: ['hash2'],
-          imagePushedAt: new Date(),
-          imageSizeInBytes: 15,
-        },
-      ],
-      nextToken: 'token',
-    }),
-  })).mockImplementationOnce(() => ({
-    promise: jest.fn().mockResolvedValue({
-      imageDetails: [
-        {
-          imageTags: ['hash3'],
-          imagePushedAt: daysAgo(30),
-          imageSizeInBytes: 9,
-        },
-        {
-          imageTags: ['hash4'],
-          imagePushedAt: new Date(),
-          imageSizeInBytes: 11,
-        },
-      ],
-    }),
-  }));
+  ecrClientMock.reset();
+  ecrClientMock.on(DescribeImagesCommand).resolves({
+    imageDetails: [
+      {
+        imageTags: ['hash1'],
+        imagePushedAt: daysAgo(5),
+        imageSizeInBytes: 12,
+      },
+      {
+        imageTags: ['hash2'],
+        imagePushedAt: new Date(),
+        imageSizeInBytes: 15,
+      },
+    ],
+    nextToken: 'token',
+  }).resolves({
+    imageDetails: [
+      {
+        imageTags: ['hash3'],
+        imagePushedAt: daysAgo(30),
+        imageSizeInBytes: 9,
+      },
+      {
+        imageTags: ['hash4'],
+        imagePushedAt: new Date(),
+        imageSizeInBytes: 11,
+      },
+    ],
+  })
 
   process.env.REPOSITORY_NAME = 'repository';
   process.env.RUN = 'true';
@@ -54,16 +43,16 @@ beforeEach(() => {
 test('cleans unused images', async () => {
   const response = await handler(['hash2', 'hash4']);
 
-  expect(ServiceMock.describeImages).toHaveBeenCalledWith(expect.objectContaining({
+  expect(ecrClientMock).toHaveReceivedCommandWith(DescribeImagesCommand, {
     repositoryName: 'repository',
-  }));
+  });
 
-  expect(ServiceMock.batchDeleteImage).toHaveBeenCalledTimes(2);
-  expect(ServiceMock.batchDeleteImage).toHaveBeenCalledWith({
+  expect(ecrClientMock).toHaveReceivedCommandTimes(BatchDeleteImageCommand, 2);
+  expect(ecrClientMock).toHaveReceivedCommandWith(BatchDeleteImageCommand, {
     repositoryName: 'repository',
     imageIds: [{ imageTag: 'hash1' }],
-  });
-  expect(ServiceMock.batchDeleteImage).toHaveBeenCalledWith({
+  })
+  expect(ecrClientMock).toHaveReceivedCommandWith(BatchDeleteImageCommand, {
     repositoryName: 'repository',
     imageIds: [{ imageTag: 'hash3' }],
   });
@@ -79,7 +68,7 @@ test('without RUN', async () => {
 
   const response = await handler(['hash2', 'hash4']);
 
-  expect(ServiceMock.batchDeleteImage).not.toHaveBeenCalled();
+  expect(ecrClientMock).not.toHaveReceivedCommand(BatchDeleteImageCommand);
 
   expect(response).toEqual({
     Deleted: 2,
@@ -93,8 +82,8 @@ test('with RETAIN_MILLISECONDS', async () => {
 
   const response = await handler(['hash2', 'hash4']);
 
-  expect(ServiceMock.batchDeleteImage).toHaveBeenCalledTimes(1);
-  expect(ServiceMock.batchDeleteImage).toHaveBeenCalledWith({
+  expect(ecrClientMock).toHaveReceivedCommandTimes(BatchDeleteImageCommand, 1);
+  expect(ecrClientMock).toHaveReceivedCommandWith(BatchDeleteImageCommand, {
     repositoryName: 'repository',
     imageIds: [{ imageTag: 'hash3' }],
   });

@@ -1,4 +1,4 @@
-import { StepFunctions } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn'; // eslint-disable-line import/no-extraneous-dependencies
 import { respond } from './http';
 
 export const CREATE_FAILED_PHYSICAL_ID_MARKER = 'AWSCDK::StateMachineProvider::CREATE_FAILED';
@@ -67,6 +67,8 @@ export async function cfnResponseFailed(event: FailedExecutionEvent) {
   });
 }
 
+const stepFunctionsClient = new SFNClient({});
+
 export async function startExecution(event: AWSLambda.CloudFormationCustomResourceEvent) {
   try {
     console.log('Event: %j', event);
@@ -84,11 +86,10 @@ export async function startExecution(event: AWSLambda.CloudFormationCustomResour
       return;
     }
 
-    const stepFunctions = new StepFunctions();
-    await stepFunctions.startExecution({
+    await stepFunctionsClient.send(new StartExecutionCommand({
       stateMachineArn: process.env.STATE_MACHINE_ARN,
       input: JSON.stringify(event),
-    }).promise();
+    }));
   } catch (err) {
     console.log(err);
     await respond('FAILED', {

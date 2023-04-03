@@ -1,13 +1,17 @@
-import * as AWS from 'aws-sdk-mock';
+import 'aws-sdk-client-mock-jest';
+import { mockClient } from 'aws-sdk-client-mock';
 import * as runtime from '../../src/state-machine-cr-provider/runtime';
 import * as http from '../../src/state-machine-cr-provider/runtime/http';
+import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn';
 
 jest.mock('../../src/state-machine-cr-provider/runtime/http');
 
 console.log = jest.fn();
 
+const sfnClientMock = mockClient(SFNClient);
+
 beforeEach(() => {
-  AWS.restore();
+  sfnClientMock.reset();
   jest.clearAllMocks();
   process.env.STATE_MACHINE_ARN = 'state-machine-arn';
 });
@@ -119,39 +123,27 @@ test('cfnResponseFailed with Update', async () => {
 });
 
 test('startExecution with Create', async () => {
-  const startExecutionMock = jest.fn();
-  AWS.mock('StepFunctions', 'startExecution', (params: any, callback: (p: any) => void) =>
-    callback(startExecutionMock(params)),
-  );
-
   await runtime.startExecution(cfEvent);
 
-  expect(startExecutionMock).toHaveBeenCalledWith({
+  expect(sfnClientMock).toHaveReceivedCommandWith(StartExecutionCommand, {
     stateMachineArn: 'state-machine-arn',
     input: JSON.stringify(cfEvent),
   });
 });
 
 test('startExecution with Delete after failed Create', async () => {
-  const startExecutionMock = jest.fn();
-  AWS.mock('StepFunctions', 'startExecution', (params: any, callback: any) =>
-    callback(null, startExecutionMock(params)),
-  );
-
   await runtime.startExecution({
     ...cfEvent,
     RequestType: 'Delete',
     PhysicalResourceId: runtime.CREATE_FAILED_PHYSICAL_ID_MARKER,
   });
 
-  expect(startExecutionMock).not.toHaveBeenCalled();
+  expect(sfnClientMock).not.toHaveReceivedCommand(StartExecutionCommand);
   expect(http.respond).toHaveBeenCalledWith('SUCCESS', expect.anything());
 });
 
 test('startExecution with error', async () => {
-  AWS.mock('StepFunctions', 'startExecution', (_params: any, callback: (p: any) => void) =>
-    callback(new Error('UnknownError')),
-  );
+  sfnClientMock.on(StartExecutionCommand).rejects(new Error('UnknownError'));
 
   await runtime.startExecution(cfEvent);
 

@@ -17,10 +17,21 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@slack/web-api',
   ],
   devDeps: [
+    '@aws-sdk/client-cloudformation',
+    '@aws-sdk/client-dynamodb',
+    '@aws-sdk/client-ecr',
+    '@aws-sdk/client-ecs',
+    '@aws-sdk/client-eventbridge',
+    '@aws-sdk/client-iam',
+    '@aws-sdk/client-s3',
+    '@aws-sdk/client-secrets-manager',
+    '@aws-sdk/client-sfn',
+    '@aws-sdk/client-textract',
+    '@aws-sdk/lib-dynamodb',
     '@types/aws-lambda',
     '@types/tsscmp',
-    'aws-sdk',
-    'aws-sdk-mock',
+    'aws-sdk-client-mock',
+    'aws-sdk-client-mock-jest',
     'nock',
   ],
   defaultReleaseBranch: 'master',
@@ -39,7 +50,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     mavenEndpoint: 'https://s01.oss.sonatype.org',
   },
   lambdaOptions: {
-    runtime: awscdk.LambdaRuntime.NODEJS_16_X,
+    runtime: awscdk.LambdaRuntime.NODEJS_18_X,
   },
 });
 

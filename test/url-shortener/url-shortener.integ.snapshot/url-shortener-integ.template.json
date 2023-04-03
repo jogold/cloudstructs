@@ -142,7 +142,7 @@
         },
         "Region": "us-east-1",
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b"
+        "RefreshToken": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623"
       },
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
@@ -477,7 +477,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
           },
-          "S3Key": "fd4294b00b8217bca0a7259abdc10316d0b1eef18ca87517535c650ef2ec1c6e.zip"
+          "S3Key": "8dae1e50de0bb305af925ef42797fa33d71cc171e445df5d098b603360a1615c.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -500,7 +500,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs18.x"
       },
       "DependsOn": [
         "UrlShortenerServiceRoleDefaultPolicyC2E011EF",
