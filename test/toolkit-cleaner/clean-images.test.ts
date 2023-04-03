@@ -1,7 +1,7 @@
 import 'aws-sdk-client-mock-jest';
 import { mockClient } from 'aws-sdk-client-mock';
-import { handler } from '../../src/toolkit-cleaner/clean-images.lambda';
 import { BatchDeleteImageCommand, DescribeImagesCommand, ECRClient } from '@aws-sdk/client-ecr';
+import { handler } from '../../src/toolkit-cleaner/clean-images.lambda';
 
 const ecrClientMock = mockClient(ECRClient);
 

@@ -1,7 +1,5 @@
 import { handler } from '../../src/email-receiver/whitelist.lambda';
 
-console.log = jest.fn();
-
 const sesEvent: AWSLambda.SESEvent = {
   Records: [
     {

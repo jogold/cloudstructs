@@ -1,8 +1,6 @@
 import nock from 'nock';
 import * as http from '../../src/state-machine-cr-provider/runtime/http';
 
-console.log = jest.fn();
-
 beforeEach(() => {
   nock.cleanAll();
 });

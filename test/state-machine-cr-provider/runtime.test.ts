@@ -6,8 +6,6 @@ import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn';
 
 jest.mock('../../src/state-machine-cr-provider/runtime/http');
 
-console.log = jest.fn();
-
 const sfnClientMock = mockClient(SFNClient);
 
 beforeEach(() => {

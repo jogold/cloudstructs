@@ -1,7 +1,7 @@
 import 'aws-sdk-client-mock-jest';
 import { mockClient } from 'aws-sdk-client-mock';
-import { handler } from '../../src/toolkit-cleaner/clean-objects.lambda';
 import { DeleteObjectsCommand, ListObjectVersionsCommand, S3Client } from '@aws-sdk/client-s3';
+import { handler } from '../../src/toolkit-cleaner/clean-objects.lambda';
 
 const s3ClientMock = mockClient(S3Client);
 

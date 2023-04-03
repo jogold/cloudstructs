@@ -1,7 +1,7 @@
 import 'aws-sdk-client-mock-jest';
 import { mockClient } from 'aws-sdk-client-mock';
-import { handler } from '../../src/toolkit-cleaner/get-stack-names.lambda';
 import { CloudFormationClient, DescribeStacksCommand } from '@aws-sdk/client-cloudformation';
+import { handler } from '../../src/toolkit-cleaner/get-stack-names.lambda';
 
 const cloudFormationClientMock = mockClient(CloudFormationClient);
 cloudFormationClientMock.on(DescribeStacksCommand)

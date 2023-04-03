@@ -1,7 +1,3 @@
-import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
-import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
-
 const getResponseMock = jest.fn().mockResolvedValue({});
 const getMock = jest.fn().mockImplementation(() => ({
   json: getResponseMock,
@@ -25,6 +21,9 @@ jest.mock('got', () => {
   };
 });
 
+import 'aws-sdk-client-mock-jest';
+import { mockClient } from 'aws-sdk-client-mock';
+import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
 import { handler } from '../../src/slack-app/provider.lambda';
 
 const event: AWSLambda.CloudFormationCustomResourceEvent & { PhysicalResourceId?: string } = {

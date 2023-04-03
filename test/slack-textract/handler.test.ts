@@ -6,7 +6,6 @@ import got from 'got';
 import { handler, FilesInfoResult } from '../../src/slack-textract/detect.lambda';
 
 process.env.SLACK_TOKEN = 'token';
-console.log = jest.fn();
 
 jest.mock('@slack/web-api');
 jest.mock('got');
