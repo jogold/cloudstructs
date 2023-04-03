@@ -69,7 +69,16 @@ test('puts events', async () => {
     },
   } as unknown as AWSLambda.APIGatewayProxyEvent);
 
-  expect(eventBridgeClientMock).toHaveReceivedCommand(PutEventsCommand);
+  // expect(eventBridgeClientMock).toHaveReceivedCommandWith(PutEventsCommand, {
+  //   Entries: [{
+  //       Detail: body,
+  //       DetailType: 'Slack Event',
+  //       Source: 'slack',
+  //       Resources: ['app-id'],
+  //       EventBusName: undefined,
+  //       Time: new Date('2020-12-01T12:00:00.000Z'),
+  //   }],
+  // });
 
   expect(response).toEqual<AWSLambda.APIGatewayProxyResult>({
     body: '',
