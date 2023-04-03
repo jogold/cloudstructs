@@ -9,7 +9,7 @@ process.env.SLACK_SIGNING_SECRET = 'secret';
 const eventBridgeClientMock = mockClient(EventBridgeClient);
 
 beforeEach(() => {
-  eventBridgeClientMock.restore();
+  eventBridgeClientMock.reset();
   eventBridgeClientMock.on(PutEventsCommand).resolves({});
 });
 
