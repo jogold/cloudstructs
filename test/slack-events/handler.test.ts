@@ -12,6 +12,7 @@ const eventBridgeClientMock = mockClient(EventBridgeClient);
 
 beforeEach(() => {
   eventBridgeClientMock.restore();
+  eventBridgeClientMock.on(PutEventsCommand).resolves({});
 });
 
 test('returns 403 on invalid signature', async () => {

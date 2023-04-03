@@ -10,6 +10,9 @@ const documentClientMock = mockClient(DynamoDBDocumentClient);
 beforeEach(() => {
   s3ClientMock.reset();
   documentClientMock.reset();
+  documentClientMock.on(UpdateCommand).resolves({
+    Attributes: { value: 1000 }
+  })
 })
 
 process.env.TABLE_NAME = 'my-table';

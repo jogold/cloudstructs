@@ -45,16 +45,14 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
     }
 
     const putEvents = await eventBridgeClient.send(new PutEventsCommand({
-      Entries: [
-        {
-          Detail: event.body,
-          DetailType: 'Slack Event',
-          Source: 'slack',
-          Resources: [body.api_app_id],
-          EventBusName: process.env.EVENT_BUS_NAME,
-          Time: new Date(body.event_time),
-        },
-      ],
+      Entries: [{
+        Detail: event.body,
+        DetailType: 'Slack Event',
+        Source: 'slack',
+        Resources: [body.api_app_id],
+        EventBusName: process.env.EVENT_BUS_NAME,
+        Time: new Date(body.event_time),
+      }],
     }));
     console.log('Put events: %j', putEvents);
 
