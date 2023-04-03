@@ -1,4 +1,4 @@
-import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'; // eslint-disable-line import/no-extraneous-dependencies
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 const s3Client = new S3Client({});
 

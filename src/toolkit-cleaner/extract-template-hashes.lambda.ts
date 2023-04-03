@@ -1,4 +1,4 @@
-import { CloudFormationClient, GetTemplateCommand } from '@aws-sdk/client-cloudformation'; // eslint-disable-line import/no-extraneous-dependencies
+import { CloudFormationClient, GetTemplateCommand } from '@aws-sdk/client-cloudformation';
 
 const cloudFormationClient = new CloudFormationClient({});
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge'; // eslint-disable-line import/no-extraneous-dependencies
+import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge';
 import { verifyRequestSignature } from './signature';
 
 const eventBridgeClient = new EventBridgeClient({});

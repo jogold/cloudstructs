@@ -1,4 +1,4 @@
-import { UpdateServiceCommandInput } from '@aws-sdk/client-ecs'; // eslint-disable-line import/no-extraneous-dependencies
+import type { UpdateServiceCommandInput } from '@aws-sdk/client-ecs';
 import { Stack } from 'aws-cdk-lib';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as events from 'aws-cdk-lib/aws-events';

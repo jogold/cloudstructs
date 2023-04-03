@@ -1,4 +1,4 @@
-import { CloudFormationClient, DescribeStacksCommand } from '@aws-sdk/client-cloudformation'; // eslint-disable-line import/no-extraneous-dependencies
+import { CloudFormationClient, DescribeStacksCommand } from '@aws-sdk/client-cloudformation';
 
 const cloudFormationClient = new CloudFormationClient({});
 

@@ -1,4 +1,4 @@
-import { BatchDeleteImageCommand, DescribeImagesCommand, ECRClient } from '@aws-sdk/client-ecr'; // eslint-disable-line import/no-extraneous-dependencies
+import { BatchDeleteImageCommand, DescribeImagesCommand, ECRClient } from '@aws-sdk/client-ecr';
 
 const ecrClient = new ECRClient({});
 
