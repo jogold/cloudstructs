@@ -32,7 +32,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023b.zip",
+          "S3Key": "8586c6ca50883afe7d9e678fa61482ee10198d35f8b1306e80f918ac9ea77ca8.zip",
         },
         "Handler": "index.cfnResponseFailed",
         "Role": Object {
@@ -41,7 +41,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -85,7 +85,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023b.zip",
+          "S3Key": "8586c6ca50883afe7d9e678fa61482ee10198d35f8b1306e80f918ac9ea77ca8.zip",
         },
         "Handler": "index.cfnResponseSuccess",
         "Role": Object {
@@ -94,7 +94,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -261,7 +261,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "6263d68db0f81d599eea8d960f8f73df06f1da7f98a9aabad85f28895db2023b.zip",
+          "S3Key": "8586c6ca50883afe7d9e678fa61482ee10198d35f8b1306e80f918ac9ea77ca8.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -277,7 +277,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },

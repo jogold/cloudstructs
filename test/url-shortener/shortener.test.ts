@@ -1,7 +1,7 @@
 import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/url-shortener/shortener.lambda';
 
 const s3ClientMock = mockClient(S3Client);
@@ -11,9 +11,9 @@ beforeEach(() => {
   s3ClientMock.reset();
   documentClientMock.reset();
   documentClientMock.on(UpdateCommand).resolves({
-    Attributes: { value: 1000 }
-  })
-})
+    Attributes: { value: 1000 },
+  });
+});
 
 process.env.TABLE_NAME = 'my-table';
 process.env.DOMAIN_NAME = 'short.com';

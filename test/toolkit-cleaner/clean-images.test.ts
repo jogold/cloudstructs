@@ -1,6 +1,6 @@
 import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
 import { BatchDeleteImageCommand, DescribeImagesCommand, ECRClient } from '@aws-sdk/client-ecr';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/toolkit-cleaner/clean-images.lambda';
 
 const ecrClientMock = mockClient(ECRClient);
@@ -36,7 +36,7 @@ beforeEach(() => {
           imageSizeInBytes: 11,
         },
       ],
-    })
+    });
 
   process.env.REPOSITORY_NAME = 'repository';
   process.env.RUN = 'true';
@@ -53,7 +53,7 @@ test('cleans unused images', async () => {
   expect(ecrClientMock).toHaveReceivedCommandWith(BatchDeleteImageCommand, {
     repositoryName: 'repository',
     imageIds: [{ imageTag: 'hash1' }],
-  })
+  });
   expect(ecrClientMock).toHaveReceivedCommandWith(BatchDeleteImageCommand, {
     repositoryName: 'repository',
     imageIds: [{ imageTag: 'hash3' }],

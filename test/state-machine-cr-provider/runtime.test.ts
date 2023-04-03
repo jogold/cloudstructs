@@ -1,8 +1,8 @@
 import 'aws-sdk-client-mock-jest';
+import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn';
 import { mockClient } from 'aws-sdk-client-mock';
 import * as runtime from '../../src/state-machine-cr-provider/runtime';
 import * as http from '../../src/state-machine-cr-provider/runtime/http';
-import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn';
 
 jest.mock('../../src/state-machine-cr-provider/runtime/http');
 

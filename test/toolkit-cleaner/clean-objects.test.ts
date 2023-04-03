@@ -1,6 +1,6 @@
 import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
 import { DeleteObjectsCommand, ListObjectVersionsCommand, S3Client } from '@aws-sdk/client-s3';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/toolkit-cleaner/clean-objects.lambda';
 
 const s3ClientMock = mockClient(S3Client);
@@ -40,7 +40,7 @@ beforeEach(() => {
           VersionId: 'hash4-version-id',
         },
       ],
-    })
+    });
 
   process.env.BUCKET_NAME = 'bucket';
   process.env.RUN = 'true';

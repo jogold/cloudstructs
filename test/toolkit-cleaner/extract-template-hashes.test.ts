@@ -1,6 +1,6 @@
 import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
 import { CloudFormationClient, GetTemplateCommand } from '@aws-sdk/client-cloudformation';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/toolkit-cleaner/extract-template-hashes.lambda';
 
 const cloudFormationClientMock = mockClient(CloudFormationClient);

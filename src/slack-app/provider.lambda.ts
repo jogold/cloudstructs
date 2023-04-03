@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { OnEventRequest, OnEventResponse } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types';
 import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager'; // eslint-disable-line import/no-extraneous-dependencies
+import { OnEventRequest, OnEventResponse } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types';
 import got from 'got';
 
 interface SlackSecret {

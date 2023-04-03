@@ -1,7 +1,7 @@
 import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
-import { WebClient } from '@slack/web-api';
 import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
+import { WebClient } from '@slack/web-api';
+import { mockClient } from 'aws-sdk-client-mock';
 import got from 'got';
 import { handler, FilesInfoResult } from '../../src/slack-textract/detect.lambda';
 
@@ -15,7 +15,7 @@ const textractClientMock = mockClient(TextractClient);
 
 beforeEach(() => {
   textractClientMock.reset();
-})
+});
 
 test('handler', async () => {
   const fileInfo: FilesInfoResult = {

@@ -22,8 +22,8 @@ jest.mock('got', () => {
 });
 
 import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
 import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/slack-app/provider.lambda';
 
 const event: AWSLambda.CloudFormationCustomResourceEvent & { PhysicalResourceId?: string } = {
@@ -53,17 +53,17 @@ const secretsManagerClientMock = mockClient(SecretsManagerClient);
 
 beforeEach(() => {
   jest.clearAllMocks();
-  secretsManagerClientMock.reset()
+  secretsManagerClientMock.reset();
   secretsManagerClientMock.on(GetSecretValueCommand).resolves({
     SecretString: JSON.stringify({
       accessToken: 'access-token',
       refreshToken: 'refresh-token',
       exp: Date.now() / 1000 + 3600,
     }),
-  })
+  });
   secretsManagerClientMock.on(PutSecretValueCommand).resolves({
-    ARN: 'arn'
-  })
+    ARN: 'arn',
+  });
 
   postResponseMock.mockResolvedValue({
     ok: true,

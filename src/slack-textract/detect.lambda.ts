@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { WebClient, WebAPICallResult } from '@slack/web-api';
 import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
+import { WebClient, WebAPICallResult } from '@slack/web-api';
 import got from 'got';
 
 export interface SlackEvent {

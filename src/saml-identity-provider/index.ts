@@ -1,7 +1,7 @@
+import { CreateSAMLProviderCommandInput, UpdateSAMLProviderCommandInput, DeleteSAMLProviderCommandInput } from '@aws-sdk/client-iam'; // eslint-disable-line import/no-extraneous-dependencies
 import { Names, Stack } from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as cr from 'aws-cdk-lib/custom-resources';
-import { CreateSAMLProviderCommandInput, UpdateSAMLProviderCommandInput, DeleteSAMLProviderCommandInput } from '@aws-sdk/client-iam'; // eslint-disable-line import/no-extraneous-dependencies
 import { Construct } from 'constructs';
 
 /**

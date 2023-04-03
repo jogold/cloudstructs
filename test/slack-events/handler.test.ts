@@ -1,6 +1,6 @@
 import 'aws-sdk-client-mock-jest';
-import { mockClient } from 'aws-sdk-client-mock';
 import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/slack-events/events.lambda';
 import * as signature from '../../src/slack-events/signature';
 
@@ -69,12 +69,12 @@ test('puts events', async () => {
 
   expect(eventBridgeClientMock).toHaveReceivedCommandWith(PutEventsCommand, {
     Entries: [{
-        Detail: body,
-        DetailType: 'Slack Event',
-        Source: 'slack',
-        Resources: ['app-id'],
-        EventBusName: undefined,
-        Time: new Date('2020-12-01T12:00:00.000Z'),
+      Detail: body,
+      DetailType: 'Slack Event',
+      Source: 'slack',
+      Resources: ['app-id'],
+      EventBusName: undefined,
+      Time: new Date('2020-12-01T12:00:00.000Z'),
     }],
   });
 
