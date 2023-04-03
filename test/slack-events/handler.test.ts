@@ -75,7 +75,6 @@ test('puts events', async () => {
         DetailType: 'Slack Event',
         Source: 'slack',
         Resources: ['app-id'],
-        EventBusName: undefined,
         Time: new Date('2020-12-01T12:00:00.000Z'),
     }],
   });

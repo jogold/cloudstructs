@@ -34,7 +34,7 @@ test('returns 201 with short url', async () => {
     }),
   });
 
-  expect(documentClientMock).toHaveBeenCalledWith(UpdateCommand, {
+  expect(documentClientMock).toHaveReceivedCommandWith(UpdateCommand, {
     TableName: 'my-table',
     Key: { key: 'counter' },
     UpdateExpression: 'ADD #value :incr',
