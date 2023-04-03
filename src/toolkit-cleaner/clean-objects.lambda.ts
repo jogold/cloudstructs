@@ -1,7 +1,7 @@
 import * as path from 'path';
-import { S3 } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { DeleteObjectsCommand, ListObjectVersionsCommand, S3Client } from '@aws-sdk/client-s3';
 
-const s3 = new S3();
+const s3Client = new S3Client({});
 
 export async function handler(assetHashes: string[]) {
   if (!process.env.BUCKET_NAME) {
@@ -14,10 +14,10 @@ export async function handler(assetHashes: string[]) {
   let nextKeyMarker: string | undefined;
   let finished = false;
   while (!finished) {
-    const response = await s3.listObjectVersions({
+    const response = await s3Client.send(new ListObjectVersionsCommand({
       Bucket: process.env.BUCKET_NAME,
       KeyMarker: nextKeyMarker,
-    }).promise();
+    }));
 
     const toDelete = response.Versions?.filter(v => {
       if (!v.Key) {
@@ -41,12 +41,12 @@ export async function handler(assetHashes: string[]) {
 
     if (toDelete && toDelete.length !== 0) {
       if (process.env.RUN) {
-        await s3.deleteObjects({
+        await s3Client.send(new DeleteObjectsCommand({
           Bucket: process.env.BUCKET_NAME,
           Delete: {
             Objects: toDelete.map(v => ({ Key: v.Key!, VersionId: v.VersionId })),
           },
-        }).promise();
+        }));
       }
       deleted += toDelete.length;
       reclaimed += toDelete.reduce((acc, x) => acc + (x.Size ?? 0), 0);

@@ -164,7 +164,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -396,7 +396,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -477,7 +477,7 @@ Object {
       ],
       "Properties": Object {
         "Code": Object {
-          "ZipFile": "export.handler=() => void;",
+          "ZipFile": "export.handler = () => void;",
         },
         "Handler": "index.handler",
         "Role": Object {
@@ -486,7 +486,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },

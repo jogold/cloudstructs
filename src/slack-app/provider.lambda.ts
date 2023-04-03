@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
+import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
 import { OnEventRequest, OnEventResponse } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types';
-import { SecretsManager } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 import got from 'got';
 
 interface SlackSecret {
@@ -50,7 +50,7 @@ interface ManifestResponse {
   };
 }
 
-const secretsmanager = new SecretsManager({ apiVersion: '2017-10-17' });
+const secretsmanagerClient = new SecretsManagerClient({});
 
 const slackClient = got.extend({
   prefixUrl: 'https://slack.com/api',
@@ -59,9 +59,9 @@ const slackClient = got.extend({
 export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   console.log('Event: %j', event);
 
-  const data = await secretsmanager.getSecretValue({
+  const data = await secretsmanagerClient.send(new GetSecretValueCommand({
     SecretId: event.ResourceProperties.configurationTokenSecretArn,
-  }).promise();
+  }));
 
   if (!data.SecretString) {
     throw new Error('No secret string found in configuration token secret');
@@ -89,14 +89,14 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
     accessToken = rotate.token;
 
     console.log('Saving access token');
-    const putSecretValue = await secretsmanager.putSecretValue({
+    const putSecretValue = await secretsmanagerClient.send(new PutSecretValueCommand({
       SecretId: event.ResourceProperties.configurationTokenSecretArn,
       SecretString: JSON.stringify({
         accessToken,
         refreshToken: rotate.refresh_token,
         exp: rotate.exp,
       }),
-    }).promise();
+    }));
     console.log(`Successfully saved access token in secret ${putSecretValue.ARN}`);
   }
 
@@ -120,7 +120,7 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
 
   if (event.RequestType === 'Create' && response.credentials) {
     console.log('Saving app credentials');
-    const putSecretValue = await secretsmanager.putSecretValue({
+    const putSecretValue = await secretsmanagerClient.send(new PutSecretValueCommand({
       SecretId: event.ResourceProperties.credentialsSecretArn,
       SecretString: JSON.stringify({
         appId: response.app_id,
@@ -129,7 +129,7 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
         verificationToken: response.credentials.verification_token,
         signingSecret: response.credentials.signing_secret,
       }),
-    }).promise();
+    }));
     console.log(`Successfully saved app credentials in secret ${putSecretValue.ARN}`);
   }
 

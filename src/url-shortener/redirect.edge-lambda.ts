@@ -1,6 +1,6 @@
-import { S3 } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
-const s3 = new S3({ apiVersion: '2006-03-01' });
+const s3Client = new S3Client({});
 
 export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<AWSLambda.CloudFrontRequestResult> {
   const request = event.Records[0].cf.request;
@@ -15,10 +15,10 @@ export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<
     const bucket = s3Origin.domainName.replace(new RegExp(`.s3.${s3Origin.region}.amazonaws.com$`), '');
     const key = request.uri.substring(1); // remove first slash
 
-    const data = await s3.getObject({
+    const data = await s3Client.send(new GetObjectCommand({
       Bucket: bucket,
       Key: key,
-    }).promise();
+    }));
 
     if (!data.Body) {
       throw new Error('No body');

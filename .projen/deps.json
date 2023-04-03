@@ -11,6 +11,50 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-cloudformation",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-dynamodb",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-ecr",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-ecs",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-eventbridge",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-iam",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-s3",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-secrets-manager",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-sfn",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-textract",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/lib-dynamodb",
+      "type": "build"
+    },
+    {
       "name": "@types/aws-lambda",
       "type": "build"
     },
@@ -49,11 +93,11 @@
       "type": "build"
     },
     {
-      "name": "aws-sdk",
+      "name": "aws-sdk-client-mock",
       "type": "build"
     },
     {
-      "name": "aws-sdk-mock",
+      "name": "aws-sdk-client-mock-jest",
       "type": "build"
     },
     {

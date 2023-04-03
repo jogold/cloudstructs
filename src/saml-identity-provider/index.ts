@@ -1,7 +1,7 @@
+import type { CreateSAMLProviderCommandInput, UpdateSAMLProviderCommandInput, DeleteSAMLProviderCommandInput } from '@aws-sdk/client-iam';
 import { Names, Stack } from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as cr from 'aws-cdk-lib/custom-resources';
-import { IAM } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 import { Construct } from 'constructs';
 
 /**
@@ -59,7 +59,7 @@ export class SamlIdentityProvider extends Construct {
         parameters: {
           Name: name,
           SAMLMetadataDocument: props.metadataDocument,
-        } as IAM.CreateSAMLProviderRequest,
+        } as CreateSAMLProviderCommandInput,
         physicalResourceId: cr.PhysicalResourceId.fromResponse('SAMLProviderArn'),
       },
       onUpdate: {
@@ -68,7 +68,7 @@ export class SamlIdentityProvider extends Construct {
         parameters: {
           SAMLProviderArn: new cr.PhysicalResourceIdReference().toJSON(),
           SAMLMetadataDocument: props.metadataDocument,
-        } as IAM.UpdateSAMLProviderRequest,
+        } as UpdateSAMLProviderCommandInput,
         physicalResourceId: cr.PhysicalResourceId.fromResponse('SAMLProviderArn'),
       },
       onDelete: {
@@ -76,7 +76,7 @@ export class SamlIdentityProvider extends Construct {
         action: 'deleteSAMLProvider',
         parameters: {
           SAMLProviderArn: new cr.PhysicalResourceIdReference().toJSON(),
-        } as IAM.DeleteSAMLProviderRequest,
+        } as DeleteSAMLProviderCommandInput,
       },
       policy: cr.AwsCustomResourcePolicy.fromStatements([
         new iam.PolicyStatement({

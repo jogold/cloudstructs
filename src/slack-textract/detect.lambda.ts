@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
+import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
 import { WebClient, WebAPICallResult } from '@slack/web-api';
-import { Textract } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 import got from 'got';
 
 export interface SlackEvent {
@@ -23,6 +23,7 @@ export interface FilesInfoResult extends WebAPICallResult {
   };
 }
 
+const textractClient = new TextractClient({});
 
 export async function handler(event: SlackEvent): Promise<void> {
   console.log('Event: %j', event);
@@ -48,11 +49,9 @@ export async function handler(event: SlackEvent): Promise<void> {
   }).buffer();
 
   // Detect text with Textract
-  const textract = new Textract({ apiVersion: '2018-06-27' });
-
-  const data = await textract.detectDocumentText({
+  const data = await textractClient.send(new DetectDocumentTextCommand({
     Document: { Bytes: file },
-  }).promise();
+  }));
 
   if (!data.Blocks) {
     console.log('No text detected');

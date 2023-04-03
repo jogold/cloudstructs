@@ -1,16 +1,21 @@
+import 'aws-sdk-client-mock-jest';
+import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
 import { WebClient } from '@slack/web-api';
-import { Textract } from 'aws-sdk';
+import { mockClient } from 'aws-sdk-client-mock';
 import got from 'got';
 import { handler, FilesInfoResult } from '../../src/slack-textract/detect.lambda';
 
 process.env.SLACK_TOKEN = 'token';
-console.log = jest.fn();
 
 jest.mock('@slack/web-api');
 jest.mock('got');
-jest.mock('aws-sdk');
 
 const gotMock = got as unknown as jest.Mock;
+const textractClientMock = mockClient(TextractClient);
+
+beforeEach(() => {
+  textractClientMock.reset();
+});
 
 test('handler', async () => {
   const fileInfo: FilesInfoResult = {
@@ -41,7 +46,7 @@ test('handler', async () => {
     return { buffer: () => Buffer.from('image-buffer') };
   });
 
-  const detected: Textract.DetectDocumentTextResponse = {
+  textractClientMock.on(DetectDocumentTextCommand).resolves({
     Blocks: [
       {
         BlockType: 'LINE',
@@ -56,12 +61,6 @@ test('handler', async () => {
         Text: 'World!',
       },
     ],
-  };
-  const detectDocumentTextMock = jest.fn(() => {
-    return { promise: () => detected };
-  });
-  (Textract as unknown as jest.Mock).mockImplementation(() => {
-    return { detectDocumentText: detectDocumentTextMock };
   });
 
   await handler({
@@ -79,7 +78,7 @@ test('handler', async () => {
     },
   });
 
-  expect(detectDocumentTextMock).toHaveBeenLastCalledWith({
+  expect(textractClientMock).toHaveReceivedCommandWith(DetectDocumentTextCommand, {
     Document: { Bytes: Buffer.from('image-buffer') },
   });
 

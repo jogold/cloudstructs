@@ -1,11 +1,11 @@
-import { CloudFormation } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { CloudFormationClient, GetTemplateCommand } from '@aws-sdk/client-cloudformation';
 
-const cloudFormation = new CloudFormation();
+const cloudFormationClient = new CloudFormationClient({});
 
 export async function handler(stackName: string) {
-  const template = await cloudFormation.getTemplate({
+  const template = await cloudFormationClient.send(new GetTemplateCommand({
     StackName: stackName,
-  }).promise();
+  }));
 
   if (!template.TemplateBody) {
     return [];

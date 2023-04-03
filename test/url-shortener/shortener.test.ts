@@ -1,27 +1,18 @@
-const s3ClientMock = {
-  putObject: jest.fn().mockReturnThis(),
-  promise: jest.fn(),
-};
-
-const documentClientMock = {
-  update: jest.fn().mockReturnValue({
-    promise: () => ({
-      Attributes: {
-        value: 1000,
-      },
-    }),
-  }),
-};
-
+import 'aws-sdk-client-mock-jest';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/url-shortener/shortener.lambda';
 
-jest.mock('aws-sdk', () => {
-  return {
-    S3: jest.fn(() => s3ClientMock),
-    DynamoDB: {
-      DocumentClient: jest.fn(() => documentClientMock),
-    },
-  };
+const s3ClientMock = mockClient(S3Client);
+const documentClientMock = mockClient(DynamoDBDocumentClient);
+
+beforeEach(() => {
+  s3ClientMock.reset();
+  documentClientMock.reset();
+  documentClientMock.on(UpdateCommand).resolves({
+    Attributes: { value: 1000 },
+  });
 });
 
 process.env.TABLE_NAME = 'my-table';
@@ -43,7 +34,7 @@ test('returns 201 with short url', async () => {
     }),
   });
 
-  expect(documentClientMock.update).toHaveBeenCalledWith({
+  expect(documentClientMock).toHaveReceivedCommandWith(UpdateCommand, {
     TableName: 'my-table',
     Key: { key: 'counter' },
     UpdateExpression: 'ADD #value :incr',
@@ -52,7 +43,7 @@ test('returns 201 with short url', async () => {
     ReturnValues: 'UPDATED_NEW',
   });
 
-  expect(s3ClientMock.putObject).toHaveBeenCalledWith({
+  expect(s3ClientMock).toHaveReceivedCommandWith(PutObjectCommand, {
     Bucket: 'bucket',
     Key: 'QI',
     ContentType: 'application/json',
@@ -72,7 +63,7 @@ test('returns 400 with invalid url', async () => {
     body: '',
   });
 
-  expect(documentClientMock.update). not.toHaveBeenCalled();
+  expect(documentClientMock).not.toHaveReceivedCommand(UpdateCommand);
 
-  expect(s3ClientMock.putObject).not.toHaveBeenCalled();
+  expect(s3ClientMock).not.toHaveReceivedCommand(PutObjectCommand);
 });

@@ -1,7 +1,5 @@
 import { handler } from '../../src/email-receiver/s3.lambda';
 
-console.log = jest.fn();
-
 test('it extracts the message', async () => {
   const response = await handler({
     Records: [

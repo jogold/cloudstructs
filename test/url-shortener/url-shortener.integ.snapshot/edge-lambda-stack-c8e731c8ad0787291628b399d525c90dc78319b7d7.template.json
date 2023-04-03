@@ -95,7 +95,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
           },
-          "S3Key": "aa232339481023f7b9e63c1f9e5bb5b6deb86f2cb45b277fefb73717193eea0c.zip"
+          "S3Key": "61cde4e7bd5351537ea14b733248c1ecb896780c39b95a71a82e8065ceca919c.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -105,14 +105,14 @@
         },
         "Description": "src/url-shortener/redirect.edge-lambda.ts",
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x"
+        "Runtime": "nodejs18.x"
       },
       "DependsOn": [
         "RedirectServiceRoleDefaultPolicy53F16DEF",
         "RedirectServiceRole39B6C513"
       ]
     },
-    "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b": {
+    "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623": {
       "Type": "AWS::Lambda::Version",
       "Properties": {
         "FunctionName": {
@@ -125,7 +125,7 @@
       "Properties": {
         "Type": "String",
         "Value": {
-          "Ref": "RedirectCurrentVersion479E25EC963cd784fb770817bf8e8933d934fd9b"
+          "Ref": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623"
         },
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/Redirect"
       }

@@ -1,24 +1,3 @@
-const getSecretValueResponseMock = jest.fn();
-const getSecretValueMock = jest.fn().mockImplementation(() => ({
-  promise: getSecretValueResponseMock,
-}));
-
-const putSecretValueResponseMock = jest.fn().mockResolvedValue({});
-const putSecretValueMock = jest.fn().mockImplementation(() => ({
-  promise: putSecretValueResponseMock,
-}));
-
-const SecretsManagerMock = {
-  getSecretValue: getSecretValueMock,
-  putSecretValue: putSecretValueMock,
-};
-
-jest.mock('aws-sdk', () => {
-  return {
-    SecretsManager: jest.fn(() => SecretsManagerMock),
-  };
-});
-
 const getResponseMock = jest.fn().mockResolvedValue({});
 const getMock = jest.fn().mockImplementation(() => ({
   json: getResponseMock,
@@ -42,6 +21,9 @@ jest.mock('got', () => {
   };
 });
 
+import 'aws-sdk-client-mock-jest';
+import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
+import { mockClient } from 'aws-sdk-client-mock';
 import { handler } from '../../src/slack-app/provider.lambda';
 
 const event: AWSLambda.CloudFormationCustomResourceEvent & { PhysicalResourceId?: string } = {
@@ -67,15 +49,20 @@ const credentials = {
   signing_secret: 'signing_secret',
 };
 
+const secretsManagerClientMock = mockClient(SecretsManagerClient);
+
 beforeEach(() => {
   jest.clearAllMocks();
-
-  getSecretValueResponseMock.mockResolvedValue({
+  secretsManagerClientMock.reset();
+  secretsManagerClientMock.on(GetSecretValueCommand).resolves({
     SecretString: JSON.stringify({
       accessToken: 'access-token',
       refreshToken: 'refresh-token',
       exp: Date.now() / 1000 + 3600,
     }),
+  });
+  secretsManagerClientMock.on(PutSecretValueCommand).resolves({
+    ARN: 'arn',
   });
 
   postResponseMock.mockResolvedValue({
@@ -95,7 +82,7 @@ test('create request', async () => {
     },
   });
 
-  expect(getSecretValueMock).toHaveBeenCalledWith({
+  expect(secretsManagerClientMock).toHaveReceivedCommandWith(GetSecretValueCommand, {
     SecretId: 'conf-secret-arn',
   });
 
@@ -104,7 +91,7 @@ test('create request', async () => {
     json: { manifest: 'manifest' },
   });
 
-  expect(putSecretValueMock).toHaveBeenCalledWith({
+  expect(secretsManagerClientMock).toHaveReceivedCommandWith(PutSecretValueCommand, {
     SecretId: 'creds-secret-arn',
     SecretString: JSON.stringify({
       appId: 'app-id',
@@ -117,7 +104,7 @@ test('create request', async () => {
 });
 
 test('refreshes the token', async () => {
-  getSecretValueResponseMock.mockResolvedValue({
+  secretsManagerClientMock.on(GetSecretValueCommand).resolvesOnce({
     SecretString: JSON.stringify({
       accessToken: 'access-token',
       refreshToken: 'refresh-token',
@@ -142,11 +129,11 @@ test('refreshes the token', async () => {
     },
   });
 
-  expect(getSecretValueMock).toHaveBeenCalledWith({
+  expect(secretsManagerClientMock).toHaveReceivedCommandWith(GetSecretValueCommand, {
     SecretId: 'conf-secret-arn',
   });
 
-  expect(putSecretValueMock).toHaveBeenCalledWith({
+  expect(secretsManagerClientMock).toHaveReceivedCommandWith(PutSecretValueCommand, {
     SecretId: 'conf-secret-arn',
     SecretString: JSON.stringify({
       accessToken: 'new-access-token',
@@ -185,7 +172,7 @@ test('update request', async () => {
     json: { app_id: 'app-id', manifest: 'manifest' },
   });
 
-  expect(putSecretValueMock).not.toHaveBeenCalled();
+  expect(secretsManagerClientMock).not.toHaveReceivedCommand(PutSecretValueCommand);
 });
 
 test('delete request', async () => {
@@ -211,5 +198,5 @@ test('delete request', async () => {
     json: { app_id: 'app-id' },
   });
 
-  expect(putSecretValueMock).not.toHaveBeenCalled();
+  expect(secretsManagerClientMock).not.toHaveReceivedCommand(PutSecretValueCommand);
 });

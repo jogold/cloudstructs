@@ -251,7 +251,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "35e78094ff2b4066a6db540e3e64bb43a615ec2a4089b9540b636bb2c6e27486.zip",
+          "S3Key": "648e99e58fa21fc9e8e0af846d3d6330bb5d8ea10b2f4aba257b49645d5a8205.zip",
         },
         "Description": "src/slack-events/events.lambda.ts",
         "Environment": Object {
@@ -267,7 +267,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -356,7 +356,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "c9cd562d8e394f7cab7c0797569cd341e5046dbd97a424d31d5ab2b3435e3792.zip",
+          "S3Key": "2966254b788b7fb93c9a9e824dd191112e39b36107900317cc04614b9c8f666f.zip",
         },
         "Description": "src/slack-textract/detect.lambda.ts",
         "Environment": Object {
@@ -372,7 +372,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 30,
       },
       "Type": "AWS::Lambda::Function",

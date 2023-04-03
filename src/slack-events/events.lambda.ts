@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
-import { EventBridge } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge';
 import { verifyRequestSignature } from './signature';
+
+const eventBridgeClient = new EventBridgeClient({});
 
 /**
  * Handle Slack events
@@ -42,20 +44,16 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
       return response;
     }
 
-    const eventBridge = new EventBridge({ apiVersion: '2015-10-07' });
-
-    const putEvents = await eventBridge.putEvents({
-      Entries: [
-        {
-          Detail: event.body,
-          DetailType: 'Slack Event',
-          Source: 'slack',
-          Resources: [body.api_app_id],
-          EventBusName: process.env.EVENT_BUS_NAME,
-          Time: new Date(body.event_time),
-        },
-      ],
-    }).promise();
+    const putEvents = await eventBridgeClient.send(new PutEventsCommand({
+      Entries: [{
+        Detail: event.body,
+        DetailType: 'Slack Event',
+        Source: 'slack',
+        Resources: [body.api_app_id],
+        EventBusName: process.env.EVENT_BUS_NAME,
+        Time: new Date(body.event_time),
+      }],
+    }));
     console.log('Put events: %j', putEvents);
 
     return response;
