@@ -1,4 +1,4 @@
-import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn';
+import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn'; // eslint-disable-line import/no-extraneous-dependencies
 import { respond } from './http';
 
 export const CREATE_FAILED_PHYSICAL_ID_MARKER = 'AWSCDK::StateMachineProvider::CREATE_FAILED';
