@@ -2,8 +2,6 @@
 import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge'; // eslint-disable-line import/no-extraneous-dependencies
 import { verifyRequestSignature } from './signature';
 
-const eventBridgeClient = new EventBridgeClient({});
-
 /**
  * Handle Slack events
  */
@@ -44,6 +42,7 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
       return response;
     }
 
+    const eventBridgeClient = new EventBridgeClient({});
     const putEvents = await eventBridgeClient.send(new PutEventsCommand({
       Entries: [{
         Detail: event.body,
