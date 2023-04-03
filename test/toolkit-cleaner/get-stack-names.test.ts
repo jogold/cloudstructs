@@ -4,15 +4,17 @@ import { handler } from '../../src/toolkit-cleaner/get-stack-names.lambda';
 import { CloudFormationClient, DescribeStacksCommand } from '@aws-sdk/client-cloudformation';
 
 const cloudFormationClientMock = mockClient(CloudFormationClient);
-cloudFormationClientMock.on(DescribeStacksCommand).resolves({
-  Stacks: [
-    { StackName: 'stack1', CreationTime: new Date(), StackStatus: 'status' }, 
-    { StackName: 'stack2', CreationTime: new Date(), StackStatus: 'status' }
-  ],
-  NextToken: 'token',
-}).resolves({
-  Stacks: [{ StackName: 'stack3', CreationTime: new Date(), StackStatus: 'status' }],
-})
+cloudFormationClientMock.on(DescribeStacksCommand)
+  .resolvesOnce({
+    Stacks: [
+      { StackName: 'stack1', CreationTime: new Date(), StackStatus: 'status' },
+      { StackName: 'stack2', CreationTime: new Date(), StackStatus: 'status' }
+    ],
+    NextToken: 'token',
+  })
+  .resolvesOnce({
+    Stacks: [{ StackName: 'stack3', CreationTime: new Date(), StackStatus: 'status' }],
+  })
 
 test('returns a list of stack names', async () => {
 

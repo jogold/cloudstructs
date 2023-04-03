@@ -7,34 +7,36 @@ const ecrClientMock = mockClient(ECRClient);
 
 beforeEach(() => {
   ecrClientMock.reset();
-  ecrClientMock.on(DescribeImagesCommand).resolves({
-    imageDetails: [
-      {
-        imageTags: ['hash1'],
-        imagePushedAt: daysAgo(5),
-        imageSizeInBytes: 12,
-      },
-      {
-        imageTags: ['hash2'],
-        imagePushedAt: new Date(),
-        imageSizeInBytes: 15,
-      },
-    ],
-    nextToken: 'token',
-  }).resolves({
-    imageDetails: [
-      {
-        imageTags: ['hash3'],
-        imagePushedAt: daysAgo(30),
-        imageSizeInBytes: 9,
-      },
-      {
-        imageTags: ['hash4'],
-        imagePushedAt: new Date(),
-        imageSizeInBytes: 11,
-      },
-    ],
-  })
+  ecrClientMock.on(DescribeImagesCommand)
+    .resolvesOnce({
+      imageDetails: [
+        {
+          imageTags: ['hash1'],
+          imagePushedAt: daysAgo(5),
+          imageSizeInBytes: 12,
+        },
+        {
+          imageTags: ['hash2'],
+          imagePushedAt: new Date(),
+          imageSizeInBytes: 15,
+        },
+      ],
+      nextToken: 'token',
+    })
+    .resolvesOnce({
+      imageDetails: [
+        {
+          imageTags: ['hash3'],
+          imagePushedAt: daysAgo(30),
+          imageSizeInBytes: 9,
+        },
+        {
+          imageTags: ['hash4'],
+          imagePushedAt: new Date(),
+          imageSizeInBytes: 11,
+        },
+      ],
+    })
 
   process.env.REPOSITORY_NAME = 'repository';
   process.env.RUN = 'true';

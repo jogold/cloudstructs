@@ -7,38 +7,40 @@ const s3ClientMock = mockClient(S3Client);
 
 beforeEach(() => {
   s3ClientMock.reset();
-  s3ClientMock.on(ListObjectVersionsCommand).resolves({
-    Versions: [
-      {
-        Key: 'hash1.json',
-        LastModified: daysAgo(5),
-        Size: 12,
-        VersionId: 'hash1-version-id',
-      },
-      {
-        Key: 'hash2.zip',
-        LastModified: new Date(),
-        Size: 15,
-        VersionId: 'hash2-version-id',
-      },
-    ],
-    NextKeyMarker: 'marker',
-  }).resolves({
-    Versions: [
-      {
-        Key: 'hash3.zip',
-        LastModified: daysAgo(30),
-        Size: 9,
-        VersionId: 'hash3-version-id',
-      },
-      {
-        Key: 'hash4.zip',
-        LastModified: new Date(),
-        Size: 11,
-        VersionId: 'hash4-version-id',
-      },
-    ],
-  })
+  s3ClientMock.on(ListObjectVersionsCommand)
+    .resolvesOnce({
+      Versions: [
+        {
+          Key: 'hash1.json',
+          LastModified: daysAgo(5),
+          Size: 12,
+          VersionId: 'hash1-version-id',
+        },
+        {
+          Key: 'hash2.zip',
+          LastModified: new Date(),
+          Size: 15,
+          VersionId: 'hash2-version-id',
+        },
+      ],
+      NextKeyMarker: 'marker',
+    })
+    .resolvesOnce({
+      Versions: [
+        {
+          Key: 'hash3.zip',
+          LastModified: daysAgo(30),
+          Size: 9,
+          VersionId: 'hash3-version-id',
+        },
+        {
+          Key: 'hash4.zip',
+          LastModified: new Date(),
+          Size: 11,
+          VersionId: 'hash4-version-id',
+        },
+      ],
+    })
 
   process.env.BUCKET_NAME = 'bucket';
   process.env.RUN = 'true';
