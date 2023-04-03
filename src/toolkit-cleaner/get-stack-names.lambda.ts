@@ -1,4 +1,4 @@
-import { CloudFormationClient, DescribeStacksCommand, DescribeStacksCommandOutput, Stack } from '@aws-sdk/client-cloudformation'; // eslint-disable-line import/no-extraneous-dependencies
+import { CloudFormationClient, DescribeStacksCommand } from '@aws-sdk/client-cloudformation'; // eslint-disable-line import/no-extraneous-dependencies
 
 const cloudFormationClient = new CloudFormationClient({});
 
@@ -9,7 +9,7 @@ export async function handler() {
   let finished = false;
   while (!finished) {
     const response = await cloudFormationClient.send(new DescribeStacksCommand({ NextToken: nextToken }));
-    
+
     for (const stack of (response.Stacks ?? [])) {
       if (stack.StackName) {
         res.push(stack.StackName);
