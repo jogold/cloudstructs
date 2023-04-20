@@ -24,7 +24,7 @@ export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<
       throw new Error('No body');
     }
 
-    const redirect = JSON.parse(data.Body.toString());
+    const redirect = JSON.parse(await data.Body.transformToString());
 
     return {
       status: '301',
