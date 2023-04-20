@@ -1,7 +1,5 @@
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
-const s3Client = new S3Client({});
-
 export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<AWSLambda.CloudFrontRequestResult> {
   const request = event.Records[0].cf.request;
 
@@ -12,6 +10,7 @@ export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<
       throw new Error('No S3 origin');
     }
 
+    const s3Client = new S3Client({ region: s3Origin.region });
     const bucket = s3Origin.domainName.replace(new RegExp(`.s3.${s3Origin.region}.amazonaws.com$`), '');
     const key = request.uri.substring(1); // remove first slash
 
