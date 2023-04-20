@@ -579,7 +579,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623",
+        "RefreshToken": "RedirectCurrentVersion479E25ECb3b92f6aff867f291cf06f3e9d02ff8e",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -1682,7 +1682,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623",
+        "RefreshToken": "RedirectCurrentVersion479E25ECb3b92f6aff867f291cf06f3e9d02ff8e",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -3123,7 +3123,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623",
+        "RefreshToken": "RedirectCurrentVersion479E25ECb3b92f6aff867f291cf06f3e9d02ff8e",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -4299,7 +4299,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623",
+        "RefreshToken": "RedirectCurrentVersion479E25ECb3b92f6aff867f291cf06f3e9d02ff8e",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -5350,7 +5350,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623",
+        "RefreshToken": "RedirectCurrentVersion479E25ECb3b92f6aff867f291cf06f3e9d02ff8e",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -6419,7 +6419,7 @@ Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC6feb7b141b2f2b98ba557e27f0602623",
+        "RefreshToken": "RedirectCurrentVersion479E25ECb3b92f6aff867f291cf06f3e9d02ff8e",
         "Region": "us-east-1",
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
