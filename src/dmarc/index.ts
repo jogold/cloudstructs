@@ -3,7 +3,7 @@ import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as ses from 'aws-cdk-lib/aws-ses';
 
 import { Construct } from 'constructs';
-import { EmailReceiver, EmailReceiverProps } from '../email-receiver/receiver';
+import { EmailReceiver } from '../email-receiver/receiver';
 
 export enum DmarcPolicy {
   None = 'none',
