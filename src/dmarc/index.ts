@@ -123,7 +123,7 @@ export interface DmarcReporterProps {
 }
 
 /**
- * Creates a DMARC record in Route 53 and allows attaching a Lambda function to process them.
+ * Creates a DMARC record in Route 53 and invokes a Lambda function to process incoming reports.
  */
 export class DmarcReporter extends Construct {
   constructor(scope: Construct, id: string, props: DmarcReporterProps) {

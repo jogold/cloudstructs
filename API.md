@@ -6,7 +6,7 @@ Name|Description
 ----|-----------
 [CodeCommitMirror](#cloudstructs-codecommitmirror)|Mirror a repository to AWS CodeCommit on schedule.
 [CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)|A source repository for AWS CodeCommit mirroring.
-[DmarcReporter](#cloudstructs-dmarcreporter)|Creates a DMARC record in Route 53 and allows attaching a Lambda function to process them.
+[DmarcReporter](#cloudstructs-dmarcreporter)|Creates a DMARC record in Route 53 and invokes a Lambda function to process incoming reports.
 [EcsServiceRoller](#cloudstructs-ecsserviceroller)|Roll your ECS service tasks on schedule or with a rule.
 [EmailReceiver](#cloudstructs-emailreceiver)|Receive emails through SES, save them to S3 and invokes a Lambda function.
 [RollTrigger](#cloudstructs-rolltrigger)|The rule or schedule that should trigger a roll.
@@ -159,7 +159,7 @@ __Returns__:
 
 ## class DmarcReporter  <a id="cloudstructs-dmarcreporter"></a>
 
-Creates a DMARC record in Route 53 and allows attaching a Lambda function to process them.
+Creates a DMARC record in Route 53 and invokes a Lambda function to process incoming reports.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
 __Extends__: [Construct](#constructs-construct)
