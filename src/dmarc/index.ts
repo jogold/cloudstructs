@@ -5,17 +5,41 @@ import * as ses from 'aws-cdk-lib/aws-ses';
 import { Construct } from 'constructs';
 import { EmailReceiver } from '../email-receiver/receiver';
 
+/**
+ * The DMARC policy to apply to messages that fail DMARC compliance.
+ */
 export enum DmarcPolicy {
+  /**
+   * Do not apply any special handling to messages that fail DMARC compliance.
+   */
   NONE = 'none',
+  /**
+   * Quarantine messages that fail DMARC compliance. (usually by sending them to spam)
+   */
   QUARANTINE = 'quarantine',
+  /**
+   * Reject messages that fail DMARC compliance. (usually by rejecting them outright)
+   */
   REJECT = 'reject',
 }
 
+/**
+ * The DMARC alignment mode.
+ */
 export enum DmarcAlignment {
+  /**
+   * Relaxed alignment mode.
+   */
   RELAXED = 'relaxed',
+  /**
+   * Strict alignment mode.
+   */
   STRICT = 'strict',
 }
 
+/**
+ * Properties for a DmarcReporter
+ */
 export interface DmarcReporterProps {
   /**
    * The Route 53 hosted zone to create the DMARC record in.
@@ -24,7 +48,7 @@ export interface DmarcReporterProps {
   /**
    * The email address to send DMARC reports to.
    * This email address must be verified in SES.
-   * @default dmarc-reports@<hostedZone.zoneName>
+   * @default dmarc-reports@${hostedZone.zoneName}
    */
   readonly emailAddress?: string;
 
@@ -98,6 +122,9 @@ export interface DmarcReporterProps {
   readonly receiptRuleSet: ses.IReceiptRuleSet;
 }
 
+/**
+ * Creates a DMARC record in Route 53 and allows attaching a Lambda function to process them.
+ */
 export class DmarcReporter extends Construct {
   constructor(scope: Construct, id: string, props: DmarcReporterProps) {
     super(scope, id);
