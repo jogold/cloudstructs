@@ -225,6 +225,7 @@
     "./package.json": "./package.json",
     "./.jsii": "./.jsii",
     "./lib/codecommit-mirror": "./lib/codecommit-mirror/index.js",
+    "./lib/dmarc": "./lib/dmarc/index.js",
     "./lib/ecs-service-roller": "./lib/ecs-service-roller/index.js",
     "./lib/email-receiver": "./lib/email-receiver/index.js",
     "./lib/saml-identity-provider": "./lib/saml-identity-provider/index.js",
