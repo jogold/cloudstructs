@@ -128,12 +128,12 @@ export class DmarcReporter extends Construct {
     }
     if (props.dmarcDkimAlignment) {
       dmarcRecordValue.push(
-        `adkim=${props.dmarcDkimAlignment === 'relaxed' ? 'r' : 's'}`,
+        `adkim=${props.dmarcDkimAlignment === DmarcAlignment.RELAXED ? 'r' : 's'}`,
       );
     }
     if (props.dmarcSpfAlignment) {
       dmarcRecordValue.push(
-        `aspf=${props.dmarcSpfAlignment === 'relaxed' ? 'r' : 's'}`,
+        `aspf=${props.dmarcSpfAlignment === DmarcAlignment.RELAXED ? 'r' : 's'}`,
       );
     }
 
