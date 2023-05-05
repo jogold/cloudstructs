@@ -102,9 +102,11 @@ export class DmarcReporter extends Construct {
   constructor(scope: Construct, id: string, props: DmarcReporterProps) {
     super(scope, id);
 
+    const emailAddress = props.emailAddress ?? `dmarc-reports@${props.hostedZone.zoneName}`;
+
     new EmailReceiver(this, 'EmailReceiver', {
       recipients: [
-        props.emailAddress ?? `dmarc-reports@${props.hostedZone.zoneName}`,
+        emailAddress,
       ],
       function: props.function,
       afterRule: props.afterRule,
@@ -115,7 +117,7 @@ export class DmarcReporter extends Construct {
       'v=DMARC1',
       `p=${props.dmarcPolicy}`,
       `rua=mailto:${[
-        props.emailAddress,
+        emailAddress,
         ...(props.additionalEmailAddresses ?? []),
       ].join(',')}`,
     ];
