@@ -75,7 +75,7 @@ export interface DmarcReporterProps {
    * - relaxed: Use relaxed alignment mode.
    * - strict: Use strict alignment mode.
    *
-  * @default relaxed
+   * @default relaxed
    */
   readonly dmarcSpfAlignment?: DmarcAlignment;
 
@@ -102,12 +102,11 @@ export class DmarcReporter extends Construct {
   constructor(scope: Construct, id: string, props: DmarcReporterProps) {
     super(scope, id);
 
-    const emailAddress = props.emailAddress ?? `dmarc-reports@${props.hostedZone.zoneName}`;
+    const emailAddress =
+      props.emailAddress ?? `dmarc-reports@${props.hostedZone.zoneName}`;
 
     new EmailReceiver(this, 'EmailReceiver', {
-      recipients: [
-        emailAddress,
-      ],
+      recipients: [emailAddress],
       function: props.function,
       afterRule: props.afterRule,
       receiptRuleSet: props.receiptRuleSet,
@@ -116,10 +115,9 @@ export class DmarcReporter extends Construct {
     const dmarcRecordValue = [
       'v=DMARC1',
       `p=${props.dmarcPolicy}`,
-      `rua=mailto:${[
-        emailAddress,
-        ...(props.additionalEmailAddresses ?? []),
-      ].join(',')}`,
+      `rua=${[emailAddress, ...(props.additionalEmailAddresses ?? [])]
+        .map((address) => `mailto:${address}`)
+        .join(',')}`,
     ];
 
     if (props.dmarcSubdomainPolicy) {
@@ -130,7 +128,9 @@ export class DmarcReporter extends Construct {
     }
     if (props.dmarcDkimAlignment) {
       dmarcRecordValue.push(
-        `adkim=${props.dmarcDkimAlignment === DmarcAlignment.RELAXED ? 'r' : 's'}`,
+        `adkim=${
+          props.dmarcDkimAlignment === DmarcAlignment.RELAXED ? 'r' : 's'
+        }`,
       );
     }
     if (props.dmarcSpfAlignment) {
