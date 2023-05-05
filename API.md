@@ -6,6 +6,7 @@ Name|Description
 ----|-----------
 [CodeCommitMirror](#cloudstructs-codecommitmirror)|Mirror a repository to AWS CodeCommit on schedule.
 [CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)|A source repository for AWS CodeCommit mirroring.
+[DmarcReporter](#cloudstructs-dmarcreporter)|*No description*
 [EcsServiceRoller](#cloudstructs-ecsserviceroller)|Roll your ECS service tasks on schedule or with a rule.
 [EmailReceiver](#cloudstructs-emailreceiver)|Receive emails through SES, save them to S3 and invokes a Lambda function.
 [RollTrigger](#cloudstructs-rolltrigger)|The rule or schedule that should trigger a roll.
@@ -28,6 +29,7 @@ Name|Description
 Name|Description
 ----|-----------
 [CodeCommitMirrorProps](#cloudstructs-codecommitmirrorprops)|Properties for a CodeCommitMirror.
+[DmarcReporterProps](#cloudstructs-dmarcreporterprops)|*No description*
 [EcsServiceRollerProps](#cloudstructs-ecsservicerollerprops)|Properties for a EcsServiceRoller.
 [EmailReceiverProps](#cloudstructs-emailreceiverprops)|Properties for an EmailReceiver.
 [SamlIdentityProviderProps](#cloudstructs-samlidentityproviderprops)|Properties for a SamlProvider.
@@ -62,6 +64,8 @@ Name|Description
 
 Name|Description
 ----|-----------
+[DmarcAlignment](#cloudstructs-dmarcalignment)|*No description*
+[DmarcPolicy](#cloudstructs-dmarcpolicy)|*No description*
 [SlackAppManifestShortcutType](#cloudstructs-slackappmanifestshortcuttype)|Type of shortcuts.
 [SslServerTestGrade](#cloudstructs-sslservertestgrade)|SSL Server test grade.
 
@@ -150,6 +154,40 @@ static private(name: string, url: Secret): CodeCommitMirrorSourceRepository
 
 __Returns__:
 * <code>[CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)</code>
+
+
+
+## class DmarcReporter  <a id="cloudstructs-dmarcreporter"></a>
+
+
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
+
+### Initializer
+
+
+
+
+```ts
+new DmarcReporter(scope: Construct, id: string, props: DmarcReporterProps)
+```
+
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[DmarcReporterProps](#cloudstructs-dmarcreporterprops)</code>)  *No description*
+  * **dmarcPolicy** (<code>[DmarcPolicy](#cloudstructs-dmarcpolicy)</code>)  The DMARC policy to apply to messages that fail DMARC compliance. 
+  * **function** (<code>[aws_lambda.IFunction](#aws-cdk-lib-aws-lambda-ifunction)</code>)  A Lambda function to invoke after the message is saved to S3. 
+  * **hostedZone** (<code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code>)  The Route 53 hosted zone to create the DMARC record in. 
+  * **receiptRuleSet** (<code>[aws_ses.IReceiptRuleSet](#aws-cdk-lib-aws-ses-ireceiptruleset)</code>)  The SES receipt rule set where a receipt rule will be added. 
+  * **additionalEmailAddresses** (<code>Array<string></code>)  Additional email addresses to send DMARC reports to. __*Optional*__
+  * **afterRule** (<code>[aws_ses.IReceiptRule](#aws-cdk-lib-aws-ses-ireceiptrule)</code>)  An existing rule after which the new rule will be placed in the rule set. __*Default*__: The new rule is inserted at the beginning of the rule list.
+  * **dmarcDkimAlignment** (<code>[DmarcAlignment](#cloudstructs-dmarcalignment)</code>)  The alignment mode to use for DKIM signatures. __*Default*__: relaxed
+  * **dmarcPercentage** (<code>number</code>)  The percentage of messages that should be checked for DMARC compliance. __*Default*__: 100
+  * **dmarcSpfAlignment** (<code>[DmarcAlignment](#cloudstructs-dmarcalignment)</code>)  The alignment mode to use for SPF signatures. __*Default*__: relaxed
+  * **dmarcSubdomainPolicy** (<code>[DmarcPolicy](#cloudstructs-dmarcpolicy)</code>)  The DMARC policy to apply to messages that fail DMARC compliance for subdomains. __*Default*__: inherited from dmarcPolicy
+  * **emailAddress** (<code>string</code>)  The email address to send DMARC reports to. __*Default*__: dmarc-reports
+
 
 
 
@@ -766,6 +804,29 @@ Name | Type | Description
 
 
 
+## struct DmarcReporterProps  <a id="cloudstructs-dmarcreporterprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**dmarcPolicy** | <code>[DmarcPolicy](#cloudstructs-dmarcpolicy)</code> | The DMARC policy to apply to messages that fail DMARC compliance.
+**function** | <code>[aws_lambda.IFunction](#aws-cdk-lib-aws-lambda-ifunction)</code> | A Lambda function to invoke after the message is saved to S3.
+**hostedZone** | <code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code> | The Route 53 hosted zone to create the DMARC record in.
+**receiptRuleSet** | <code>[aws_ses.IReceiptRuleSet](#aws-cdk-lib-aws-ses-ireceiptruleset)</code> | The SES receipt rule set where a receipt rule will be added.
+**additionalEmailAddresses**? | <code>Array<string></code> | Additional email addresses to send DMARC reports to.<br/>__*Optional*__
+**afterRule**? | <code>[aws_ses.IReceiptRule](#aws-cdk-lib-aws-ses-ireceiptrule)</code> | An existing rule after which the new rule will be placed in the rule set.<br/>__*Default*__: The new rule is inserted at the beginning of the rule list.
+**dmarcDkimAlignment**? | <code>[DmarcAlignment](#cloudstructs-dmarcalignment)</code> | The alignment mode to use for DKIM signatures.<br/>__*Default*__: relaxed
+**dmarcPercentage**? | <code>number</code> | The percentage of messages that should be checked for DMARC compliance.<br/>__*Default*__: 100
+**dmarcSpfAlignment**? | <code>[DmarcAlignment](#cloudstructs-dmarcalignment)</code> | The alignment mode to use for SPF signatures.<br/>__*Default*__: relaxed
+**dmarcSubdomainPolicy**? | <code>[DmarcPolicy](#cloudstructs-dmarcpolicy)</code> | The DMARC policy to apply to messages that fail DMARC compliance for subdomains.<br/>__*Default*__: inherited from dmarcPolicy
+**emailAddress**? | <code>string</code> | The email address to send DMARC reports to.<br/>__*Default*__: dmarc-reports
+
+
+
 ## struct EcsServiceRollerProps  <a id="cloudstructs-ecsservicerollerprops"></a>
 
 
@@ -1121,6 +1182,27 @@ Name | Type | Description
 **iamAuthorization**? | <code>boolean</code> | Whether to use IAM authorization.<br/>__*Default*__: do not use IAM authorization
 **recordName**? | <code>string</code> | The record name to use in the hosted zone.<br/>__*Default*__: zone root
 
+
+
+## enum DmarcAlignment  <a id="cloudstructs-dmarcalignment"></a>
+
+
+
+Name | Description
+-----|-----
+**RELAXED** |
+**STRICT** |
+
+
+## enum DmarcPolicy  <a id="cloudstructs-dmarcpolicy"></a>
+
+
+
+Name | Description
+-----|-----
+**NONE** |
+**QUARANTINE** |
+**REJECT** |
 
 
 ## enum SlackAppManifestShortcutType  <a id="cloudstructs-slackappmanifestshortcuttype"></a>
