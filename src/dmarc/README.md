@@ -38,10 +38,10 @@ export class MyStack extends Stack {
       // optional, defaults to 100
       dmarcPercentage: 100,
 
-      //
+      // defaults to DmarcAlignment.Relaxed if not specified
       dmarcDkimAlignment: DmarcAlignment.Relaxed,
 
-      //
+      // defaults to DmarcAlignment.Relaxed if not specified
       dmarcSpfAlignment: DmarcAlignment.Strict,
 
       // lambda function that processes dmarc reports

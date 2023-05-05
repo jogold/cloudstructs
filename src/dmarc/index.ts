@@ -64,6 +64,8 @@ export interface DmarcReporterProps {
    * This can be one of the following values:
    * - relaxed: Use relaxed alignment mode.
    * - strict: Use strict alignment mode.
+   *
+   * @default relaxed
    */
   readonly dmarcDkimAlignment?: DmarcAlignment;
 
@@ -72,6 +74,8 @@ export interface DmarcReporterProps {
    * This can be one of the following values:
    * - relaxed: Use relaxed alignment mode.
    * - strict: Use strict alignment mode.
+   *
+  * @default relaxed
    */
   readonly dmarcSpfAlignment?: DmarcAlignment;
 
