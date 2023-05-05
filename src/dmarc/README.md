@@ -29,20 +29,21 @@ export class MyStack extends Stack {
       // optional, other email addresses that receive dmarc reports
       additionalEmailAddresses: ["additional@example.com"],
 
-      // you could use DmarcPolicy.None to just receive dmarc reports
-      dmarcPolicy: DmarcPolicy.Quarantine,
+      // you could use DmarcPolicy.NONE to just receive dmarc reports
+      // to help you investigate DMARC conformance
+      dmarcPolicy: DmarcPolicy.QUARANTINE,
 
       // optional, inherited from dmarcPolicy
-      dmarcSubdomainPolicy: DmarcPolicy.None,
+      dmarcSubdomainPolicy: DmarcPolicy.NONE,
 
       // optional, defaults to 100
       dmarcPercentage: 100,
 
-      // optional, defaults to DmarcAlignment.Relaxed
-      dmarcDkimAlignment: DmarcAlignment.Relaxed,
+      // optional, defaults to DmarcAlignment.RELAXED
+      dmarcDkimAlignment: DmarcAlignment.RELAXED,
 
-      // optional, defaults to DmarcAlignment.Relaxed
-      dmarcSpfAlignment: DmarcAlignment.Strict,
+      // optional, defaults to DmarcAlignment.RELAXED
+      dmarcSpfAlignment: DmarcAlignment.STRICT,
 
       // lambda function that processes dmarc reports
       // receives a [`AWSLambda.SESMessage`](https://www.npmjs.com/package/@types/aws-lambda)

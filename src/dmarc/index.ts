@@ -6,14 +6,14 @@ import { Construct } from 'constructs';
 import { EmailReceiver } from '../email-receiver/receiver';
 
 export enum DmarcPolicy {
-  None = 'none',
-  Quarantine = 'quarantine',
-  Reject = 'reject',
+  NONE = 'none',
+  QUARANTINE = 'quarantine',
+  REJECT = 'reject',
 }
 
 export enum DmarcAlignment {
-  Relaxed = 'relaxed',
-  Strict = 'strict',
+  RELAXED = 'relaxed',
+  STRICT = 'strict',
 }
 
 export interface DmarcReporterProps {
