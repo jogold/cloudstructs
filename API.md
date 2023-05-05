@@ -6,7 +6,7 @@ Name|Description
 ----|-----------
 [CodeCommitMirror](#cloudstructs-codecommitmirror)|Mirror a repository to AWS CodeCommit on schedule.
 [CodeCommitMirrorSourceRepository](#cloudstructs-codecommitmirrorsourcerepository)|A source repository for AWS CodeCommit mirroring.
-[DmarcReporter](#cloudstructs-dmarcreporter)|*No description*
+[DmarcReporter](#cloudstructs-dmarcreporter)|Creates a DMARC record in Route 53 and allows attaching a Lambda function to process them.
 [EcsServiceRoller](#cloudstructs-ecsserviceroller)|Roll your ECS service tasks on schedule or with a rule.
 [EmailReceiver](#cloudstructs-emailreceiver)|Receive emails through SES, save them to S3 and invokes a Lambda function.
 [RollTrigger](#cloudstructs-rolltrigger)|The rule or schedule that should trigger a roll.
@@ -29,7 +29,7 @@ Name|Description
 Name|Description
 ----|-----------
 [CodeCommitMirrorProps](#cloudstructs-codecommitmirrorprops)|Properties for a CodeCommitMirror.
-[DmarcReporterProps](#cloudstructs-dmarcreporterprops)|*No description*
+[DmarcReporterProps](#cloudstructs-dmarcreporterprops)|Properties for a DmarcReporter.
 [EcsServiceRollerProps](#cloudstructs-ecsservicerollerprops)|Properties for a EcsServiceRoller.
 [EmailReceiverProps](#cloudstructs-emailreceiverprops)|Properties for an EmailReceiver.
 [SamlIdentityProviderProps](#cloudstructs-samlidentityproviderprops)|Properties for a SamlProvider.
@@ -64,8 +64,8 @@ Name|Description
 
 Name|Description
 ----|-----------
-[DmarcAlignment](#cloudstructs-dmarcalignment)|*No description*
-[DmarcPolicy](#cloudstructs-dmarcpolicy)|*No description*
+[DmarcAlignment](#cloudstructs-dmarcalignment)|The DMARC alignment mode.
+[DmarcPolicy](#cloudstructs-dmarcpolicy)|The DMARC policy to apply to messages that fail DMARC compliance.
 [SlackAppManifestShortcutType](#cloudstructs-slackappmanifestshortcuttype)|Type of shortcuts.
 [SslServerTestGrade](#cloudstructs-sslservertestgrade)|SSL Server test grade.
 
@@ -159,7 +159,7 @@ __Returns__:
 
 ## class DmarcReporter  <a id="cloudstructs-dmarcreporter"></a>
 
-
+Creates a DMARC record in Route 53 and allows attaching a Lambda function to process them.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
 __Extends__: [Construct](#constructs-construct)
@@ -807,7 +807,7 @@ Name | Type | Description
 ## struct DmarcReporterProps  <a id="cloudstructs-dmarcreporterprops"></a>
 
 
-
+Properties for a DmarcReporter.
 
 
 
@@ -1186,23 +1186,23 @@ Name | Type | Description
 
 ## enum DmarcAlignment  <a id="cloudstructs-dmarcalignment"></a>
 
-
+The DMARC alignment mode.
 
 Name | Description
 -----|-----
-**RELAXED** |
-**STRICT** |
+**RELAXED** |Relaxed alignment mode.
+**STRICT** |Strict alignment mode.
 
 
 ## enum DmarcPolicy  <a id="cloudstructs-dmarcpolicy"></a>
 
-
+The DMARC policy to apply to messages that fail DMARC compliance.
 
 Name | Description
 -----|-----
-**NONE** |
-**QUARANTINE** |
-**REJECT** |
+**NONE** |Do not apply any special handling to messages that fail DMARC compliance.
+**QUARANTINE** |Quarantine messages that fail DMARC compliance.
+**REJECT** |Reject messages that fail DMARC compliance.
 
 
 ## enum SlackAppManifestShortcutType  <a id="cloudstructs-slackappmanifestshortcuttype"></a>
