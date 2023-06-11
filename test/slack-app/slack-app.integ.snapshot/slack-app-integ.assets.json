@@ -1,15 +1,15 @@
 {
   "version": "15.0.0",
   "files": {
-    "277fd9541645068dad6cf3ebc43d582a5f2cb2b5eb0160de90fd087194fb1539": {
+    "824af8408a30f356f2f08e964919289b1d10d2c7e310d050e0a19987e811ba04": {
       "source": {
-        "path": "asset.277fd9541645068dad6cf3ebc43d582a5f2cb2b5eb0160de90fd087194fb1539.lambda",
+        "path": "asset.824af8408a30f356f2f08e964919289b1d10d2c7e310d050e0a19987e811ba04.lambda",
         "packaging": "zip"
       },
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "277fd9541645068dad6cf3ebc43d582a5f2cb2b5eb0160de90fd087194fb1539.zip",
+          "objectKey": "824af8408a30f356f2f08e964919289b1d10d2c7e310d050e0a19987e811ba04.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
@@ -40,7 +40,7 @@
         }
       }
     },
-    "545ff30217308ffa13d7de80aa47381335163867399cc770656822710bad0d19": {
+    "5b696c82ead72f4b801f0b1bb222774f32f0dd3b0273a3746e64ce476f5737f5": {
       "source": {
         "path": "slack-app-integ.template.json",
         "packaging": "file"
@@ -48,7 +48,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "545ff30217308ffa13d7de80aa47381335163867399cc770656822710bad0d19.json",
+          "objectKey": "5b696c82ead72f4b801f0b1bb222774f32f0dd3b0273a3746e64ce476f5737f5.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
