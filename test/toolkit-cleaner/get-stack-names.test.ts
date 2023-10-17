@@ -7,13 +7,13 @@ const cloudFormationClientMock = mockClient(CloudFormationClient);
 cloudFormationClientMock.on(DescribeStacksCommand)
   .resolvesOnce({
     Stacks: [
-      { StackName: 'stack1', CreationTime: new Date(), StackStatus: 'status' },
-      { StackName: 'stack2', CreationTime: new Date(), StackStatus: 'status' },
+      { StackName: 'stack1', CreationTime: new Date(), StackStatus: 'CREATE_COMPLETE' },
+      { StackName: 'stack2', CreationTime: new Date(), StackStatus: 'CREATE_COMPLETE' },
     ],
     NextToken: 'token',
   })
   .resolvesOnce({
-    Stacks: [{ StackName: 'stack3', CreationTime: new Date(), StackStatus: 'status' }],
+    Stacks: [{ StackName: 'stack3', CreationTime: new Date(), StackStatus: 'CREATE_COMPLETE' }],
   });
 
 test('returns a list of stack names', async () => {

@@ -94,7 +94,7 @@ export async function startExecution(event: AWSLambda.CloudFormationCustomResour
     console.log(err);
     await respond('FAILED', {
       ...event,
-      Reason: err.message,
+      Reason: err instanceof Error ? err.message : undefined,
     });
   }
 }
