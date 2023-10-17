@@ -119,11 +119,11 @@
     "eslint-plugin-import": "^2.28.1",
     "jest": "^27",
     "jest-junit": "^15",
-    "jsii": "1.x",
+    "jsii": "5.x",
     "jsii-diff": "^1.90.0",
     "jsii-docgen": "^9.2.2",
     "jsii-pacmak": "^1.90.0",
-    "jsii-rosetta": "1.x",
+    "jsii-rosetta": "5.x",
     "nock": "^13.3.4",
     "npm-check-updates": "^16",
     "projen": "^0.75.1",
@@ -146,10 +146,6 @@
     "@slack/web-api",
     "got"
   ],
-  "resolutions": {
-    "@types/babel__traverse": "7.18.2",
-    "@types/prettier": "2.6.0"
-  },
   "keywords": [
     "cdk"
   ],

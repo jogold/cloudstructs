@@ -5,6 +5,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'jonathan.goldwasser@gmail.com',
   authorName: 'Jonathan Goldwasser',
   description: 'High-level constructs for AWS CDK',
+  jsiiVersion: '5.x',
   cdkVersion: '2.1.0',
   name: 'cloudstructs',
   repository: 'https://github.com/jogold/cloudstructs.git',
