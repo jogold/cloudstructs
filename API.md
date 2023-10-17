@@ -723,11 +723,11 @@ An AWS Secrets Manager secret containing the credentials of the application.
 
 ```
 {
-   "appId": "...",
-   "clientId": "...",
-   "clientSecret": "...",
-   "verificationToken": "...",
-   "signingSecret": "..."
+  "appId": "...",
+  "clientId": "...",
+  "clientSecret": "...",
+  "verificationToken": "...",
+  "signingSecret": "..."
 }
 ```
 
@@ -1844,7 +1844,7 @@ public readonly emailAddress: string;
 ```
 
 - *Type:* string
-- *Default:* dmarc-reports
+- *Default:* dmarc-reports@${hostedZone.zoneName}
 
 The email address to send DMARC reports to.
 
@@ -2982,7 +2982,7 @@ Must use the following JSON format:
 
 ```
 {
-   "refreshToken": "<token>"
+  "refreshToken": "<token>"
 }
 ```
 
