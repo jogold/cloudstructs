@@ -53,7 +53,7 @@ test('handler', async () => {
         Text: 'Hello',
       },
       {
-        BlockType: 'ZZZ',
+        BlockType: 'CELL',
         Text: 'Not',
       },
       {
