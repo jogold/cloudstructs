@@ -125,7 +125,7 @@
     "jsii-rosetta": "5.x",
     "nock": "^13.3.8",
     "npm-check-updates": "^16",
-    "projen": "^0.76.28",
+    "projen": "^0.76.29",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
