@@ -77,7 +77,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs20.x",
         "Timeout": 30
       },
       "DependsOn": [
@@ -159,7 +159,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs20.x",
         "Timeout": 30
       },
       "DependsOn": [
@@ -301,7 +301,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs20.x",
         "Timeout": 300
       },
       "DependsOn": [
@@ -412,7 +412,7 @@
           }
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs20.x",
         "Timeout": 300
       },
       "DependsOn": [
