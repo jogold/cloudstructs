@@ -188,6 +188,9 @@
       "ts-jest": {
         "tsconfig": "tsconfig.dev.json"
       }
+    },
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
     }
   },
   "types": "lib/index.d.ts",
