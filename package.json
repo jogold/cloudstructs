@@ -90,17 +90,17 @@
   "devDependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "2.1.0-alpha.0",
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.1.0-alpha.0",
-    "@aws-sdk/client-cloudformation": "^3.478.0",
-    "@aws-sdk/client-dynamodb": "^3.478.0",
-    "@aws-sdk/client-ecr": "^3.478.0",
-    "@aws-sdk/client-ecs": "^3.478.0",
-    "@aws-sdk/client-eventbridge": "^3.478.0",
-    "@aws-sdk/client-iam": "^3.478.0",
-    "@aws-sdk/client-s3": "^3.478.0",
-    "@aws-sdk/client-secrets-manager": "^3.478.0",
-    "@aws-sdk/client-sfn": "^3.478.0",
-    "@aws-sdk/client-textract": "^3.478.0",
-    "@aws-sdk/lib-dynamodb": "^3.478.0",
+    "@aws-sdk/client-cloudformation": "^3.481.0",
+    "@aws-sdk/client-dynamodb": "^3.481.0",
+    "@aws-sdk/client-ecr": "^3.481.0",
+    "@aws-sdk/client-ecs": "^3.481.0",
+    "@aws-sdk/client-eventbridge": "^3.481.0",
+    "@aws-sdk/client-iam": "^3.481.0",
+    "@aws-sdk/client-s3": "^3.481.0",
+    "@aws-sdk/client-secrets-manager": "^3.481.0",
+    "@aws-sdk/client-sfn": "^3.481.0",
+    "@aws-sdk/client-textract": "^3.481.0",
+    "@aws-sdk/lib-dynamodb": "^3.481.0",
     "@types/aws-lambda": "^8.10.130",
     "@types/jest": "^27",
     "@types/node": "^18",
@@ -124,7 +124,7 @@
     "jsii-pacmak": "^1.93.0",
     "jsii-rosetta": "5.x",
     "nock": "^13.4.0",
-    "projen": "^0.78.2",
+    "projen": "^0.78.4",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.2",
@@ -183,11 +183,13 @@
         }
       ]
     ],
-    "preset": "ts-jest",
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "tsconfig.dev.json"
-      }
+    "transform": {
+      "^.+\\.[t]sx?$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.dev.json"
+        }
+      ]
     },
     "moduleNameMapper": {
       "axios": "axios/dist/node/axios.cjs"
