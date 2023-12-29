@@ -27,5 +27,5 @@ function findDockerTagPrefix(hash: string): string {
     return '';
   }
 
-  return hash.substring(0, hash.length - 64)
+  return hash.substring(0, hash.length - 64);
 }
