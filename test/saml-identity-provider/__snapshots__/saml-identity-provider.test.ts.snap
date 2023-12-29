@@ -1,29 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SamlIdentityProvider 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": Object {
-      "DependsOn": Array [
+  "Resources": {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+      "DependsOn": [
         "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2.zip",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
             "Arn",
           ],
@@ -33,27 +33,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -64,47 +64,47 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "IdentityProviderA00909EA": Object {
+    "IdentityProviderA00909EA": {
       "DeletionPolicy": "Delete",
-      "DependsOn": Array [
+      "DependsOn": [
         "IdentityProviderCustomResourcePolicy3F0F7442",
       ],
-      "Properties": Object {
-        "Create": "{\\"service\\":\\"IAM\\",\\"action\\":\\"createSAMLProvider\\",\\"parameters\\":{\\"Name\\":\\"IdentityProviderIdentityProvider\\",\\"SAMLMetadataDocument\\":\\"<?xml version=\\\\\\"1.0\\\\\\" encoding=\\\\\\"utf-8\\\\\\"?><EntityDescriptor ID=\\\\\\"ID\\\\\\" entityID=\\\\\\"ID\\\\\\"</EntityDescriptor>\\"},\\"physicalResourceId\\":{\\"responsePath\\":\\"SAMLProviderArn\\"}}",
-        "Delete": "{\\"service\\":\\"IAM\\",\\"action\\":\\"deleteSAMLProvider\\",\\"parameters\\":{\\"SAMLProviderArn\\":\\"PHYSICAL:RESOURCEID:\\"}}",
+      "Properties": {
+        "Create": "{"service":"IAM","action":"createSAMLProvider","parameters":{"Name":"IdentityProviderIdentityProvider","SAMLMetadataDocument":"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?><EntityDescriptor ID=\\"ID\\" entityID=\\"ID\\"</EntityDescriptor>"},"physicalResourceId":{"responsePath":"SAMLProviderArn"}}",
+        "Delete": "{"service":"IAM","action":"deleteSAMLProvider","parameters":{"SAMLProviderArn":"PHYSICAL:RESOURCEID:"}}",
         "InstallLatestAwsSdk": true,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
             "Arn",
           ],
         },
-        "Update": "{\\"service\\":\\"IAM\\",\\"action\\":\\"updateSAMLProvider\\",\\"parameters\\":{\\"SAMLProviderArn\\":\\"PHYSICAL:RESOURCEID:\\",\\"SAMLMetadataDocument\\":\\"<?xml version=\\\\\\"1.0\\\\\\" encoding=\\\\\\"utf-8\\\\\\"?><EntityDescriptor ID=\\\\\\"ID\\\\\\" entityID=\\\\\\"ID\\\\\\"</EntityDescriptor>\\"},\\"physicalResourceId\\":{\\"responsePath\\":\\"SAMLProviderArn\\"}}",
+        "Update": "{"service":"IAM","action":"updateSAMLProvider","parameters":{"SAMLProviderArn":"PHYSICAL:RESOURCEID:","SAMLMetadataDocument":"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?><EntityDescriptor ID=\\"ID\\" entityID=\\"ID\\"</EntityDescriptor>"},"physicalResourceId":{"responsePath":"SAMLProviderArn"}}",
       },
       "Type": "Custom::SamlIdentityProvider",
       "UpdateReplacePolicy": "Delete",
     },
-    "IdentityProviderCustomResourcePolicy3F0F7442": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "IdentityProviderCustomResourcePolicy3F0F7442": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "iam:createSAMLProvider",
                 "iam:updateSAMLProvider",
                 "iam:deleteSAMLProvider",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":iam::",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":saml-provider/IdentityProviderIdentityProvider",
@@ -116,29 +116,29 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "IdentityProviderCustomResourcePolicy3F0F7442",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "Role1ABCC5F0": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "Role1ABCC5F0": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRoleWithSAML",
-              "Condition": Object {
-                "StringEquals": Object {
+              "Condition": {
+                "StringEquals": {
                   "SAML:aud": "https://signin.aws.amazon.com/saml",
                 },
               },
               "Effect": "Allow",
-              "Principal": Object {
-                "Federated": Object {
-                  "Fn::GetAtt": Array [
+              "Principal": {
+                "Federated": {
+                  "Fn::GetAtt": [
                     "IdentityProviderA00909EA",
                     "SAMLProviderArn",
                   ],
@@ -152,22 +152,22 @@ Object {
       "Type": "AWS::IAM::Role",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],

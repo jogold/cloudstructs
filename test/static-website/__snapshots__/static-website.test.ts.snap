@@ -1,30 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StaticWebsite 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "OriginRequest0052232D": Object {
-      "DependsOn": Array [
+  "Resources": {
+    "OriginRequest0052232D": {
+      "DependsOn": [
         "OriginRequestServiceRole04760C2E",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-1",
           },
           "S3Key": "7103577a2cb7fc67b45dcf792018885f3f5557b18e7a4b239e35ed10d119f5b9.zip",
         },
         "Description": "src/static-website/origin-request.edge-lambda.ts",
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "OriginRequestServiceRole04760C2E",
             "Arn",
           ],
@@ -33,52 +33,52 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginRequestCurrentVersionD6F77E9F01c31a424b9789d3d40146516339cf86": Object {
-      "Properties": Object {
-        "FunctionName": Object {
+    "OriginRequestCurrentVersionD6F77E9F01c31a424b9789d3d40146516339cf86": {
+      "Properties": {
+        "FunctionName": {
           "Ref": "OriginRequest0052232D",
         },
       },
       "Type": "AWS::Lambda::Version",
     },
-    "OriginRequestParameter759D9B4C": Object {
-      "Properties": Object {
+    "OriginRequestParameter759D9B4C": {
+      "Properties": {
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
         "Type": "String",
-        "Value": Object {
+        "Value": {
           "Ref": "OriginRequestCurrentVersionD6F77E9F01c31a424b9789d3d40146516339cf86",
         },
       },
       "Type": "AWS::SSM::Parameter",
     },
-    "OriginRequestServiceRole04760C2E": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "OriginRequestServiceRole04760C2E": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
-            Object {
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "edgelambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -90,22 +90,22 @@ Object {
       "Type": "AWS::IAM::Role",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],
@@ -121,39 +121,39 @@ Object {
 `;
 
 exports[`StaticWebsite 2`] = `
-Object {
-  "Mappings": Object {
-    "AWSCloudFrontPartitionHostedZoneIdMap": Object {
-      "aws": Object {
+{
+  "Mappings": {
+    "AWSCloudFrontPartitionHostedZoneIdMap": {
+      "aws": {
         "zoneId": "Z2FDTNDATAQYW2",
       },
-      "aws-cn": Object {
+      "aws-cn": {
         "zoneId": "Z3RFFRIM2A3IF5",
       },
     },
   },
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": Object {
-      "DependsOn": Array [
+  "Resources": {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+      "DependsOn": [
         "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
           "S3Key": "11d371859e49f3b1a49896583254890801a40beada56e4c84409a179a221e2e2.zip",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
             "Arn",
           ],
@@ -163,27 +163,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -194,19 +194,19 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "ApiDefaultRoute1D83B0D8": Object {
-      "Properties": Object {
-        "ApiId": Object {
+    "ApiDefaultRoute1D83B0D8": {
+      "Properties": {
+        "ApiId": {
           "Ref": "ApiF70053CD",
         },
         "AuthorizationType": "NONE",
         "RouteKey": "$default",
-        "Target": Object {
-          "Fn::Join": Array [
+        "Target": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "integrations/",
-              Object {
+              {
                 "Ref": "ApiDefaultRouteIntegrationDB7B670E",
               },
             ],
@@ -215,14 +215,14 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Route",
     },
-    "ApiDefaultRouteIntegrationDB7B670E": Object {
-      "Properties": Object {
-        "ApiId": Object {
+    "ApiDefaultRouteIntegrationDB7B670E": {
+      "Properties": {
+        "ApiId": {
           "Ref": "ApiF70053CD",
         },
         "IntegrationType": "AWS_PROXY",
-        "IntegrationUri": Object {
-          "Fn::GetAtt": Array [
+        "IntegrationUri": {
+          "Fn::GetAtt": [
             "Fn9270CBC0",
             "Arn",
           ],
@@ -231,30 +231,30 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Integration",
     },
-    "ApiDefaultRouteIntegrationPermission612BAC34": Object {
-      "Properties": Object {
+    "ApiDefaultRouteIntegrationPermission612BAC34": {
+      "Properties": {
         "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
+        "FunctionName": {
+          "Fn::GetAtt": [
             "Fn9270CBC0",
             "Arn",
           ],
         },
         "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
+        "SourceArn": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "arn:",
-              Object {
+              {
                 "Ref": "AWS::Partition",
               },
               ":execute-api:eu-west-1:",
-              Object {
+              {
                 "Ref": "AWS::AccountId",
               },
               ":",
-              Object {
+              {
                 "Ref": "ApiF70053CD",
               },
               "/*/*",
@@ -264,9 +264,9 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "ApiDefaultStage189A7074": Object {
-      "Properties": Object {
-        "ApiId": Object {
+    "ApiDefaultStage189A7074": {
+      "Properties": {
+        "ApiId": {
           "Ref": "ApiF70053CD",
         },
         "AutoDeploy": true,
@@ -274,28 +274,28 @@ Object {
       },
       "Type": "AWS::ApiGatewayV2::Stage",
     },
-    "ApiF70053CD": Object {
-      "Properties": Object {
+    "ApiF70053CD": {
+      "Properties": {
         "Name": "Api",
         "ProtocolType": "HTTP",
       },
       "Type": "AWS::ApiGatewayV2::Api",
     },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": Object {
-      "DependsOn": Array [
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A": {
+      "DependsOn": [
         "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
           "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825",
             "Arn",
           ],
@@ -305,44 +305,44 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
+        "ManagedPolicyArns": [
+          {
             "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
           },
         ],
-        "Policies": Array [
-          Object {
-            "PolicyDocument": Object {
-              "Statement": Array [
-                Object {
-                  "Action": Array [
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
                     "ssm:GetParameter",
                   ],
                   "Effect": "Allow",
-                  "Resource": Object {
-                    "Fn::Join": Array [
+                  "Resource": {
+                    "Fn::Join": [
                       "",
-                      Array [
+                      [
                         "arn:",
-                        Object {
+                        {
                           "Ref": "AWS::Partition",
                         },
                         ":ssm:us-east-1:",
-                        Object {
+                        {
                           "Ref": "AWS::AccountId",
                         },
                         ":parameter/cdk/EdgeFunctionArn/*",
@@ -359,17 +359,17 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "Fn9270CBC0": Object {
-      "DependsOn": Array [
+    "Fn9270CBC0": {
+      "DependsOn": [
         "FnServiceRoleB9001A96",
       ],
-      "Properties": Object {
-        "Code": Object {
+      "Properties": {
+        "Code": {
           "ZipFile": "inline",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "FnServiceRoleB9001A96",
             "Arn",
           ],
@@ -378,27 +378,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "FnServiceRoleB9001A96": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "FnServiceRoleB9001A96": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -409,32 +409,32 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "HostedZoneDB99F866": Object {
-      "Properties": Object {
+    "HostedZoneDB99F866": {
+      "Properties": {
         "Name": "my-site.com.",
       },
       "Type": "AWS::Route53::HostedZone",
     },
-    "StaticWebsiteARecord6F0B2A09": Object {
-      "Properties": Object {
-        "AliasTarget": Object {
-          "DNSName": Object {
-            "Fn::GetAtt": Array [
+    "StaticWebsiteARecord6F0B2A09": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
               "StaticWebsiteDistributionBAD21F75",
               "DomainName",
             ],
           },
-          "HostedZoneId": Object {
-            "Fn::FindInMap": Array [
+          "HostedZoneId": {
+            "Fn::FindInMap": [
               "AWSCloudFrontPartitionHostedZoneIdMap",
-              Object {
+              {
                 "Ref": "AWS::Partition",
               },
               "zoneId",
             ],
           },
         },
-        "HostedZoneId": Object {
+        "HostedZoneId": {
           "Ref": "HostedZoneDB99F866",
         },
         "Name": "www.my-site.com.",
@@ -442,26 +442,26 @@ Object {
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "StaticWebsiteAaaaRecordA6A958CD": Object {
-      "Properties": Object {
-        "AliasTarget": Object {
-          "DNSName": Object {
-            "Fn::GetAtt": Array [
+    "StaticWebsiteAaaaRecordA6A958CD": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
               "StaticWebsiteDistributionBAD21F75",
               "DomainName",
             ],
           },
-          "HostedZoneId": Object {
-            "Fn::FindInMap": Array [
+          "HostedZoneId": {
+            "Fn::FindInMap": [
               "AWSCloudFrontPartitionHostedZoneIdMap",
-              Object {
+              {
                 "Ref": "AWS::Partition",
               },
               "zoneId",
             ],
           },
         },
-        "HostedZoneId": Object {
+        "HostedZoneId": {
           "Ref": "HostedZoneDB99F866",
         },
         "Name": "www.my-site.com.",
@@ -469,10 +469,10 @@ Object {
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "StaticWebsiteBucket0E92E0FC": Object {
+    "StaticWebsiteBucket0E92E0FC": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "PublicAccessBlockConfiguration": Object {
+      "Properties": {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -482,30 +482,30 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "StaticWebsiteBucketPolicy86C0E5CF": Object {
-      "Properties": Object {
-        "Bucket": Object {
+    "StaticWebsiteBucketPolicy86C0E5CF": {
+      "Properties": {
+        "Bucket": {
           "Ref": "StaticWebsiteBucket0E92E0FC",
         },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Principal": Object {
-                "CanonicalUser": Object {
-                  "Fn::GetAtt": Array [
+              "Principal": {
+                "CanonicalUser": {
+                  "Fn::GetAtt": [
                     "StaticWebsiteDistributionOrigin1S3Origin3045572F",
                     "S3CanonicalUserId",
                   ],
                 },
               },
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  [
+                    {
+                      "Fn::GetAtt": [
                         "StaticWebsiteBucket0E92E0FC",
                         "Arn",
                       ],
@@ -521,21 +521,21 @@ Object {
       },
       "Type": "AWS::S3::BucketPolicy",
     },
-    "StaticWebsiteCertificateCertificateRequestorFunction8DAF9CCF": Object {
-      "DependsOn": Array [
+    "StaticWebsiteCertificateCertificateRequestorFunction8DAF9CCF": {
+      "DependsOn": [
         "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyBBEC5BA3",
         "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
           "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
         },
         "Handler": "index.certificateRequestHandler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B",
             "Arn",
           ],
@@ -545,27 +545,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -576,12 +576,12 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyBBEC5BA3": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyBBEC5BA3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "acm:RequestCertificate",
                 "acm:DescribeCertificate",
                 "acm:DeleteCertificate",
@@ -590,24 +590,24 @@ Object {
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "route53:GetChange",
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "route53:changeResourceRecordSets",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":route53:::hostedzone/",
-                    Object {
+                    {
                       "Ref": "HostedZoneDB99F866",
                     },
                   ],
@@ -618,24 +618,24 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyBBEC5BA3",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "StaticWebsiteCertificateCertificateRequestorResource7C29CEF3": Object {
+    "StaticWebsiteCertificateCertificateRequestorResource7C29CEF3": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "DomainName": "www.my-site.com",
-        "HostedZoneId": Object {
+        "HostedZoneId": {
           "Ref": "HostedZoneDB99F866",
         },
         "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "StaticWebsiteCertificateCertificateRequestorFunction8DAF9CCF",
             "Arn",
           ],
@@ -644,27 +644,27 @@ Object {
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "StaticWebsiteDistributionBAD21F75": Object {
-      "Properties": Object {
-        "DistributionConfig": Object {
-          "Aliases": Array [
+    "StaticWebsiteDistributionBAD21F75": {
+      "Properties": {
+        "DistributionConfig": {
+          "Aliases": [
             "www.my-site.com",
           ],
-          "DefaultCacheBehavior": Object {
+          "DefaultCacheBehavior": {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
-            "LambdaFunctionAssociations": Array [
-              Object {
+            "LambdaFunctionAssociations": [
+              {
                 "EventType": "origin-request",
-                "LambdaFunctionARN": Object {
-                  "Fn::GetAtt": Array [
+                "LambdaFunctionARN": {
+                  "Fn::GetAtt": [
                     "StaticWebsiteOriginRequestArnReaderEA9004DC",
                     "FunctionArn",
                   ],
                 },
               },
             ],
-            "ResponseHeadersPolicyId": Object {
+            "ResponseHeadersPolicyId": {
               "Ref": "StaticWebsiteResponseHeadersPolicyF3EBE566",
             },
             "TargetOriginId": "StackStaticWebsiteDistributionOrigin103625211",
@@ -674,22 +674,22 @@ Object {
           "Enabled": true,
           "HttpVersion": "http2and3",
           "IPV6Enabled": true,
-          "Origins": Array [
-            Object {
-              "DomainName": Object {
-                "Fn::GetAtt": Array [
+          "Origins": [
+            {
+              "DomainName": {
+                "Fn::GetAtt": [
                   "StaticWebsiteBucket0E92E0FC",
                   "RegionalDomainName",
                 ],
               },
               "Id": "StackStaticWebsiteDistributionOrigin103625211",
-              "S3OriginConfig": Object {
-                "OriginAccessIdentity": Object {
-                  "Fn::Join": Array [
+              "S3OriginConfig": {
+                "OriginAccessIdentity": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "origin-access-identity/cloudfront/",
-                      Object {
+                      {
                         "Ref": "StaticWebsiteDistributionOrigin1S3Origin3045572F",
                       },
                     ],
@@ -698,9 +698,9 @@ Object {
               },
             },
           ],
-          "ViewerCertificate": Object {
-            "AcmCertificateArn": Object {
-              "Fn::GetAtt": Array [
+          "ViewerCertificate": {
+            "AcmCertificateArn": {
+              "Fn::GetAtt": [
                 "StaticWebsiteCertificateCertificateRequestorResource7C29CEF3",
                 "Arn",
               ],
@@ -712,34 +712,34 @@ Object {
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "StaticWebsiteDistributionOrigin1S3Origin3045572F": Object {
-      "Properties": Object {
-        "CloudFrontOriginAccessIdentityConfig": Object {
+    "StaticWebsiteDistributionOrigin1S3Origin3045572F": {
+      "Properties": {
+        "CloudFrontOriginAccessIdentityConfig": {
           "Comment": "Identity for StackStaticWebsiteDistributionOrigin103625211",
         },
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
-    "StaticWebsiteHttpsRedirectRedirectAliasRecord2591f3E6FEEF4C": Object {
-      "Properties": Object {
-        "AliasTarget": Object {
-          "DNSName": Object {
-            "Fn::GetAtt": Array [
+    "StaticWebsiteHttpsRedirectRedirectAliasRecord2591f3E6FEEF4C": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
               "StaticWebsiteHttpsRedirectRedirectDistributionCFDistributionF7ADE06F",
               "DomainName",
             ],
           },
-          "HostedZoneId": Object {
-            "Fn::FindInMap": Array [
+          "HostedZoneId": {
+            "Fn::FindInMap": [
               "AWSCloudFrontPartitionHostedZoneIdMap",
-              Object {
+              {
                 "Ref": "AWS::Partition",
               },
               "zoneId",
             ],
           },
         },
-        "HostedZoneId": Object {
+        "HostedZoneId": {
           "Ref": "HostedZoneDB99F866",
         },
         "Name": "my-site.com.",
@@ -747,26 +747,26 @@ Object {
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "StaticWebsiteHttpsRedirectRedirectAliasRecordSix2591f309F9321D": Object {
-      "Properties": Object {
-        "AliasTarget": Object {
-          "DNSName": Object {
-            "Fn::GetAtt": Array [
+    "StaticWebsiteHttpsRedirectRedirectAliasRecordSix2591f309F9321D": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
               "StaticWebsiteHttpsRedirectRedirectDistributionCFDistributionF7ADE06F",
               "DomainName",
             ],
           },
-          "HostedZoneId": Object {
-            "Fn::FindInMap": Array [
+          "HostedZoneId": {
+            "Fn::FindInMap": [
               "AWSCloudFrontPartitionHostedZoneIdMap",
-              Object {
+              {
                 "Ref": "AWS::Partition",
               },
               "zoneId",
             ],
           },
         },
-        "HostedZoneId": Object {
+        "HostedZoneId": {
           "Ref": "HostedZoneDB99F866",
         },
         "Name": "my-site.com.",
@@ -774,17 +774,17 @@ Object {
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "StaticWebsiteHttpsRedirectRedirectBucket45BA11C9": Object {
+    "StaticWebsiteHttpsRedirectRedirectBucket45BA11C9": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "PublicAccessBlockConfiguration": Object {
+      "Properties": {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
           "RestrictPublicBuckets": true,
         },
-        "WebsiteConfiguration": Object {
-          "RedirectAllRequestsTo": Object {
+        "WebsiteConfiguration": {
+          "RedirectAllRequestsTo": {
             "HostName": "www.my-site.com",
             "Protocol": "https",
           },
@@ -793,21 +793,21 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
     },
-    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionEE7DB513": Object {
-      "DependsOn": Array [
+    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionEE7DB513": {
+      "DependsOn": [
         "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy81FC4515",
         "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRole08DAF404",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
           "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
         },
         "Handler": "index.certificateRequestHandler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRole08DAF404",
             "Arn",
           ],
@@ -817,27 +817,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRole08DAF404": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRole08DAF404": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -848,12 +848,12 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy81FC4515": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy81FC4515": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "acm:RequestCertificate",
                 "acm:DescribeCertificate",
                 "acm:DeleteCertificate",
@@ -862,24 +862,24 @@ Object {
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "route53:GetChange",
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "route53:changeResourceRecordSets",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":route53:::hostedzone/",
-                    Object {
+                    {
                       "Ref": "HostedZoneDB99F866",
                     },
                   ],
@@ -890,54 +890,54 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy81FC4515",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionServiceRole08DAF404",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorResource692E38D9": Object {
+    "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorResource692E38D9": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "DomainName": "my-site.com",
-        "HostedZoneId": Object {
+        "HostedZoneId": {
           "Ref": "HostedZoneDB99F866",
         },
         "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorFunctionEE7DB513",
             "Arn",
           ],
         },
-        "SubjectAlternativeNames": Array [
+        "SubjectAlternativeNames": [
           "my-site.com",
         ],
       },
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "StaticWebsiteHttpsRedirectRedirectDistributionCFDistributionF7ADE06F": Object {
-      "Properties": Object {
-        "DistributionConfig": Object {
-          "Aliases": Array [
+    "StaticWebsiteHttpsRedirectRedirectDistributionCFDistributionF7ADE06F": {
+      "Properties": {
+        "DistributionConfig": {
+          "Aliases": [
             "my-site.com",
           ],
           "Comment": "Redirect to www.my-site.com from my-site.com",
-          "DefaultCacheBehavior": Object {
-            "AllowedMethods": Array [
+          "DefaultCacheBehavior": {
+            "AllowedMethods": [
               "GET",
               "HEAD",
             ],
-            "CachedMethods": Array [
+            "CachedMethods": [
               "GET",
               "HEAD",
             ],
             "Compress": true,
-            "ForwardedValues": Object {
-              "Cookies": Object {
+            "ForwardedValues": {
+              "Cookies": {
                 "Forward": "none",
               },
               "QueryString": false,
@@ -949,28 +949,28 @@ Object {
           "Enabled": true,
           "HttpVersion": "http2",
           "IPV6Enabled": true,
-          "Origins": Array [
-            Object {
+          "Origins": [
+            {
               "ConnectionAttempts": 3,
               "ConnectionTimeout": 10,
-              "CustomOriginConfig": Object {
+              "CustomOriginConfig": {
                 "HTTPPort": 80,
                 "HTTPSPort": 443,
                 "OriginKeepaliveTimeout": 5,
                 "OriginProtocolPolicy": "http-only",
                 "OriginReadTimeout": 30,
-                "OriginSSLProtocols": Array [
+                "OriginSSLProtocols": [
                   "TLSv1.2",
                 ],
               },
-              "DomainName": Object {
-                "Fn::Select": Array [
+              "DomainName": {
+                "Fn::Select": [
                   2,
-                  Object {
-                    "Fn::Split": Array [
+                  {
+                    "Fn::Split": [
                       "/",
-                      Object {
-                        "Fn::GetAtt": Array [
+                      {
+                        "Fn::GetAtt": [
                           "StaticWebsiteHttpsRedirectRedirectBucket45BA11C9",
                           "WebsiteURL",
                         ],
@@ -983,9 +983,9 @@ Object {
             },
           ],
           "PriceClass": "PriceClass_All",
-          "ViewerCertificate": Object {
-            "AcmCertificateArn": Object {
-              "Fn::GetAtt": Array [
+          "ViewerCertificate": {
+            "AcmCertificateArn": {
+              "Fn::GetAtt": [
                 "StaticWebsiteHttpsRedirectRedirectCertificateCertificateRequestorResource692E38D9",
                 "Arn",
               ],
@@ -997,14 +997,14 @@ Object {
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "StaticWebsiteOriginRequestArnReaderEA9004DC": Object {
+    "StaticWebsiteOriginRequestArnReaderEA9004DC": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
         "RefreshToken": "OriginRequestCurrentVersionD6F77E9F01c31a424b9789d3d40146516339cf86",
         "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "CustomCrossRegionStringParameterReaderCustomResourceProviderHandler65B5F33A",
             "Arn",
           ],
@@ -1013,56 +1013,56 @@ Object {
       "Type": "Custom::CrossRegionStringParameterReader",
       "UpdateReplacePolicy": "Delete",
     },
-    "StaticWebsitePutConfig8F8DD69A": Object {
+    "StaticWebsitePutConfig8F8DD69A": {
       "DeletionPolicy": "Delete",
-      "DependsOn": Array [
+      "DependsOn": [
         "StaticWebsitePutConfigCustomResourcePolicy54D08151",
       ],
-      "Properties": Object {
-        "Create": Object {
-          "Fn::Join": Array [
+      "Properties": {
+        "Create": {
+          "Fn::Join": [
             "",
-            Array [
-              "{\\"service\\":\\"S3\\",\\"action\\":\\"putObject\\",\\"parameters\\":{\\"Bucket\\":\\"",
-              Object {
+            [
+              "{"service":"S3","action":"putObject","parameters":{"Bucket":"",
+              {
                 "Ref": "StaticWebsiteBucket0E92E0FC",
               },
-              "\\",\\"Key\\":\\"config.json\\",\\"Body\\":\\"{\\\\\\"key1\\\\\\":\\\\\\"value1\\\\\\",\\\\\\"key2\\\\\\":\\\\\\"value2\\\\\\",\\\\\\"apiUrl\\\\\\":\\\\\\"https://",
-              Object {
+              "","Key":"config.json","Body":"{\\"key1\\":\\"value1\\",\\"key2\\":\\"value2\\",\\"apiUrl\\":\\"https://",
+              {
                 "Ref": "ApiF70053CD",
               },
               ".execute-api.eu-west-1.",
-              Object {
+              {
                 "Ref": "AWS::URLSuffix",
               },
-              "/\\\\\\"}\\",\\"ContentType\\":\\"application/json\\",\\"CacheControl\\":\\"max-age=0, no-cache, no-store, must-revalidate\\"},\\"physicalResourceId\\":{\\"id\\":\\"config\\"}}",
+              "/\\"}","ContentType":"application/json","CacheControl":"max-age=0, no-cache, no-store, must-revalidate"},"physicalResourceId":{"id":"config"}}",
             ],
           ],
         },
         "InstallLatestAwsSdk": true,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
             "Arn",
           ],
         },
-        "Update": Object {
-          "Fn::Join": Array [
+        "Update": {
+          "Fn::Join": [
             "",
-            Array [
-              "{\\"service\\":\\"S3\\",\\"action\\":\\"putObject\\",\\"parameters\\":{\\"Bucket\\":\\"",
-              Object {
+            [
+              "{"service":"S3","action":"putObject","parameters":{"Bucket":"",
+              {
                 "Ref": "StaticWebsiteBucket0E92E0FC",
               },
-              "\\",\\"Key\\":\\"config.json\\",\\"Body\\":\\"{\\\\\\"key1\\\\\\":\\\\\\"value1\\\\\\",\\\\\\"key2\\\\\\":\\\\\\"value2\\\\\\",\\\\\\"apiUrl\\\\\\":\\\\\\"https://",
-              Object {
+              "","Key":"config.json","Body":"{\\"key1\\":\\"value1\\",\\"key2\\":\\"value2\\",\\"apiUrl\\":\\"https://",
+              {
                 "Ref": "ApiF70053CD",
               },
               ".execute-api.eu-west-1.",
-              Object {
+              {
                 "Ref": "AWS::URLSuffix",
               },
-              "/\\\\\\"}\\",\\"ContentType\\":\\"application/json\\",\\"CacheControl\\":\\"max-age=0, no-cache, no-store, must-revalidate\\"},\\"physicalResourceId\\":{\\"id\\":\\"config\\"}}",
+              "/\\"}","ContentType":"application/json","CacheControl":"max-age=0, no-cache, no-store, must-revalidate"},"physicalResourceId":{"id":"config"}}",
             ],
           ],
         },
@@ -1070,19 +1070,19 @@ Object {
       "Type": "Custom::AWS",
       "UpdateReplacePolicy": "Delete",
     },
-    "StaticWebsitePutConfigCustomResourcePolicy54D08151": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "StaticWebsitePutConfigCustomResourcePolicy54D08151": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "s3:PutObject",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  [
+                    {
+                      "Fn::GetAtt": [
                         "StaticWebsiteBucket0E92E0FC",
                         "Arn",
                       ],
@@ -1096,37 +1096,37 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "StaticWebsitePutConfigCustomResourcePolicy54D08151",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "StaticWebsiteResponseHeadersPolicyF3EBE566": Object {
-      "Properties": Object {
-        "ResponseHeadersPolicyConfig": Object {
+    "StaticWebsiteResponseHeadersPolicyF3EBE566": {
+      "Properties": {
+        "ResponseHeadersPolicyConfig": {
           "Name": "StackStaticWebsiteResponseHeadersPolicyEF11926D",
-          "SecurityHeadersConfig": Object {
-            "ContentTypeOptions": Object {
+          "SecurityHeadersConfig": {
+            "ContentTypeOptions": {
               "Override": true,
             },
-            "FrameOptions": Object {
+            "FrameOptions": {
               "FrameOption": "DENY",
               "Override": true,
             },
-            "ReferrerPolicy": Object {
+            "ReferrerPolicy": {
               "Override": true,
               "ReferrerPolicy": "strict-origin-when-cross-origin",
             },
-            "StrictTransportSecurity": Object {
+            "StrictTransportSecurity": {
               "AccessControlMaxAgeSec": 31536000,
               "IncludeSubdomains": true,
               "Override": true,
               "Preload": true,
             },
-            "XSSProtection": Object {
+            "XSSProtection": {
               "ModeBlock": true,
               "Override": true,
               "Protection": true,
@@ -1137,22 +1137,22 @@ Object {
       "Type": "AWS::CloudFront::ResponseHeadersPolicy",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],

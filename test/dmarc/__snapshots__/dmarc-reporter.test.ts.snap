@@ -1,50 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DmarcReporter 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "DmarcReporterDmarcRecord500F74C9": Object {
-      "Properties": Object {
-        "HostedZoneId": Object {
+  "Resources": {
+    "DmarcReporterDmarcRecord500F74C9": {
+      "Properties": {
+        "HostedZoneId": {
           "Ref": "HostedZoneDB99F866",
         },
         "Name": "_dmarc.example.com.",
-        "ResourceRecords": Array [
-          "\\"v=DMARC1; p=reject; rua=mailto:dmarc-reports@example.com,mailto:someaddress@dmarc-service.com,mailto:otheraddress@other-service.com; sp=quarantine; pct=55; adkim=r; aspf=s\\"",
+        "ResourceRecords": [
+          ""v=DMARC1; p=reject; rua=mailto:dmarc-reports@example.com,mailto:someaddress@dmarc-service.com,mailto:otheraddress@other-service.com; sp=quarantine; pct=55; adkim=r; aspf=s"",
         ],
         "TTL": "1800",
         "Type": "TXT",
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "DmarcReporterEmailReceiverBucketF1700F35": Object {
+    "DmarcReporterEmailReceiverBucketF1700F35": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "BucketEncryption": Object {
-          "ServerSideEncryptionConfiguration": Array [
-            Object {
-              "ServerSideEncryptionByDefault": Object {
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
                 "SSEAlgorithm": "AES256",
               },
             },
           ],
         },
-        "LifecycleConfiguration": Object {
-          "Rules": Array [
-            Object {
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
               "ExpirationInDays": 1,
               "Status": "Enabled",
             },
           ],
         },
-        "PublicAccessBlockConfiguration": Object {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -54,32 +54,32 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "DmarcReporterEmailReceiverBucketPolicy7E4F847B": Object {
-      "Properties": Object {
-        "Bucket": Object {
+    "DmarcReporterEmailReceiverBucketPolicy7E4F847B": {
+      "Properties": {
+        "Bucket": {
           "Ref": "DmarcReporterEmailReceiverBucketF1700F35",
         },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "s3:PutObject",
-              "Condition": Object {
-                "StringEquals": Object {
-                  "aws:Referer": Object {
+              "Condition": {
+                "StringEquals": {
+                  "aws:Referer": {
                     "Ref": "AWS::AccountId",
                   },
                 },
               },
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ses.amazonaws.com",
               },
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  [
+                    {
+                      "Fn::GetAtt": [
                         "DmarcReporterEmailReceiverBucketF1700F35",
                         "Arn",
                       ],
@@ -95,26 +95,26 @@ Object {
       },
       "Type": "AWS::S3::BucketPolicy",
     },
-    "DmarcReporterEmailReceiverReceiptRuleA0500AF6": Object {
-      "DependsOn": Array [
+    "DmarcReporterEmailReceiverReceiptRuleA0500AF6": {
+      "DependsOn": [
         "DmarcReporterEmailReceiverBucketPolicy7E4F847B",
       ],
-      "Properties": Object {
-        "Rule": Object {
-          "Actions": Array [
-            Object {
-              "S3Action": Object {
-                "BucketName": Object {
+      "Properties": {
+        "Rule": {
+          "Actions": [
+            {
+              "S3Action": {
+                "BucketName": {
                   "Ref": "DmarcReporterEmailReceiverBucketF1700F35",
                 },
-                "TopicArn": Object {
+                "TopicArn": {
                   "Ref": "DmarcReporterEmailReceiverTopic85110845",
                 },
               },
             },
           ],
           "Enabled": true,
-          "Recipients": Array [
+          "Recipients": [
             "dmarc-reports@example.com",
           ],
         },
@@ -122,46 +122,46 @@ Object {
       },
       "Type": "AWS::SES::ReceiptRule",
     },
-    "DmarcReporterEmailReceiverTopic85110845": Object {
+    "DmarcReporterEmailReceiverTopic85110845": {
       "Type": "AWS::SNS::Topic",
     },
-    "DmarcReporterEmailReceivers3AllowInvokeDmarcReporterEmailReceiverTopicB672F6604C5D9E00": Object {
-      "Properties": Object {
+    "DmarcReporterEmailReceivers3AllowInvokeDmarcReporterEmailReceiverTopicB672F6604C5D9E00": {
+      "Properties": {
         "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
+        "FunctionName": {
+          "Fn::GetAtt": [
             "DmarcReporterEmailReceivers3DE5A5BB4",
             "Arn",
           ],
         },
         "Principal": "sns.amazonaws.com",
-        "SourceArn": Object {
+        "SourceArn": {
           "Ref": "DmarcReporterEmailReceiverTopic85110845",
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "DmarcReporterEmailReceivers3DE5A5BB4": Object {
-      "DependsOn": Array [
+    "DmarcReporterEmailReceivers3DE5A5BB4": {
+      "DependsOn": [
         "DmarcReporterEmailReceivers3ServiceRoleDefaultPolicy3B6AE52A",
         "DmarcReporterEmailReceivers3ServiceRole17AB0AE4",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "3d78437d64ccf325f4a2ea52c0f2ff10b36acb4bf8d1077b2ad1811284aa4b46.zip",
         },
         "Description": "src/email-receiver/s3.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
+        "Environment": {
+          "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
           },
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "DmarcReporterEmailReceivers3ServiceRole17AB0AE4",
             "Arn",
           ],
@@ -170,24 +170,24 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "DmarcReporterEmailReceivers3EventInvokeConfig7BBE4497": Object {
-      "Properties": Object {
-        "DestinationConfig": Object {
-          "OnSuccess": Object {
-            "Destination": Object {
-              "Fn::Join": Array [
+    "DmarcReporterEmailReceivers3EventInvokeConfig7BBE4497": {
+      "Properties": {
+        "DestinationConfig": {
+          "OnSuccess": {
+            "Destination": {
+              "Fn::Join": [
                 "",
-                Array [
+                [
                   "arn:",
-                  Object {
+                  {
                     "Ref": "AWS::Partition",
                   },
                   ":events:",
-                  Object {
+                  {
                     "Ref": "AWS::Region",
                   },
                   ":",
-                  Object {
+                  {
                     "Ref": "AWS::AccountId",
                   },
                   ":event-bus/default",
@@ -196,25 +196,25 @@ Object {
             },
           },
         },
-        "FunctionName": Object {
+        "FunctionName": {
           "Ref": "DmarcReporterEmailReceivers3DE5A5BB4",
         },
         "Qualifier": "$LATEST",
       },
       "Type": "AWS::Lambda::EventInvokeConfig",
     },
-    "DmarcReporterEmailReceivers3EventInvokeConfigSuccessAllowEventRuleFn9E622E4A": Object {
-      "Properties": Object {
+    "DmarcReporterEmailReceivers3EventInvokeConfigSuccessAllowEventRuleFn9E622E4A": {
+      "Properties": {
         "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
+        "FunctionName": {
+          "Fn::GetAtt": [
             "Fn9270CBC0",
             "Arn",
           ],
         },
         "Principal": "events.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::GetAtt": Array [
+        "SourceArn": {
+          "Fn::GetAtt": [
             "DmarcReporterEmailReceivers3EventInvokeConfigSuccessED23FE4E",
             "Arn",
           ],
@@ -222,19 +222,19 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "DmarcReporterEmailReceivers3EventInvokeConfigSuccessED23FE4E": Object {
-      "Properties": Object {
-        "EventPattern": Object {
-          "detail-type": Array [
+    "DmarcReporterEmailReceivers3EventInvokeConfigSuccessED23FE4E": {
+      "Properties": {
+        "EventPattern": {
+          "detail-type": [
             "Lambda Function Invocation Result - Success",
           ],
-          "resources": Array [
-            Object {
-              "Fn::Join": Array [
+          "resources": [
+            {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
-                    "Fn::GetAtt": Array [
+                [
+                  {
+                    "Fn::GetAtt": [
                       "DmarcReporterEmailReceivers3DE5A5BB4",
                       "Arn",
                     ],
@@ -244,15 +244,15 @@ Object {
               ],
             },
           ],
-          "source": Array [
+          "source": [
             "lambda",
           ],
         },
         "State": "ENABLED",
-        "Targets": Array [
-          Object {
-            "Arn": Object {
-              "Fn::GetAtt": Array [
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
                 "Fn9270CBC0",
                 "Arn",
               ],
@@ -264,22 +264,22 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "DmarcReporterEmailReceivers3LogRetention16D3E702": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
+    "DmarcReporterEmailReceivers3LogRetention16D3E702": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "/aws/lambda/",
-              Object {
+              {
                 "Ref": "DmarcReporterEmailReceivers3DE5A5BB4",
               },
             ],
           ],
         },
         "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
             "Arn",
           ],
@@ -287,27 +287,27 @@ Object {
       },
       "Type": "Custom::LogRetention",
     },
-    "DmarcReporterEmailReceivers3ServiceRole17AB0AE4": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "DmarcReporterEmailReceivers3ServiceRole17AB0AE4": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -318,27 +318,27 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "DmarcReporterEmailReceivers3ServiceRoleDefaultPolicy3B6AE52A": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "DmarcReporterEmailReceivers3ServiceRoleDefaultPolicy3B6AE52A": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "events:PutEvents",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":events:",
-                    Object {
+                    {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":event-bus/default",
@@ -350,41 +350,41 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "DmarcReporterEmailReceivers3ServiceRoleDefaultPolicy3B6AE52A",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "DmarcReporterEmailReceivers3ServiceRole17AB0AE4",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "DmarcReporterEmailReceivers3Topic123953AA": Object {
-      "Properties": Object {
-        "Endpoint": Object {
-          "Fn::GetAtt": Array [
+    "DmarcReporterEmailReceivers3Topic123953AA": {
+      "Properties": {
+        "Endpoint": {
+          "Fn::GetAtt": [
             "DmarcReporterEmailReceivers3DE5A5BB4",
             "Arn",
           ],
         },
         "Protocol": "lambda",
-        "TopicArn": Object {
+        "TopicArn": {
           "Ref": "DmarcReporterEmailReceiverTopic85110845",
         },
       },
       "Type": "AWS::SNS::Subscription",
     },
-    "Fn9270CBC0": Object {
-      "DependsOn": Array [
+    "Fn9270CBC0": {
+      "DependsOn": [
         "FnServiceRoleDefaultPolicyC6A839BF",
         "FnServiceRoleB9001A96",
       ],
-      "Properties": Object {
-        "Code": Object {
+      "Properties": {
+        "Code": {
           "ZipFile": "export.handler = () => void;",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "FnServiceRoleB9001A96",
             "Arn",
           ],
@@ -393,27 +393,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "FnServiceRoleB9001A96": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "FnServiceRoleB9001A96": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -424,30 +424,30 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "FnServiceRoleDefaultPolicyC6A839BF": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "FnServiceRoleDefaultPolicyC6A839BF": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
                     "DmarcReporterEmailReceiverBucketF1700F35",
                     "Arn",
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "DmarcReporterEmailReceiverBucketF1700F35",
                           "Arn",
                         ],
@@ -462,35 +462,35 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "FnServiceRoleDefaultPolicyC6A839BF",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "FnServiceRoleB9001A96",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "HostedZoneDB99F866": Object {
-      "Properties": Object {
+    "HostedZoneDB99F866": {
+      "Properties": {
         "Name": "example.com.",
       },
       "Type": "AWS::Route53::HostedZone",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": Object {
-      "DependsOn": Array [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
         "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
         "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
             "Arn",
           ],
@@ -499,27 +499,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -530,12 +530,12 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:PutRetentionPolicy",
                 "logs:DeleteRetentionPolicy",
               ],
@@ -546,8 +546,8 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
           },
         ],
@@ -555,22 +555,22 @@ Object {
       "Type": "AWS::IAM::Policy",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],

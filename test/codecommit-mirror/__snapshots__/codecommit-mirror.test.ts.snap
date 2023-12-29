@@ -1,26 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CodeCommitMirror with a private GitHub repo 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "ClusterEB0386A7": Object {
+  "Resources": {
+    "ClusterEB0386A7": {
       "Type": "AWS::ECS::Cluster",
     },
-    "ClusterVpcFAA3CEDF": Object {
-      "Properties": Object {
+    "ClusterVpcFAA3CEDF": {
+      "Properties": {
         "CidrBlock": "10.0.0.0/16",
         "EnableDnsHostnames": true,
         "EnableDnsSupport": true,
         "InstanceTenancy": "default",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc",
           },
@@ -28,10 +28,10 @@ Object {
       },
       "Type": "AWS::EC2::VPC",
     },
-    "ClusterVpcIGW1E358A6E": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcIGW1E358A6E": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc",
           },
@@ -39,164 +39,164 @@ Object {
       },
       "Type": "AWS::EC2::InternetGateway",
     },
-    "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD": Object {
-      "Properties": Object {
+    "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD": {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "NatGatewayId": Object {
+        "NatGatewayId": {
           "Ref": "ClusterVpcPublicSubnet1NATGateway0693C346",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPrivateSubnet1RouteTableAssociation9B8A88D9": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPrivateSubnet1RouteTableAssociation9B8A88D9": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPrivateSubnet1SubnetA4EB481A": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPrivateSubnet1SubnetA4EB481A": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             0,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.128.0/18",
         "MapPublicIpOnLaunch": false,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcPrivateSubnet2DefaultRoute011666AF": Object {
-      "Properties": Object {
+    "ClusterVpcPrivateSubnet2DefaultRoute011666AF": {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "NatGatewayId": Object {
+        "NatGatewayId": {
           "Ref": "ClusterVpcPublicSubnet2NATGateway00B24686",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet2RouteTable73064A66",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPrivateSubnet2RouteTable73064A66": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPrivateSubnet2RouteTable73064A66": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPrivateSubnet2RouteTableAssociationFB21349E": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPrivateSubnet2RouteTableAssociationFB21349E": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet2RouteTable73064A66",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPrivateSubnet2SubnetBD1ECB6E": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPrivateSubnet2SubnetBD1ECB6E": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             1,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.192.0/18",
         "MapPublicIpOnLaunch": false,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B": Object {
-      "DependsOn": Array [
+    "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B": {
+      "DependsOn": [
         "ClusterVpcVPCGW47AC17E9",
       ],
-      "Properties": Object {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": Object {
+        "GatewayId": {
           "Ref": "ClusterVpcIGW1E358A6E",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet1RouteTable5594A636",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPublicSubnet1EIP433C56EE": Object {
-      "Properties": Object {
+    "ClusterVpcPublicSubnet1EIP433C56EE": {
+      "Properties": {
         "Domain": "vpc",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
@@ -204,19 +204,19 @@ Object {
       },
       "Type": "AWS::EC2::EIP",
     },
-    "ClusterVpcPublicSubnet1NATGateway0693C346": Object {
-      "Properties": Object {
-        "AllocationId": Object {
-          "Fn::GetAtt": Array [
+    "ClusterVpcPublicSubnet1NATGateway0693C346": {
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
             "ClusterVpcPublicSubnet1EIP433C56EE",
             "AllocationId",
           ],
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
@@ -224,83 +224,83 @@ Object {
       },
       "Type": "AWS::EC2::NatGateway",
     },
-    "ClusterVpcPublicSubnet1RouteTable5594A636": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPublicSubnet1RouteTable5594A636": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet1RouteTable5594A636",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPublicSubnet1SubnetA9F7E0A5": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPublicSubnet1SubnetA9F7E0A5": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             0,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.0.0/18",
         "MapPublicIpOnLaunch": true,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcPublicSubnet2DefaultRoute97446C8A": Object {
-      "DependsOn": Array [
+    "ClusterVpcPublicSubnet2DefaultRoute97446C8A": {
+      "DependsOn": [
         "ClusterVpcVPCGW47AC17E9",
       ],
-      "Properties": Object {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": Object {
+        "GatewayId": {
           "Ref": "ClusterVpcIGW1E358A6E",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet2RouteTable7B43F18C",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPublicSubnet2EIP203DF3E5": Object {
-      "Properties": Object {
+    "ClusterVpcPublicSubnet2EIP203DF3E5": {
+      "Properties": {
         "Domain": "vpc",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
@@ -308,19 +308,19 @@ Object {
       },
       "Type": "AWS::EC2::EIP",
     },
-    "ClusterVpcPublicSubnet2NATGateway00B24686": Object {
-      "Properties": Object {
-        "AllocationId": Object {
-          "Fn::GetAtt": Array [
+    "ClusterVpcPublicSubnet2NATGateway00B24686": {
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
             "ClusterVpcPublicSubnet2EIP203DF3E5",
             "AllocationId",
           ],
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
@@ -328,125 +328,125 @@ Object {
       },
       "Type": "AWS::EC2::NatGateway",
     },
-    "ClusterVpcPublicSubnet2RouteTable7B43F18C": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPublicSubnet2RouteTable7B43F18C": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet2RouteTable7B43F18C",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPublicSubnet2Subnet059113C4": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPublicSubnet2Subnet059113C4": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             1,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.64.0/18",
         "MapPublicIpOnLaunch": true,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcVPCGW47AC17E9": Object {
-      "Properties": Object {
-        "InternetGatewayId": Object {
+    "ClusterVpcVPCGW47AC17E9": {
+      "Properties": {
+        "InternetGatewayId": {
           "Ref": "ClusterVpcIGW1E358A6E",
         },
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
     },
-    "MirrorRepositoryE95A2647": Object {
-      "Properties": Object {
+    "MirrorRepositoryE95A2647": {
+      "Properties": {
         "RepositoryDescription": "Mirror of private",
         "RepositoryName": "private",
       },
       "Type": "AWS::CodeCommit::Repository",
     },
-    "MirrorRule1106DA08": Object {
-      "Properties": Object {
+    "MirrorRule1106DA08": {
+      "Properties": {
         "ScheduleExpression": "rate(6 hours)",
         "State": "ENABLED",
-        "Targets": Array [
-          Object {
-            "Arn": Object {
-              "Fn::GetAtt": Array [
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
                 "ClusterEB0386A7",
                 "Arn",
               ],
             },
-            "EcsParameters": Object {
+            "EcsParameters": {
               "LaunchType": "FARGATE",
-              "NetworkConfiguration": Object {
-                "AwsVpcConfiguration": Object {
+              "NetworkConfiguration": {
+                "AwsVpcConfiguration": {
                   "AssignPublicIp": "ENABLED",
-                  "SecurityGroups": Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  "SecurityGroups": [
+                    {
+                      "Fn::GetAtt": [
                         "MirrorTaskDefinitionSecurityGroup65F9CFFE",
                         "GroupId",
                       ],
                     },
                   ],
-                  "Subnets": Array [
-                    Object {
+                  "Subnets": [
+                    {
                       "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
                     },
-                    Object {
+                    {
                       "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
                     },
                   ],
                 },
               },
               "TaskCount": 1,
-              "TaskDefinitionArn": Object {
+              "TaskDefinitionArn": {
                 "Ref": "MirrorTaskDefinitionBBDEF66A",
               },
             },
             "Id": "Target0",
             "Input": "{}",
-            "RoleArn": Object {
-              "Fn::GetAtt": Array [
+            "RoleArn": {
+              "Fn::GetAtt": [
                 "MirrorTaskDefinitionEventsRole3D0F75BD",
                 "Arn",
               ],
@@ -456,28 +456,28 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "MirrorTaskDefinitionBBDEF66A": Object {
-      "Properties": Object {
-        "ContainerDefinitions": Array [
-          Object {
-            "Environment": Array [
-              Object {
+    "MirrorTaskDefinitionBBDEF66A": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
                 "Name": "NAME",
                 "Value": "private",
               },
-              Object {
+              {
                 "Name": "DESTINATION",
-                "Value": Object {
-                  "Fn::Join": Array [
+                "Value": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "codecommit::",
-                      Object {
+                      {
                         "Ref": "AWS::Region",
                       },
                       "://",
-                      Object {
-                        "Fn::GetAtt": Array [
+                      {
+                        "Fn::GetAtt": [
                           "MirrorRepositoryE95A2647",
                           "Name",
                         ],
@@ -488,39 +488,39 @@ Object {
               },
             ],
             "Essential": true,
-            "Image": Object {
+            "Image": {
               "Fn::Sub": "\${AWS::AccountId}.dkr.ecr.\${AWS::Region}.\${AWS::URLSuffix}/cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}:f1f0f73cf085b6c0337d5053dc994125b5aa5e85fd0f0f4408911a51692508da",
             },
-            "LogConfiguration": Object {
+            "LogConfiguration": {
               "LogDriver": "awslogs",
-              "Options": Object {
-                "awslogs-group": Object {
+              "Options": {
+                "awslogs-group": {
                   "Ref": "MirrorTaskDefinitionContainerLogGroup10AB3E0B",
                 },
-                "awslogs-region": Object {
+                "awslogs-region": {
                   "Ref": "AWS::Region",
                 },
                 "awslogs-stream-prefix": "private",
               },
             },
             "Name": "Container",
-            "Secrets": Array [
-              Object {
+            "Secrets": [
+              {
                 "Name": "SOURCE",
-                "ValueFrom": Object {
-                  "Fn::Join": Array [
+                "ValueFrom": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":secretsmanager:",
-                      Object {
+                      {
                         "Ref": "AWS::Region",
                       },
                       ":",
-                      Object {
+                      {
                         "Ref": "AWS::AccountId",
                       },
                       ":secret:clone-url",
@@ -532,8 +532,8 @@ Object {
           },
         ],
         "Cpu": "256",
-        "ExecutionRoleArn": Object {
-          "Fn::GetAtt": Array [
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
             "MirrorTaskDefinitionExecutionRole64876923",
             "Arn",
           ],
@@ -541,11 +541,11 @@ Object {
         "Family": "MirrorTaskDefinitionA5220156",
         "Memory": "512",
         "NetworkMode": "awsvpc",
-        "RequiresCompatibilities": Array [
+        "RequiresCompatibilities": [
           "FARGATE",
         ],
-        "TaskRoleArn": Object {
-          "Fn::GetAtt": Array [
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
             "MirrorTaskDefinitionTaskRole326A1D46",
             "Arn",
           ],
@@ -553,22 +553,22 @@ Object {
       },
       "Type": "AWS::ECS::TaskDefinition",
     },
-    "MirrorTaskDefinitionContainerLogGroup10AB3E0B": Object {
+    "MirrorTaskDefinitionContainerLogGroup10AB3E0B": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
+      "Properties": {
         "RetentionInDays": 60,
       },
       "Type": "AWS::Logs::LogGroup",
       "UpdateReplacePolicy": "Retain",
     },
-    "MirrorTaskDefinitionEventsRole3D0F75BD": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionEventsRole3D0F75BD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "events.amazonaws.com",
               },
             },
@@ -578,16 +578,16 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "MirrorTaskDefinitionEventsRoleDefaultPolicy1450513C": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionEventsRoleDefaultPolicy1450513C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "ecs:RunTask",
-              "Condition": Object {
-                "ArnEquals": Object {
-                  "ecs:cluster": Object {
-                    "Fn::GetAtt": Array [
+              "Condition": {
+                "ArnEquals": {
+                  "ecs:cluster": {
+                    "Fn::GetAtt": [
                       "ClusterEB0386A7",
                       "Arn",
                     ],
@@ -595,25 +595,25 @@ Object {
                 },
               },
               "Effect": "Allow",
-              "Resource": Object {
+              "Resource": {
                 "Ref": "MirrorTaskDefinitionBBDEF66A",
               },
             },
-            Object {
+            {
               "Action": "iam:PassRole",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorTaskDefinitionExecutionRole64876923",
                   "Arn",
                 ],
               },
             },
-            Object {
+            {
               "Action": "iam:PassRole",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorTaskDefinitionTaskRole326A1D46",
                   "Arn",
                 ],
@@ -623,22 +623,22 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "MirrorTaskDefinitionEventsRoleDefaultPolicy1450513C",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "MirrorTaskDefinitionEventsRole3D0F75BD",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "MirrorTaskDefinitionExecutionRole64876923": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionExecutionRole64876923": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ecs-tasks.amazonaws.com",
               },
             },
@@ -648,79 +648,79 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "MirrorTaskDefinitionExecutionRoleDefaultPolicy40B4E0D8": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "MirrorTaskDefinitionExecutionRoleDefaultPolicy40B4E0D8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "ecr:BatchCheckLayerAvailability",
                 "ecr:GetDownloadUrlForLayer",
                 "ecr:BatchGetImage",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":ecr:",
-                    Object {
+                    {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":repository/",
-                    Object {
+                    {
                       "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
                     },
                   ],
                 ],
               },
             },
-            Object {
+            {
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "logs:CreateLogStream",
                 "logs:PutLogEvents",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorTaskDefinitionContainerLogGroup10AB3E0B",
                   "Arn",
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "secretsmanager:GetSecretValue",
                 "secretsmanager:DescribeSecret",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":secretsmanager:",
-                    Object {
+                    {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":secret:clone-url-??????",
@@ -732,38 +732,38 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "MirrorTaskDefinitionExecutionRoleDefaultPolicy40B4E0D8",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "MirrorTaskDefinitionExecutionRole64876923",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "MirrorTaskDefinitionSecurityGroup65F9CFFE": Object {
-      "Properties": Object {
+    "MirrorTaskDefinitionSecurityGroup65F9CFFE": {
+      "Properties": {
         "GroupDescription": "Default/Mirror/TaskDefinition/SecurityGroup",
-        "SecurityGroupEgress": Array [
-          Object {
+        "SecurityGroupEgress": [
+          {
             "CidrIp": "0.0.0.0/0",
             "Description": "Allow all outbound traffic by default",
             "IpProtocol": "-1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "MirrorTaskDefinitionTaskRole326A1D46": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionTaskRole326A1D46": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ecs-tasks.amazonaws.com",
               },
             },
@@ -773,15 +773,15 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "MirrorTaskDefinitionTaskRoleDefaultPolicy174D916C": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionTaskRoleDefaultPolicy174D916C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "codecommit:GitPush",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorRepositoryE95A2647",
                   "Arn",
                 ],
@@ -791,8 +791,8 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "MirrorTaskDefinitionTaskRoleDefaultPolicy174D916C",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "MirrorTaskDefinitionTaskRole326A1D46",
           },
         ],
@@ -800,22 +800,22 @@ Object {
       "Type": "AWS::IAM::Policy",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],
@@ -831,26 +831,26 @@ Object {
 `;
 
 exports[`CodeCommitMirror with a public GitHub repo 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "ClusterEB0386A7": Object {
+  "Resources": {
+    "ClusterEB0386A7": {
       "Type": "AWS::ECS::Cluster",
     },
-    "ClusterVpcFAA3CEDF": Object {
-      "Properties": Object {
+    "ClusterVpcFAA3CEDF": {
+      "Properties": {
         "CidrBlock": "10.0.0.0/16",
         "EnableDnsHostnames": true,
         "EnableDnsSupport": true,
         "InstanceTenancy": "default",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc",
           },
@@ -858,10 +858,10 @@ Object {
       },
       "Type": "AWS::EC2::VPC",
     },
-    "ClusterVpcIGW1E358A6E": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcIGW1E358A6E": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc",
           },
@@ -869,164 +869,164 @@ Object {
       },
       "Type": "AWS::EC2::InternetGateway",
     },
-    "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD": Object {
-      "Properties": Object {
+    "ClusterVpcPrivateSubnet1DefaultRoute3B4D40DD": {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "NatGatewayId": Object {
+        "NatGatewayId": {
           "Ref": "ClusterVpcPublicSubnet1NATGateway0693C346",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPrivateSubnet1RouteTableAssociation9B8A88D9": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPrivateSubnet1RouteTableAssociation9B8A88D9": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet1RouteTable5AAEDA3F",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPrivateSubnet1SubnetA4EB481A": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPrivateSubnet1SubnetA4EB481A": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             0,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.128.0/18",
         "MapPublicIpOnLaunch": false,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcPrivateSubnet2DefaultRoute011666AF": Object {
-      "Properties": Object {
+    "ClusterVpcPrivateSubnet2DefaultRoute011666AF": {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "NatGatewayId": Object {
+        "NatGatewayId": {
           "Ref": "ClusterVpcPublicSubnet2NATGateway00B24686",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet2RouteTable73064A66",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPrivateSubnet2RouteTable73064A66": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPrivateSubnet2RouteTable73064A66": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPrivateSubnet2RouteTableAssociationFB21349E": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPrivateSubnet2RouteTableAssociationFB21349E": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPrivateSubnet2RouteTable73064A66",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPrivateSubnet2SubnetBD1ECB6E",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPrivateSubnet2SubnetBD1ECB6E": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPrivateSubnet2SubnetBD1ECB6E": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             1,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.192.0/18",
         "MapPublicIpOnLaunch": false,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Private",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PrivateSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B": Object {
-      "DependsOn": Array [
+    "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B": {
+      "DependsOn": [
         "ClusterVpcVPCGW47AC17E9",
       ],
-      "Properties": Object {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": Object {
+        "GatewayId": {
           "Ref": "ClusterVpcIGW1E358A6E",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet1RouteTable5594A636",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPublicSubnet1EIP433C56EE": Object {
-      "Properties": Object {
+    "ClusterVpcPublicSubnet1EIP433C56EE": {
+      "Properties": {
         "Domain": "vpc",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
@@ -1034,19 +1034,19 @@ Object {
       },
       "Type": "AWS::EC2::EIP",
     },
-    "ClusterVpcPublicSubnet1NATGateway0693C346": Object {
-      "Properties": Object {
-        "AllocationId": Object {
-          "Fn::GetAtt": Array [
+    "ClusterVpcPublicSubnet1NATGateway0693C346": {
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
             "ClusterVpcPublicSubnet1EIP433C56EE",
             "AllocationId",
           ],
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
@@ -1054,83 +1054,83 @@ Object {
       },
       "Type": "AWS::EC2::NatGateway",
     },
-    "ClusterVpcPublicSubnet1RouteTable5594A636": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPublicSubnet1RouteTable5594A636": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet1RouteTable5594A636",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPublicSubnet1SubnetA9F7E0A5": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPublicSubnet1SubnetA9F7E0A5": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             0,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.0.0/18",
         "MapPublicIpOnLaunch": true,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcPublicSubnet2DefaultRoute97446C8A": Object {
-      "DependsOn": Array [
+    "ClusterVpcPublicSubnet2DefaultRoute97446C8A": {
+      "DependsOn": [
         "ClusterVpcVPCGW47AC17E9",
       ],
-      "Properties": Object {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": Object {
+        "GatewayId": {
           "Ref": "ClusterVpcIGW1E358A6E",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet2RouteTable7B43F18C",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "ClusterVpcPublicSubnet2EIP203DF3E5": Object {
-      "Properties": Object {
+    "ClusterVpcPublicSubnet2EIP203DF3E5": {
+      "Properties": {
         "Domain": "vpc",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
@@ -1138,19 +1138,19 @@ Object {
       },
       "Type": "AWS::EC2::EIP",
     },
-    "ClusterVpcPublicSubnet2NATGateway00B24686": Object {
-      "Properties": Object {
-        "AllocationId": Object {
-          "Fn::GetAtt": Array [
+    "ClusterVpcPublicSubnet2NATGateway00B24686": {
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
             "ClusterVpcPublicSubnet2EIP203DF3E5",
             "AllocationId",
           ],
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
@@ -1158,125 +1158,125 @@ Object {
       },
       "Type": "AWS::EC2::NatGateway",
     },
-    "ClusterVpcPublicSubnet2RouteTable7B43F18C": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "ClusterVpcPublicSubnet2RouteTable7B43F18C": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "ClusterVpcPublicSubnet2RouteTable7B43F18C",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "ClusterVpcPublicSubnet2Subnet059113C4": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "ClusterVpcPublicSubnet2Subnet059113C4": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             1,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.64.0/18",
         "MapPublicIpOnLaunch": true,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "Default/Cluster/Vpc/PublicSubnet2",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "ClusterVpcVPCGW47AC17E9": Object {
-      "Properties": Object {
-        "InternetGatewayId": Object {
+    "ClusterVpcVPCGW47AC17E9": {
+      "Properties": {
+        "InternetGatewayId": {
           "Ref": "ClusterVpcIGW1E358A6E",
         },
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
     },
-    "MirrorRepositoryE95A2647": Object {
-      "Properties": Object {
+    "MirrorRepositoryE95A2647": {
+      "Properties": {
         "RepositoryDescription": "Mirror of cloudstructs",
         "RepositoryName": "cloudstructs",
       },
       "Type": "AWS::CodeCommit::Repository",
     },
-    "MirrorRule1106DA08": Object {
-      "Properties": Object {
+    "MirrorRule1106DA08": {
+      "Properties": {
         "ScheduleExpression": "cron(0 0 * * ? *)",
         "State": "ENABLED",
-        "Targets": Array [
-          Object {
-            "Arn": Object {
-              "Fn::GetAtt": Array [
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
                 "ClusterEB0386A7",
                 "Arn",
               ],
             },
-            "EcsParameters": Object {
+            "EcsParameters": {
               "LaunchType": "FARGATE",
-              "NetworkConfiguration": Object {
-                "AwsVpcConfiguration": Object {
+              "NetworkConfiguration": {
+                "AwsVpcConfiguration": {
                   "AssignPublicIp": "ENABLED",
-                  "SecurityGroups": Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  "SecurityGroups": [
+                    {
+                      "Fn::GetAtt": [
                         "MirrorTaskDefinitionSecurityGroup65F9CFFE",
                         "GroupId",
                       ],
                     },
                   ],
-                  "Subnets": Array [
-                    Object {
+                  "Subnets": [
+                    {
                       "Ref": "ClusterVpcPublicSubnet1SubnetA9F7E0A5",
                     },
-                    Object {
+                    {
                       "Ref": "ClusterVpcPublicSubnet2Subnet059113C4",
                     },
                   ],
                 },
               },
               "TaskCount": 1,
-              "TaskDefinitionArn": Object {
+              "TaskDefinitionArn": {
                 "Ref": "MirrorTaskDefinitionBBDEF66A",
               },
             },
             "Id": "Target0",
             "Input": "{}",
-            "RoleArn": Object {
-              "Fn::GetAtt": Array [
+            "RoleArn": {
+              "Fn::GetAtt": [
                 "MirrorTaskDefinitionEventsRole3D0F75BD",
                 "Arn",
               ],
@@ -1286,28 +1286,28 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "MirrorTaskDefinitionBBDEF66A": Object {
-      "Properties": Object {
-        "ContainerDefinitions": Array [
-          Object {
-            "Environment": Array [
-              Object {
+    "MirrorTaskDefinitionBBDEF66A": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
                 "Name": "NAME",
                 "Value": "cloudstructs",
               },
-              Object {
+              {
                 "Name": "DESTINATION",
-                "Value": Object {
-                  "Fn::Join": Array [
+                "Value": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "codecommit::",
-                      Object {
+                      {
                         "Ref": "AWS::Region",
                       },
                       "://",
-                      Object {
-                        "Fn::GetAtt": Array [
+                      {
+                        "Fn::GetAtt": [
                           "MirrorRepositoryE95A2647",
                           "Name",
                         ],
@@ -1316,22 +1316,22 @@ Object {
                   ],
                 },
               },
-              Object {
+              {
                 "Name": "SOURCE",
                 "Value": "https://github.com/jogold/cloudstructs",
               },
             ],
             "Essential": true,
-            "Image": Object {
+            "Image": {
               "Fn::Sub": "\${AWS::AccountId}.dkr.ecr.\${AWS::Region}.\${AWS::URLSuffix}/cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}:f1f0f73cf085b6c0337d5053dc994125b5aa5e85fd0f0f4408911a51692508da",
             },
-            "LogConfiguration": Object {
+            "LogConfiguration": {
               "LogDriver": "awslogs",
-              "Options": Object {
-                "awslogs-group": Object {
+              "Options": {
+                "awslogs-group": {
                   "Ref": "MirrorTaskDefinitionContainerLogGroup10AB3E0B",
                 },
-                "awslogs-region": Object {
+                "awslogs-region": {
                   "Ref": "AWS::Region",
                 },
                 "awslogs-stream-prefix": "cloudstructs",
@@ -1341,8 +1341,8 @@ Object {
           },
         ],
         "Cpu": "256",
-        "ExecutionRoleArn": Object {
-          "Fn::GetAtt": Array [
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
             "MirrorTaskDefinitionExecutionRole64876923",
             "Arn",
           ],
@@ -1350,11 +1350,11 @@ Object {
         "Family": "MirrorTaskDefinitionA5220156",
         "Memory": "512",
         "NetworkMode": "awsvpc",
-        "RequiresCompatibilities": Array [
+        "RequiresCompatibilities": [
           "FARGATE",
         ],
-        "TaskRoleArn": Object {
-          "Fn::GetAtt": Array [
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
             "MirrorTaskDefinitionTaskRole326A1D46",
             "Arn",
           ],
@@ -1362,22 +1362,22 @@ Object {
       },
       "Type": "AWS::ECS::TaskDefinition",
     },
-    "MirrorTaskDefinitionContainerLogGroup10AB3E0B": Object {
+    "MirrorTaskDefinitionContainerLogGroup10AB3E0B": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
+      "Properties": {
         "RetentionInDays": 60,
       },
       "Type": "AWS::Logs::LogGroup",
       "UpdateReplacePolicy": "Retain",
     },
-    "MirrorTaskDefinitionEventsRole3D0F75BD": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionEventsRole3D0F75BD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "events.amazonaws.com",
               },
             },
@@ -1387,16 +1387,16 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "MirrorTaskDefinitionEventsRoleDefaultPolicy1450513C": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionEventsRoleDefaultPolicy1450513C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "ecs:RunTask",
-              "Condition": Object {
-                "ArnEquals": Object {
-                  "ecs:cluster": Object {
-                    "Fn::GetAtt": Array [
+              "Condition": {
+                "ArnEquals": {
+                  "ecs:cluster": {
+                    "Fn::GetAtt": [
                       "ClusterEB0386A7",
                       "Arn",
                     ],
@@ -1404,25 +1404,25 @@ Object {
                 },
               },
               "Effect": "Allow",
-              "Resource": Object {
+              "Resource": {
                 "Ref": "MirrorTaskDefinitionBBDEF66A",
               },
             },
-            Object {
+            {
               "Action": "iam:PassRole",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorTaskDefinitionExecutionRole64876923",
                   "Arn",
                 ],
               },
             },
-            Object {
+            {
               "Action": "iam:PassRole",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorTaskDefinitionTaskRole326A1D46",
                   "Arn",
                 ],
@@ -1432,22 +1432,22 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "MirrorTaskDefinitionEventsRoleDefaultPolicy1450513C",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "MirrorTaskDefinitionEventsRole3D0F75BD",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "MirrorTaskDefinitionExecutionRole64876923": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionExecutionRole64876923": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ecs-tasks.amazonaws.com",
               },
             },
@@ -1457,54 +1457,54 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "MirrorTaskDefinitionExecutionRoleDefaultPolicy40B4E0D8": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "MirrorTaskDefinitionExecutionRoleDefaultPolicy40B4E0D8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "ecr:BatchCheckLayerAvailability",
                 "ecr:GetDownloadUrlForLayer",
                 "ecr:BatchGetImage",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":ecr:",
-                    Object {
+                    {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":repository/",
-                    Object {
+                    {
                       "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
                     },
                   ],
                 ],
               },
             },
-            Object {
+            {
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "logs:CreateLogStream",
                 "logs:PutLogEvents",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorTaskDefinitionContainerLogGroup10AB3E0B",
                   "Arn",
                 ],
@@ -1514,38 +1514,38 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "MirrorTaskDefinitionExecutionRoleDefaultPolicy40B4E0D8",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "MirrorTaskDefinitionExecutionRole64876923",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "MirrorTaskDefinitionSecurityGroup65F9CFFE": Object {
-      "Properties": Object {
+    "MirrorTaskDefinitionSecurityGroup65F9CFFE": {
+      "Properties": {
         "GroupDescription": "Default/Mirror/TaskDefinition/SecurityGroup",
-        "SecurityGroupEgress": Array [
-          Object {
+        "SecurityGroupEgress": [
+          {
             "CidrIp": "0.0.0.0/0",
             "Description": "Allow all outbound traffic by default",
             "IpProtocol": "-1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "ClusterVpcFAA3CEDF",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "MirrorTaskDefinitionTaskRole326A1D46": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionTaskRole326A1D46": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ecs-tasks.amazonaws.com",
               },
             },
@@ -1555,15 +1555,15 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "MirrorTaskDefinitionTaskRoleDefaultPolicy174D916C": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MirrorTaskDefinitionTaskRoleDefaultPolicy174D916C": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "codecommit:GitPush",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MirrorRepositoryE95A2647",
                   "Arn",
                 ],
@@ -1573,8 +1573,8 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "MirrorTaskDefinitionTaskRoleDefaultPolicy174D916C",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "MirrorTaskDefinitionTaskRole326A1D46",
           },
         ],
@@ -1582,22 +1582,22 @@ Object {
       "Type": "AWS::IAM::Policy",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],

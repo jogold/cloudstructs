@@ -102,7 +102,7 @@
     "@aws-sdk/client-textract": "^3.481.0",
     "@aws-sdk/lib-dynamodb": "^3.481.0",
     "@types/aws-lambda": "^8.10.130",
-    "@types/jest": "^27",
+    "@types/jest": "^29",
     "@types/node": "^18",
     "@types/tsscmp": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^6",
@@ -116,7 +116,7 @@
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "jest": "^27",
+    "jest": "^29",
     "jest-junit": "^15",
     "jsii": "5.x",
     "jsii-diff": "^1.93.0",
@@ -126,7 +126,7 @@
     "nock": "^13.4.0",
     "projen": "^0.78.4",
     "standard-version": "^9",
-    "ts-jest": "^27",
+    "ts-jest": "^29",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
   },
@@ -190,9 +190,6 @@
           "tsconfig": "tsconfig.dev.json"
         }
       ]
-    },
-    "moduleNameMapper": {
-      "axios": "axios/dist/node/axios.cjs"
     }
   },
   "types": "lib/index.d.ts",
