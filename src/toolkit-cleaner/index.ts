@@ -82,6 +82,9 @@ export class ToolkitCleaner extends Construct {
 
     const extractTemplateHashesFunction = new ExtractTemplateHashesFunction(this, 'ExtractTemplateHashesFunction', {
       timeout: Duration.seconds(30),
+      environment: {
+        DOCKER_IMAGE_ASSET_HASH: dockerImageAsset.assetHash,
+      }
     });
     extractTemplateHashesFunction.addToRolePolicy(new PolicyStatement({
       actions: ['cloudformation:GetTemplate'],
