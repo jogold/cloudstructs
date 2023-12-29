@@ -74,8 +74,4 @@ for (const dirent of fs.readdirSync('./src', { withFileTypes: true })) {
 }
 project.tryFindObjectFile('package.json').addOverride('exports', packageExports);
 
-project.tryFindObjectFile('package.json').addOverride('jest.moduleNameMapper', {
-  axios: 'axios/dist/node/axios.cjs',
-});
-
 project.synth();

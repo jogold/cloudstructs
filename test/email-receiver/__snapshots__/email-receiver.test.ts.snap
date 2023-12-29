@@ -1,36 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EmailReceiver 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "EmailReceiverBucketC6897915": Object {
+  "Resources": {
+    "EmailReceiverBucketC6897915": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "BucketEncryption": Object {
-          "ServerSideEncryptionConfiguration": Array [
-            Object {
-              "ServerSideEncryptionByDefault": Object {
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
                 "SSEAlgorithm": "AES256",
               },
             },
           ],
         },
-        "LifecycleConfiguration": Object {
-          "Rules": Array [
-            Object {
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
               "ExpirationInDays": 1,
               "Status": "Enabled",
             },
           ],
         },
-        "PublicAccessBlockConfiguration": Object {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
@@ -40,32 +40,32 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "EmailReceiverBucketPolicyDCA90FAB": Object {
-      "Properties": Object {
-        "Bucket": Object {
+    "EmailReceiverBucketPolicyDCA90FAB": {
+      "Properties": {
+        "Bucket": {
           "Ref": "EmailReceiverBucketC6897915",
         },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "s3:PutObject",
-              "Condition": Object {
-                "StringEquals": Object {
-                  "aws:Referer": Object {
+              "Condition": {
+                "StringEquals": {
+                  "aws:Referer": {
                     "Ref": "AWS::AccountId",
                   },
                 },
               },
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ses.amazonaws.com",
               },
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  [
+                    {
+                      "Fn::GetAtt": [
                         "EmailReceiverBucketC6897915",
                         "Arn",
                       ],
@@ -81,18 +81,18 @@ Object {
       },
       "Type": "AWS::S3::BucketPolicy",
     },
-    "EmailReceiverReceiptRule44F9F83D": Object {
-      "DependsOn": Array [
+    "EmailReceiverReceiptRule44F9F83D": {
+      "DependsOn": [
         "EmailReceiverBucketPolicyDCA90FAB",
         "EmailReceiverwhitelistAllowSesAEC8E5FA",
       ],
-      "Properties": Object {
-        "Rule": Object {
-          "Actions": Array [
-            Object {
-              "LambdaAction": Object {
-                "FunctionArn": Object {
-                  "Fn::GetAtt": Array [
+      "Properties": {
+        "Rule": {
+          "Actions": [
+            {
+              "LambdaAction": {
+                "FunctionArn": {
+                  "Fn::GetAtt": [
                     "EmailReceiverwhitelist484EFAE6",
                     "Arn",
                   ],
@@ -100,19 +100,19 @@ Object {
                 "InvocationType": "RequestResponse",
               },
             },
-            Object {
-              "S3Action": Object {
-                "BucketName": Object {
+            {
+              "S3Action": {
+                "BucketName": {
                   "Ref": "EmailReceiverBucketC6897915",
                 },
-                "TopicArn": Object {
+                "TopicArn": {
                   "Ref": "EmailReceiverTopic0009FDF2",
                 },
               },
             },
           ],
           "Enabled": true,
-          "Recipients": Array [
+          "Recipients": [
             "support@cloudstructs.com",
           ],
         },
@@ -120,46 +120,46 @@ Object {
       },
       "Type": "AWS::SES::ReceiptRule",
     },
-    "EmailReceiverTopic0009FDF2": Object {
+    "EmailReceiverTopic0009FDF2": {
       "Type": "AWS::SNS::Topic",
     },
-    "EmailReceivers3AllowInvokeEmailReceiverTopic8053BC7913DB5DD5": Object {
-      "Properties": Object {
+    "EmailReceivers3AllowInvokeEmailReceiverTopic8053BC7913DB5DD5": {
+      "Properties": {
         "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
+        "FunctionName": {
+          "Fn::GetAtt": [
             "EmailReceivers3E240E67A",
             "Arn",
           ],
         },
         "Principal": "sns.amazonaws.com",
-        "SourceArn": Object {
+        "SourceArn": {
           "Ref": "EmailReceiverTopic0009FDF2",
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "EmailReceivers3E240E67A": Object {
-      "DependsOn": Array [
+    "EmailReceivers3E240E67A": {
+      "DependsOn": [
         "EmailReceivers3ServiceRoleDefaultPolicy0E58628F",
         "EmailReceivers3ServiceRoleD73560D7",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "3d78437d64ccf325f4a2ea52c0f2ff10b36acb4bf8d1077b2ad1811284aa4b46.zip",
         },
         "Description": "src/email-receiver/s3.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
+        "Environment": {
+          "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
           },
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "EmailReceivers3ServiceRoleD73560D7",
             "Arn",
           ],
@@ -168,24 +168,24 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "EmailReceivers3EventInvokeConfig0DCB7AB9": Object {
-      "Properties": Object {
-        "DestinationConfig": Object {
-          "OnSuccess": Object {
-            "Destination": Object {
-              "Fn::Join": Array [
+    "EmailReceivers3EventInvokeConfig0DCB7AB9": {
+      "Properties": {
+        "DestinationConfig": {
+          "OnSuccess": {
+            "Destination": {
+              "Fn::Join": [
                 "",
-                Array [
+                [
                   "arn:",
-                  Object {
+                  {
                     "Ref": "AWS::Partition",
                   },
                   ":events:",
-                  Object {
+                  {
                     "Ref": "AWS::Region",
                   },
                   ":",
-                  Object {
+                  {
                     "Ref": "AWS::AccountId",
                   },
                   ":event-bus/default",
@@ -194,25 +194,25 @@ Object {
             },
           },
         },
-        "FunctionName": Object {
+        "FunctionName": {
           "Ref": "EmailReceivers3E240E67A",
         },
         "Qualifier": "$LATEST",
       },
       "Type": "AWS::Lambda::EventInvokeConfig",
     },
-    "EmailReceivers3EventInvokeConfigSuccessAllowEventRuleFnA881C47A": Object {
-      "Properties": Object {
+    "EmailReceivers3EventInvokeConfigSuccessAllowEventRuleFnA881C47A": {
+      "Properties": {
         "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
+        "FunctionName": {
+          "Fn::GetAtt": [
             "Fn9270CBC0",
             "Arn",
           ],
         },
         "Principal": "events.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::GetAtt": Array [
+        "SourceArn": {
+          "Fn::GetAtt": [
             "EmailReceivers3EventInvokeConfigSuccessDE8DA36F",
             "Arn",
           ],
@@ -220,19 +220,19 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "EmailReceivers3EventInvokeConfigSuccessDE8DA36F": Object {
-      "Properties": Object {
-        "EventPattern": Object {
-          "detail-type": Array [
+    "EmailReceivers3EventInvokeConfigSuccessDE8DA36F": {
+      "Properties": {
+        "EventPattern": {
+          "detail-type": [
             "Lambda Function Invocation Result - Success",
           ],
-          "resources": Array [
-            Object {
-              "Fn::Join": Array [
+          "resources": [
+            {
+              "Fn::Join": [
                 "",
-                Array [
-                  Object {
-                    "Fn::GetAtt": Array [
+                [
+                  {
+                    "Fn::GetAtt": [
                       "EmailReceivers3E240E67A",
                       "Arn",
                     ],
@@ -242,15 +242,15 @@ Object {
               ],
             },
           ],
-          "source": Array [
+          "source": [
             "lambda",
           ],
         },
         "State": "ENABLED",
-        "Targets": Array [
-          Object {
-            "Arn": Object {
-              "Fn::GetAtt": Array [
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
                 "Fn9270CBC0",
                 "Arn",
               ],
@@ -262,22 +262,22 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "EmailReceivers3LogRetention119F5A8B": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
+    "EmailReceivers3LogRetention119F5A8B": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "/aws/lambda/",
-              Object {
+              {
                 "Ref": "EmailReceivers3E240E67A",
               },
             ],
           ],
         },
         "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
             "Arn",
           ],
@@ -285,27 +285,27 @@ Object {
       },
       "Type": "Custom::LogRetention",
     },
-    "EmailReceivers3ServiceRoleD73560D7": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "EmailReceivers3ServiceRoleD73560D7": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -316,27 +316,27 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "EmailReceivers3ServiceRoleDefaultPolicy0E58628F": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "EmailReceivers3ServiceRoleDefaultPolicy0E58628F": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "events:PutEvents",
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":events:",
-                    Object {
+                    {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    Object {
+                    {
                       "Ref": "AWS::AccountId",
                     },
                     ":event-bus/default",
@@ -348,50 +348,50 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "EmailReceivers3ServiceRoleDefaultPolicy0E58628F",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "EmailReceivers3ServiceRoleD73560D7",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "EmailReceivers3Topic1B449381": Object {
-      "Properties": Object {
-        "Endpoint": Object {
-          "Fn::GetAtt": Array [
+    "EmailReceivers3Topic1B449381": {
+      "Properties": {
+        "Endpoint": {
+          "Fn::GetAtt": [
             "EmailReceivers3E240E67A",
             "Arn",
           ],
         },
         "Protocol": "lambda",
-        "TopicArn": Object {
+        "TopicArn": {
           "Ref": "EmailReceiverTopic0009FDF2",
         },
       },
       "Type": "AWS::SNS::Subscription",
     },
-    "EmailReceiverwhitelist484EFAE6": Object {
-      "DependsOn": Array [
+    "EmailReceiverwhitelist484EFAE6": {
+      "DependsOn": [
         "EmailReceiverwhitelistServiceRoleBF0A3250",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "2f040bbe2b6a11136d43cd35c29e11397d9f27344f65b7324551fc77410a902e.zip",
         },
         "Description": "src/email-receiver/whitelist.lambda.ts",
-        "Environment": Object {
-          "Variables": Object {
+        "Environment": {
+          "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "SOURCE_WHITELIST": "@amazon.com$",
           },
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "EmailReceiverwhitelistServiceRoleBF0A3250",
             "Arn",
           ],
@@ -400,38 +400,38 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "EmailReceiverwhitelistAllowSesAEC8E5FA": Object {
-      "Properties": Object {
+    "EmailReceiverwhitelistAllowSesAEC8E5FA": {
+      "Properties": {
         "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
+        "FunctionName": {
+          "Fn::GetAtt": [
             "EmailReceiverwhitelist484EFAE6",
             "Arn",
           ],
         },
         "Principal": "ses.amazonaws.com",
-        "SourceAccount": Object {
+        "SourceAccount": {
           "Ref": "AWS::AccountId",
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "EmailReceiverwhitelistLogRetention6B34DA74": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
+    "EmailReceiverwhitelistLogRetention6B34DA74": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "/aws/lambda/",
-              Object {
+              {
                 "Ref": "EmailReceiverwhitelist484EFAE6",
               },
             ],
           ],
         },
         "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
             "Arn",
           ],
@@ -439,27 +439,27 @@ Object {
       },
       "Type": "Custom::LogRetention",
     },
-    "EmailReceiverwhitelistServiceRoleBF0A3250": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "EmailReceiverwhitelistServiceRoleBF0A3250": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -470,18 +470,18 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "Fn9270CBC0": Object {
-      "DependsOn": Array [
+    "Fn9270CBC0": {
+      "DependsOn": [
         "FnServiceRoleDefaultPolicyC6A839BF",
         "FnServiceRoleB9001A96",
       ],
-      "Properties": Object {
-        "Code": Object {
+      "Properties": {
+        "Code": {
           "ZipFile": "export.handler = () => void;",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "FnServiceRoleB9001A96",
             "Arn",
           ],
@@ -490,27 +490,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "FnServiceRoleB9001A96": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "FnServiceRoleB9001A96": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -521,30 +521,30 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "FnServiceRoleDefaultPolicyC6A839BF": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "FnServiceRoleDefaultPolicyC6A839BF": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
                     "EmailReceiverBucketC6897915",
                     "Arn",
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
-                      Object {
-                        "Fn::GetAtt": Array [
+                    [
+                      {
+                        "Fn::GetAtt": [
                           "EmailReceiverBucketC6897915",
                           "Arn",
                         ],
@@ -559,29 +559,29 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "FnServiceRoleDefaultPolicyC6A839BF",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "FnServiceRoleB9001A96",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": Object {
-      "DependsOn": Array [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
         "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
         "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
             "Arn",
           ],
@@ -590,27 +590,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -621,12 +621,12 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:PutRetentionPolicy",
                 "logs:DeleteRetentionPolicy",
               ],
@@ -637,8 +637,8 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
           },
         ],
@@ -646,22 +646,22 @@ Object {
       "Type": "AWS::IAM::Policy",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],
