@@ -144,7 +144,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "e2fc900c4989c9292d92789a3c86dc4c928e649bf168c2547f48b503dd41a520.zip"
+          "S3Key": "839231c3a66de2124ed53cba376ac7d09e962b10a04d77f96cd2f74e930f75c9.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -155,6 +155,7 @@
         "Description": "src/toolkit-cleaner/extract-template-hashes.lambda.ts",
         "Environment": {
           "Variables": {
+            "DOCKER_IMAGE_ASSET_HASH": "59bc252bbfc4819edcc48f546a0ea71b7b108d3899f8f503cd6f5bcc1f375126",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
           }
         },
