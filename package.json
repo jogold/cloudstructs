@@ -90,17 +90,17 @@
   "devDependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "2.1.0-alpha.0",
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.1.0-alpha.0",
-    "@aws-sdk/client-cloudformation": "^3.481.0",
-    "@aws-sdk/client-dynamodb": "^3.481.0",
-    "@aws-sdk/client-ecr": "^3.481.0",
-    "@aws-sdk/client-ecs": "^3.481.0",
-    "@aws-sdk/client-eventbridge": "^3.481.0",
-    "@aws-sdk/client-iam": "^3.481.0",
-    "@aws-sdk/client-s3": "^3.481.0",
-    "@aws-sdk/client-secrets-manager": "^3.481.0",
-    "@aws-sdk/client-sfn": "^3.481.0",
-    "@aws-sdk/client-textract": "^3.481.0",
-    "@aws-sdk/lib-dynamodb": "^3.481.0",
+    "@aws-sdk/client-cloudformation": "^3.484.0",
+    "@aws-sdk/client-dynamodb": "^3.484.0",
+    "@aws-sdk/client-ecr": "^3.484.0",
+    "@aws-sdk/client-ecs": "^3.484.0",
+    "@aws-sdk/client-eventbridge": "^3.484.0",
+    "@aws-sdk/client-iam": "^3.484.0",
+    "@aws-sdk/client-s3": "^3.484.0",
+    "@aws-sdk/client-secrets-manager": "^3.484.0",
+    "@aws-sdk/client-sfn": "^3.484.0",
+    "@aws-sdk/client-textract": "^3.484.0",
+    "@aws-sdk/lib-dynamodb": "^3.484.0",
     "@types/aws-lambda": "^8.10.130",
     "@types/jest": "^29",
     "@types/node": "^18",
@@ -112,7 +112,7 @@
     "aws-sdk-client-mock": "^2.2.0",
     "aws-sdk-client-mock-jest": "^2.2.0",
     "constructs": "10.0.5",
-    "esbuild": "^0.19.10",
+    "esbuild": "^0.19.11",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
@@ -124,11 +124,11 @@
     "jsii-pacmak": "^1.93.0",
     "jsii-rosetta": "5.x",
     "nock": "^13.4.0",
-    "projen": "^0.78.4",
+    "projen": "^0.78.8",
     "standard-version": "^9",
     "ts-jest": "^29",
     "ts-node": "^10.9.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "^2.1.0-alpha.0",
@@ -137,7 +137,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "@slack/web-api": "^6.11.0",
+    "@slack/web-api": "^6.11.1",
     "got": "^11.8.6"
   },
   "bundledDependencies": [
