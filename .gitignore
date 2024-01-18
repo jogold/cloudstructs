@@ -30,7 +30,6 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
-!/.projenrc.js
 /test-reports/
 junit.xml
 /coverage/
@@ -101,3 +100,4 @@ test/url-shortener/url-shortener.integ.snapshot/manifest.json
 test/url-shortener/url-shortener.integ.snapshot/**/manifest.json
 test/url-shortener/url-shortener.integ.snapshot/tree.json
 test/url-shortener/url-shortener.integ.snapshot/**/tree.json
+!/.projenrc.js
