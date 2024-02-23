@@ -138,13 +138,15 @@ export class ToolkitCleaner extends Construct {
     });
 
     const stateMachine = new sfn.StateMachine(this, 'Resource', {
-      definition: getStackNames
-        .next(stacksMap.iterator(extractTemplateHashes))
-        .next(flattenHashes)
-        .next(new sfn.Parallel(this, 'Clean')
-          .branch(cleanObjects)
-          .branch(cleanImages))
-        .next(sumReclaimed),
+      definitionBody: sfn.DefinitionBody.fromChainable(
+        getStackNames
+          .next(stacksMap.iterator(extractTemplateHashes))
+          .next(flattenHashes)
+          .next(new sfn.Parallel(this, 'Clean')
+            .branch(cleanObjects)
+            .branch(cleanImages))
+          .next(sumReclaimed),
+      ),
     });
 
     const rule = new Rule(this, 'Rule', {
