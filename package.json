@@ -88,8 +88,6 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "2.1.0-alpha.0",
-    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.1.0-alpha.0",
     "@aws-sdk/client-cloudformation": "^3.501.0",
     "@aws-sdk/client-dynamodb": "^3.501.0",
     "@aws-sdk/client-ecr": "^3.501.0",
@@ -108,7 +106,7 @@
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
     "aws-cdk": "^2",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.112.0",
     "aws-sdk-client-mock": "^2.2.0",
     "aws-sdk-client-mock-jest": "^2.2.0",
     "constructs": "10.0.5",
@@ -131,9 +129,7 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "^2.1.0-alpha.0",
-    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.1.0-alpha.0",
-    "aws-cdk-lib": "^2.1.0",
+    "aws-cdk-lib": "^2.112.0",
     "constructs": "^10.0.5"
   },
   "dependencies": {
