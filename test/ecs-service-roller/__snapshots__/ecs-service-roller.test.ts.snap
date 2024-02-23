@@ -20,16 +20,18 @@ exports[`EcsServiceRoller with default 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "1de7291df4432bda23037e2ef9f4bc0651aab3c7ce9bf737ac7f2f8c32e99115.zip",
+          "S3Key": "d5626dac41d5e2eaf12db03451d44d017deffa332358cd3f142412754402ef7c.zip",
         },
         "Handler": "index.handler",
+        "MemorySize": 256,
         "Role": {
           "Fn::GetAtt": [
             "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50",
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 60,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -309,6 +311,10 @@ exports[`EcsServiceRoller with default 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet1NATGateway0693C346": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+        "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -413,6 +419,10 @@ exports[`EcsServiceRoller with default 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet2NATGateway00B24686": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+        "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -557,11 +567,19 @@ exports[`EcsServiceRoller with default 1`] = `
       "Type": "AWS::Events::Rule",
     },
     "ServiceD69D759B": {
+      "DependsOn": [
+        "TaskDefTaskRole1EDB4A67",
+      ],
       "Properties": {
         "Cluster": {
           "Ref": "ClusterEB0386A7",
         },
         "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
@@ -595,6 +613,9 @@ exports[`EcsServiceRoller with default 1`] = `
       "Type": "AWS::ECS::Service",
     },
     "ServiceSecurityGroupC96ED6A7": {
+      "DependsOn": [
+        "TaskDefTaskRole1EDB4A67",
+      ],
       "Properties": {
         "GroupDescription": "Default/Service/SecurityGroup",
         "SecurityGroupEgress": [
@@ -703,16 +724,18 @@ exports[`EcsServiceRoller with rule 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "1de7291df4432bda23037e2ef9f4bc0651aab3c7ce9bf737ac7f2f8c32e99115.zip",
+          "S3Key": "d5626dac41d5e2eaf12db03451d44d017deffa332358cd3f142412754402ef7c.zip",
         },
         "Handler": "index.handler",
+        "MemorySize": 256,
         "Role": {
           "Fn::GetAtt": [
             "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50",
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 60,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -992,6 +1015,10 @@ exports[`EcsServiceRoller with rule 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet1NATGateway0693C346": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+        "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -1096,6 +1123,10 @@ exports[`EcsServiceRoller with rule 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet2NATGateway00B24686": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+        "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -1244,11 +1275,19 @@ exports[`EcsServiceRoller with rule 1`] = `
       "Type": "AWS::Lambda::Permission",
     },
     "ServiceD69D759B": {
+      "DependsOn": [
+        "TaskDefTaskRole1EDB4A67",
+      ],
       "Properties": {
         "Cluster": {
           "Ref": "ClusterEB0386A7",
         },
         "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
@@ -1282,6 +1321,9 @@ exports[`EcsServiceRoller with rule 1`] = `
       "Type": "AWS::ECS::Service",
     },
     "ServiceSecurityGroupC96ED6A7": {
+      "DependsOn": [
+        "TaskDefTaskRole1EDB4A67",
+      ],
       "Properties": {
         "GroupDescription": "Default/Service/SecurityGroup",
         "SecurityGroupEgress": [
@@ -1390,16 +1432,18 @@ exports[`EcsServiceRoller with schedule 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "1de7291df4432bda23037e2ef9f4bc0651aab3c7ce9bf737ac7f2f8c32e99115.zip",
+          "S3Key": "d5626dac41d5e2eaf12db03451d44d017deffa332358cd3f142412754402ef7c.zip",
         },
         "Handler": "index.handler",
+        "MemorySize": 256,
         "Role": {
           "Fn::GetAtt": [
             "AWSb4cf1abd4e4f4bc699441af7ccd9ec37ServiceRole9FFE9C50",
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 60,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -1679,6 +1723,10 @@ exports[`EcsServiceRoller with schedule 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet1NATGateway0693C346": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+        "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -1783,6 +1831,10 @@ exports[`EcsServiceRoller with schedule 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet2NATGateway00B24686": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+        "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -1927,11 +1979,19 @@ exports[`EcsServiceRoller with schedule 1`] = `
       "Type": "AWS::Events::Rule",
     },
     "ServiceD69D759B": {
+      "DependsOn": [
+        "TaskDefTaskRole1EDB4A67",
+      ],
       "Properties": {
         "Cluster": {
           "Ref": "ClusterEB0386A7",
         },
         "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
@@ -1965,6 +2025,9 @@ exports[`EcsServiceRoller with schedule 1`] = `
       "Type": "AWS::ECS::Service",
     },
     "ServiceSecurityGroupC96ED6A7": {
+      "DependsOn": [
+        "TaskDefTaskRole1EDB4A67",
+      ],
       "Properties": {
         "GroupDescription": "Default/Service/SecurityGroup",
         "SecurityGroupEgress": [

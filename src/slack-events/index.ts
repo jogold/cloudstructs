@@ -1,6 +1,6 @@
-import * as apigatewayv2 from '@aws-cdk/aws-apigatewayv2-alpha';
-import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 import * as cdk from 'aws-cdk-lib';
+import * as apigatewayv2 from 'aws-cdk-lib/aws-apigatewayv2';
+import * as integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';

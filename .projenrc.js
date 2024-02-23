@@ -6,13 +6,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorName: 'Jonathan Goldwasser',
   description: 'High-level constructs for AWS CDK',
   jsiiVersion: '5.x',
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.112.0',
   name: 'cloudstructs',
   repository: 'https://github.com/jogold/cloudstructs.git',
-  peerDeps: [
-    '@aws-cdk/aws-apigatewayv2-alpha@^2.1.0-alpha.0',
-    '@aws-cdk/aws-apigatewayv2-integrations-alpha@^2.1.0-alpha.0',
-  ],
+  peerDeps: [],
   bundledDeps: [
     'got',
     '@slack/web-api',

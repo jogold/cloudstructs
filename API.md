@@ -3878,11 +3878,31 @@ new SamlFederatedPrincipal(identityProvider: SamlIdentityProvider)
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#cloudstructs.SamlFederatedPrincipal.addToAssumeRolePolicy">addToAssumeRolePolicy</a></code> | Add the principal to the AssumeRolePolicyDocument. |
 | <code><a href="#cloudstructs.SamlFederatedPrincipal.addToPolicy">addToPolicy</a></code> | Add to the policy of this principal. |
 | <code><a href="#cloudstructs.SamlFederatedPrincipal.addToPrincipalPolicy">addToPrincipalPolicy</a></code> | Add to the policy of this principal. |
+| <code><a href="#cloudstructs.SamlFederatedPrincipal.dedupeString">dedupeString</a></code> | Return whether or not this principal is equal to the given principal. |
 | <code><a href="#cloudstructs.SamlFederatedPrincipal.toJSON">toJSON</a></code> | JSON-ify the principal. |
 | <code><a href="#cloudstructs.SamlFederatedPrincipal.toString">toString</a></code> | Returns a string representation of an object. |
 | <code><a href="#cloudstructs.SamlFederatedPrincipal.withConditions">withConditions</a></code> | Returns a new PrincipalWithConditions using this principal as the base, with the passed conditions added. |
+| <code><a href="#cloudstructs.SamlFederatedPrincipal.withSessionTags">withSessionTags</a></code> | Returns a new principal using this principal as the base, with session tags enabled. |
+
+---
+
+##### ~~`addToAssumeRolePolicy`~~ <a name="addToAssumeRolePolicy" id="cloudstructs.SamlFederatedPrincipal.addToAssumeRolePolicy"></a>
+
+```typescript
+public addToAssumeRolePolicy(document: PolicyDocument): void
+```
+
+Add the principal to the AssumeRolePolicyDocument.
+
+Add the statements to the AssumeRolePolicyDocument necessary to give this principal
+permissions to assume the given role.
+
+###### `document`<sup>Required</sup> <a name="document" id="cloudstructs.SamlFederatedPrincipal.addToAssumeRolePolicy.parameter.document"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyDocument
 
 ---
 
@@ -3914,6 +3934,14 @@ Add to the policy of this principal.
 
 ---
 
+##### ~~`dedupeString`~~ <a name="dedupeString" id="cloudstructs.SamlFederatedPrincipal.dedupeString"></a>
+
+```typescript
+public dedupeString(): string
+```
+
+Return whether or not this principal is equal to the given principal.
+
 ##### ~~`toJSON`~~ <a name="toJSON" id="cloudstructs.SamlFederatedPrincipal.toJSON"></a>
 
 ```typescript
@@ -3935,7 +3963,7 @@ Returns a string representation of an object.
 ##### ~~`withConditions`~~ <a name="withConditions" id="cloudstructs.SamlFederatedPrincipal.withConditions"></a>
 
 ```typescript
-public withConditions(conditions: {[ key: string ]: any}): IPrincipal
+public withConditions(conditions: {[ key: string ]: any}): PrincipalBase
 ```
 
 Returns a new PrincipalWithConditions using this principal as the base, with the passed conditions added.
@@ -3948,6 +3976,14 @@ conditions parameter, the value from the conditions parameter will be used.
 - *Type:* {[ key: string ]: any}
 
 ---
+
+##### ~~`withSessionTags`~~ <a name="withSessionTags" id="cloudstructs.SamlFederatedPrincipal.withSessionTags"></a>
+
+```typescript
+public withSessionTags(): PrincipalBase
+```
+
+Returns a new principal using this principal as the base, with session tags enabled.
 
 
 #### Properties <a name="Properties" id="Properties"></a>
@@ -4036,7 +4072,7 @@ public readonly conditions: {[ key: string ]: any};
 
 The conditions under which the policy is in effect.
 
-See [the IAM documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html).
+> [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html)
 
 ---
 
