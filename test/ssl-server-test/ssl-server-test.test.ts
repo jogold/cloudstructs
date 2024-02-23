@@ -50,22 +50,54 @@ test('SslServerTest', () => {
         {
           Action: 'lambda:InvokeFunction',
           Effect: 'Allow',
-          Resource: {
-            'Fn::GetAtt': [
-              'cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3',
-              'Arn',
-            ],
-          },
+          Resource: [
+            {
+              'Fn::GetAtt': [
+                'cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3',
+                'Arn',
+              ],
+            },
+            {
+              'Fn::Join': [
+                '',
+                [
+                  {
+                    'Fn::GetAtt': [
+                      'cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3',
+                      'Arn',
+                    ],
+                  },
+                  ':*',
+                ],
+              ],
+            },
+          ],
         },
         {
           Action: 'lambda:InvokeFunction',
           Effect: 'Allow',
-          Resource: {
-            'Fn::GetAtt': [
-              'cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D',
-              'Arn',
-            ],
-          },
+          Resource: [
+            {
+              'Fn::GetAtt': [
+                'cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D',
+                'Arn',
+              ],
+            },
+            {
+              'Fn::Join': [
+                '',
+                [
+                  {
+                    'Fn::GetAtt': [
+                      'cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D',
+                      'Arn',
+                    ],
+                  },
+                  ':*',
+                ],
+              ],
+            },
+          ],
         },
         {
           Action: 'sns:Publish',

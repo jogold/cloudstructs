@@ -21,14 +21,14 @@ test('ToolkitCleaner', () => {
       'Fn::Join': [
         '',
         [
-          '{"StartAt":"GetStackNames","States":{"GetStackNames":{"Next":"StacksMap","Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
+          '{"StartAt":"GetStackNames","States":{"GetStackNames":{"Next":"StacksMap","Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
           {
             'Fn::GetAtt': [
               'ToolkitCleanerGetStackNamesFunction362F31B8',
               'Arn',
             ],
           },
-          '"},"StacksMap":{"Type":"Map","Next":"FlattenHashes","ResultSelector":{"AssetHashes.$":"$"},"Iterator":{"StartAt":"ExtractTemplateHashes","States":{"ExtractTemplateHashes":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["Throttling"]}],"Type":"Task","Resource":"',
+          '"},"StacksMap":{"Type":"Map","Next":"FlattenHashes","ResultSelector":{"AssetHashes.$":"$"},"Iterator":{"StartAt":"ExtractTemplateHashes","States":{"ExtractTemplateHashes":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["Throttling"]}],"Type":"Task","Resource":"',
           {
             'Fn::GetAtt': [
               'ToolkitCleanerExtractTemplateHashesFunctionFFDFB6D1',
@@ -38,18 +38,18 @@ test('ToolkitCleaner', () => {
           '"}}},"MaxConcurrency":1},"FlattenHashes":{"Next":"Clean","Type":"Task","Resource":"',
           {
             'Fn::GetAtt': [
-              'Evalda2d1181604e4a4586941a6abd7fe42dF371675D',
+              'Eval41256dc5445742738ed917bc818694e54EB1134F',
               'Arn',
             ],
           },
-          '","Parameters":{"expression":"[...new Set(($.AssetHashes).flat())]","expressionAttributeValues":{"$.AssetHashes.$":"$.AssetHashes"}}},"Clean":{"Type":"Parallel","Next":"SumReclaimed","Branches":[{"StartAt":"CleanObjects","States":{"CleanObjects":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
+          '","Parameters":{"expression":"[...new Set(($.AssetHashes).flat())]","expressionAttributeValues":{"$.AssetHashes.$":"$.AssetHashes"}}},"Clean":{"Type":"Parallel","Next":"SumReclaimed","Branches":[{"StartAt":"CleanObjects","States":{"CleanObjects":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
           {
             'Fn::GetAtt': [
               'ToolkitCleanerCleanObjectsFunction23A18EAE',
               'Arn',
             ],
           },
-          '"}}},{"StartAt":"CleanImages","States":{"CleanImages":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
+          '"}}},{"StartAt":"CleanImages","States":{"CleanImages":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
           {
             'Fn::GetAtt': [
               'ToolkitCleanerCleanImagesFunction96CABD19',
@@ -59,7 +59,7 @@ test('ToolkitCleaner', () => {
           '"}}}]},"SumReclaimed":{"End":true,"Type":"Task","Resource":"',
           {
             'Fn::GetAtt': [
-              'Evalda2d1181604e4a4586941a6abd7fe42dF371675D',
+              'Eval41256dc5445742738ed917bc818694e54EB1134F',
               'Arn',
             ],
           },
