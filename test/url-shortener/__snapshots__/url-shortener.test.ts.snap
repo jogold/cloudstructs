@@ -53,7 +53,7 @@ exports[`UrlShortener 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -63,7 +63,7 @@ exports[`UrlShortener 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -138,7 +138,7 @@ exports[`UrlShortener 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
+          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -147,7 +147,8 @@ exports[`UrlShortener 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -367,7 +368,7 @@ exports[`UrlShortener 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
+          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": {
@@ -376,7 +377,7 @@ exports[`UrlShortener 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -433,6 +434,21 @@ exports[`UrlShortener 1`] = `
             },
             {
               "Action": "route53:changeResourceRecordSets",
+              "Condition": {
+                "ForAllValues:StringEquals": {
+                  "route53:ChangeResourceRecordSetsActions": [
+                    "UPSERT",
+                  ],
+                  "route53:ChangeResourceRecordSetsRecordTypes": [
+                    "CNAME",
+                  ],
+                },
+                "ForAllValues:StringLike": {
+                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+                    "*.cstructs.com",
+                  ],
+                },
+              },
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -629,6 +645,10 @@ exports[`UrlShortener 1`] = `
             {
               "Action": [
                 "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -695,6 +715,7 @@ exports[`UrlShortener 1`] = `
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomAccount4B9FF23F": {
+      "DeletionPolicy": "Retain",
       "DependsOn": [
         "UrlShortenerUrlShortenercstructscomC0F539C8",
       ],
@@ -707,6 +728,7 @@ exports[`UrlShortener 1`] = `
         },
       },
       "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomC0F539C8": {
       "Properties": {
@@ -715,6 +737,7 @@ exports[`UrlShortener 1`] = `
       "Type": "AWS::ApiGateway::RestApi",
     },
     "UrlShortenerUrlShortenercstructscomCloudWatchRoleF6B6739D": {
+      "DeletionPolicy": "Retain",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -744,6 +767,7 @@ exports[`UrlShortener 1`] = `
         ],
       },
       "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomDeployment4A14831A931fca1a918eda4882130d1439843b80": {
       "DependsOn": [
@@ -760,6 +784,9 @@ exports[`UrlShortener 1`] = `
       "Type": "AWS::ApiGateway::Deployment",
     },
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": {
+      "DependsOn": [
+        "UrlShortenerUrlShortenercstructscomAccount4B9FF23F",
+      ],
       "Properties": {
         "DeploymentId": {
           "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A931fca1a918eda4882130d1439843b80",
@@ -1156,7 +1183,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -1166,7 +1193,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -1241,7 +1268,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
+          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -1250,7 +1277,8 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -1470,7 +1498,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
+          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": {
@@ -1479,7 +1507,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -1536,6 +1564,21 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             },
             {
               "Action": "route53:changeResourceRecordSets",
+              "Condition": {
+                "ForAllValues:StringEquals": {
+                  "route53:ChangeResourceRecordSetsActions": [
+                    "UPSERT",
+                  ],
+                  "route53:ChangeResourceRecordSetsRecordTypes": [
+                    "CNAME",
+                  ],
+                },
+                "ForAllValues:StringLike": {
+                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+                    "*.cstructs.com",
+                  ],
+                },
+              },
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -1732,6 +1775,10 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             {
               "Action": [
                 "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -1798,6 +1845,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomAccount4B9FF23F": {
+      "DeletionPolicy": "Retain",
       "DependsOn": [
         "UrlShortenerUrlShortenercstructscomC0F539C8",
       ],
@@ -1810,6 +1858,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
         },
       },
       "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomC0F539C8": {
       "Properties": {
@@ -1843,6 +1892,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
       "Type": "AWS::ApiGateway::RestApi",
     },
     "UrlShortenerUrlShortenercstructscomCloudWatchRoleF6B6739D": {
+      "DeletionPolicy": "Retain",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -1872,6 +1922,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
         ],
       },
       "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomDeployment4A14831Ab8d2c81dd4d91d061c7fd578b5258843": {
       "DependsOn": [
@@ -1888,6 +1939,9 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
       "Type": "AWS::ApiGateway::Deployment",
     },
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": {
+      "DependsOn": [
+        "UrlShortenerUrlShortenercstructscomAccount4B9FF23F",
+      ],
       "Properties": {
         "DeploymentId": {
           "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831Ab8d2c81dd4d91d061c7fd578b5258843",
@@ -2321,6 +2375,10 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "VpcPublicSubnet1NATGateway4D7517AA": {
+      "DependsOn": [
+        "VpcPublicSubnet1DefaultRoute3DA9E72A",
+        "VpcPublicSubnet1RouteTableAssociation97140677",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -2425,6 +2483,10 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "VpcPublicSubnet2NATGateway9182C01D": {
+      "DependsOn": [
+        "VpcPublicSubnet2DefaultRoute97F91067",
+        "VpcPublicSubnet2RouteTableAssociationDD5762D8",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -2596,7 +2658,7 @@ exports[`UrlShortener with CORS 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -2606,7 +2668,7 @@ exports[`UrlShortener with CORS 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -2681,7 +2743,7 @@ exports[`UrlShortener with CORS 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
+          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -2690,7 +2752,8 @@ exports[`UrlShortener with CORS 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -2911,7 +2974,7 @@ exports[`UrlShortener with CORS 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
+          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": {
@@ -2920,7 +2983,7 @@ exports[`UrlShortener with CORS 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -2977,6 +3040,21 @@ exports[`UrlShortener with CORS 1`] = `
             },
             {
               "Action": "route53:changeResourceRecordSets",
+              "Condition": {
+                "ForAllValues:StringEquals": {
+                  "route53:ChangeResourceRecordSetsActions": [
+                    "UPSERT",
+                  ],
+                  "route53:ChangeResourceRecordSetsRecordTypes": [
+                    "CNAME",
+                  ],
+                },
+                "ForAllValues:StringLike": {
+                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+                    "*.cstructs.com",
+                  ],
+                },
+              },
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -3173,6 +3251,10 @@ exports[`UrlShortener with CORS 1`] = `
             {
               "Action": [
                 "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -3239,6 +3321,7 @@ exports[`UrlShortener with CORS 1`] = `
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomAccount4B9FF23F": {
+      "DeletionPolicy": "Retain",
       "DependsOn": [
         "UrlShortenerUrlShortenercstructscomC0F539C8",
       ],
@@ -3251,6 +3334,7 @@ exports[`UrlShortener with CORS 1`] = `
         },
       },
       "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomC0F539C8": {
       "Properties": {
@@ -3259,6 +3343,7 @@ exports[`UrlShortener with CORS 1`] = `
       "Type": "AWS::ApiGateway::RestApi",
     },
     "UrlShortenerUrlShortenercstructscomCloudWatchRoleF6B6739D": {
+      "DeletionPolicy": "Retain",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -3288,8 +3373,9 @@ exports[`UrlShortener with CORS 1`] = `
         ],
       },
       "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
     },
-    "UrlShortenerUrlShortenercstructscomDeployment4A14831Ade55b507c68b4bee633011271d9701a9": {
+    "UrlShortenerUrlShortenercstructscomDeployment4A14831A221d8c9ddb568e609f43ece7196226ff": {
       "DependsOn": [
         "UrlShortenerUrlShortenercstructscomproxyOPTIONSC9A0AB8C",
         "UrlShortenerUrlShortenercstructscomproxyPOST4A20FE5F",
@@ -3306,9 +3392,12 @@ exports[`UrlShortener with CORS 1`] = `
       "Type": "AWS::ApiGateway::Deployment",
     },
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": {
+      "DependsOn": [
+        "UrlShortenerUrlShortenercstructscomAccount4B9FF23F",
+      ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831Ade55b507c68b4bee633011271d9701a9",
+          "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A221d8c9ddb568e609f43ece7196226ff",
         },
         "RestApiId": {
           "Ref": "UrlShortenerUrlShortenercstructscomC0F539C8",
@@ -3319,6 +3408,7 @@ exports[`UrlShortener with CORS 1`] = `
     },
     "UrlShortenerUrlShortenercstructscomOPTIONS76630D17": {
       "Properties": {
+        "ApiKeyRequired": false,
         "AuthorizationType": "NONE",
         "HttpMethod": "OPTIONS",
         "Integration": {
@@ -3487,6 +3577,7 @@ exports[`UrlShortener with CORS 1`] = `
     },
     "UrlShortenerUrlShortenercstructscomproxyOPTIONSC9A0AB8C": {
       "Properties": {
+        "ApiKeyRequired": false,
         "AuthorizationType": "NONE",
         "HttpMethod": "OPTIONS",
         "Integration": {
@@ -3716,7 +3807,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -3726,7 +3817,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -3801,7 +3892,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
+          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -3810,7 +3901,8 @@ exports[`UrlShortener with IAM authorization 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -4087,7 +4179,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
+          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": {
@@ -4096,7 +4188,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -4153,6 +4245,21 @@ exports[`UrlShortener with IAM authorization 1`] = `
             },
             {
               "Action": "route53:changeResourceRecordSets",
+              "Condition": {
+                "ForAllValues:StringEquals": {
+                  "route53:ChangeResourceRecordSetsActions": [
+                    "UPSERT",
+                  ],
+                  "route53:ChangeResourceRecordSetsRecordTypes": [
+                    "CNAME",
+                  ],
+                },
+                "ForAllValues:StringLike": {
+                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+                    "*.cstructs.com",
+                  ],
+                },
+              },
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -4349,6 +4456,10 @@ exports[`UrlShortener with IAM authorization 1`] = `
             {
               "Action": [
                 "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -4415,6 +4526,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomAccount4B9FF23F": {
+      "DeletionPolicy": "Retain",
       "DependsOn": [
         "UrlShortenerUrlShortenercstructscomC0F539C8",
       ],
@@ -4427,6 +4539,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
         },
       },
       "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomC0F539C8": {
       "Properties": {
@@ -4435,6 +4548,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
       "Type": "AWS::ApiGateway::RestApi",
     },
     "UrlShortenerUrlShortenercstructscomCloudWatchRoleF6B6739D": {
+      "DeletionPolicy": "Retain",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -4464,6 +4578,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
         ],
       },
       "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomDeployment4A14831Afe3b960ec71f7c090d7d1a1d09863cf3": {
       "DependsOn": [
@@ -4480,6 +4595,9 @@ exports[`UrlShortener with IAM authorization 1`] = `
       "Type": "AWS::ApiGateway::Deployment",
     },
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": {
+      "DependsOn": [
+        "UrlShortenerUrlShortenercstructscomAccount4B9FF23F",
+      ],
       "Properties": {
         "DeploymentId": {
           "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831Afe3b960ec71f7c090d7d1a1d09863cf3",
@@ -4824,7 +4942,7 @@ exports[`UrlShortener with authorizer 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -4834,7 +4952,7 @@ exports[`UrlShortener with authorizer 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -4909,7 +5027,7 @@ exports[`UrlShortener with authorizer 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
+          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -4918,7 +5036,8 @@ exports[`UrlShortener with authorizer 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -5138,7 +5257,7 @@ exports[`UrlShortener with authorizer 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
+          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": {
@@ -5147,7 +5266,7 @@ exports[`UrlShortener with authorizer 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -5204,6 +5323,21 @@ exports[`UrlShortener with authorizer 1`] = `
             },
             {
               "Action": "route53:changeResourceRecordSets",
+              "Condition": {
+                "ForAllValues:StringEquals": {
+                  "route53:ChangeResourceRecordSetsActions": [
+                    "UPSERT",
+                  ],
+                  "route53:ChangeResourceRecordSetsRecordTypes": [
+                    "CNAME",
+                  ],
+                },
+                "ForAllValues:StringLike": {
+                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+                    "*.cstructs.com",
+                  ],
+                },
+              },
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -5400,6 +5534,10 @@ exports[`UrlShortener with authorizer 1`] = `
             {
               "Action": [
                 "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -5466,6 +5604,7 @@ exports[`UrlShortener with authorizer 1`] = `
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomAccount4B9FF23F": {
+      "DeletionPolicy": "Retain",
       "DependsOn": [
         "UrlShortenerUrlShortenercstructscomC0F539C8",
       ],
@@ -5478,6 +5617,7 @@ exports[`UrlShortener with authorizer 1`] = `
         },
       },
       "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomC0F539C8": {
       "Properties": {
@@ -5486,6 +5626,7 @@ exports[`UrlShortener with authorizer 1`] = `
       "Type": "AWS::ApiGateway::RestApi",
     },
     "UrlShortenerUrlShortenercstructscomCloudWatchRoleF6B6739D": {
+      "DeletionPolicy": "Retain",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -5515,6 +5656,7 @@ exports[`UrlShortener with authorizer 1`] = `
         ],
       },
       "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomDeployment4A14831Ab923fc593ebcbdd91fdfc97147847601": {
       "DependsOn": [
@@ -5531,6 +5673,9 @@ exports[`UrlShortener with authorizer 1`] = `
       "Type": "AWS::ApiGateway::Deployment",
     },
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": {
+      "DependsOn": [
+        "UrlShortenerUrlShortenercstructscomAccount4B9FF23F",
+      ],
       "Properties": {
         "DeploymentId": {
           "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831Ab923fc593ebcbdd91fdfc97147847601",
@@ -5893,7 +6038,7 @@ exports[`UrlShortener with record name 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "45b7ed524ce2b119dd4f2b8642ae8bfaf0df45bc6bd705072ae4ee6d1a999241.zip",
+          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -5903,7 +6048,7 @@ exports[`UrlShortener with record name 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -5978,7 +6123,7 @@ exports[`UrlShortener with record name 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "b120b13d9d868c7622e7db1b68bae4c0f82ffd0227b8c15f2cef38e186ff3827.zip",
+          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -5987,7 +6132,8 @@ exports[`UrlShortener with record name 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -6207,7 +6353,7 @@ exports[`UrlShortener with record name 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7af6295e521fd55af94332393ceffb3e866aac4dc4956321f7918f21e72199e4.zip",
+          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
         },
         "Handler": "index.certificateRequestHandler",
         "Role": {
@@ -6216,7 +6362,7 @@ exports[`UrlShortener with record name 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -6273,6 +6419,21 @@ exports[`UrlShortener with record name 1`] = `
             },
             {
               "Action": "route53:changeResourceRecordSets",
+              "Condition": {
+                "ForAllValues:StringEquals": {
+                  "route53:ChangeResourceRecordSetsActions": [
+                    "UPSERT",
+                  ],
+                  "route53:ChangeResourceRecordSetsRecordTypes": [
+                    "CNAME",
+                  ],
+                },
+                "ForAllValues:StringLike": {
+                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+                    "*.short.cstructs.com",
+                  ],
+                },
+              },
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -6469,6 +6630,10 @@ exports[`UrlShortener with record name 1`] = `
             {
               "Action": [
                 "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -6535,6 +6700,7 @@ exports[`UrlShortener with record name 1`] = `
       "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerUrlShortenercstructscomAccount4B9FF23F": {
+      "DeletionPolicy": "Retain",
       "DependsOn": [
         "UrlShortenerUrlShortenercstructscomC0F539C8",
       ],
@@ -6547,6 +6713,7 @@ exports[`UrlShortener with record name 1`] = `
         },
       },
       "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomC0F539C8": {
       "Properties": {
@@ -6555,6 +6722,7 @@ exports[`UrlShortener with record name 1`] = `
       "Type": "AWS::ApiGateway::RestApi",
     },
     "UrlShortenerUrlShortenercstructscomCloudWatchRoleF6B6739D": {
+      "DeletionPolicy": "Retain",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -6584,6 +6752,7 @@ exports[`UrlShortener with record name 1`] = `
         ],
       },
       "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
     },
     "UrlShortenerUrlShortenercstructscomDeployment4A14831A931fca1a918eda4882130d1439843b80": {
       "DependsOn": [
@@ -6600,6 +6769,9 @@ exports[`UrlShortener with record name 1`] = `
       "Type": "AWS::ApiGateway::Deployment",
     },
     "UrlShortenerUrlShortenercstructscomDeploymentStageprodF548EFA2": {
+      "DependsOn": [
+        "UrlShortenerUrlShortenercstructscomAccount4B9FF23F",
+      ],
       "Properties": {
         "DeploymentId": {
           "Ref": "UrlShortenerUrlShortenercstructscomDeployment4A14831A931fca1a918eda4882130d1439843b80",

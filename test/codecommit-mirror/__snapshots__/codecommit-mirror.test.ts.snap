@@ -205,6 +205,10 @@ exports[`CodeCommitMirror with a private GitHub repo 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet1NATGateway0693C346": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+        "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -309,6 +313,10 @@ exports[`CodeCommitMirror with a private GitHub repo 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet2NATGateway00B24686": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+        "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -1035,6 +1043,10 @@ exports[`CodeCommitMirror with a public GitHub repo 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet1NATGateway0693C346": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet1DefaultRoute62DA4B4B",
+        "ClusterVpcPublicSubnet1RouteTableAssociation0FBEF1F4",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
@@ -1139,6 +1151,10 @@ exports[`CodeCommitMirror with a public GitHub repo 1`] = `
       "Type": "AWS::EC2::EIP",
     },
     "ClusterVpcPublicSubnet2NATGateway00B24686": {
+      "DependsOn": [
+        "ClusterVpcPublicSubnet2DefaultRoute97446C8A",
+        "ClusterVpcPublicSubnet2RouteTableAssociation8446B27D",
+      ],
       "Properties": {
         "AllocationId": {
           "Fn::GetAtt": [
