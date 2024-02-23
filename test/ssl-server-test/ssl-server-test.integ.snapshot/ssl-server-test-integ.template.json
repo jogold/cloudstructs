@@ -1,395 +1,535 @@
 {
-  "Resources": {
-    "SslServerTestCdkDevAlarmTopic7DD51A1B": {
-      "Type": "AWS::SNS::Topic"
-    },
-    "SslServerTestCdkDevRuleF584CCD4": {
-      "Type": "AWS::Events::Rule",
-      "Properties": {
-        "ScheduleExpression": "rate(1 day)",
-        "State": "ENABLED",
-        "Targets": [
-          {
-            "Arn": {
-              "Ref": "cloudstructssslservertestStateMachine4198892D"
-            },
-            "Id": "Target0",
-            "Input": {
-              "Fn::Join": [
-                "",
-                [
-                  "{\"host\":\"cdk.dev\",\"minimumGrade\":\"A+\",\"alarmTopicArn\":\"",
-                  {
-                    "Ref": "SslServerTestCdkDevAlarmTopic7DD51A1B"
-                  },
-                  "\"}"
-                ]
-              ]
-            },
-            "RoleArn": {
-              "Fn::GetAtt": [
-                "cloudstructssslservertestStateMachineEventsRole42C7B797",
-                "Arn"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com"
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition"
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-              ]
-            ]
-          }
-        ]
-      }
-    },
-    "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-          },
-          "S3Key": "9db120688461d865c813bd640672ebde6708d8dd687df3a95923ad04d9c097c1.zip"
-        },
-        "Role": {
-          "Fn::GetAtt": [
-            "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299",
-            "Arn"
-          ]
-        },
-        "Description": "src/ssl-server-test/analyze.lambda.ts",
-        "Environment": {
-          "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
-          }
-        },
-        "Handler": "index.handler",
-        "Runtime": "nodejs20.x",
-        "Timeout": 30
-      },
-      "DependsOn": [
-        "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299"
-      ]
-    },
-    "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com"
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition"
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-              ]
-            ]
-          }
-        ]
-      }
-    },
-    "cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-          },
-          "S3Key": "f2e5ee15de15486b62462c70e1375be9f3f090ada04d2ffaa2be626baa22e8e7.zip"
-        },
-        "Role": {
-          "Fn::GetAtt": [
-            "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19",
-            "Arn"
-          ]
-        },
-        "Description": "src/ssl-server-test/extract-grade.lambda.ts",
-        "Environment": {
-          "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
-          }
-        },
-        "Handler": "index.handler",
-        "Runtime": "nodejs20.x"
-      },
-      "DependsOn": [
-        "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19"
-      ]
-    },
-    "cloudstructssslservertestStateMachineRoleA503A678": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "states.",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ".amazonaws.com"
-                    ]
-                  ]
-                }
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        }
-      }
-    },
-    "cloudstructssslservertestStateMachineRoleDefaultPolicyBD578415": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "lambda:InvokeFunction",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
-                  "Arn"
-                ]
-              }
-            },
-            {
-              "Action": "lambda:InvokeFunction",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D",
-                  "Arn"
-                ]
-              }
-            },
-            {
-              "Action": "sns:Publish",
-              "Effect": "Allow",
-              "Resource": {
-                "Ref": "SslServerTestCdkDevAlarmTopic7DD51A1B"
-              }
-            },
-            {
-              "Action": "sns:Publish",
-              "Effect": "Allow",
-              "Resource": {
-                "Ref": "SslServerTestWwwCdkDevAlarmTopic6BB34FDB"
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "PolicyName": "cloudstructssslservertestStateMachineRoleDefaultPolicyBD578415",
-        "Roles": [
-          {
-            "Ref": "cloudstructssslservertestStateMachineRoleA503A678"
-          }
-        ]
-      }
-    },
-    "cloudstructssslservertestStateMachine4198892D": {
-      "Type": "AWS::StepFunctions::StateMachine",
-      "Properties": {
-        "RoleArn": {
-          "Fn::GetAtt": [
-            "cloudstructssslservertestStateMachineRoleA503A678",
-            "Arn"
-          ]
-        },
-        "DefinitionString": {
-          "Fn::Join": [
-            "",
-            [
-              "{\"StartAt\":\"Start Analysis\",\"States\":{\"Start Analysis\":{\"Next\":\"Wait\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
-              {
-                "Fn::GetAtt": [
-                  "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
-                  "Arn"
-                ]
-              },
-              "\",\"Parameters\":{\"host.$\":\"$.host\",\"startNew\":\"on\"}},\"Wait\":{\"Type\":\"Wait\",\"Seconds\":30,\"Next\":\"Poll Analysis\"},\"Poll Analysis\":{\"Next\":\"Is Ready ?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
-              {
-                "Fn::GetAtt": [
-                  "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
-                  "Arn"
-                ]
-              },
-              "\",\"Parameters\":{\"host.$\":\"$.host\"}},\"Is Ready ?\":{\"Type\":\"Choice\",\"Choices\":[{\"Variable\":\"$.status\",\"StringEquals\":\"READY\",\"Next\":\"Extract Grade\"},{\"Variable\":\"$.status\",\"StringEquals\":\"ERROR\",\"Next\":\"Fail\"}],\"Default\":\"Wait\"},\"Extract Grade\":{\"Next\":\"Is Grade Below Minimum?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"ResultPath\":\"$.grade\",\"Resource\":\"",
-              {
-                "Fn::GetAtt": [
-                  "cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D",
-                  "Arn"
-                ]
-              },
-              "\"},\"Is Grade Below Minimum?\":{\"Type\":\"Choice\",\"Choices\":[{\"Variable\":\"$$.Execution.Input.minimumGrade\",\"StringLessThanPath\":\"$.grade\",\"Next\":\"Notify\"}],\"Default\":\"Pass\"},\"Pass\":{\"Type\":\"Pass\",\"End\":true},\"Notify\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":states:::sns:publish\",\"Parameters\":{\"TopicArn.$\":\"$$.Execution.Input.alarmTopicArn\",\"Message.$\":\"States.JsonToString($)\",\"Subject.$\":\"States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)\"}},\"Fail\":{\"Type\":\"Fail\"}},\"TimeoutSeconds\":3600}"
-            ]
-          ]
-        }
-      },
-      "DependsOn": [
-        "cloudstructssslservertestStateMachineRoleDefaultPolicyBD578415",
-        "cloudstructssslservertestStateMachineRoleA503A678"
-      ]
-    },
-    "cloudstructssslservertestStateMachineEventsRole42C7B797": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "events.amazonaws.com"
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        }
-      }
-    },
-    "cloudstructssslservertestStateMachineEventsRoleDefaultPolicyF9D131FE": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "states:StartExecution",
-              "Effect": "Allow",
-              "Resource": {
-                "Ref": "cloudstructssslservertestStateMachine4198892D"
-              }
-            }
-          ],
-          "Version": "2012-10-17"
-        },
-        "PolicyName": "cloudstructssslservertestStateMachineEventsRoleDefaultPolicyF9D131FE",
-        "Roles": [
-          {
-            "Ref": "cloudstructssslservertestStateMachineEventsRole42C7B797"
-          }
-        ]
-      }
-    },
-    "SslServerTestWwwCdkDevAlarmTopic6BB34FDB": {
-      "Type": "AWS::SNS::Topic"
-    },
-    "SslServerTestWwwCdkDevRule0C4DA03B": {
-      "Type": "AWS::Events::Rule",
-      "Properties": {
-        "ScheduleExpression": "rate(1 day)",
-        "State": "ENABLED",
-        "Targets": [
-          {
-            "Arn": {
-              "Ref": "cloudstructssslservertestStateMachine4198892D"
-            },
-            "Id": "Target0",
-            "Input": {
-              "Fn::Join": [
-                "",
-                [
-                  "{\"host\":\"www.cdk.dev\",\"minimumGrade\":\"A+\",\"alarmTopicArn\":\"",
-                  {
-                    "Ref": "SslServerTestWwwCdkDevAlarmTopic6BB34FDB"
-                  },
-                  "\"}"
-                ]
-              ]
-            },
-            "RoleArn": {
-              "Fn::GetAtt": [
-                "cloudstructssslservertestStateMachineEventsRole42C7B797",
-                "Arn"
-              ]
-            }
-          }
-        ]
-      }
-    }
+ "Resources": {
+  "SslServerTestCdkDevAlarmTopic7DD51A1B": {
+   "Type": "AWS::SNS::Topic"
   },
-  "Parameters": {
-    "BootstrapVersion": {
-      "Type": "AWS::SSM::Parameter::Value<String>",
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
-    }
+  "SslServerTestCdkDevRuleF584CCD4": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "ScheduleExpression": "rate(1 day)",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": {
+       "Ref": "cloudstructssslservertestStateMachine4198892D"
+      },
+      "Id": "Target0",
+      "Input": {
+       "Fn::Join": [
+        "",
+        [
+         "{\"host\":\"cdk.dev\",\"minimumGrade\":\"A+\",\"alarmTopicArn\":\"",
+         {
+          "Ref": "SslServerTestCdkDevAlarmTopic7DD51A1B"
+         },
+         "\"}"
+        ]
+       ]
+      },
+      "RoleArn": {
+       "Fn::GetAtt": [
+        "cloudstructssslservertestStateMachineEventsRole42C7B797",
+        "Arn"
+       ]
+      }
+     }
+    ]
+   }
   },
-  "Rules": {
-    "CheckBootstrapVersion": {
-      "Assertions": [
+  "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
         {
-          "Assert": {
-            "Fn::Not": [
-              {
-                "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5"
-                  ],
-                  {
-                    "Ref": "BootstrapVersion"
-                  }
-                ]
-              }
-            ]
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
-        }
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
       ]
+     }
+    ]
+   }
+  },
+  "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "db3edd589323dd068a0af8ccb5e430b94d43e4e7d0c68a4b9f9bff87ed50cd40.zip"
+    },
+    "Description": "src/ssl-server-test/analyze.lambda.ts",
+    "Environment": {
+     "Variables": {
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "cloudstructssslservertestStateMachineAnalyzeFunctionServiceRoleE2FD5299"
+   ]
+  },
+  "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "f2e5ee15de15486b62462c70e1375be9f3f090ada04d2ffaa2be626baa22e8e7.zip"
+    },
+    "Description": "src/ssl-server-test/extract-grade.lambda.ts",
+    "Environment": {
+     "Variables": {
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19"
+   ]
+  },
+  "cloudstructssslservertestStateMachineRoleA503A678": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": {
+         "Fn::FindInMap": [
+          "ServiceprincipalMap",
+          {
+           "Ref": "AWS::Region"
+          },
+          "states"
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
     }
+   }
+  },
+  "cloudstructssslservertestStateMachineRoleDefaultPolicyBD578415": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "lambda:InvokeFunction",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D",
+             "Arn"
+            ]
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "sns:Publish",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "SslServerTestCdkDevAlarmTopic7DD51A1B"
+       }
+      },
+      {
+       "Action": "sns:Publish",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "SslServerTestWwwCdkDevAlarmTopic6BB34FDB"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "cloudstructssslservertestStateMachineRoleDefaultPolicyBD578415",
+    "Roles": [
+     {
+      "Ref": "cloudstructssslservertestStateMachineRoleA503A678"
+     }
+    ]
+   }
+  },
+  "cloudstructssslservertestStateMachine4198892D": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "DefinitionString": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"StartAt\":\"Start Analysis\",\"States\":{\"Start Analysis\":{\"Next\":\"Wait\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ClientExecutionTimeoutException\",\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
+         "Arn"
+        ]
+       },
+       "\",\"Parameters\":{\"host.$\":\"$.host\",\"startNew\":\"on\"}},\"Wait\":{\"Type\":\"Wait\",\"Seconds\":30,\"Next\":\"Poll Analysis\"},\"Poll Analysis\":{\"Next\":\"Is Ready ?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ClientExecutionTimeoutException\",\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"Lambda.Unknown\"],\"IntervalSeconds\":2}],\"Type\":\"Task\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "cloudstructssslservertestStateMachineAnalyzeFunction5F4E0EC3",
+         "Arn"
+        ]
+       },
+       "\",\"Parameters\":{\"host.$\":\"$.host\"}},\"Is Ready ?\":{\"Type\":\"Choice\",\"Choices\":[{\"Variable\":\"$.status\",\"StringEquals\":\"READY\",\"Next\":\"Extract Grade\"},{\"Variable\":\"$.status\",\"StringEquals\":\"ERROR\",\"Next\":\"Fail\"}],\"Default\":\"Wait\"},\"Extract Grade\":{\"Next\":\"Is Grade Below Minimum?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ClientExecutionTimeoutException\",\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"ResultPath\":\"$.grade\",\"Resource\":\"",
+       {
+        "Fn::GetAtt": [
+         "cloudstructssslservertestStateMachineExtractGradeFunction1D1F524D",
+         "Arn"
+        ]
+       },
+       "\"},\"Is Grade Below Minimum?\":{\"Type\":\"Choice\",\"Choices\":[{\"Variable\":\"$$.Execution.Input.minimumGrade\",\"StringLessThanPath\":\"$.grade\",\"Next\":\"Notify\"}],\"Default\":\"Pass\"},\"Pass\":{\"Type\":\"Pass\",\"End\":true},\"Notify\":{\"End\":true,\"Type\":\"Task\",\"Resource\":\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":states:::sns:publish\",\"Parameters\":{\"TopicArn.$\":\"$$.Execution.Input.alarmTopicArn\",\"Message.$\":\"States.JsonToString($)\",\"Subject.$\":\"States.Format('SSL grade for {} is below minimum grade ({} < {})', $.host, $.grade, $$.Execution.Input.minimumGrade)\"}},\"Fail\":{\"Type\":\"Fail\"}},\"TimeoutSeconds\":3600}"
+      ]
+     ]
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "cloudstructssslservertestStateMachineRoleA503A678",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "cloudstructssslservertestStateMachineRoleDefaultPolicyBD578415",
+    "cloudstructssslservertestStateMachineRoleA503A678"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "cloudstructssslservertestStateMachineEventsRole42C7B797": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "cloudstructssslservertestStateMachineEventsRoleDefaultPolicyF9D131FE": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "cloudstructssslservertestStateMachine4198892D"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "cloudstructssslservertestStateMachineEventsRoleDefaultPolicyF9D131FE",
+    "Roles": [
+     {
+      "Ref": "cloudstructssslservertestStateMachineEventsRole42C7B797"
+     }
+    ]
+   }
+  },
+  "SslServerTestWwwCdkDevAlarmTopic6BB34FDB": {
+   "Type": "AWS::SNS::Topic"
+  },
+  "SslServerTestWwwCdkDevRule0C4DA03B": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "ScheduleExpression": "rate(1 day)",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": {
+       "Ref": "cloudstructssslservertestStateMachine4198892D"
+      },
+      "Id": "Target0",
+      "Input": {
+       "Fn::Join": [
+        "",
+        [
+         "{\"host\":\"www.cdk.dev\",\"minimumGrade\":\"A+\",\"alarmTopicArn\":\"",
+         {
+          "Ref": "SslServerTestWwwCdkDevAlarmTopic6BB34FDB"
+         },
+         "\"}"
+        ]
+       ]
+      },
+      "RoleArn": {
+       "Fn::GetAtt": [
+        "cloudstructssslservertestStateMachineEventsRole42C7B797",
+        "Arn"
+       ]
+      }
+     }
+    ]
+   }
   }
+ },
+ "Mappings": {
+  "ServiceprincipalMap": {
+   "af-south-1": {
+    "states": "states.af-south-1.amazonaws.com"
+   },
+   "ap-east-1": {
+    "states": "states.ap-east-1.amazonaws.com"
+   },
+   "ap-northeast-1": {
+    "states": "states.ap-northeast-1.amazonaws.com"
+   },
+   "ap-northeast-2": {
+    "states": "states.ap-northeast-2.amazonaws.com"
+   },
+   "ap-northeast-3": {
+    "states": "states.ap-northeast-3.amazonaws.com"
+   },
+   "ap-south-1": {
+    "states": "states.ap-south-1.amazonaws.com"
+   },
+   "ap-south-2": {
+    "states": "states.ap-south-2.amazonaws.com"
+   },
+   "ap-southeast-1": {
+    "states": "states.ap-southeast-1.amazonaws.com"
+   },
+   "ap-southeast-2": {
+    "states": "states.ap-southeast-2.amazonaws.com"
+   },
+   "ap-southeast-3": {
+    "states": "states.ap-southeast-3.amazonaws.com"
+   },
+   "ap-southeast-4": {
+    "states": "states.ap-southeast-4.amazonaws.com"
+   },
+   "ca-central-1": {
+    "states": "states.ca-central-1.amazonaws.com"
+   },
+   "cn-north-1": {
+    "states": "states.cn-north-1.amazonaws.com"
+   },
+   "cn-northwest-1": {
+    "states": "states.cn-northwest-1.amazonaws.com"
+   },
+   "eu-central-1": {
+    "states": "states.eu-central-1.amazonaws.com"
+   },
+   "eu-central-2": {
+    "states": "states.eu-central-2.amazonaws.com"
+   },
+   "eu-north-1": {
+    "states": "states.eu-north-1.amazonaws.com"
+   },
+   "eu-south-1": {
+    "states": "states.eu-south-1.amazonaws.com"
+   },
+   "eu-south-2": {
+    "states": "states.eu-south-2.amazonaws.com"
+   },
+   "eu-west-1": {
+    "states": "states.eu-west-1.amazonaws.com"
+   },
+   "eu-west-2": {
+    "states": "states.eu-west-2.amazonaws.com"
+   },
+   "eu-west-3": {
+    "states": "states.eu-west-3.amazonaws.com"
+   },
+   "il-central-1": {
+    "states": "states.il-central-1.amazonaws.com"
+   },
+   "me-central-1": {
+    "states": "states.me-central-1.amazonaws.com"
+   },
+   "me-south-1": {
+    "states": "states.me-south-1.amazonaws.com"
+   },
+   "sa-east-1": {
+    "states": "states.sa-east-1.amazonaws.com"
+   },
+   "us-east-1": {
+    "states": "states.us-east-1.amazonaws.com"
+   },
+   "us-east-2": {
+    "states": "states.us-east-2.amazonaws.com"
+   },
+   "us-gov-east-1": {
+    "states": "states.us-gov-east-1.amazonaws.com"
+   },
+   "us-gov-west-1": {
+    "states": "states.us-gov-west-1.amazonaws.com"
+   },
+   "us-iso-east-1": {
+    "states": "states.amazonaws.com"
+   },
+   "us-iso-west-1": {
+    "states": "states.amazonaws.com"
+   },
+   "us-isob-east-1": {
+    "states": "states.amazonaws.com"
+   },
+   "us-west-1": {
+    "states": "states.us-west-1.amazonaws.com"
+   },
+   "us-west-2": {
+    "states": "states.us-west-2.amazonaws.com"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
 }
