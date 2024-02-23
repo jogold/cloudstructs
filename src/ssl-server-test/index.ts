@@ -3,7 +3,7 @@ import { Rule, RuleTargetInput, Schedule } from 'aws-cdk-lib/aws-events';
 import { SfnStateMachine } from 'aws-cdk-lib/aws-events-targets';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { ITopic, Topic } from 'aws-cdk-lib/aws-sns';
-import { Choice, Condition, Fail, FieldUtils, JsonPath, Pass, StateMachine, TaskInput, TaskMetricsConfig, TaskStateBase, TaskStateBaseProps, Wait, WaitTime } from 'aws-cdk-lib/aws-stepfunctions';
+import { Choice, Condition, DefinitionBody, Fail, FieldUtils, JsonPath, Pass, StateMachine, TaskInput, TaskMetricsConfig, TaskStateBase, TaskStateBaseProps, Wait, WaitTime } from 'aws-cdk-lib/aws-stepfunctions';
 import { LambdaInvoke } from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { Construct } from 'constructs';
 import { AnalyzeFunction } from './analyze-function';
@@ -150,18 +150,19 @@ class SslServerTestStateMachine extends Construct {
     const fail = new Fail(this, 'Fail');
 
     this.stateMachine = new StateMachine(this, 'StateMachine', {
-      definition: startAnalysis
-        .next(wait)
-        .next(pollAnalysis)
-        .next(new Choice(this, 'Is Ready ?')
-          .when(Condition.stringEquals('$.status', 'READY'), extractGrade.next(
-            new Choice(this, 'Is Grade Below Minimum?')
-              .when(Condition.stringLessThanJsonPath('$$.Execution.Input.minimumGrade', '$.grade'), notify)
-              .otherwise(new Pass(this, 'Pass')),
-          ))
-          .when(Condition.stringEquals('$.status', 'ERROR'), fail)
-          .otherwise(wait),
-        ),
+      definitionBody: DefinitionBody.fromChainable(
+        startAnalysis
+          .next(wait)
+          .next(pollAnalysis)
+          .next(new Choice(this, 'Is Ready ?')
+            .when(Condition.stringEquals('$.status', 'READY'), extractGrade.next(
+              new Choice(this, 'Is Grade Below Minimum?')
+                .when(Condition.stringLessThanJsonPath('$$.Execution.Input.minimumGrade', '$.grade'), notify)
+                .otherwise(new Pass(this, 'Pass')),
+            ))
+            .when(Condition.stringEquals('$.status', 'ERROR'), fail)
+            .otherwise(wait)),
+      ),
       timeout: Duration.hours(1),
     });
   }
