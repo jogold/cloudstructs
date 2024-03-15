@@ -27,7 +27,7 @@ export class MyStack extends Stack {
 }
 ```
 
-Your Lambda function conveniently receives a [`AWSLambda.SESMessage`](https://www.npmjs.com/package/@types/aws-lambda)
+Your Lambda function receives a [`AWSLambda.SNSMessage`](https://www.npmjs.com/package/@types/aws-lambda)
 event:
 
 ```ts
@@ -36,11 +36,13 @@ import { SESMessage } from 'cloudstructs';
 
 const s3 = new S3({ apiVersion: '2006-03-01' });
 
-export async function handler(event: AWSLambda.SESMessage): Promise<void> {
+export async function handler(event: AWSLambda.SNSEvent): Promise<void> {
+  const ses = JSON.parse(event.Records[0].Sns.Message) as AWSLambda.SESMessage;
+
   // Download email
   const rawEmail = await s3.getObject({
-    Bucket: event.receipt.action.bucketName,
-    Key: event.receipt.action.objectKey,
+    Bucket: ses.receipt.action.bucketName,
+    Key: ses.receipt.action.objectKey,
   }).promise();
 
   // ... do something with email ...

@@ -50,7 +50,6 @@ junit.xml
 tsconfig.json
 !/API.md
 /assets/
-!/src/email-receiver/s3-function.ts
 !/src/email-receiver/whitelist-function.ts
 !/src/slack-app/provider-function.ts
 !/src/slack-events/events-function.ts

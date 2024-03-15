@@ -18,7 +18,6 @@
 /API.md linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
-/src/email-receiver/s3-function.ts linguist-generated
 /src/email-receiver/whitelist-function.ts linguist-generated
 /src/slack-app/provider-function.ts linguist-generated
 /src/slack-events/events-function.ts linguist-generated

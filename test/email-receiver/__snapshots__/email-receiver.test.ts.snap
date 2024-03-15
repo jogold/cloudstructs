@@ -123,254 +123,6 @@ exports[`EmailReceiver 1`] = `
     "EmailReceiverTopic0009FDF2": {
       "Type": "AWS::SNS::Topic",
     },
-    "EmailReceivers3AllowInvokeEmailReceiverTopic8053BC7913DB5DD5": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "EmailReceivers3E240E67A",
-            "Arn",
-          ],
-        },
-        "Principal": "sns.amazonaws.com",
-        "SourceArn": {
-          "Ref": "EmailReceiverTopic0009FDF2",
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "EmailReceivers3E240E67A": {
-      "DependsOn": [
-        "EmailReceivers3ServiceRoleDefaultPolicy0E58628F",
-        "EmailReceivers3ServiceRoleD73560D7",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
-          },
-          "S3Key": "3d78437d64ccf325f4a2ea52c0f2ff10b36acb4bf8d1077b2ad1811284aa4b46.zip",
-        },
-        "Description": "src/email-receiver/s3.lambda.ts",
-        "Environment": {
-          "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-          },
-        },
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": [
-            "EmailReceivers3ServiceRoleD73560D7",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs20.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "EmailReceivers3EventInvokeConfig0DCB7AB9": {
-      "Properties": {
-        "DestinationConfig": {
-          "OnSuccess": {
-            "Destination": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:",
-                  {
-                    "Ref": "AWS::Partition",
-                  },
-                  ":events:",
-                  {
-                    "Ref": "AWS::Region",
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId",
-                  },
-                  ":event-bus/default",
-                ],
-              ],
-            },
-          },
-        },
-        "FunctionName": {
-          "Ref": "EmailReceivers3E240E67A",
-        },
-        "Qualifier": "$LATEST",
-      },
-      "Type": "AWS::Lambda::EventInvokeConfig",
-    },
-    "EmailReceivers3EventInvokeConfigSuccessAllowEventRuleFnA881C47A": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "Fn9270CBC0",
-            "Arn",
-          ],
-        },
-        "Principal": "events.amazonaws.com",
-        "SourceArn": {
-          "Fn::GetAtt": [
-            "EmailReceivers3EventInvokeConfigSuccessDE8DA36F",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "EmailReceivers3EventInvokeConfigSuccessDE8DA36F": {
-      "Properties": {
-        "EventPattern": {
-          "detail-type": [
-            "Lambda Function Invocation Result - Success",
-          ],
-          "resources": [
-            {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::GetAtt": [
-                      "EmailReceivers3E240E67A",
-                      "Arn",
-                    ],
-                  },
-                  ":$LATEST",
-                ],
-              ],
-            },
-          ],
-          "source": [
-            "lambda",
-          ],
-        },
-        "State": "ENABLED",
-        "Targets": [
-          {
-            "Arn": {
-              "Fn::GetAtt": [
-                "Fn9270CBC0",
-                "Arn",
-              ],
-            },
-            "Id": "Target0",
-            "InputPath": "$.detail.responsePayload",
-          },
-        ],
-      },
-      "Type": "AWS::Events::Rule",
-    },
-    "EmailReceivers3LogRetention119F5A8B": {
-      "Properties": {
-        "LogGroupName": {
-          "Fn::Join": [
-            "",
-            [
-              "/aws/lambda/",
-              {
-                "Ref": "EmailReceivers3E240E67A",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 30,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "EmailReceivers3ServiceRoleD73560D7": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "EmailReceivers3ServiceRoleDefaultPolicy0E58628F": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "events:PutEvents",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":events:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId",
-                    },
-                    ":event-bus/default",
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "EmailReceivers3ServiceRoleDefaultPolicy0E58628F",
-        "Roles": [
-          {
-            "Ref": "EmailReceivers3ServiceRoleD73560D7",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "EmailReceivers3Topic1B449381": {
-      "Properties": {
-        "Endpoint": {
-          "Fn::GetAtt": [
-            "EmailReceivers3E240E67A",
-            "Arn",
-          ],
-        },
-        "Protocol": "lambda",
-        "TopicArn": {
-          "Ref": "EmailReceiverTopic0009FDF2",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
     "EmailReceiverwhitelist484EFAE6": {
       "DependsOn": [
         "EmailReceiverwhitelistServiceRoleBF0A3250",
@@ -490,6 +242,22 @@ exports[`EmailReceiver 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
+    "FnAllowInvokeEmailReceiverTopic8053BC793B4FA4AA": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "Fn9270CBC0",
+            "Arn",
+          ],
+        },
+        "Principal": "sns.amazonaws.com",
+        "SourceArn": {
+          "Ref": "EmailReceiverTopic0009FDF2",
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
     "FnServiceRoleB9001A96": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -566,6 +334,21 @@ exports[`EmailReceiver 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "FnTopicED2AB11E": {
+      "Properties": {
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "Fn9270CBC0",
+            "Arn",
+          ],
+        },
+        "Protocol": "lambda",
+        "TopicArn": {
+          "Ref": "EmailReceiverTopic0009FDF2",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
     },
     "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
       "DependsOn": [
