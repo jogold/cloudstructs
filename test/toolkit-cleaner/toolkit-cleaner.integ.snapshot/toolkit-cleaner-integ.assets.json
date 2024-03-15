@@ -1,5 +1,5 @@
 {
-  "version": "35.0.0",
+  "version": "36.0.0",
   "files": {
     "95c924c84f5d023be4edee540cb2cb401a49f115d01ed403b288f6cb412771df": {
       "source": {
@@ -79,7 +79,7 @@
         }
       }
     },
-    "98847dde48fcfdf640649e0b6d6475dfbb32da6bf54a09507e02cb06c4fd11a8": {
+    "92f9cadfef0d55746244db5e99b1dedebf3f3423d3363b7ba6d201890151114a": {
       "source": {
         "path": "toolkit-cleaner-integ.template.json",
         "packaging": "file"
@@ -87,7 +87,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "98847dde48fcfdf640649e0b6d6475dfbb32da6bf54a09507e02cb06c4fd11a8.json",
+          "objectKey": "92f9cadfef0d55746244db5e99b1dedebf3f3423d3363b7ba6d201890151114a.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

@@ -140,7 +140,7 @@ export class ToolkitCleaner extends Construct {
     const stateMachine = new sfn.StateMachine(this, 'Resource', {
       definitionBody: sfn.DefinitionBody.fromChainable(
         getStackNames
-          .next(stacksMap.iterator(extractTemplateHashes))
+          .next(stacksMap.itemProcessor(extractTemplateHashes))
           .next(flattenHashes)
           .next(new sfn.Parallel(this, 'Clean')
             .branch(cleanObjects)

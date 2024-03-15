@@ -106,7 +106,7 @@
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
     "aws-cdk": "^2",
-    "aws-cdk-lib": "2.112.0",
+    "aws-cdk-lib": "2.133.0",
     "aws-sdk-client-mock": "^2.2.0",
     "aws-sdk-client-mock-jest": "^2.2.0",
     "constructs": "10.0.5",
@@ -129,7 +129,7 @@
     "typescript": "^5.4.2"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.112.0",
+    "aws-cdk-lib": "^2.133.0",
     "constructs": "^10.0.5"
   },
   "dependencies": {

@@ -149,7 +149,7 @@ exports[`StaticWebsite 2`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "17c16a3854838fd3ff4bda08146122a6701f33b9c86ae17f415ad0dc47a97544.zip",
+          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -290,7 +290,7 @@ exports[`StaticWebsite 2`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
+          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,

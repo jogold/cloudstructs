@@ -28,7 +28,7 @@ test('ToolkitCleaner', () => {
               'Arn',
             ],
           },
-          '"},"StacksMap":{"Type":"Map","Next":"FlattenHashes","ResultSelector":{"AssetHashes.$":"$"},"Iterator":{"StartAt":"ExtractTemplateHashes","States":{"ExtractTemplateHashes":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["Throttling"]}],"Type":"Task","Resource":"',
+          '"},"StacksMap":{"Type":"Map","Next":"FlattenHashes","ResultSelector":{"AssetHashes.$":"$"},"ItemProcessor":{"ProcessorConfig":{"Mode":"INLINE"},"StartAt":"ExtractTemplateHashes","States":{"ExtractTemplateHashes":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["Throttling"]}],"Type":"Task","Resource":"',
           {
             'Fn::GetAtt': [
               'ToolkitCleanerExtractTemplateHashesFunctionFFDFB6D1',

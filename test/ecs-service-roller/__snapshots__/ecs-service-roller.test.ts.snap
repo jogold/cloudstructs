@@ -20,7 +20,7 @@ exports[`EcsServiceRoller with default 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "d5626dac41d5e2eaf12db03451d44d017deffa332358cd3f142412754402ef7c.zip",
+          "S3Key": "f917396796eb3f83098f0ef32e3d38a0d75ddece58d94ad9ddffa5cf720d4805.zip",
         },
         "Handler": "index.handler",
         "MemorySize": 256,
@@ -724,7 +724,7 @@ exports[`EcsServiceRoller with rule 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "d5626dac41d5e2eaf12db03451d44d017deffa332358cd3f142412754402ef7c.zip",
+          "S3Key": "f917396796eb3f83098f0ef32e3d38a0d75ddece58d94ad9ddffa5cf720d4805.zip",
         },
         "Handler": "index.handler",
         "MemorySize": 256,
@@ -1432,7 +1432,7 @@ exports[`EcsServiceRoller with schedule 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "d5626dac41d5e2eaf12db03451d44d017deffa332358cd3f142412754402ef7c.zip",
+          "S3Key": "f917396796eb3f83098f0ef32e3d38a0d75ddece58d94ad9ddffa5cf720d4805.zip",
         },
         "Handler": "index.handler",
         "MemorySize": 256,

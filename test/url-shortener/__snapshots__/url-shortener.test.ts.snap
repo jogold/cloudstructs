@@ -53,7 +53,7 @@ exports[`UrlShortener 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
+          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -1183,7 +1183,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
+          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -2658,7 +2658,7 @@ exports[`UrlShortener with CORS 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
+          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -3807,7 +3807,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
+          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -4942,7 +4942,7 @@ exports[`UrlShortener with authorizer 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
+          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -6038,7 +6038,7 @@ exports[`UrlShortener with record name 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "7b6b79862e18ab4b409cd9030e927a51058675765b06850d741b81cd0477a00d.zip",
+          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
