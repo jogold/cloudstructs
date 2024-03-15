@@ -9,8 +9,6 @@
     "build": "npx projen build",
     "bump": "npx projen bump",
     "bundle": "npx projen bundle",
-    "bundle:email-receiver/s3.lambda": "npx projen bundle:email-receiver/s3.lambda",
-    "bundle:email-receiver/s3.lambda:watch": "npx projen bundle:email-receiver/s3.lambda:watch",
     "bundle:email-receiver/whitelist.lambda": "npx projen bundle:email-receiver/whitelist.lambda",
     "bundle:email-receiver/whitelist.lambda:watch": "npx projen bundle:email-receiver/whitelist.lambda:watch",
     "bundle:slack-app/provider.lambda": "npx projen bundle:slack-app/provider.lambda",

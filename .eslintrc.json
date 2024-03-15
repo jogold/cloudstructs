@@ -147,7 +147,6 @@
         "devDependencies": [
           "**/test/**",
           "**/build-tools/**",
-          "src/email-receiver/s3.lambda.ts",
           "src/email-receiver/whitelist.lambda.ts",
           "src/slack-app/provider.lambda.ts",
           "src/slack-events/events.lambda.ts",

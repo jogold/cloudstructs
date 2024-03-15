@@ -1,6 +1,5 @@
 import { Duration } from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
-import * as destinations from 'aws-cdk-lib/aws-lambda-destinations';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as ses from 'aws-cdk-lib/aws-ses';
@@ -8,7 +7,6 @@ import * as actions from 'aws-cdk-lib/aws-ses-actions';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
-import { S3Function } from './s3-function';
 import { WhitelistFunction } from './whitelist-function';
 
 /**
@@ -97,13 +95,6 @@ export class EmailReceiver extends Construct {
       topic,
     }));
 
-    const s3Handler = new S3Function(this, 's3', {
-      logRetention: logs.RetentionDays.ONE_MONTH,
-      onSuccess: new destinations.LambdaDestination(props.function, {
-        responseOnly: true,
-      }),
-    });
-
-    topic.addSubscription(new subscriptions.LambdaSubscription(s3Handler)); // Notify
+    topic.addSubscription(new subscriptions.LambdaSubscription(props.function)); // Notify
   }
 }

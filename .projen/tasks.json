@@ -46,9 +46,6 @@
       "description": "Prepare assets",
       "steps": [
         {
-          "spawn": "bundle:email-receiver/s3.lambda"
-        },
-        {
           "spawn": "bundle:email-receiver/whitelist.lambda"
         },
         {
@@ -86,24 +83,6 @@
         },
         {
           "spawn": "bundle:url-shortener/redirect.edge-lambda"
-        }
-      ]
-    },
-    "bundle:email-receiver/s3.lambda": {
-      "name": "bundle:email-receiver/s3.lambda",
-      "description": "Create a JavaScript bundle from src/email-receiver/s3.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
-        }
-      ]
-    },
-    "bundle:email-receiver/s3.lambda:watch": {
-      "name": "bundle:email-receiver/s3.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/email-receiver/s3.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/email-receiver/s3.lambda.ts --target=\"node20\" --platform=\"node\" --outfile=\"assets/email-receiver/s3.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },

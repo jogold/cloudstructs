@@ -125,254 +125,6 @@ exports[`DmarcReporter 1`] = `
     "DmarcReporterEmailReceiverTopic85110845": {
       "Type": "AWS::SNS::Topic",
     },
-    "DmarcReporterEmailReceivers3AllowInvokeDmarcReporterEmailReceiverTopicB672F6604C5D9E00": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "DmarcReporterEmailReceivers3DE5A5BB4",
-            "Arn",
-          ],
-        },
-        "Principal": "sns.amazonaws.com",
-        "SourceArn": {
-          "Ref": "DmarcReporterEmailReceiverTopic85110845",
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "DmarcReporterEmailReceivers3DE5A5BB4": {
-      "DependsOn": [
-        "DmarcReporterEmailReceivers3ServiceRoleDefaultPolicy3B6AE52A",
-        "DmarcReporterEmailReceivers3ServiceRole17AB0AE4",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
-          },
-          "S3Key": "3d78437d64ccf325f4a2ea52c0f2ff10b36acb4bf8d1077b2ad1811284aa4b46.zip",
-        },
-        "Description": "src/email-receiver/s3.lambda.ts",
-        "Environment": {
-          "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-          },
-        },
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": [
-            "DmarcReporterEmailReceivers3ServiceRole17AB0AE4",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs20.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "DmarcReporterEmailReceivers3EventInvokeConfig7BBE4497": {
-      "Properties": {
-        "DestinationConfig": {
-          "OnSuccess": {
-            "Destination": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:",
-                  {
-                    "Ref": "AWS::Partition",
-                  },
-                  ":events:",
-                  {
-                    "Ref": "AWS::Region",
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId",
-                  },
-                  ":event-bus/default",
-                ],
-              ],
-            },
-          },
-        },
-        "FunctionName": {
-          "Ref": "DmarcReporterEmailReceivers3DE5A5BB4",
-        },
-        "Qualifier": "$LATEST",
-      },
-      "Type": "AWS::Lambda::EventInvokeConfig",
-    },
-    "DmarcReporterEmailReceivers3EventInvokeConfigSuccessAllowEventRuleFn9E622E4A": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "Fn9270CBC0",
-            "Arn",
-          ],
-        },
-        "Principal": "events.amazonaws.com",
-        "SourceArn": {
-          "Fn::GetAtt": [
-            "DmarcReporterEmailReceivers3EventInvokeConfigSuccessED23FE4E",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "DmarcReporterEmailReceivers3EventInvokeConfigSuccessED23FE4E": {
-      "Properties": {
-        "EventPattern": {
-          "detail-type": [
-            "Lambda Function Invocation Result - Success",
-          ],
-          "resources": [
-            {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::GetAtt": [
-                      "DmarcReporterEmailReceivers3DE5A5BB4",
-                      "Arn",
-                    ],
-                  },
-                  ":$LATEST",
-                ],
-              ],
-            },
-          ],
-          "source": [
-            "lambda",
-          ],
-        },
-        "State": "ENABLED",
-        "Targets": [
-          {
-            "Arn": {
-              "Fn::GetAtt": [
-                "Fn9270CBC0",
-                "Arn",
-              ],
-            },
-            "Id": "Target0",
-            "InputPath": "$.detail.responsePayload",
-          },
-        ],
-      },
-      "Type": "AWS::Events::Rule",
-    },
-    "DmarcReporterEmailReceivers3LogRetention16D3E702": {
-      "Properties": {
-        "LogGroupName": {
-          "Fn::Join": [
-            "",
-            [
-              "/aws/lambda/",
-              {
-                "Ref": "DmarcReporterEmailReceivers3DE5A5BB4",
-              },
-            ],
-          ],
-        },
-        "RetentionInDays": 30,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "Custom::LogRetention",
-    },
-    "DmarcReporterEmailReceivers3ServiceRole17AB0AE4": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "DmarcReporterEmailReceivers3ServiceRoleDefaultPolicy3B6AE52A": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "events:PutEvents",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":events:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId",
-                    },
-                    ":event-bus/default",
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "DmarcReporterEmailReceivers3ServiceRoleDefaultPolicy3B6AE52A",
-        "Roles": [
-          {
-            "Ref": "DmarcReporterEmailReceivers3ServiceRole17AB0AE4",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "DmarcReporterEmailReceivers3Topic123953AA": {
-      "Properties": {
-        "Endpoint": {
-          "Fn::GetAtt": [
-            "DmarcReporterEmailReceivers3DE5A5BB4",
-            "Arn",
-          ],
-        },
-        "Protocol": "lambda",
-        "TopicArn": {
-          "Ref": "DmarcReporterEmailReceiverTopic85110845",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
     "Fn9270CBC0": {
       "DependsOn": [
         "FnServiceRoleDefaultPolicyC6A839BF",
@@ -392,6 +144,22 @@ exports[`DmarcReporter 1`] = `
         "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "FnAllowInvokeDmarcReporterEmailReceiverTopicB672F660C601765C": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "Fn9270CBC0",
+            "Arn",
+          ],
+        },
+        "Principal": "sns.amazonaws.com",
+        "SourceArn": {
+          "Ref": "DmarcReporterEmailReceiverTopic85110845",
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
     },
     "FnServiceRoleB9001A96": {
       "Properties": {
@@ -470,90 +238,26 @@ exports[`DmarcReporter 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "FnTopicED2AB11E": {
+      "Properties": {
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "Fn9270CBC0",
+            "Arn",
+          ],
+        },
+        "Protocol": "lambda",
+        "TopicArn": {
+          "Ref": "DmarcReporterEmailReceiverTopic85110845",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
     "HostedZoneDB99F866": {
       "Properties": {
         "Name": "example.com.",
       },
       "Type": "AWS::Route53::HostedZone",
-    },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
-      "DependsOn": [
-        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
-        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
-          },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
-        },
-        "Handler": "index.handler",
-        "Role": {
-          "Fn::GetAtt": [
-            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs18.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "logs:PutRetentionPolicy",
-                "logs:DeleteRetentionPolicy",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
-        "Roles": [
-          {
-            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
   },
   "Rules": {
