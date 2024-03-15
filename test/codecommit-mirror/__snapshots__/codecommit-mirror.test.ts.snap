@@ -608,6 +608,26 @@ exports[`CodeCommitMirror with a private GitHub repo 1`] = `
               },
             },
             {
+              "Action": "ecs:TagResource",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ecs:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":*:task/",
+                    {
+                      "Ref": "ClusterEB0386A7",
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+            {
               "Action": "iam:PassRole",
               "Effect": "Allow",
               "Resource": {
@@ -1422,6 +1442,26 @@ exports[`CodeCommitMirror with a public GitHub repo 1`] = `
               "Effect": "Allow",
               "Resource": {
                 "Ref": "MirrorTaskDefinitionBBDEF66A",
+              },
+            },
+            {
+              "Action": "ecs:TagResource",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ecs:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":*:task/",
+                    {
+                      "Ref": "ClusterEB0386A7",
+                    },
+                    "/*",
+                  ],
+                ],
               },
             },
             {
