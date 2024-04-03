@@ -50,6 +50,13 @@ export interface StaticWebsiteProps {
    * @default - a new policy is created with best practice security headers
    */
   readonly responseHeadersPolicy?: cloudfront.ResponseHeadersPolicy;
+
+  /**
+   * The Lambda@Edge functions to invoke before serving the contents.
+   *
+   * @default - an origin request function that redirects all requests for a path to /index.html
+   */
+  readonly edgeLambdas?: cloudfront.EdgeLambda[];
 }
 
 /**
@@ -111,7 +118,7 @@ export class StaticWebsite extends Construct {
       defaultBehavior: {
         origin: new origins.S3Origin(this.bucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        edgeLambdas: [
+        edgeLambdas: props.edgeLambdas ?? [
           {
             eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
             functionVersion: new OriginRequestFunction(this, 'OriginRequest'),
