@@ -3326,6 +3326,7 @@ const staticWebsiteProps: StaticWebsiteProps = { ... }
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.domainName">domainName</a></code> | <code>string</code> | The domain name for this static website. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.hostedZone">hostedZone</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone</code> | The hosted zone where records should be added. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.backendConfiguration">backendConfiguration</a></code> | <code>any</code> | A backend configuration that will be saved as `config.json` in the S3 bucket of the static website. |
+| <code><a href="#cloudstructs.StaticWebsiteProps.property.edgeLambdas">edgeLambdas</a></code> | <code>aws-cdk-lib.aws_cloudfront.EdgeLambda[]</code> | The Lambda@Edge functions to invoke before serving the contents. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.redirects">redirects</a></code> | <code>string[]</code> | A list of domain names that should redirect to `domainName`. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.responseHeadersPolicy">responseHeadersPolicy</a></code> | <code>aws-cdk-lib.aws_cloudfront.ResponseHeadersPolicy</code> | Response headers policy for the default behavior. |
 
@@ -3382,6 +3383,19 @@ The frontend can query this config by doing `fetch('/config.json')`.
 { userPoolId: '1234', apiEndoint: 'https://www.my-api.com/api' }
 ```
 
+
+##### `edgeLambdas`<sup>Optional</sup> <a name="edgeLambdas" id="cloudstructs.StaticWebsiteProps.property.edgeLambdas"></a>
+
+```typescript
+public readonly edgeLambdas: EdgeLambda[];
+```
+
+- *Type:* aws-cdk-lib.aws_cloudfront.EdgeLambda[]
+- *Default:* an origin request function that redirects all requests for a path to /index.html
+
+The Lambda@Edge functions to invoke before serving the contents.
+
+---
 
 ##### `redirects`<sup>Optional</sup> <a name="redirects" id="cloudstructs.StaticWebsiteProps.property.redirects"></a>
 
