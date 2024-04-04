@@ -52,6 +52,13 @@ export interface StaticWebsiteProps {
   readonly responseHeadersPolicy?: cloudfront.ResponseHeadersPolicy;
 
   /**
+   * Cache policy for the default behavior
+   *
+   * @default CachePolicy.CACHING_OPTIMIZED
+   */
+  readonly cachePolicy?: cloudfront.ICachePolicy;
+
+  /**
    * The Lambda@Edge functions to invoke before serving the contents.
    *
    * @default - an origin request function that redirects all requests for a path to /index.html
@@ -127,6 +134,7 @@ export class StaticWebsite extends Construct {
         responseHeadersPolicy: props.responseHeadersPolicy ?? new cloudfront.ResponseHeadersPolicy(this, 'ResponseHeadersPolicy', {
           securityHeadersBehavior: StaticWebsite.defaultSecurityHeadersBehavior,
         }),
+        cachePolicy: props.cachePolicy,
       },
       defaultRootObject: 'index.html',
       domainNames: [props.domainName],
