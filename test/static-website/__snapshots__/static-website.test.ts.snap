@@ -19,7 +19,7 @@ exports[`StaticWebsite 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-us-east-1",
           },
-          "S3Key": "7103577a2cb7fc67b45dcf792018885f3f5557b18e7a4b239e35ed10d119f5b9.zip",
+          "S3Key": "26f41d5aecce2a35015d531a35df7ba8056a4dd03df5aedc8b706fb6d5d7a0d8.zip",
         },
         "Description": "src/static-website/origin-request.edge-lambda.ts",
         "Handler": "index.handler",
@@ -33,7 +33,7 @@ exports[`StaticWebsite 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginRequestCurrentVersionD6F77E9F01c31a424b9789d3d40146516339cf86": {
+    "OriginRequestCurrentVersionD6F77E9F3e62b43b127b8d74eebd0a633dd3637a": {
       "Properties": {
         "FunctionName": {
           "Ref": "OriginRequest0052232D",
@@ -46,7 +46,7 @@ exports[`StaticWebsite 1`] = `
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
         "Type": "String",
         "Value": {
-          "Ref": "OriginRequestCurrentVersionD6F77E9F01c31a424b9789d3d40146516339cf86",
+          "Ref": "OriginRequestCurrentVersionD6F77E9F3e62b43b127b8d74eebd0a633dd3637a",
         },
       },
       "Type": "AWS::SSM::Parameter",
@@ -1032,7 +1032,7 @@ exports[`StaticWebsite 2`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
-        "RefreshToken": "OriginRequestCurrentVersionD6F77E9F01c31a424b9789d3d40146516339cf86",
+        "RefreshToken": "OriginRequestCurrentVersionD6F77E9F3e62b43b127b8d74eebd0a633dd3637a",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [

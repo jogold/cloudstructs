@@ -217,7 +217,7 @@ exports[`UrlShortener 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "c24177eb20adda044c41ac4cd3fb80790ea886b6787756aa868126f2a94052a4.zip",
+          "S3Key": "b9d6c62120ffb22a5a44557d48d6261ae846d8bd49a68c3e3592af8248ba97f6.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": {
@@ -1347,7 +1347,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "c24177eb20adda044c41ac4cd3fb80790ea886b6787756aa868126f2a94052a4.zip",
+          "S3Key": "b9d6c62120ffb22a5a44557d48d6261ae846d8bd49a68c3e3592af8248ba97f6.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": {
@@ -2822,7 +2822,7 @@ exports[`UrlShortener with CORS 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "c24177eb20adda044c41ac4cd3fb80790ea886b6787756aa868126f2a94052a4.zip",
+          "S3Key": "b9d6c62120ffb22a5a44557d48d6261ae846d8bd49a68c3e3592af8248ba97f6.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": {
@@ -4028,7 +4028,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "c24177eb20adda044c41ac4cd3fb80790ea886b6787756aa868126f2a94052a4.zip",
+          "S3Key": "b9d6c62120ffb22a5a44557d48d6261ae846d8bd49a68c3e3592af8248ba97f6.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": {
@@ -5106,7 +5106,7 @@ exports[`UrlShortener with authorizer 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "c24177eb20adda044c41ac4cd3fb80790ea886b6787756aa868126f2a94052a4.zip",
+          "S3Key": "b9d6c62120ffb22a5a44557d48d6261ae846d8bd49a68c3e3592af8248ba97f6.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": {
@@ -6202,7 +6202,7 @@ exports[`UrlShortener with record name 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "c24177eb20adda044c41ac4cd3fb80790ea886b6787756aa868126f2a94052a4.zip",
+          "S3Key": "b9d6c62120ffb22a5a44557d48d6261ae846d8bd49a68c3e3592af8248ba97f6.zip",
         },
         "Description": "src/url-shortener/shortener.lambda.ts",
         "Environment": {
