@@ -1,4 +1,4 @@
-# MjmlTempalte
+# MjmlTemplate
 
 SES email template from [MJML](https://mjml.io/)
 

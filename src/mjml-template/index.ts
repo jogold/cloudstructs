@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import mjml2html = require('mjml'); // eslint-disable-line @typescript-eslint/no-require-imports
 
 /**
- * Properties for a MjmlTempalte
+ * Properties for a MjmlTemplate
  */
 export interface MjmlTemplateProps {
   /**
@@ -19,7 +19,7 @@ export interface MjmlTemplateProps {
   readonly subject: string;
 
   /**
-   * The MJML of the email
+   * The MJML for the email
    */
   readonly mjml: string;
 }
