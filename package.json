@@ -42,6 +42,11 @@
     "docgen": "npx projen docgen",
     "eject": "npx projen eject",
     "eslint": "npx projen eslint",
+    "integ:mjml-template:assert": "npx projen integ:mjml-template:assert",
+    "integ:mjml-template:deploy": "npx projen integ:mjml-template:deploy",
+    "integ:mjml-template:destroy": "npx projen integ:mjml-template:destroy",
+    "integ:mjml-template:snapshot": "npx projen integ:mjml-template:snapshot",
+    "integ:mjml-template:watch": "npx projen integ:mjml-template:watch",
     "integ:slack-app:assert": "npx projen integ:slack-app:assert",
     "integ:slack-app:deploy": "npx projen integ:slack-app:deploy",
     "integ:slack-app:destroy": "npx projen integ:slack-app:destroy",
@@ -99,6 +104,7 @@
     "@aws-sdk/lib-dynamodb": "^3.600.0",
     "@types/aws-lambda": "^8.10.140",
     "@types/jest": "^29",
+    "@types/mjml": "^4.7.4",
     "@types/node": "^18",
     "@types/tsscmp": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^7",
@@ -132,11 +138,13 @@
   },
   "dependencies": {
     "@slack/web-api": "^6.12.0",
-    "got": "^11.8.6"
+    "got": "^11.8.6",
+    "mjml": "^4.15.3"
   },
   "bundledDependencies": [
     "@slack/web-api",
-    "got"
+    "got",
+    "mjml"
   ],
   "keywords": [
     "cdk"
@@ -223,6 +231,7 @@
     "./lib/dmarc": "./lib/dmarc/index.js",
     "./lib/ecs-service-roller": "./lib/ecs-service-roller/index.js",
     "./lib/email-receiver": "./lib/email-receiver/index.js",
+    "./lib/mjml-template": "./lib/mjml-template/index.js",
     "./lib/saml-identity-provider": "./lib/saml-identity-provider/index.js",
     "./lib/slack-app": "./lib/slack-app/index.js",
     "./lib/slack-events": "./lib/slack-events/index.js",

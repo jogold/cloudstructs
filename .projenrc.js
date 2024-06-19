@@ -13,6 +13,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   bundledDeps: [
     'got',
     '@slack/web-api',
+    'mjml',
   ],
   devDeps: [
     '@aws-sdk/client-cloudformation',
@@ -27,6 +28,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-textract',
     '@aws-sdk/lib-dynamodb',
     '@types/aws-lambda',
+    '@types/mjml',
     '@types/tsscmp',
     'aws-sdk-client-mock',
     'aws-sdk-client-mock-jest',
