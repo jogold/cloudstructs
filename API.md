@@ -2132,7 +2132,7 @@ A regular expression to whitelist source email addresses.
 
 ### MjmlTemplateProps <a name="MjmlTemplateProps" id="cloudstructs.MjmlTemplateProps"></a>
 
-Properties for a MjmlTempalte.
+Properties for a MjmlTemplate.
 
 #### Initializer <a name="Initializer" id="cloudstructs.MjmlTemplateProps.Initializer"></a>
 
@@ -2146,7 +2146,7 @@ const mjmlTemplateProps: MjmlTemplateProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloudstructs.MjmlTemplateProps.property.mjml">mjml</a></code> | <code>string</code> | The MJML of the email. |
+| <code><a href="#cloudstructs.MjmlTemplateProps.property.mjml">mjml</a></code> | <code>string</code> | The MJML for the email. |
 | <code><a href="#cloudstructs.MjmlTemplateProps.property.subject">subject</a></code> | <code>string</code> | The subject line of the email. |
 | <code><a href="#cloudstructs.MjmlTemplateProps.property.templateName">templateName</a></code> | <code>string</code> | The name of the template. |
 
@@ -2160,7 +2160,7 @@ public readonly mjml: string;
 
 - *Type:* string
 
-The MJML of the email.
+The MJML for the email.
 
 ---
 
