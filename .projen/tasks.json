@@ -428,6 +428,69 @@
         }
       ]
     },
+    "integ:mjml-template:assert": {
+      "name": "integ:mjml-template:assert",
+      "description": "assert the snapshot of integration test 'mjml-template'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/mjml-template/mjml-template.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'mjml-template'. Run 'projen integ:mjml-template:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/mjml-template/mjml-template.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/mjml-template/.tmp/mjml-template.integ/assert.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/mjml-template/mjml-template.integ.snapshot/ test/mjml-template/.tmp/mjml-template.integ/assert.cdk.out/"
+        }
+      ]
+    },
+    "integ:mjml-template:deploy": {
+      "name": "integ:mjml-template:deploy",
+      "description": "deploy integration test 'mjml-template' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/mjml-template/.tmp/mjml-template.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/mjml-template/mjml-template.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/mjml-template/.tmp/mjml-template.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/mjml-template/mjml-template.integ.snapshot"
+        },
+        {
+          "exec": "mv test/mjml-template/.tmp/mjml-template.integ/deploy.cdk.out test/mjml-template/mjml-template.integ.snapshot"
+        },
+        {
+          "spawn": "integ:mjml-template:destroy"
+        }
+      ]
+    },
+    "integ:mjml-template:destroy": {
+      "name": "integ:mjml-template:destroy",
+      "description": "destroy integration test 'mjml-template'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/mjml-template/mjml-template.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:mjml-template:snapshot": {
+      "name": "integ:mjml-template:snapshot",
+      "description": "update snapshot for integration test \"mjml-template\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/mjml-template/mjml-template.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/mjml-template/mjml-template.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:mjml-template:watch": {
+      "name": "integ:mjml-template:watch",
+      "description": "watch integration test 'mjml-template' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/mjml-template/mjml-template.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/mjml-template/.tmp/mjml-template.integ/deploy.cdk.out"
+        }
+      ]
+    },
     "integ:slack-app:assert": {
       "name": "integ:slack-app:assert",
       "description": "assert the snapshot of integration test 'slack-app'",
@@ -495,6 +558,9 @@
       "name": "integ:snapshot-all",
       "description": "update snapshot for all integration tests",
       "steps": [
+        {
+          "spawn": "integ:mjml-template:snapshot"
+        },
         {
           "spawn": "integ:slack-app:snapshot"
         },
@@ -827,6 +893,9 @@
           "spawn": "eslint"
         },
         {
+          "spawn": "integ:mjml-template:assert"
+        },
+        {
           "spawn": "integ:slack-app:assert"
         },
         {
@@ -873,13 +942,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@types/aws-lambda,@types/jest,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-docgen,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@slack/web-api,got"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@types/aws-lambda,@types/jest,@types/mjml,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-docgen,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@slack/web-api,got,mjml"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-sdk/client-cloudformation @aws-sdk/client-dynamodb @aws-sdk/client-ecr @aws-sdk/client-ecs @aws-sdk/client-eventbridge @aws-sdk/client-iam @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-textract @aws-sdk/lib-dynamodb @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-sdk-client-mock aws-sdk-client-mock-jest esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii nock projen standard-version ts-jest ts-node typescript @slack/web-api got aws-cdk-lib constructs"
+          "exec": "yarn upgrade @aws-sdk/client-cloudformation @aws-sdk/client-dynamodb @aws-sdk/client-ecr @aws-sdk/client-ecs @aws-sdk/client-eventbridge @aws-sdk/client-iam @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-textract @aws-sdk/lib-dynamodb @types/aws-lambda @types/jest @types/mjml @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-sdk-client-mock aws-sdk-client-mock-jest esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii nock projen standard-version ts-jest ts-node typescript @slack/web-api got mjml aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"

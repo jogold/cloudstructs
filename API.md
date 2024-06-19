@@ -18,6 +18,8 @@ Version >= 0.2.0 requires AWS CDK v2.
 * [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
   and invoke a Lambda function
 
+* ['MjmlTemplate`](src/mjml-template) SES email template from [MJML](https://mjml.io/)
+
 * [`SlackApp`](src/slack-app) Deploy Slack apps from manifests
 
 * [`SlackEvents`](src/slack-events) Send Slack events to Amazon EventBridge
@@ -445,6 +447,120 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+
+### MjmlTemplate <a name="MjmlTemplate" id="cloudstructs.MjmlTemplate"></a>
+
+SES email template from [MJML](https://mjml.io/).
+
+#### Initializers <a name="Initializers" id="cloudstructs.MjmlTemplate.Initializer"></a>
+
+```typescript
+import { MjmlTemplate } from 'cloudstructs'
+
+new MjmlTemplate(scope: Construct, id: string, props: MjmlTemplateProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cloudstructs.MjmlTemplate.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cloudstructs.MjmlTemplate.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cloudstructs.MjmlTemplate.Initializer.parameter.props">props</a></code> | <code><a href="#cloudstructs.MjmlTemplateProps">MjmlTemplateProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="cloudstructs.MjmlTemplate.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="cloudstructs.MjmlTemplate.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="cloudstructs.MjmlTemplate.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#cloudstructs.MjmlTemplateProps">MjmlTemplateProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cloudstructs.MjmlTemplate.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cloudstructs.MjmlTemplate.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cloudstructs.MjmlTemplate.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="cloudstructs.MjmlTemplate.isConstruct"></a>
+
+```typescript
+import { MjmlTemplate } from 'cloudstructs'
+
+MjmlTemplate.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="cloudstructs.MjmlTemplate.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cloudstructs.MjmlTemplate.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cloudstructs.MjmlTemplate.property.templateName">templateName</a></code> | <code>string</code> | The name of the template. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cloudstructs.MjmlTemplate.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `templateName`<sup>Required</sup> <a name="templateName" id="cloudstructs.MjmlTemplate.property.templateName"></a>
+
+```typescript
+public readonly templateName: string;
+```
+
+- *Type:* string
+
+The name of the template.
 
 ---
 
@@ -2011,6 +2127,65 @@ public readonly sourceWhitelist: string;
 - *Default:* no whitelisting of source email addresses
 
 A regular expression to whitelist source email addresses.
+
+---
+
+### MjmlTemplateProps <a name="MjmlTemplateProps" id="cloudstructs.MjmlTemplateProps"></a>
+
+Properties for a MjmlTemplate.
+
+#### Initializer <a name="Initializer" id="cloudstructs.MjmlTemplateProps.Initializer"></a>
+
+```typescript
+import { MjmlTemplateProps } from 'cloudstructs'
+
+const mjmlTemplateProps: MjmlTemplateProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cloudstructs.MjmlTemplateProps.property.mjml">mjml</a></code> | <code>string</code> | The MJML for the email. |
+| <code><a href="#cloudstructs.MjmlTemplateProps.property.subject">subject</a></code> | <code>string</code> | The subject line of the email. |
+| <code><a href="#cloudstructs.MjmlTemplateProps.property.templateName">templateName</a></code> | <code>string</code> | The name of the template. |
+
+---
+
+##### `mjml`<sup>Required</sup> <a name="mjml" id="cloudstructs.MjmlTemplateProps.property.mjml"></a>
+
+```typescript
+public readonly mjml: string;
+```
+
+- *Type:* string
+
+The MJML for the email.
+
+---
+
+##### `subject`<sup>Required</sup> <a name="subject" id="cloudstructs.MjmlTemplateProps.property.subject"></a>
+
+```typescript
+public readonly subject: string;
+```
+
+- *Type:* string
+
+The subject line of the email.
+
+---
+
+##### `templateName`<sup>Optional</sup> <a name="templateName" id="cloudstructs.MjmlTemplateProps.property.templateName"></a>
+
+```typescript
+public readonly templateName: string;
+```
+
+- *Type:* string
+- *Default:* a CloudFormation generated name
+
+The name of the template.
 
 ---
 

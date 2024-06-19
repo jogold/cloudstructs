@@ -63,6 +63,15 @@ tsconfig.json
 !/src/url-shortener/shortener-function.ts
 !/src/static-website/origin-request-function.ts
 !/src/url-shortener/redirect-function.ts
+test/mjml-template/.tmp
+test/mjml-template/mjml-template.integ.snapshot/asset.*
+test/mjml-template/mjml-template.integ.snapshot/**/asset.*
+test/mjml-template/mjml-template.integ.snapshot/cdk.out
+test/mjml-template/mjml-template.integ.snapshot/**/cdk.out
+test/mjml-template/mjml-template.integ.snapshot/manifest.json
+test/mjml-template/mjml-template.integ.snapshot/**/manifest.json
+test/mjml-template/mjml-template.integ.snapshot/tree.json
+test/mjml-template/mjml-template.integ.snapshot/**/tree.json
 test/slack-app/.tmp
 test/slack-app/slack-app.integ.snapshot/asset.*
 test/slack-app/slack-app.integ.snapshot/**/asset.*
