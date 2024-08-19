@@ -357,7 +357,7 @@ exports[`SlackEvents 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "3cb34efca38e91ddddb7cefe001fd4a94e9d2075bdb44cf6bf22c40ce7d6e295.zip",
+          "S3Key": "4655e317b8ebda6feb753faed84c664852602aa10576dbfd1a038975464df83d.zip",
         },
         "Description": "src/slack-textract/detect.lambda.ts",
         "Environment": {
