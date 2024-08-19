@@ -137,7 +137,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "@slack/web-api": "^6.12.0",
+    "@slack/web-api": "^7.3.4",
     "got": "^11.8.6",
     "mjml": "^4.15.3"
   },

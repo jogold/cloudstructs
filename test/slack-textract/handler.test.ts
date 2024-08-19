@@ -1,9 +1,9 @@
 import 'aws-sdk-client-mock-jest';
 import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
-import { WebClient } from '@slack/web-api';
+import { FilesInfoResponse, WebClient } from '@slack/web-api';
 import { mockClient } from 'aws-sdk-client-mock';
 import got from 'got';
-import { handler, FilesInfoResult } from '../../src/slack-textract/detect.lambda';
+import { handler } from '../../src/slack-textract/detect.lambda';
 
 process.env.SLACK_TOKEN = 'token';
 
@@ -18,7 +18,7 @@ beforeEach(() => {
 });
 
 test('handler', async () => {
-  const fileInfo: FilesInfoResult = {
+  const fileInfo: FilesInfoResponse = {
     ok: true,
     file: {
       mimetype: 'image/jpg',
