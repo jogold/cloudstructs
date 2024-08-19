@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
-import { FilesInfoResponse, WebClient } from '@slack/web-api';
+import { WebClient } from '@slack/web-api';
 import got from 'got';
 
 export interface SlackEvent {
