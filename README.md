@@ -18,7 +18,7 @@ Version >= 0.2.0 requires AWS CDK v2.
 * [`EmailReceiver`](src/email-receiver) Receive emails through SES, save them to S3
   and invoke a Lambda function
 
-* ['MjmlTemplate`](src/mjml-template) SES email template from [MJML](https://mjml.io/)
+* [`MjmlTemplate`](src/mjml-template) SES email template from [MJML](https://mjml.io/)
 
 * [`SlackApp`](src/slack-app) Deploy Slack apps from manifests
 
