@@ -949,7 +949,7 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@types/aws-lambda,@types/jest,@types/mjml,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@slack/web-api,got,mjml"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@types/aws-lambda,@types/jest,@types/mjml,@types/node,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@slack/web-api,got,mjml"
         },
         {
           "exec": "yarn install --check-files"
