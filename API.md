@@ -3583,10 +3583,24 @@ const toolkitCleanerProps: ToolkitCleanerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#cloudstructs.ToolkitCleanerProps.property.cleanAssetsTimeout">cleanAssetsTimeout</a></code> | <code>aws-cdk-lib.Duration</code> | The timeout for the Lambda functions that clean assets. |
 | <code><a href="#cloudstructs.ToolkitCleanerProps.property.dryRun">dryRun</a></code> | <code>boolean</code> | Only output number of assets and total size that would be deleted but without actually deleting assets. |
 | <code><a href="#cloudstructs.ToolkitCleanerProps.property.retainAssetsNewerThan">retainAssetsNewerThan</a></code> | <code>aws-cdk-lib.Duration</code> | Retain unused assets that were created recently. |
 | <code><a href="#cloudstructs.ToolkitCleanerProps.property.schedule">schedule</a></code> | <code>aws-cdk-lib.aws_events.Schedule</code> | The schedule for the cleaner. |
 | <code><a href="#cloudstructs.ToolkitCleanerProps.property.scheduleEnabled">scheduleEnabled</a></code> | <code>boolean</code> | Whether to clean on schedule. |
+
+---
+
+##### `cleanAssetsTimeout`<sup>Optional</sup> <a name="cleanAssetsTimeout" id="cloudstructs.ToolkitCleanerProps.property.cleanAssetsTimeout"></a>
+
+```typescript
+public readonly cleanAssetsTimeout: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+- *Default:* Duration.minutes(5)
+
+The timeout for the Lambda functions that clean assets.
 
 ---
 
