@@ -44,6 +44,13 @@ export interface ToolkitCleanerProps {
    * @default - all unused assets are removed
    */
   readonly retainAssetsNewerThan?: Duration;
+
+  /**
+   * The timeout for the Lambda functions that clean assets
+   *
+   * @default Duration.minutes(5)
+   */
+  readonly cleanAssetsTimeout?: Duration;
 }
 
 /**
@@ -102,7 +109,7 @@ export class ToolkitCleaner extends Construct {
     });
 
     const cleanObjectsFunction = new CleanObjectsFunction(this, 'CleanObjectsFunction', {
-      timeout: Duration.minutes(5),
+      timeout: props.cleanAssetsTimeout ?? Duration.minutes(5),
     });
     cleanObjectsFunction.addEnvironment('BUCKET_NAME', fileAsset.bucket.bucketName);
     fileAsset.bucket.grantRead(cleanObjectsFunction);
@@ -113,7 +120,7 @@ export class ToolkitCleaner extends Construct {
     });
 
     const cleanImagesFunction = new CleanImagesFunction(this, 'CleanImagesFunction', {
-      timeout: Duration.minutes(5),
+      timeout: props.cleanAssetsTimeout ?? Duration.minutes(5),
     });
     cleanImagesFunction.addEnvironment('REPOSITORY_NAME', dockerImageAsset.repository.repositoryName);
     dockerImageAsset.repository.grant(cleanImagesFunction, 'ecr:DescribeImages', 'ecr:BatchDeleteImage');
