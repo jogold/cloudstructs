@@ -27,7 +27,7 @@ export interface EmailReceiverProps {
    * A Lambda function to invoke after the message is saved to S3. The Lambda
    * function will be invoked with a SESMessage as event.
    */
-  readonly function: lambda.IFunction;
+  readonly function?: lambda.IFunction;
 
   /**
    * A regular expression to whitelist source email addresses
@@ -56,6 +56,16 @@ export interface EmailReceiverProps {
  * Lambda function
  */
 export class EmailReceiver extends Construct {
+  /**
+   * The S3 bucket where emails are delivered
+   */
+  public readonly bucket: s3.Bucket;
+
+  /**
+   * The SNS topic that is notified when emails are delivered to S3
+   */
+  public readonly topic: sns.ITopic;
+
   constructor(scope: Construct, id: string, props: EmailReceiverProps) {
     super(scope, id);
 
@@ -66,14 +76,16 @@ export class EmailReceiver extends Construct {
       enabled: props.enabled,
     });
 
-    const bucket = new s3.Bucket(this, 'Bucket', {
+    this.bucket = new s3.Bucket(this, 'Bucket', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       encryption: s3.BucketEncryption.S3_MANAGED,
       lifecycleRules: [{ expiration: Duration.days(1) }],
     });
-    bucket.grantRead(props.function); // Download email
+    if (props.function) {
+      this.bucket.grantRead(props.function); // Download email
+    }
 
-    const topic = new sns.Topic(this, 'Topic');
+    this.topic = new sns.Topic(this, 'Topic');
 
     // Actions
     if (props.sourceWhitelist) {
@@ -91,10 +103,12 @@ export class EmailReceiver extends Construct {
     }
 
     receiptRule.addAction(new actions.S3({
-      bucket,
-      topic,
+      bucket: this.bucket,
+      topic: this.topic,
     }));
 
-    topic.addSubscription(new subscriptions.LambdaSubscription(props.function)); // Notify
+    if (props.function) {
+      this.topic.addSubscription(new subscriptions.LambdaSubscription(props.function)); // Notify
+    }
   }
 }
