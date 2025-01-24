@@ -390,6 +390,8 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cloudstructs.EmailReceiver.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cloudstructs.EmailReceiver.property.bucket">bucket</a></code> | <code>aws-cdk-lib.aws_s3.Bucket</code> | The S3 bucket where emails are delivered. |
+| <code><a href="#cloudstructs.EmailReceiver.property.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | The SNS topic that is notified when emails are delivered to S3. |
 
 ---
 
@@ -402,6 +404,30 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+##### `bucket`<sup>Required</sup> <a name="bucket" id="cloudstructs.EmailReceiver.property.bucket"></a>
+
+```typescript
+public readonly bucket: Bucket;
+```
+
+- *Type:* aws-cdk-lib.aws_s3.Bucket
+
+The S3 bucket where emails are delivered.
+
+---
+
+##### `topic`<sup>Required</sup> <a name="topic" id="cloudstructs.EmailReceiver.property.topic"></a>
+
+```typescript
+public readonly topic: ITopic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.ITopic
+
+The SNS topic that is notified when emails are delivered to S3.
 
 ---
 
@@ -1998,27 +2024,12 @@ const emailReceiverProps: EmailReceiverProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloudstructs.EmailReceiverProps.property.function">function</a></code> | <code>aws-cdk-lib.aws_lambda.IFunction</code> | A Lambda function to invoke after the message is saved to S3. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.receiptRuleSet">receiptRuleSet</a></code> | <code>aws-cdk-lib.aws_ses.IReceiptRuleSet</code> | The SES receipt rule set where a receipt rule will be added. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.recipients">recipients</a></code> | <code>string[]</code> | The recipients for which emails should be received. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.afterRule">afterRule</a></code> | <code>aws-cdk-lib.aws_ses.IReceiptRule</code> | An existing rule after which the new rule will be placed in the rule set. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.enabled">enabled</a></code> | <code>boolean</code> | Whether the receiver is active. |
+| <code><a href="#cloudstructs.EmailReceiverProps.property.function">function</a></code> | <code>aws-cdk-lib.aws_lambda.IFunction</code> | A Lambda function to invoke after the message is saved to S3. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.sourceWhitelist">sourceWhitelist</a></code> | <code>string</code> | A regular expression to whitelist source email addresses. |
-
----
-
-##### `function`<sup>Required</sup> <a name="function" id="cloudstructs.EmailReceiverProps.property.function"></a>
-
-```typescript
-public readonly function: IFunction;
-```
-
-- *Type:* aws-cdk-lib.aws_lambda.IFunction
-
-A Lambda function to invoke after the message is saved to S3.
-
-The Lambda
-function will be invoked with a SESMessage as event.
 
 ---
 
@@ -2069,6 +2080,21 @@ public readonly enabled: boolean;
 - *Default:* true
 
 Whether the receiver is active.
+
+---
+
+##### `function`<sup>Optional</sup> <a name="function" id="cloudstructs.EmailReceiverProps.property.function"></a>
+
+```typescript
+public readonly function: IFunction;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.IFunction
+
+A Lambda function to invoke after the message is saved to S3.
+
+The Lambda
+function will be invoked with a SESMessage as event.
 
 ---
 
