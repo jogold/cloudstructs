@@ -239,7 +239,7 @@ exports[`UrlShortener 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -595,7 +595,7 @@ exports[`UrlShortener 1`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC1afc83c02ee1b6fdc2114827b475aca7",
+        "RefreshToken": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -1369,7 +1369,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -1725,7 +1725,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC1afc83c02ee1b6fdc2114827b475aca7",
+        "RefreshToken": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -2845,7 +2845,7 @@ exports[`UrlShortener with CORS 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -3201,7 +3201,7 @@ exports[`UrlShortener with CORS 1`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC1afc83c02ee1b6fdc2114827b475aca7",
+        "RefreshToken": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -4050,7 +4050,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -4406,7 +4406,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC1afc83c02ee1b6fdc2114827b475aca7",
+        "RefreshToken": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -5128,7 +5128,7 @@ exports[`UrlShortener with authorizer 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -5484,7 +5484,7 @@ exports[`UrlShortener with authorizer 1`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC1afc83c02ee1b6fdc2114827b475aca7",
+        "RefreshToken": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -6224,7 +6224,7 @@ exports[`UrlShortener with record name 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -6580,7 +6580,7 @@ exports[`UrlShortener with record name 1`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/UrlShortener/Redirect",
-        "RefreshToken": "RedirectCurrentVersion479E25EC1afc83c02ee1b6fdc2114827b475aca7",
+        "RefreshToken": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [
