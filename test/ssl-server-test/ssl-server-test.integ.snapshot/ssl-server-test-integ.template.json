@@ -89,7 +89,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs20.x",
+    "Runtime": "nodejs22.x",
     "Timeout": 30
    },
    "DependsOn": [
@@ -149,7 +149,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs20.x"
+    "Runtime": "nodejs22.x"
    },
    "DependsOn": [
     "cloudstructssslservertestStateMachineExtractGradeFunctionServiceRole1D034C19"

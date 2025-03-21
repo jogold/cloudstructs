@@ -142,7 +142,7 @@
     },
     "Region": "us-east-1",
     "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/Redirect",
-    "RefreshToken": "RedirectCurrentVersion479E25EC1afc83c02ee1b6fdc2114827b475aca7"
+    "RefreshToken": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
@@ -519,7 +519,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs20.x"
+    "Runtime": "nodejs22.x"
    },
    "DependsOn": [
     "UrlShortenerServiceRoleDefaultPolicyC2E011EF",

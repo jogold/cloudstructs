@@ -50,7 +50,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     mavenEndpoint: 'https://s01.oss.sonatype.org',
   },
   lambdaOptions: {
-    runtime: awscdk.LambdaRuntime.NODEJS_20_X,
+    runtime: awscdk.LambdaRuntime.NODEJS_22_X,
   },
 });
 

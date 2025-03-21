@@ -216,7 +216,7 @@ exports[`SlackEvents 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
       },
       "Type": "AWS::Lambda::Function",
     },
