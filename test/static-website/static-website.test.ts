@@ -21,7 +21,7 @@ test('StaticWebsite', () => {
     defaultIntegration: new integrations.HttpLambdaIntegration('Integration', new lambda.Function(stack, 'Fn', {
       code: lambda.Code.fromInline('inline'),
       handler: 'index.handler',
-      runtime: new lambda.Runtime('nodejs18.x', lambda.RuntimeFamily.NODEJS, { supportsInlineCode: true }),
+      runtime: new lambda.Runtime('nodejs22.x', lambda.RuntimeFamily.NODEJS, { supportsInlineCode: true }),
     })),
   });
 
