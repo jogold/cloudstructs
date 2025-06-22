@@ -55,7 +55,7 @@ export enum SslServerTestGrade {
   C = 'C',
   D = 'D',
   E = 'E',
-  F = 'F'
+  F = 'F',
 }
 
 /**
