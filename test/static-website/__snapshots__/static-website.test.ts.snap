@@ -735,6 +735,33 @@ exports[`StaticWebsite 2`] = `
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
+    "StaticWebsiteHttpsRecord6CF10F2C": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "StaticWebsiteDistributionBAD21F75",
+              "DomainName",
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::FindInMap": [
+              "AWSCloudFrontPartitionHostedZoneIdMap",
+              {
+                "Ref": "AWS::Partition",
+              },
+              "zoneId",
+            ],
+          },
+        },
+        "HostedZoneId": {
+          "Ref": "HostedZoneDB99F866",
+        },
+        "Name": "www.my-site.com.",
+        "Type": "HTTPS",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
     "StaticWebsiteHttpsRedirectRedirectAliasRecord2591f3E6FEEF4C": {
       "Properties": {
         "AliasTarget": {

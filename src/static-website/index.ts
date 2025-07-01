@@ -155,6 +155,13 @@ export class StaticWebsite extends Construct {
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(this.distribution)),
     });
 
+    new route53.RecordSet(this, 'HttpsRecord', {
+      recordType: 'HTTPS' as route53.RecordType,
+      recordName: props.domainName,
+      zone: props.hostedZone,
+      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(this.distribution)),
+    })
+
     if (props.backendConfiguration) {
     // Save backend config to bucket, can be queried by the frontend
       new cr.AwsCustomResource(this, 'PutConfig', {
