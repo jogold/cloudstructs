@@ -160,7 +160,7 @@ export class StaticWebsite extends Construct {
       recordName: props.domainName,
       zone: props.hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(this.distribution)),
-    })
+    });
 
     if (props.backendConfiguration) {
     // Save backend config to bucket, can be queried by the frontend
