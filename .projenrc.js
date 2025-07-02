@@ -47,6 +47,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     mavenGroupId: 'io.github.jogold',
     javaPackage: 'io.github.jogold.cloudstructs',
     mavenArtifactId: 'cloudstructs',
+    mavenServerId: 'central-ossrh',
   },
   lambdaOptions: {
     runtime: awscdk.LambdaRuntime.NODEJS_22_X,
