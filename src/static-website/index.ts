@@ -196,6 +196,7 @@ export class StaticWebsite extends Construct {
       const redirectDistribution = httpsRedirect.node.tryFindChild('RedirectDistribution') as cloudfront.CloudFrontWebDistribution;
       const cfnDistribution = redirectDistribution.node.tryFindChild('CFDistribution') as cloudfront.CfnDistribution;
       cfnDistribution.addPropertyOverride('DistributionConfig.ViewerCertificate.MinimumProtocolVersion', 'TLSv1.2_2021');
+      cfnDistribution.addPropertyOverride('DistributionConfig.HttpVersion', 'http2and3');
     }
   }
 }
