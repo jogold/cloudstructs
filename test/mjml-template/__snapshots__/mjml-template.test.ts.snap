@@ -73,7 +73,7 @@ exports[`MjmlTemplate 1`] = `
     
     
       <div
-         style="" lang="und" dir="auto"
+         aria-roledescription="email" style="" role="article" lang="und" dir="auto"
       >
         
       
