@@ -36,6 +36,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   defaultReleaseBranch: 'master',
   releaseToNpm: true,
+  npmTrustedPublishing: true,
   publishToPypi: {
     distName: 'cloudstructs',
     module: 'cloudstructs',
