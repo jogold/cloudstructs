@@ -40,6 +40,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   publishToPypi: {
     distName: 'cloudstructs',
     module: 'cloudstructs',
+    trustedPublishing: true,
   },
   publishToGo: {
     moduleName: 'github.com/jogold/cloudstructs-go',
