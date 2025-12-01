@@ -13,7 +13,7 @@ beforeEach(() => {
 test('DmarcReporter', () => {
   const fn = new lambda.Function(stack, 'Fn', {
     code: lambda.Code.fromInline('export.handler = () => void;'),
-    runtime: new lambda.Runtime('nodejs22.x', lambda.RuntimeFamily.NODEJS, {
+    runtime: new lambda.Runtime('nodejs24.x', lambda.RuntimeFamily.NODEJS, {
       supportsInlineCode: true,
     }),
     handler: 'index.handler',

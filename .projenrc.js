@@ -52,7 +52,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     mavenServerId: 'central-ossrh',
   },
   lambdaOptions: {
-    runtime: awscdk.LambdaRuntime.NODEJS_22_X,
+    runtime: awscdk.LambdaRuntime.NODEJS_24_X,
   },
 });
 

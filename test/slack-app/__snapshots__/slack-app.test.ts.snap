@@ -268,7 +268,7 @@ exports[`SlackApp 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
       },
       "Type": "AWS::Lambda::Function",
     },

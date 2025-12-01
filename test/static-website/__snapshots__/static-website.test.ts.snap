@@ -29,11 +29,11 @@ exports[`StaticWebsite 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
       },
       "Type": "AWS::Lambda::Function",
     },
-    "OriginRequestCurrentVersionD6F77E9F80245834fbbc8013cb3122853c7f5a4e": {
+    "OriginRequestCurrentVersionD6F77E9F1aa1d0332e3d0c3ddd4e96ca4a785f29": {
       "Properties": {
         "FunctionName": {
           "Ref": "OriginRequest0052232D",
@@ -46,7 +46,7 @@ exports[`StaticWebsite 1`] = `
         "Name": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
         "Type": "String",
         "Value": {
-          "Ref": "OriginRequestCurrentVersionD6F77E9F80245834fbbc8013cb3122853c7f5a4e",
+          "Ref": "OriginRequestCurrentVersionD6F77E9F1aa1d0332e3d0c3ddd4e96ca4a785f29",
         },
       },
       "Type": "AWS::SSM::Parameter",
@@ -374,7 +374,7 @@ exports[`StaticWebsite 2`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
       },
       "Type": "AWS::Lambda::Function",
     },
@@ -1059,7 +1059,7 @@ exports[`StaticWebsite 2`] = `
       "DeletionPolicy": "Delete",
       "Properties": {
         "ParameterName": "/cdk/EdgeFunctionArn/eu-west-1/Stack/StaticWebsite/OriginRequest",
-        "RefreshToken": "OriginRequestCurrentVersionD6F77E9F80245834fbbc8013cb3122853c7f5a4e",
+        "RefreshToken": "OriginRequestCurrentVersionD6F77E9F1aa1d0332e3d0c3ddd4e96ca4a785f29",
         "Region": "us-east-1",
         "ServiceToken": {
           "Fn::GetAtt": [

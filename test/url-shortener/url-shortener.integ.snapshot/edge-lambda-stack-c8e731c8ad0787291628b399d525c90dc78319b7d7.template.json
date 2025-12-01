@@ -105,14 +105,14 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs22.x"
+    "Runtime": "nodejs24.x"
    },
    "DependsOn": [
     "RedirectServiceRoleDefaultPolicy53F16DEF",
     "RedirectServiceRole39B6C513"
    ]
   },
-  "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581": {
+  "RedirectCurrentVersion479E25ECda849a4c7ccf6efe08941f8fce999820": {
    "Type": "AWS::Lambda::Version",
    "Properties": {
     "FunctionName": {
@@ -126,7 +126,7 @@
     "Name": "/cdk/EdgeFunctionArn/eu-west-1/url-shortener-integ/UrlShortener/Redirect",
     "Type": "String",
     "Value": {
-     "Ref": "RedirectCurrentVersion479E25EC0f3d7e82490b3ab600fd9d2aee4f2581"
+     "Ref": "RedirectCurrentVersion479E25ECda849a4c7ccf6efe08941f8fce999820"
     }
    }
   }

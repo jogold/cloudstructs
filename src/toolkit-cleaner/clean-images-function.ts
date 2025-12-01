@@ -17,7 +17,7 @@ export class CleanImagesFunction extends lambda.Function {
     super(scope, id, {
       description: 'src/toolkit-cleaner/clean-images.lambda.ts',
       ...props,
-      runtime: new lambda.Runtime('nodejs22.x', lambda.RuntimeFamily.NODEJS),
+      runtime: new lambda.Runtime('nodejs24.x', lambda.RuntimeFamily.NODEJS),
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/toolkit-cleaner/clean-images.lambda')),
     });
