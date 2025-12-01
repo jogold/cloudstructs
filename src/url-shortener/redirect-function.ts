@@ -18,7 +18,7 @@ export class RedirectFunction extends cloudfront.experimental.EdgeFunction {
     super(scope, id, {
       description: 'src/url-shortener/redirect.edge-lambda.ts',
       ...props,
-      runtime: new lambda.Runtime('nodejs22.x', lambda.RuntimeFamily.NODEJS),
+      runtime: new lambda.Runtime('nodejs24.x', lambda.RuntimeFamily.NODEJS),
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/url-shortener/redirect.edge-lambda')),
     });
