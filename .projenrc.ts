@@ -91,4 +91,6 @@ if (packageJsonFile) {
   packageJsonFile.addOverride('exports', packageExports);
 }
 
+project.npmrc.addConfig('node-linker', 'hoisted');
+
 project.synth();
