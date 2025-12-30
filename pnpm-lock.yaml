@@ -52,7 +52,7 @@ importers:
         specifier: ^3.958.0
         version: 3.958.0(@aws-sdk/client-dynamodb@3.958.0)
       '@stylistic/eslint-plugin':
-        specifier: ^2.13.0
+        specifier: ^2
         version: 2.13.0(eslint@9.39.2)(typescript@5.9.3)
       '@types/aws-lambda':
         specifier: ^8.10.159
@@ -70,13 +70,13 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.51.0
+        specifier: ^8
         version: 8.51.0(@typescript-eslint/parser@8.51.0(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2)(typescript@5.9.3)
       '@typescript-eslint/parser':
-        specifier: ^8.51.0
+        specifier: ^8
         version: 8.51.0(eslint@9.39.2)(typescript@5.9.3)
       aws-cdk:
-        specifier: ^2.1100.1
+        specifier: ^2
         version: 2.1100.1
       aws-cdk-lib:
         specifier: 2.133.0
@@ -88,7 +88,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(aws-sdk-client-mock@2.2.0)
       commit-and-tag-version:
-        specifier: ^12.6.1
+        specifier: ^12
         version: 12.6.1
       constructs:
         specifier: 10.0.5
@@ -97,7 +97,7 @@ importers:
         specifier: ^0.27.2
         version: 0.27.2
       eslint:
-        specifier: ^9.39.2
+        specifier: ^9
         version: 9.39.2
       eslint-import-resolver-typescript:
         specifier: ^3.10.1
@@ -109,22 +109,22 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@18.19.130)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.9.3))
       jest-junit:
-        specifier: ^16.0.0
+        specifier: ^16
         version: 16.0.0
       jsii:
-        specifier: ~5.9.21
+        specifier: 5.x
         version: 5.9.21
       jsii-diff:
         specifier: ^1.124.0
         version: 1.124.0
       jsii-docgen:
-        specifier: ^10.11.10
+        specifier: ^10.5.0
         version: 10.11.10(jsii-rosetta@5.9.24)
       jsii-pacmak:
         specifier: ^1.124.0
         version: 1.124.0(jsii-rosetta@5.9.24)
       jsii-rosetta:
-        specifier: ~5.9.24
+        specifier: 5.x
         version: 5.9.24
       nock:
         specifier: ^13.5.6
