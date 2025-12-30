@@ -147,12 +147,6 @@
     "got",
     "mjml"
   ],
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "unrs-resolver"
-    ]
-  },
   "keywords": [
     "cdk"
   ],

@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import { awscdk } from 'projen';
-import { NodePackageManager } from 'projen/lib/javascript';
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Jonathan Goldwasser',
@@ -11,7 +10,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: '2.133.0',
   name: 'cloudstructs',
   projenrcTs: true,
-  packageManager: NodePackageManager.PNPM,
   peerDeps: [],
   bundledDeps: [
     'got',
@@ -85,12 +83,6 @@ for (const dirent of fs.readdirSync('./src', { withFileTypes: true })) {
     packageExports[`./lib/${construct}`] = `./lib/${construct}/index.js`;
   }
 }
-
-const packageJsonFile = project.tryFindObjectFile('package.json');
-if (packageJsonFile) {
-  packageJsonFile.addOverride('exports', packageExports);
-}
-
-project.npmrc.addConfig('node-linker', 'hoisted');
+project.package.addField('exports', packageExports);
 
 project.synth();

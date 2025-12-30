@@ -12,7 +12,6 @@
 /.gitignore linguist-generated
 /.mergify.yml linguist-generated
 /.npmignore linguist-generated
-/.npmrc linguist-generated
 /.projen/** linguist-generated
 /.projen/deps.json linguist-generated
 /.projen/files.json linguist-generated
@@ -20,7 +19,6 @@
 /API.md linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
-/pnpm-lock.yaml linguist-generated
 /src/email-receiver/whitelist-function.ts linguist-generated
 /src/slack-app/provider-function.ts linguist-generated
 /src/slack-events/events-function.ts linguist-generated
@@ -35,3 +33,4 @@
 /src/url-shortener/redirect-function.ts linguist-generated
 /src/url-shortener/shortener-function.ts linguist-generated
 /tsconfig.dev.json linguist-generated
+/yarn.lock linguist-generated

@@ -28,16 +28,12 @@ jobs:
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: "10"
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: lts/*
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check if version has already been tagged
@@ -111,16 +107,12 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: "10"
       - name: Checkout
         uses: actions/checkout@v5
         with:
           path: .repo
       - name: Install Dependencies
-        run: cd .repo && pnpm i --frozen-lockfile
+        run: cd .repo && yarn install --check-files --frozen-lockfile
       - name: Extract build artifact
         run: tar --strip-components=1 -xzvf dist/js/*.tgz -C .repo
       - name: Move build artifact out of the way
@@ -159,16 +151,12 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: "10"
       - name: Checkout
         uses: actions/checkout@v5
         with:
           path: .repo
       - name: Install Dependencies
-        run: cd .repo && pnpm i --frozen-lockfile
+        run: cd .repo && yarn install --check-files --frozen-lockfile
       - name: Extract build artifact
         run: tar --strip-components=1 -xzvf dist/js/*.tgz -C .repo
       - name: Move build artifact out of the way
@@ -209,16 +197,12 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: "10"
       - name: Checkout
         uses: actions/checkout@v5
         with:
           path: .repo
       - name: Install Dependencies
-        run: cd .repo && pnpm i --frozen-lockfile
+        run: cd .repo && yarn install --check-files --frozen-lockfile
       - name: Extract build artifact
         run: tar --strip-components=1 -xzvf dist/js/*.tgz -C .repo
       - name: Move build artifact out of the way
@@ -253,16 +237,12 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: "10"
       - name: Checkout
         uses: actions/checkout@v5
         with:
           path: .repo
       - name: Install Dependencies
-        run: cd .repo && pnpm i --frozen-lockfile
+        run: cd .repo && yarn install --check-files --frozen-lockfile
       - name: Extract build artifact
         run: tar --strip-components=1 -xzvf dist/js/*.tgz -C .repo
       - name: Move build artifact out of the way
