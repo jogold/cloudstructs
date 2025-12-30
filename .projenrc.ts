@@ -1,7 +1,10 @@
-const fs = require('fs');
-const { awscdk } = require('projen');
+import * as fs from 'fs';
+import { awscdk } from 'projen';
+import { NodePackageManager } from 'projen/lib/javascript';
 
 const project = new awscdk.AwsCdkConstructLibrary({
+  author: 'Jonathan Goldwasser',
+  repositoryUrl: 'https://github.com/jogold/cloudstructs.git',
   authorAddress: 'jonathan.goldwasser@gmail.com',
   authorName: 'Jonathan Goldwasser',
   description: 'High-level constructs for AWS CDK',
@@ -9,6 +12,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: '2.133.0',
   name: 'cloudstructs',
   repository: 'https://github.com/jogold/cloudstructs.git',
+  projenrcTs: true,
+  packageManager: NodePackageManager.PNPM,
   peerDeps: [],
   bundledDeps: [
     'got',
@@ -57,11 +62,20 @@ const project = new awscdk.AwsCdkConstructLibrary({
 });
 
 // Update integ test snapshots after upgrade
-project.upgradeWorkflow?.postUpgradeTask.spawn(project.tasks.tryFind('bundle'));
-project.upgradeWorkflow?.postUpgradeTask.spawn(project.tasks.tryFind('integ:snapshot-all'));
+if (project.upgradeWorkflow) {
+  const bundleTask = project.tasks.tryFind('bundle');
+  if (bundleTask) {
+    project.upgradeWorkflow.postUpgradeTask.spawn(bundleTask);
+  }
+
+  const snapshotAllTask = project.tasks.tryFind('integ:snapshot-all');
+  if (snapshotAllTask) {
+    project.upgradeWorkflow.postUpgradeTask.spawn(snapshotAllTask);
+  }
+}
 
 // Add "exports"
-const packageExports = {
+const packageExports: Record<string, string> = {
   '.': './lib/index.js',
   './package.json': './package.json',
   './.jsii': './.jsii',
@@ -73,6 +87,10 @@ for (const dirent of fs.readdirSync('./src', { withFileTypes: true })) {
     packageExports[`./lib/${construct}`] = `./lib/${construct}/index.js`;
   }
 }
-project.tryFindObjectFile('package.json').addOverride('exports', packageExports);
+
+const packageJsonFile = project.tryFindObjectFile('package.json');
+if (packageJsonFile) {
+  packageJsonFile.addOverride('exports', packageExports);
+}
 
 project.synth();
