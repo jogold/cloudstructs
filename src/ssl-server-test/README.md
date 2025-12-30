@@ -19,7 +19,7 @@ export class MyStack extends Stack {
     super(scope, id, props);
 
     new SslServerTest(this, 'TestMyHost', {
-      registrationEmail: 'jdoe@someoraganizationemail.com',
+      registrationEmail: 'jdoe@someorganizationemail.com',
       host: 'my.host'
     });
   }
@@ -35,7 +35,7 @@ A [free registration](https://github.com/ssllabs/ssllabs-scan/blob/master/ssllab
 
 ```ts
 const myTest = new SslServerTest(this, 'MyTest', {
-  registrationEmail: 'jdoe@someoraganizationemail.com',
+  registrationEmail: 'jdoe@someorganizationemail.com',
   host: 'my.host',
 });
 
