@@ -614,7 +614,11 @@ exports[`CodeCommitMirror with a private GitHub repo 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ecs:",
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecs:",
                     {
                       "Ref": "AWS::Region",
                     },
@@ -1451,7 +1455,11 @@ exports[`CodeCommitMirror with a public GitHub repo 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ecs:",
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecs:",
                     {
                       "Ref": "AWS::Region",
                     },

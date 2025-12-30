@@ -138,7 +138,7 @@ export class StaticWebsite extends Construct {
       },
       defaultRootObject: 'index.html',
       domainNames: [props.domainName],
-      certificate,
+      certificate: acm.Certificate.fromCertificateArn(this, 'Cert', certificate.certificateArn),
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       httpVersion: 'http2and3' as cloudfront.HttpVersion,
     });

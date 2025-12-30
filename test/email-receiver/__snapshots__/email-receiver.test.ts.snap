@@ -51,7 +51,7 @@ exports[`EmailReceiver 1`] = `
               "Action": "s3:PutObject",
               "Condition": {
                 "StringEquals": {
-                  "aws:Referer": {
+                  "aws:SourceAccount": {
                     "Ref": "AWS::AccountId",
                   },
                 },
@@ -360,7 +360,7 @@ exports[`EmailReceiver 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -369,7 +369,7 @@ exports[`EmailReceiver 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",

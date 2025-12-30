@@ -19,28 +19,28 @@ export class MyStack extends Stack {
     super(scope, id, props);
 
     new SslServerTest(this, 'TestMyHost', {
+      registrationEmail: 'jdoe@someoraganizationemail.com',
       host: 'my.host'
     });
   }
 }
 ```
 
-This will create a state machine that will run a SSL server test everyday. By default, a SNS topic is 
-created and a notification is sent to this topic if the [grade](https://github.com/ssllabs/research/wiki/SSL-Server-Rating-Guide)
+This will create a durable Lambda function that will run a SSL server test everyday. By default, a SNS
+topic is created and a notification is sent to this topic if the [grade](https://github.com/ssllabs/research/wiki/SSL-Server-Rating-Guide)
 of the test is below `A+`. The content of the notification is the
-[test result returned by the API](https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs-v3.md#response-objects).
+[test result returned by the API](https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs-v4.md#response-objects).
+
+A [free registration](https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs-v4.md#register-for-scan-api-initiation-and-result-fetching) is required to use the the SSL Labs API.
 
 ```ts
 const myTest = new SslServerTest(this, 'MyTest', {
+  registrationEmail: 'jdoe@someoraganizationemail.com',
   host: 'my.host',
 });
 
 myTest.alarmTopic.addSubscription(/* your subscription here */)
 ```
 
-Use the `minimumGrade`, `alarmTopic` or `schedule` props to customize the
+Use the `minimumGrade`, `alarmTopic` or `scheduleExpression` props to customize the
 behavior of the construct.
-
-<p align="center">
-  <img src="ssl-server-test.svg" width="50%">
-</p>

@@ -19,7 +19,7 @@ exports[`SamlIdentityProvider 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+          "S3Key": "bc8ef58951f4c88e641dd23090e9d2e2e61c7530a07960e767522941e959b625.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -28,7 +28,7 @@ exports[`SamlIdentityProvider 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 120,
       },
       "Type": "AWS::Lambda::Function",

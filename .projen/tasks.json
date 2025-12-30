@@ -62,9 +62,6 @@
           "spawn": "bundle:ssl-server-test/analyze.lambda"
         },
         {
-          "spawn": "bundle:ssl-server-test/extract-grade.lambda"
-        },
-        {
           "spawn": "bundle:toolkit-cleaner/clean-images.lambda"
         },
         {
@@ -174,24 +171,6 @@
       "steps": [
         {
           "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
-        }
-      ]
-    },
-    "bundle:ssl-server-test/extract-grade.lambda": {
-      "name": "bundle:ssl-server-test/extract-grade.lambda",
-      "description": "Create a JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
-        }
-      ]
-    },
-    "bundle:ssl-server-test/extract-grade.lambda:watch": {
-      "name": "bundle:ssl-server-test/extract-grade.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/ssl-server-test/extract-grade.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/ssl-server-test/extract-grade.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/ssl-server-test/extract-grade.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -953,13 +932,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@types/aws-lambda,@types/jest,@types/mjml,@types/node,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@slack/web-api,got,mjml"
+          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@aws/durable-execution-sdk-js-testing,@types/aws-lambda,@types/jest,@types/mjml,@types/node,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@aws/durable-execution-sdk-js,@slack/web-api,got,mjml"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-sdk/client-cloudformation @aws-sdk/client-dynamodb @aws-sdk/client-ecr @aws-sdk/client-ecs @aws-sdk/client-eventbridge @aws-sdk/client-iam @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-textract @aws-sdk/lib-dynamodb @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/mjml @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-sdk-client-mock aws-sdk-client-mock-jest commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii nock projen ts-jest ts-node typescript @slack/web-api got mjml aws-cdk-lib constructs"
+          "exec": "yarn upgrade @aws-sdk/client-cloudformation @aws-sdk/client-dynamodb @aws-sdk/client-ecr @aws-sdk/client-ecs @aws-sdk/client-eventbridge @aws-sdk/client-iam @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-sns @aws-sdk/client-textract @aws-sdk/lib-dynamodb @aws/durable-execution-sdk-js-testing @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/mjml @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-sdk-client-mock aws-sdk-client-mock-jest commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii nock projen ts-jest ts-node typescript @aws/durable-execution-sdk-js @slack/web-api got mjml aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"

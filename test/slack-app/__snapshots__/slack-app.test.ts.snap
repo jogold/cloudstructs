@@ -20,7 +20,7 @@ exports[`SlackApp 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -29,7 +29,7 @@ exports[`SlackApp 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -145,7 +145,7 @@ exports[`SlackApp 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "3542be390685e0c8353d92ccb5796d343cd93ca946b6b0de798004206a199adc.zip",
+          "S3Key": "bdc104ed9cab1b5b6421713c8155f0b753380595356f710400609664d3635eca.zip",
         },
         "Description": "AWS CDK resource provider framework - onEvent (Default/SlackAppProvider/Resource)",
         "Environment": {
@@ -159,13 +159,17 @@ exports[`SlackApp 1`] = `
           },
         },
         "Handler": "framework.onEvent",
+        "LoggingConfig": {
+          "ApplicationLogLevel": "FATAL",
+          "LogFormat": "JSON",
+        },
         "Role": {
           "Fn::GetAtt": [
             "SlackAppProviderframeworkonEventServiceRoleE93E1666",
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -199,6 +203,16 @@ exports[`SlackApp 1`] = `
                   ],
                 },
               ],
+            },
+            {
+              "Action": "lambda:GetFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "SlackAppProviderhandler547B4993",
+                  "Arn",
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -361,6 +375,7 @@ exports[`SlackApp 1`] = `
               "Action": [
                 "secretsmanager:PutSecretValue",
                 "secretsmanager:UpdateSecret",
+                "secretsmanager:UpdateSecretVersionStage",
               ],
               "Effect": "Allow",
               "Resource": {
@@ -388,6 +403,7 @@ exports[`SlackApp 1`] = `
               "Action": [
                 "secretsmanager:PutSecretValue",
                 "secretsmanager:UpdateSecret",
+                "secretsmanager:UpdateSecretVersionStage",
               ],
               "Effect": "Allow",
               "Resource": {
