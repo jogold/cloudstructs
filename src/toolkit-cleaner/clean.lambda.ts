@@ -85,7 +85,7 @@ async function extractHashes(stackName: string): Promise<string[]> {
   const regexp = new RegExp(`(${dockerTagPrefix})?[a-f0-9]{64}`, 'g');
   const matches = template.TemplateBody.match(regexp);
 
-  return [...new Set(matches)];
+  return [...new Set(matches ?? [])];
 }
 
 function findDockerTagPrefix(hash: string): string {
