@@ -1,3 +1,9 @@
+// Environment variables must be set before any imports that use getEnv
+process.env.REGISTRATION_EMAIL = 'test@example.com';
+process.env.HOST = 'example.com';
+process.env.MINIMUM_GRADE = 'A';
+process.env.ALARM_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:test-topic';
+
 import 'aws-sdk-client-mock-jest';
 import { LocalDurableTestRunner } from '@aws/durable-execution-sdk-js-testing';
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns';
@@ -6,16 +12,7 @@ import nock from 'nock';
 import { handler } from '../../src/ssl-server-test/analyze.lambda';
 import { AnalyzeResponse, AnalyzeStatus, SslServerTestGrade } from '../../src/ssl-server-test/types';
 
-// Environment variables (must be set before handler import)
-process.env.REGISTRATION_EMAIL = 'test@example.com';
-process.env.HOST = 'example.com';
-process.env.MINIMUM_GRADE = SslServerTestGrade.A;
-process.env.ALARM_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:test-topic';
-
-// Mock SNS client
 const snsClientMock = mockClient(SNSClient);
-
-// Import handler after environment is set up
 
 // Helper to mock SSL Labs API calls
 function mockSslLabsApi(startResponse: Partial<AnalyzeResponse>, ...pollResponses: Partial<AnalyzeResponse>[]) {
