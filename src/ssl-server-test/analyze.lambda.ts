@@ -1,13 +1,14 @@
 import { DurableContext, withDurableExecution } from '@aws/durable-execution-sdk-js';
 import { PublishCommand, SNSClient } from '@aws-sdk/client-sns';
 import got from 'got';
+import { getEnv } from '../utils';
 import { AnalyzeResponse, AnalyzeStatus, SslServerTestGrade } from './types';
 
 const sslLabsClient = got.extend({
   prefixUrl: 'https://api.ssllabs.com/api/v4',
-  headers: { email: process.env.REGISTRATION_EMAIL },
+  headers: { email: getEnv('REGISTRATION_EMAIL') },
   searchParams: {
-    host: process.env.HOST,
+    host: getEnv('HOST'),
   },
 });
 
@@ -50,12 +51,12 @@ export const handler = withDurableExecution(async (_, context: DurableContext) =
     throw new Error('No grade found in analysis result');
   }
 
-  if (grades.indexOf(grade as SslServerTestGrade) > grades.indexOf(process.env.MINIMUM_GRADE as SslServerTestGrade)) {
+  if (grades.indexOf(grade as SslServerTestGrade) > grades.indexOf(getEnv('MINIMUM_GRADE') as SslServerTestGrade)) {
     await context.step('notify', async () => {
       await snsClient.send(new PublishCommand({
-        TopicArn: process.env.ALARM_TOPIC_ARN,
+        TopicArn: getEnv('ALARM_TOPIC_ARN'),
         Message: JSON.stringify(analysis),
-        Subject: `SSL grade for ${process.env.HOST} is below minimum grade (${grade} < ${process.env.MINIMUM_GRADE})`,
+        Subject: `SSL grade for ${getEnv('HOST')} is below minimum grade (${grade} < ${getEnv('MINIMUM_GRADE')})`,
       }));
     });
   }
