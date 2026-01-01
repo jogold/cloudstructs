@@ -43,7 +43,7 @@ export interface ToolkitCleanerProps {
   /**
    * The timeout for the clean function
    *
-   * @default Duration.minutes(5)
+   * @default Duration.minutes(30)
    */
   readonly cleanAssetsTimeout?: Duration;
 }
@@ -64,9 +64,9 @@ export class ToolkitCleaner extends Construct {
     });
 
     const cleanFunction = new CleanFunction(this, 'CleanFunction', {
-      timeout: props.cleanAssetsTimeout ?? Duration.minutes(5),
+      timeout: props.cleanAssetsTimeout ?? Duration.seconds(30),
       durableConfig: {
-        executionTimeout: Duration.minutes(30),
+        executionTimeout: props.cleanAssetsTimeout ?? Duration.minutes(30),
       },
       environment: {
         BUCKET_NAME: fileAsset.bucket.bucketName,

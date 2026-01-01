@@ -154,7 +154,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "e1693f255fa8965c8935b2b44e28a39ae8e4f6164c79c477b2073460f5379a18.zip"
+     "S3Key": "65157e888d820c396c31b9b7736f6c60bf3dc482087539cb607074756a9c1ee1.zip"
     },
     "Description": "src/toolkit-cleaner/clean.lambda.ts",
     "DurableConfig": {
@@ -181,7 +181,7 @@
      ]
     },
     "Runtime": "nodejs24.x",
-    "Timeout": 300
+    "Timeout": 30
    },
    "DependsOn": [
     "ToolkitCleanerCleanFunctionServiceRoleDefaultPolicyBC7E9A9D",
