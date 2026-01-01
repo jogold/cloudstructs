@@ -81,7 +81,7 @@ const packageExports: Record<string, string> = {
   './.jsii': './.jsii',
 };
 for (const dirent of fs.readdirSync('./src', { withFileTypes: true })) {
-  if (dirent.isDirectory()) {
+  if (dirent.isDirectory() && dirent.name !== 'utils') {
     const construct = dirent.name;
     // TODO: remove "lib" when TypeScript supports "exports"
     packageExports[`./lib/${construct}`] = `./lib/${construct}/index.js`;

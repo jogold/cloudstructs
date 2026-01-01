@@ -5,6 +5,7 @@ import { ITopic, Topic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { AnalyzeFunction } from './analyze-function';
 import { SslServerTestGrade } from './types';
+export { SslServerTestGrade } from './types';
 
 /**
  * Properties for a SslServerTest
