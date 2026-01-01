@@ -79,7 +79,7 @@ export class SslServerTest extends Construct {
     this.alarmTopic.grantPublish(analyzeFunction);
 
     new Schedule(this, 'Schedule', {
-      schedule: ScheduleExpression.rate(Duration.days(1)),
+      schedule: props.scheduleExpression ?? ScheduleExpression.rate(Duration.days(1)),
       target: new LambdaInvoke(analyzeFunction, {}),
     });
   }
