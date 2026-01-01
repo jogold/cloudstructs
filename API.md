@@ -3820,11 +3820,11 @@ const toolkitCleanerProps: ToolkitCleanerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloudstructs.ToolkitCleanerProps.property.cleanAssetsTimeout">cleanAssetsTimeout</a></code> | <code>aws-cdk-lib.Duration</code> | The timeout for the Lambda functions that clean assets. |
+| <code><a href="#cloudstructs.ToolkitCleanerProps.property.cleanAssetsTimeout">cleanAssetsTimeout</a></code> | <code>aws-cdk-lib.Duration</code> | The timeout for the clean function. |
 | <code><a href="#cloudstructs.ToolkitCleanerProps.property.dryRun">dryRun</a></code> | <code>boolean</code> | Only output number of assets and total size that would be deleted but without actually deleting assets. |
 | <code><a href="#cloudstructs.ToolkitCleanerProps.property.retainAssetsNewerThan">retainAssetsNewerThan</a></code> | <code>aws-cdk-lib.Duration</code> | Retain unused assets that were created recently. |
-| <code><a href="#cloudstructs.ToolkitCleanerProps.property.schedule">schedule</a></code> | <code>aws-cdk-lib.aws_events.Schedule</code> | The schedule for the cleaner. |
 | <code><a href="#cloudstructs.ToolkitCleanerProps.property.scheduleEnabled">scheduleEnabled</a></code> | <code>boolean</code> | Whether to clean on schedule. |
+| <code><a href="#cloudstructs.ToolkitCleanerProps.property.scheduleExpression">scheduleExpression</a></code> | <code>aws-cdk-lib.aws_scheduler.ScheduleExpression</code> | The schedule for the cleaner. |
 
 ---
 
@@ -3837,7 +3837,7 @@ public readonly cleanAssetsTimeout: Duration;
 - *Type:* aws-cdk-lib.Duration
 - *Default:* Duration.minutes(5)
 
-The timeout for the Lambda functions that clean assets.
+The timeout for the clean function.
 
 ---
 
@@ -3866,19 +3866,6 @@ Retain unused assets that were created recently.
 
 ---
 
-##### `schedule`<sup>Optional</sup> <a name="schedule" id="cloudstructs.ToolkitCleanerProps.property.schedule"></a>
-
-```typescript
-public readonly schedule: Schedule;
-```
-
-- *Type:* aws-cdk-lib.aws_events.Schedule
-- *Default:* every day
-
-The schedule for the cleaner.
-
----
-
 ##### `scheduleEnabled`<sup>Optional</sup> <a name="scheduleEnabled" id="cloudstructs.ToolkitCleanerProps.property.scheduleEnabled"></a>
 
 ```typescript
@@ -3892,6 +3879,19 @@ Whether to clean on schedule.
 
 If you'd like to run the cleanup manually
 via the console, set to `false`.
+
+---
+
+##### `scheduleExpression`<sup>Optional</sup> <a name="scheduleExpression" id="cloudstructs.ToolkitCleanerProps.property.scheduleExpression"></a>
+
+```typescript
+public readonly scheduleExpression: ScheduleExpression;
+```
+
+- *Type:* aws-cdk-lib.aws_scheduler.ScheduleExpression
+- *Default:* every day
+
+The schedule for the cleaner.
 
 ---
 

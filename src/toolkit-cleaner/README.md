@@ -20,12 +20,12 @@ export class MyStack extends Stack {
 }
 ```
 
-The `ToolkitCleaner` construct creates a state machine that runs every day
-and removes unused S3 and ECR assets from your CDK Toolkit. The state machine
+The `ToolkitCleaner` construct creates a durable Lambda function that runs every day
+and removes unused S3 and ECR assets from your CDK Toolkit. The function
 outputs the number of deleted assets and the total reclaimed size in bytes.
 
-The running frequency can be customized using the `schedule` prop. You can also
-choose to only run the Step Function manually by passing
+The running frequency can be customized using the `scheduleExpression` prop. You can also
+choose to only run the Lambda function manually by passing
 `scheduleEnabled: false`.
 
 By default all unused assets are removed. If you wish to retain assets that
@@ -40,7 +40,3 @@ new ToolkitCleaner(this, 'ToolkitCleaner', {
 
 Use the `dryRun` prop to only output the number of assets and total size that
 would be deleted but without actually deleting assets.
-
-<p align="center">
-  <img src="toolkit-cleaner.svg" width="50%">
-</p>
