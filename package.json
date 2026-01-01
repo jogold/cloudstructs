@@ -19,8 +19,6 @@
     "bundle:slack-textract/detect.lambda:watch": "npx projen bundle:slack-textract/detect.lambda:watch",
     "bundle:ssl-server-test/analyze.lambda": "npx projen bundle:ssl-server-test/analyze.lambda",
     "bundle:ssl-server-test/analyze.lambda:watch": "npx projen bundle:ssl-server-test/analyze.lambda:watch",
-    "bundle:ssl-server-test/extract-grade.lambda": "npx projen bundle:ssl-server-test/extract-grade.lambda",
-    "bundle:ssl-server-test/extract-grade.lambda:watch": "npx projen bundle:ssl-server-test/extract-grade.lambda:watch",
     "bundle:static-website/origin-request.edge-lambda": "npx projen bundle:static-website/origin-request.edge-lambda",
     "bundle:static-website/origin-request.edge-lambda:watch": "npx projen bundle:static-website/origin-request.edge-lambda:watch",
     "bundle:toolkit-cleaner/clean-images.lambda": "npx projen bundle:toolkit-cleaner/clean-images.lambda",
@@ -100,8 +98,10 @@
     "@aws-sdk/client-s3": "^3.958.0",
     "@aws-sdk/client-secrets-manager": "^3.958.0",
     "@aws-sdk/client-sfn": "^3.958.0",
+    "@aws-sdk/client-sns": "^3.958.0",
     "@aws-sdk/client-textract": "^3.958.0",
     "@aws-sdk/lib-dynamodb": "^3.958.0",
+    "@aws/durable-execution-sdk-js-testing": "^1.1.0",
     "@stylistic/eslint-plugin": "^2",
     "@types/aws-lambda": "^8.10.159",
     "@types/jest": "^29.5.14",
@@ -111,7 +111,7 @@
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk": "^2",
-    "aws-cdk-lib": "2.133.0",
+    "aws-cdk-lib": "2.232.0",
     "aws-sdk-client-mock": "^2.2.0",
     "aws-sdk-client-mock-jest": "^2.2.0",
     "commit-and-tag-version": "^12",
@@ -134,15 +134,17 @@
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.133.0",
+    "aws-cdk-lib": "^2.232.0",
     "constructs": "^10.0.5"
   },
   "dependencies": {
+    "@aws/durable-execution-sdk-js": "^1.0.1",
     "@slack/web-api": "^7.13.0",
     "got": "^11.8.6",
     "mjml": "^4.18.0"
   },
   "bundledDependencies": [
+    "@aws/durable-execution-sdk-js",
     "@slack/web-api",
     "got",
     "mjml"
@@ -196,7 +198,8 @@
       "^.+\\.[t]sx?$": [
         "ts-jest",
         {
-          "tsconfig": "tsconfig.dev.json"
+          "tsconfig": "tsconfig.dev.json",
+          "isolatedModules": true
         }
       ]
     }

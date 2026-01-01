@@ -53,7 +53,7 @@ exports[`UrlShortener 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
+          "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -63,7 +63,7 @@ exports[`UrlShortener 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -138,7 +138,7 @@ exports[`UrlShortener 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -147,7 +147,7 @@ exports[`UrlShortener 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -377,7 +377,7 @@ exports[`UrlShortener 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -670,17 +670,12 @@ exports[`UrlShortener 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "UrlShortenerTable9C0A20BB",
+                  "Arn",
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -775,6 +770,9 @@ exports[`UrlShortener 1`] = `
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
         "UrlShortenerUrlShortenercstructscomPOSTEA096275",
       ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -1183,7 +1181,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
+          "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -1193,7 +1191,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -1268,7 +1266,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -1277,7 +1275,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -1507,7 +1505,7 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -1800,17 +1798,12 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "UrlShortenerTable9C0A20BB",
+                  "Arn",
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -1930,6 +1923,9 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
         "UrlShortenerUrlShortenercstructscomPOSTEA096275",
       ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -2658,7 +2654,7 @@ exports[`UrlShortener with CORS 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
+          "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -2668,7 +2664,7 @@ exports[`UrlShortener with CORS 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -2743,7 +2739,7 @@ exports[`UrlShortener with CORS 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -2752,7 +2748,7 @@ exports[`UrlShortener with CORS 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -2983,7 +2979,7 @@ exports[`UrlShortener with CORS 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -3276,17 +3272,12 @@ exports[`UrlShortener with CORS 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "UrlShortenerTable9C0A20BB",
+                  "Arn",
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -3383,6 +3374,9 @@ exports[`UrlShortener with CORS 1`] = `
         "UrlShortenerUrlShortenercstructscomOPTIONS76630D17",
         "UrlShortenerUrlShortenercstructscomPOSTEA096275",
       ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -3807,7 +3801,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
+          "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -3817,7 +3811,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -3892,7 +3886,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -3901,7 +3895,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -4188,7 +4182,7 @@ exports[`UrlShortener with IAM authorization 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -4481,17 +4475,12 @@ exports[`UrlShortener with IAM authorization 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "UrlShortenerTable9C0A20BB",
+                  "Arn",
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -4586,6 +4575,9 @@ exports[`UrlShortener with IAM authorization 1`] = `
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
         "UrlShortenerUrlShortenercstructscomPOSTEA096275",
       ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -4942,7 +4934,7 @@ exports[`UrlShortener with authorizer 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
+          "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -4952,7 +4944,7 @@ exports[`UrlShortener with authorizer 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -5027,7 +5019,7 @@ exports[`UrlShortener with authorizer 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -5036,7 +5028,7 @@ exports[`UrlShortener with authorizer 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -5266,7 +5258,7 @@ exports[`UrlShortener with authorizer 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -5559,17 +5551,12 @@ exports[`UrlShortener with authorizer 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "UrlShortenerTable9C0A20BB",
+                  "Arn",
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -5664,6 +5651,9 @@ exports[`UrlShortener with authorizer 1`] = `
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
         "UrlShortenerUrlShortenercstructscomPOSTEA096275",
       ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -6038,7 +6028,7 @@ exports[`UrlShortener with record name 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
+          "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -6048,7 +6038,7 @@ exports[`UrlShortener with record name 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -6123,7 +6113,7 @@ exports[`UrlShortener with record name 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip",
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -6132,7 +6122,7 @@ exports[`UrlShortener with record name 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -6362,7 +6352,7 @@ exports[`UrlShortener with record name 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -6655,17 +6645,12 @@ exports[`UrlShortener with record name 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
-                    "UrlShortenerTable9C0A20BB",
-                    "Arn",
-                  ],
-                },
-                {
-                  "Ref": "AWS::NoValue",
-                },
-              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "UrlShortenerTable9C0A20BB",
+                  "Arn",
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -6760,6 +6745,9 @@ exports[`UrlShortener with record name 1`] = `
         "UrlShortenerUrlShortenercstructscomproxyFA0C7D1E",
         "UrlShortenerUrlShortenercstructscomPOSTEA096275",
       ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {

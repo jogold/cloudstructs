@@ -7,11 +7,8 @@ class TestStack extends Stack {
     super(scope, id, props);
 
     new SslServerTest(this, 'SslServerTestCdkDev', {
+      registrationEmail: 'jdoe@someoraganizationemail.com',
       host: 'cdk.dev',
-    });
-
-    new SslServerTest(this, 'SslServerTestWwwCdkDev', {
-      host: 'www.cdk.dev',
     });
   }
 }

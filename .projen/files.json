@@ -18,7 +18,6 @@
     "src/slack-events/events-function.ts",
     "src/slack-textract/detect-function.ts",
     "src/ssl-server-test/analyze-function.ts",
-    "src/ssl-server-test/extract-grade-function.ts",
     "src/static-website/origin-request-function.ts",
     "src/toolkit-cleaner/clean-images-function.ts",
     "src/toolkit-cleaner/clean-objects-function.ts",

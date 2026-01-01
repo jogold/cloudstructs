@@ -136,7 +136,7 @@ export class UrlShortener extends Construct {
           },
         ],
       },
-      certificate,
+      certificate: acm.Certificate.fromCertificateArn(this, 'Cert', certificate.certificateArn),
       domainNames: [domainName],
       httpVersion: 'http2and3' as cloudfront.HttpVersion,
     });

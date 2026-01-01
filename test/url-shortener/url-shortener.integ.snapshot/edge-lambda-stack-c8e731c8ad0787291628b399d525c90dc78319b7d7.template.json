@@ -118,6 +118,9 @@
     "FunctionName": {
      "Ref": "Redirect7D9319B2"
     }
+   },
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
    }
   },
   "RedirectParameter0BB48857": {

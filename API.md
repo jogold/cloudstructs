@@ -3554,9 +3554,10 @@ const sslServerTestProps: SslServerTestProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cloudstructs.SslServerTestProps.property.host">host</a></code> | <code>string</code> | The hostname to test. |
+| <code><a href="#cloudstructs.SslServerTestProps.property.registrationEmail">registrationEmail</a></code> | <code>string</code> | The email registered with SSL Labs API. |
 | <code><a href="#cloudstructs.SslServerTestProps.property.alarmTopic">alarmTopic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | The topic to which the results must be sent when the grade is below the minimum grade. |
 | <code><a href="#cloudstructs.SslServerTestProps.property.minimumGrade">minimumGrade</a></code> | <code><a href="#cloudstructs.SslServerTestGrade">SslServerTestGrade</a></code> | Minimum grade for the test. The grade is calculated using the worst grade of all endpoints. |
-| <code><a href="#cloudstructs.SslServerTestProps.property.schedule">schedule</a></code> | <code>aws-cdk-lib.aws_events.Schedule</code> | The schedule for the test. |
+| <code><a href="#cloudstructs.SslServerTestProps.property.scheduleExpression">scheduleExpression</a></code> | <code>aws-cdk-lib.aws_scheduler.ScheduleExpression</code> | The schedule for the test. |
 
 ---
 
@@ -3569,6 +3570,20 @@ public readonly host: string;
 - *Type:* string
 
 The hostname to test.
+
+---
+
+##### `registrationEmail`<sup>Required</sup> <a name="registrationEmail" id="cloudstructs.SslServerTestProps.property.registrationEmail"></a>
+
+```typescript
+public readonly registrationEmail: string;
+```
+
+- *Type:* string
+
+The email registered with SSL Labs API.
+
+> [https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs-v4.md#register-for-scan-api-initiation-and-result-fetching](https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs-v4.md#register-for-scan-api-initiation-and-result-fetching)
 
 ---
 
@@ -3600,13 +3615,13 @@ Used to send the results to an alarm SNS topic.
 
 ---
 
-##### `schedule`<sup>Optional</sup> <a name="schedule" id="cloudstructs.SslServerTestProps.property.schedule"></a>
+##### `scheduleExpression`<sup>Optional</sup> <a name="scheduleExpression" id="cloudstructs.SslServerTestProps.property.scheduleExpression"></a>
 
 ```typescript
-public readonly schedule: Schedule;
+public readonly scheduleExpression: ScheduleExpression;
 ```
 
-- *Type:* aws-cdk-lib.aws_events.Schedule
+- *Type:* aws-cdk-lib.aws_scheduler.ScheduleExpression
 - *Default:* every day
 
 The schedule for the test.

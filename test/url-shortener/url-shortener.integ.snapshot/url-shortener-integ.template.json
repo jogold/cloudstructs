@@ -256,7 +256,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x",
+    "Runtime": "nodejs22.x",
     "Timeout": 900
    },
    "DependsOn": [
@@ -466,17 +466,12 @@
       {
        "Action": "dynamodb:UpdateItem",
        "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "UrlShortenerTable9C0A20BB",
-          "Arn"
-         ]
-        },
-        {
-         "Ref": "AWS::NoValue"
-        }
-       ]
+       "Resource": {
+        "Fn::GetAtt": [
+         "UrlShortenerTable9C0A20BB",
+         "Arn"
+        ]
+       }
       }
      ],
      "Version": "2012-10-17"
@@ -618,7 +613,10 @@
     "UrlShortenerUrlShortenergoldexbeproxyA27529BB",
     "UrlShortenerUrlShortenergoldexbeOPTIONS341F249C",
     "UrlShortenerUrlShortenergoldexbePOSTF5C18C34"
-   ]
+   ],
+   "Metadata": {
+    "aws:cdk:do-not-refactor": true
+   }
   },
   "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D": {
    "Type": "AWS::ApiGateway::Stage",
@@ -1015,7 +1013,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
      },
-     "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip"
+     "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip"
     },
     "Timeout": 900,
     "MemorySize": 128,
@@ -1026,7 +1024,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x"
+    "Runtime": "nodejs22.x"
    },
    "DependsOn": [
     "CustomCrossRegionStringParameterReaderCustomResourceProviderRole71CD6825"
@@ -1091,13 +1089,13 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Handler": "index.handler",
-    "Runtime": "nodejs18.x",
+    "Runtime": "nodejs22.x",
     "Timeout": 900,
     "Code": {
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
      },
-     "S3Key": "4e26bf2d0a26f2097fb2b261f22bb51e3f6b4b52635777b1e54edbd8e2d58c35.zip"
+     "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip"
     },
     "Role": {
      "Fn::GetAtt": [

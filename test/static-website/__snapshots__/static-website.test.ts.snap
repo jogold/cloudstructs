@@ -34,6 +34,9 @@ exports[`StaticWebsite 1`] = `
       "Type": "AWS::Lambda::Function",
     },
     "OriginRequestCurrentVersionD6F77E9F1aa1d0332e3d0c3ddd4e96ca4a785f29": {
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
       "Properties": {
         "FunctionName": {
           "Ref": "OriginRequest0052232D",
@@ -149,7 +152,7 @@ exports[`StaticWebsite 2`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "cb92a348b5b60bcbbe3888108f15e75877121eb402b4a74526927300fcc54975.zip",
+          "S3Key": "bc8ef58951f4c88e641dd23090e9d2e2e61c7530a07960e767522941e959b625.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -158,7 +161,7 @@ exports[`StaticWebsite 2`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 120,
       },
       "Type": "AWS::Lambda::Function",
@@ -290,7 +293,7 @@ exports[`StaticWebsite 2`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "820cf5767b52fe3ade2023551f65be59f6a5a1d6ffbb11bc6be66146f3c37d3c.zip",
+          "S3Key": "934f26e3be418ca933eeffc0c28bc2546c67037b7ea94c28b93ad93e1952a30e.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -300,7 +303,7 @@ exports[`StaticWebsite 2`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -540,7 +543,7 @@ exports[`StaticWebsite 2`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -854,7 +857,7 @@ exports[`StaticWebsite 2`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",

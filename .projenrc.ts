@@ -7,13 +7,15 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'jonathan.goldwasser@gmail.com',
   description: 'High-level constructs for AWS CDK',
   jsiiVersion: '5.x',
-  cdkVersion: '2.133.0',
+  cdkVersion: '2.232.0',
   name: 'cloudstructs',
   projenrcTs: true,
+  tsJestOptions: { transformOptions: { isolatedModules: true } },
   peerDeps: [],
   bundledDeps: [
-    'got',
+    '@aws/durable-execution-sdk-js',
     '@slack/web-api',
+    'got',
     'mjml',
   ],
   devDeps: [
@@ -26,8 +28,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-s3',
     '@aws-sdk/client-secrets-manager',
     '@aws-sdk/client-sfn',
+    '@aws-sdk/client-sns',
     '@aws-sdk/client-textract',
     '@aws-sdk/lib-dynamodb',
+    '@aws/durable-execution-sdk-js-testing',
     '@types/aws-lambda',
     '@types/mjml',
     '@types/tsscmp',
@@ -77,7 +81,7 @@ const packageExports: Record<string, string> = {
   './.jsii': './.jsii',
 };
 for (const dirent of fs.readdirSync('./src', { withFileTypes: true })) {
-  if (dirent.isDirectory()) {
+  if (dirent.isDirectory() && dirent.name !== 'utils') {
     const construct = dirent.name;
     // TODO: remove "lib" when TypeScript supports "exports"
     packageExports[`./lib/${construct}`] = `./lib/${construct}/index.js`;

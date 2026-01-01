@@ -37,11 +37,19 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-sns",
+      "type": "build"
+    },
+    {
       "name": "@aws-sdk/client-textract",
       "type": "build"
     },
     {
       "name": "@aws-sdk/lib-dynamodb",
+      "type": "build"
+    },
+    {
+      "name": "@aws/durable-execution-sdk-js-testing",
       "type": "build"
     },
     {
@@ -167,6 +175,10 @@
       "type": "build"
     },
     {
+      "name": "@aws/durable-execution-sdk-js",
+      "type": "bundled"
+    },
+    {
       "name": "@slack/web-api",
       "type": "bundled"
     },
@@ -180,7 +192,7 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.133.0",
+      "version": "^2.232.0",
       "type": "peer"
     },
     {
