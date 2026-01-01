@@ -42,21 +42,25 @@ export const handler = withDurableExecution(async (_, context: DurableContext) =
     throw new Error(`Analysis failed: ${analysis.statusMessage}`);
   }
 
-  const grades = Object.values(SslServerTestGrade);
-  const grade = analysis.endpoints
-    .map(e => e.grade)
-    .sort((a, b) => grades.indexOf(b as SslServerTestGrade) - grades.indexOf(a as SslServerTestGrade)).pop();
+  const grades = Object.values(SslServerTestGrade).reverse();
 
-  if (!grade) {
-    throw new Error('No grade found in analysis result');
+  const gradeIndices = analysis.endpoints
+    .map(e => grades.indexOf(e.grade as SslServerTestGrade))
+    .filter(index => index !== -1);
+
+  if (gradeIndices.length === 0) {
+    throw new Error('No valid grade found in analysis result');
   }
 
-  if (grades.indexOf(grade as SslServerTestGrade) > grades.indexOf(getEnv('MINIMUM_GRADE') as SslServerTestGrade)) {
+  const bestGradeIndex = Math.max(...gradeIndices);
+  const bestGrade = grades[bestGradeIndex];
+
+  if (bestGradeIndex < grades.indexOf(getEnv('MINIMUM_GRADE') as SslServerTestGrade)) {
     await context.step('notify', async () => {
       await snsClient.send(new PublishCommand({
         TopicArn: getEnv('ALARM_TOPIC_ARN'),
         Message: JSON.stringify(analysis),
-        Subject: `SSL grade for ${getEnv('HOST')} is below minimum grade (${grade} < ${getEnv('MINIMUM_GRADE')})`,
+        Subject: `SSL grade for ${getEnv('HOST')} is below minimum grade (${bestGrade} < ${getEnv('MINIMUM_GRADE')})`,
       }));
     });
   }
