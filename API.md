@@ -3835,7 +3835,7 @@ public readonly cleanAssetsTimeout: Duration;
 ```
 
 - *Type:* aws-cdk-lib.Duration
-- *Default:* Duration.minutes(5)
+- *Default:* Duration.minutes(30)
 
 The timeout for the clean function.
 
