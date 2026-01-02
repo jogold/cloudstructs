@@ -19,10 +19,7 @@
     "src/slack-textract/detect-function.ts",
     "src/ssl-server-test/analyze-function.ts",
     "src/static-website/origin-request-function.ts",
-    "src/toolkit-cleaner/clean-images-function.ts",
-    "src/toolkit-cleaner/clean-objects-function.ts",
-    "src/toolkit-cleaner/extract-template-hashes-function.ts",
-    "src/toolkit-cleaner/get-stack-names-function.ts",
+    "src/toolkit-cleaner/clean-function.ts",
     "src/url-shortener/redirect-function.ts",
     "src/url-shortener/shortener-function.ts",
     "tsconfig.dev.json"

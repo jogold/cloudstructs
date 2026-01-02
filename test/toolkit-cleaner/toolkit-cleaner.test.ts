@@ -10,92 +10,30 @@ beforeEach(() => {
 test('ToolkitCleaner', () => {
   new ToolkitCleaner(stack, 'ToolkitCleaner');
 
-  Template.fromStack(stack).hasResourceProperties('AWS::StepFunctions::StateMachine', {
-    RoleArn: {
-      'Fn::GetAtt': [
-        'ToolkitCleanerRole794E8158',
-        'Arn',
-      ],
-    },
-    DefinitionString: {
-      'Fn::Join': [
-        '',
-        [
-          '{"StartAt":"GetStackNames","States":{"GetStackNames":{"Next":"StacksMap","Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
-          {
-            'Fn::GetAtt': [
-              'ToolkitCleanerGetStackNamesFunction362F31B8',
-              'Arn',
-            ],
-          },
-          '"},"StacksMap":{"Type":"Map","Next":"FlattenHashes","ResultSelector":{"AssetHashes.$":"$"},"ItemProcessor":{"ProcessorConfig":{"Mode":"INLINE"},"StartAt":"ExtractTemplateHashes","States":{"ExtractTemplateHashes":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2},{"ErrorEquals":["Throttling"]}],"Type":"Task","Resource":"',
-          {
-            'Fn::GetAtt': [
-              'ToolkitCleanerExtractTemplateHashesFunctionFFDFB6D1',
-              'Arn',
-            ],
-          },
-          '"}}},"MaxConcurrency":1},"FlattenHashes":{"Next":"Clean","Type":"Task","Resource":"',
-          {
-            'Fn::GetAtt': [
-              'Eval41256dc5445742738ed917bc818694e54EB1134F',
-              'Arn',
-            ],
-          },
-          '","Parameters":{"expression":"[...new Set(($.AssetHashes).flat())]","expressionAttributeValues":{"$.AssetHashes.$":"$.AssetHashes"}}},"Clean":{"Type":"Parallel","Next":"SumReclaimed","Branches":[{"StartAt":"CleanObjects","States":{"CleanObjects":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
-          {
-            'Fn::GetAtt': [
-              'ToolkitCleanerCleanObjectsFunction23A18EAE',
-              'Arn',
-            ],
-          },
-          '"}}},{"StartAt":"CleanImages","States":{"CleanImages":{"End":true,"Retry":[{"ErrorEquals":["Lambda.ClientExecutionTimeoutException","Lambda.ServiceException","Lambda.AWSLambdaException","Lambda.SdkClientException"],"IntervalSeconds":2,"MaxAttempts":6,"BackoffRate":2}],"Type":"Task","Resource":"',
-          {
-            'Fn::GetAtt': [
-              'ToolkitCleanerCleanImagesFunction96CABD19',
-              'Arn',
-            ],
-          },
-          '"}}}]},"SumReclaimed":{"End":true,"Type":"Task","Resource":"',
-          {
-            'Fn::GetAtt': [
-              'Eval41256dc5445742738ed917bc818694e54EB1134F',
-              'Arn',
-            ],
-          },
-          '","Parameters":{"expression":"({ Deleted: $[0].Deleted + $[1].Deleted, Reclaimed: $[0].Reclaimed + $[1].Reclaimed })","expressionAttributeValues":{"$[0].Deleted.$":"$[0].Deleted","$[1].Deleted.$":"$[1].Deleted","$[0].Reclaimed.$":"$[0].Reclaimed","$[1].Reclaimed.$":"$[1].Reclaimed"}}}}}',
-        ],
-      ],
-    },
-  });
-
+  // Verify Lambda function exists with correct environment
   Template.fromStack(stack).hasResourceProperties('AWS::Lambda::Function', {
     Environment: {
       Variables: Match.objectLike({
         RUN: 'true',
+        BUCKET_NAME: Match.anyValue(),
+        REPOSITORY_NAME: Match.anyValue(),
+        DOCKER_IMAGE_ASSET_HASH: Match.anyValue(),
       }),
     },
-    Timeout: 300,
+    Timeout: 30,
+    DurableConfig: {
+      ExecutionTimeout: 1800,
+    },
   });
 
-  Template.fromStack(stack).hasResourceProperties('AWS::Events::Rule', {
+  // Verify EventBridge Scheduler instead of Events Rule
+  Template.fromStack(stack).hasResourceProperties('AWS::Scheduler::Schedule', {
     ScheduleExpression: 'rate(1 day)',
     State: 'ENABLED',
-    Targets: [
-      {
-        Arn: {
-          Ref: 'ToolkitCleanerC02E18EA',
-        },
-        Id: 'Target0',
-        RoleArn: {
-          'Fn::GetAtt': [
-            'ToolkitCleanerEventsRole16CFA1D4',
-            'Arn',
-          ],
-        },
-      },
-    ],
   });
+
+  // Verify no Step Functions state machine
+  Template.fromStack(stack).resourceCountIs('AWS::StepFunctions::StateMachine', 0);
 });
 
 test('with dry run', () => {
@@ -131,7 +69,7 @@ test('with scheduleEnabled set to false', () => {
     scheduleEnabled: false,
   });
 
-  Template.fromStack(stack).hasResourceProperties('AWS::Events::Rule', {
+  Template.fromStack(stack).hasResourceProperties('AWS::Scheduler::Schedule', {
     State: 'DISABLED',
   });
 });

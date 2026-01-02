@@ -62,16 +62,7 @@
           "spawn": "bundle:ssl-server-test/analyze.lambda"
         },
         {
-          "spawn": "bundle:toolkit-cleaner/clean-images.lambda"
-        },
-        {
-          "spawn": "bundle:toolkit-cleaner/clean-objects.lambda"
-        },
-        {
-          "spawn": "bundle:toolkit-cleaner/extract-template-hashes.lambda"
-        },
-        {
-          "spawn": "bundle:toolkit-cleaner/get-stack-names.lambda"
+          "spawn": "bundle:toolkit-cleaner/clean.lambda"
         },
         {
           "spawn": "bundle:url-shortener/shortener.lambda"
@@ -192,75 +183,21 @@
         }
       ]
     },
-    "bundle:toolkit-cleaner/clean-images.lambda": {
-      "name": "bundle:toolkit-cleaner/clean-images.lambda",
-      "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
+    "bundle:toolkit-cleaner/clean.lambda": {
+      "name": "bundle:toolkit-cleaner/clean.lambda",
+      "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
-    "bundle:toolkit-cleaner/clean-images.lambda:watch": {
-      "name": "bundle:toolkit-cleaner/clean-images.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-images.lambda.ts",
+    "bundle:toolkit-cleaner/clean.lambda:watch": {
+      "name": "bundle:toolkit-cleaner/clean.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-images.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-images.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
-        }
-      ]
-    },
-    "bundle:toolkit-cleaner/clean-objects.lambda": {
-      "name": "bundle:toolkit-cleaner/clean-objects.lambda",
-      "description": "Create a JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
-        }
-      ]
-    },
-    "bundle:toolkit-cleaner/clean-objects.lambda:watch": {
-      "name": "bundle:toolkit-cleaner/clean-objects.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/clean-objects.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/toolkit-cleaner/clean-objects.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean-objects.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
-        }
-      ]
-    },
-    "bundle:toolkit-cleaner/extract-template-hashes.lambda": {
-      "name": "bundle:toolkit-cleaner/extract-template-hashes.lambda",
-      "description": "Create a JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
-        }
-      ]
-    },
-    "bundle:toolkit-cleaner/extract-template-hashes.lambda:watch": {
-      "name": "bundle:toolkit-cleaner/extract-template-hashes.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/extract-template-hashes.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/toolkit-cleaner/extract-template-hashes.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/extract-template-hashes.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
-        }
-      ]
-    },
-    "bundle:toolkit-cleaner/get-stack-names.lambda": {
-      "name": "bundle:toolkit-cleaner/get-stack-names.lambda",
-      "description": "Create a JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
-        }
-      ]
-    },
-    "bundle:toolkit-cleaner/get-stack-names.lambda:watch": {
-      "name": "bundle:toolkit-cleaner/get-stack-names.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/toolkit-cleaner/get-stack-names.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/toolkit-cleaner/get-stack-names.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/get-stack-names.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+          "exec": "esbuild --bundle src/toolkit-cleaner/clean.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/toolkit-cleaner/clean.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
