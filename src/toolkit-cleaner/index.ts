@@ -64,7 +64,7 @@ export class ToolkitCleaner extends Construct {
     });
 
     const cleanFunction = new CleanFunction(this, 'CleanFunction', {
-      timeout: props.cleanAssetsTimeout ?? Duration.seconds(30),
+      timeout: Duration.seconds(30),
       durableConfig: {
         executionTimeout: props.cleanAssetsTimeout ?? Duration.minutes(30),
       },
