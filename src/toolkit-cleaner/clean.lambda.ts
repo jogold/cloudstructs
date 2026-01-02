@@ -1,8 +1,8 @@
 import * as path from 'path';
 import { DurableContext, withDurableExecution } from '@aws/durable-execution-sdk-js';
 import { CloudFormationClient, DescribeStacksCommand, GetTemplateCommand } from '@aws-sdk/client-cloudformation';
-import { BatchDeleteImageCommand, DescribeImagesCommand, ECRClient } from '@aws-sdk/client-ecr';
-import { DeleteObjectsCommand, ListObjectVersionsCommand, S3Client } from '@aws-sdk/client-s3';
+import { BatchDeleteImageCommand, DescribeImagesCommand, DescribeImagesCommandOutput, ECRClient, ImageDetail } from '@aws-sdk/client-ecr';
+import { DeleteObjectsCommand, ListObjectVersionsCommand, ListObjectVersionsCommandOutput, ObjectVersion, S3Client } from '@aws-sdk/client-s3';
 import { getEnv } from '../utils';
 
 const cloudFormationClient = new CloudFormationClient({});
@@ -14,7 +14,7 @@ interface CleanResult {
   Reclaimed: number;
 }
 
-export const handler = withDurableExecution(async (_, context: DurableContext) => {
+export const handler = withDurableExecution(async (_, context: DurableContext): Promise<CleanResult> => {
   // Step 1: Get all stack names
   const stackNames = await context.step('get-stack-names', getStackNames);
 
@@ -96,126 +96,153 @@ function findDockerTagPrefix(hash: string): string {
 }
 
 async function cleanObjects(context: DurableContext, assetHashes: string[]): Promise<CleanResult> {
-  let deleted = 0;
-  let reclaimed = 0;
-
-  let pageIndex = 0;
-  let nextKeyMarker: string | undefined;
-  do {
-    const response = await context.step(`list-and-delete-objects-${pageIndex}`, () => listAndDeleteObjects(assetHashes, nextKeyMarker));
-    deleted += response.Deleted;
-    reclaimed += response.Reclaimed;
-    nextKeyMarker = response.NextKeyMarker;
-    pageIndex++;
-  } while (nextKeyMarker);
-
-  return { Deleted: deleted, Reclaimed: reclaimed };
-}
-
-async function listAndDeleteObjects(assetHashes: string[], nextKeyMarker: string | undefined): Promise<CleanResult & { NextKeyMarker?: string }> {
-  const response = await s3Client.send(new ListObjectVersionsCommand({
-    Bucket: getEnv('BUCKET_NAME'),
-    KeyMarker: nextKeyMarker,
-  }));
-
-  const toDelete = response.Versions?.filter(v => {
-    if (!v.Key) {
-      return false;
-    }
-
-    const hash = path.basename(v.Key, path.extname(v.Key));
-    let pred = !assetHashes.includes(hash);
-
-    if (process.env.RETAIN_MILLISECONDS) {
-      if (!v.LastModified) {
-        return false;
-      }
-
-      const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
-      pred = pred && v.LastModified < limitDate;
-    }
-
-    return pred;
-  });
-
-  if (!toDelete || toDelete.length === 0) {
-    return { Deleted: 0, Reclaimed: 0, NextKeyMarker: response.NextKeyMarker };
-  }
-
-  if (!process.env.RUN) {
-    return { Deleted: 0, Reclaimed: 0, NextKeyMarker: response.NextKeyMarker };
-  }
-
-  await s3Client.send(new DeleteObjectsCommand({
-    Bucket: getEnv('BUCKET_NAME'),
-    Delete: {
-      Objects: toDelete.map(v => ({ Key: v.Key!, VersionId: v.VersionId })),
+  const strategy: AssetStrategy<ObjectVersion, ListObjectVersionsCommandOutput> = {
+    list: async (token?: string) => s3Client.send(new ListObjectVersionsCommand({
+      Bucket: getEnv('BUCKET_NAME'),
+      KeyMarker: token,
+    })),
+    getItems: (result) => result.Versions,
+    getNextToken: (result) => result.NextKeyMarker,
+    extractHash: (item) => item.Key ? path.basename(item.Key, path.extname(item.Key)) : undefined,
+    getDate: (item) => item.LastModified,
+    getSize: (item) => item.Size ?? 0,
+    delete: async (items) => {
+      await s3Client.send(new DeleteObjectsCommand({
+        Bucket: getEnv('BUCKET_NAME'),
+        Delete: {
+          Objects: items.map(v => ({ Key: v.Key!, VersionId: v.VersionId })),
+        },
+      }));
     },
-  }));
-  return {
-    Deleted: toDelete.length,
-    Reclaimed: toDelete.reduce((acc, x) => acc + (x.Size ?? 0), 0),
-    NextKeyMarker: response.NextKeyMarker,
   };
+  return cleanAssets({
+    stepNamePrefix: 'list-and-delete-objects',
+    strategy,
+    context,
+    assetHashes,
+  });
 }
 
 async function cleanImages(context: DurableContext, assetHashes: string[]): Promise<CleanResult> {
+  const strategy: AssetStrategy<ImageDetail, DescribeImagesCommandOutput> = {
+    list: async (token?: string) => ecrClient.send(new DescribeImagesCommand({
+      repositoryName: getEnv('REPOSITORY_NAME'),
+      nextToken: token,
+    })),
+    getItems: (result) => result.imageDetails,
+    getNextToken: (result) => result.nextToken,
+    extractHash: (item) => item.imageTags?.[0],
+    getDate: (item) => item.imagePushedAt,
+    getSize: (item) => item.imageSizeInBytes ?? 0,
+    delete: async (items) => {
+      await ecrClient.send(new BatchDeleteImageCommand({
+        repositoryName: getEnv('REPOSITORY_NAME'),
+        imageIds: items.map(x => ({ imageTag: x.imageTags![0] })),
+      }));
+    },
+  };
+  return cleanAssets({
+    stepNamePrefix: 'list-and-delete-images',
+    strategy,
+    context,
+    assetHashes,
+  });
+}
+
+interface CleanAssetsOptions<TItem, TListResult> {
+  stepNamePrefix: string;
+  strategy: AssetStrategy<TItem, TListResult>;
+  context: DurableContext;
+  assetHashes: string[];
+}
+
+async function cleanAssets<TItem, TListResult>(options: CleanAssetsOptions<TItem, TListResult>): Promise<CleanResult> {
+  const { context, assetHashes, strategy, stepNamePrefix } = options;
   let deleted = 0;
   let reclaimed = 0;
 
   let pageIndex = 0;
-  let nextToken: string | undefined;
+  let paginationToken: string | undefined;
   do {
-    const response = await context.step(`describe-and-deletes-images-${pageIndex}`, () => describeAndDeleteImages(assetHashes, nextToken));
+    const response = await context.step(`${stepNamePrefix}-${pageIndex}`, (stepContext) => listAndDeleteAssets({
+      strategy,
+      assetHashes,
+      logger: stepContext.logger,
+      paginationToken,
+    }));
     deleted += response.Deleted;
     reclaimed += response.Reclaimed;
-    nextToken = response.nextToken;
+    paginationToken = response.nextToken;
     pageIndex++;
-  } while (nextToken);
+  } while (paginationToken);
 
   return { Deleted: deleted, Reclaimed: reclaimed };
 }
 
-async function describeAndDeleteImages(assetHashes: string[], nextToken?: string): Promise<CleanResult & { nextToken?: string }> {
-  const response = await ecrClient.send(new DescribeImagesCommand({
-    repositoryName: getEnv('REPOSITORY_NAME'),
-    nextToken,
-  }));
+interface ListAndDeleteAssetsOptions<TItem, TListResult> {
+  strategy: AssetStrategy<TItem, TListResult>;
+  assetHashes: string[];
+  logger: Logger;
+  paginationToken?: string;
+}
 
-  const toDelete = response.imageDetails?.filter(x => {
-    if (!x.imageTags) {
+interface AssetStrategy<TItem, TListResult> {
+  list(paginationToken?: string): Promise<TListResult>;
+  getItems(result: TListResult): TItem[] | undefined;
+  getNextToken(result: TListResult): string | undefined;
+  extractHash(item: TItem): string | undefined;
+  getDate(item: TItem): Date | undefined;
+  getSize(item: TItem): number;
+  delete(items: TItem[]): Promise<void>;
+}
+
+interface Logger {
+  info(message: string, data?: object): void;
+}
+
+interface ListAndDeleteAssetsResult extends CleanResult {
+  nextToken?: string;
+}
+
+async function listAndDeleteAssets<TItem, TListResult>(options: ListAndDeleteAssetsOptions<TItem, TListResult>): Promise<ListAndDeleteAssetsResult> {
+  const { strategy, assetHashes, logger, paginationToken } = options;
+  const response = await strategy.list(paginationToken);
+  const items = strategy.getItems(response) ?? [];
+
+  const toDelete = items.filter(item => {
+    const hash = strategy.extractHash(item);
+    if (!hash) {
       return false;
     }
 
-    let pred = !assetHashes.includes(x.imageTags[0]);
+    let pred = !assetHashes.includes(hash);
 
     if (process.env.RETAIN_MILLISECONDS) {
-      if (!x.imagePushedAt) {
+      const date = strategy.getDate(item);
+      if (!date) {
         return false;
       }
 
       const limitDate = new Date(Date.now() - parseInt(process.env.RETAIN_MILLISECONDS));
-      pred = pred && x.imagePushedAt && x.imagePushedAt < limitDate;
+      pred = pred && date < limitDate;
     }
 
     return pred;
   });
 
-  if (!toDelete || toDelete.length === 0) {
-    return { Deleted: 0, Reclaimed: 0, nextToken: response.nextToken };
+  if (toDelete.length === 0) {
+    return { Deleted: 0, Reclaimed: 0, nextToken: strategy.getNextToken(response) };
   }
 
   if (!process.env.RUN) {
-    return { Deleted: 0, Reclaimed: 0, nextToken: response.nextToken };
+    logger.info('Dry run mode, skipping delete', { count: toDelete.length });
+    return { Deleted: 0, Reclaimed: 0, nextToken: strategy.getNextToken(response) };
   }
 
-  await ecrClient.send(new BatchDeleteImageCommand({
-    repositoryName: getEnv('REPOSITORY_NAME'),
-    imageIds: toDelete.map(x => ({ imageTag: x.imageTags![0] })),
-  }));
+  await strategy.delete(toDelete);
   return {
     Deleted: toDelete.length,
-    Reclaimed: toDelete.reduce((acc, x) => acc + (x.imageSizeInBytes ?? 0), 0),
-    nextToken: response.nextToken,
+    Reclaimed: toDelete.reduce((acc, item) => acc + strategy.getSize(item), 0),
+    nextToken: strategy.getNextToken(response),
   };
 }

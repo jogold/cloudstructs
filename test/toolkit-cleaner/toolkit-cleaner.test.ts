@@ -20,7 +20,10 @@ test('ToolkitCleaner', () => {
         DOCKER_IMAGE_ASSET_HASH: Match.anyValue(),
       }),
     },
-    Timeout: 300,
+    Timeout: 30,
+    DurableConfig: {
+      ExecutionTimeout: 1800,
+    },
   });
 
   // Verify EventBridge Scheduler instead of Events Rule
