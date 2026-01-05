@@ -23,7 +23,7 @@ export class MyStack extends Stack {
     // The hosted zone for the domain of the short urls
     const hostedZone = new route53.HostedZone(this, 'HostedZone', { zoneName: 'short.com' });
 
-    const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop');
 
     new cloudstructs.UrlShortener(this, 'UrlShortener', { hostedZone, certificate });
   }
