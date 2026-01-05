@@ -3690,6 +3690,7 @@ const staticWebsiteProps: StaticWebsiteProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#cloudstructs.StaticWebsiteProps.property.certificate">certificate</a></code> | <code>aws-cdk-lib.aws_certificatemanager.ICertificate</code> | The ACM certificate to use for the CloudFront distribution. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.domainName">domainName</a></code> | <code>string</code> | The domain name for this static website. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.hostedZone">hostedZone</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone</code> | The hosted zone where records should be added. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.backendConfiguration">backendConfiguration</a></code> | <code>any</code> | A backend configuration that will be saved as `config.json` in the S3 bucket of the static website. |
@@ -3697,6 +3698,20 @@ const staticWebsiteProps: StaticWebsiteProps = { ... }
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.edgeLambdas">edgeLambdas</a></code> | <code>aws-cdk-lib.aws_cloudfront.EdgeLambda[]</code> | The Lambda@Edge functions to invoke before serving the contents. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.redirects">redirects</a></code> | <code>string[]</code> | A list of domain names that should redirect to `domainName`. |
 | <code><a href="#cloudstructs.StaticWebsiteProps.property.responseHeadersPolicy">responseHeadersPolicy</a></code> | <code>aws-cdk-lib.aws_cloudfront.ResponseHeadersPolicy</code> | Response headers policy for the default behavior. |
+
+---
+
+##### `certificate`<sup>Required</sup> <a name="certificate" id="cloudstructs.StaticWebsiteProps.property.certificate"></a>
+
+```typescript
+public readonly certificate: ICertificate;
+```
+
+- *Type:* aws-cdk-lib.aws_certificatemanager.ICertificate
+
+The ACM certificate to use for the CloudFront distribution.
+
+Must be in us-east-1.
 
 ---
 
@@ -3911,6 +3926,7 @@ const urlShortenerProps: UrlShortenerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#cloudstructs.UrlShortenerProps.property.certificate">certificate</a></code> | <code>aws-cdk-lib.aws_certificatemanager.ICertificate</code> | The ACM certificate to use for the CloudFront distribution. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.hostedZone">hostedZone</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone</code> | The hosted zone for the short URLs domain. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.apiGatewayAuthorizer">apiGatewayAuthorizer</a></code> | <code>aws-cdk-lib.aws_apigateway.IAuthorizer</code> | Authorizer for API gateway. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.apiGatewayEndpoint">apiGatewayEndpoint</a></code> | <code>aws-cdk-lib.aws_ec2.IInterfaceVpcEndpoint</code> | An interface VPC endpoint for API gateway. |
@@ -3919,6 +3935,20 @@ const urlShortenerProps: UrlShortenerProps = { ... }
 | <code><a href="#cloudstructs.UrlShortenerProps.property.expiration">expiration</a></code> | <code>aws-cdk-lib.Duration</code> | Expiration for short urls. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.iamAuthorization">iamAuthorization</a></code> | <code>boolean</code> | Whether to use IAM authorization. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.recordName">recordName</a></code> | <code>string</code> | The record name to use in the hosted zone. |
+
+---
+
+##### `certificate`<sup>Required</sup> <a name="certificate" id="cloudstructs.UrlShortenerProps.property.certificate"></a>
+
+```typescript
+public readonly certificate: ICertificate;
+```
+
+- *Type:* aws-cdk-lib.aws_certificatemanager.ICertificate
+
+The ACM certificate to use for the CloudFront distribution.
+
+Must be in us-east-1.
 
 ---
 

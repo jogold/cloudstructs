@@ -328,14 +328,32 @@ exports[`UrlShortener 1`] = `
           "Statement": [
             {
               "Action": "s3:GetObject",
+              "Condition": {
+                "StringEquals": {
+                  "AWS:SourceArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":cloudfront::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":distribution/",
+                        {
+                          "Ref": "UrlShortenerDistributionA56BF25C",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
               "Effect": "Allow",
               "Principal": {
-                "CanonicalUser": {
-                  "Fn::GetAtt": [
-                    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                    "S3CanonicalUserId",
-                  ],
-                },
+                "Service": "cloudfront.amazonaws.com",
               },
               "Resource": {
                 "Fn::Join": [
@@ -357,144 +375,6 @@ exports[`UrlShortener 1`] = `
         },
       },
       "Type": "AWS::S3::BucketPolicy",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunction12DFA935": {
-      "DependsOn": [
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
-        },
-        "Handler": "index.certificateRequestHandler",
-        "Role": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs22.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "acm:RequestCertificate",
-                "acm:DescribeCertificate",
-                "acm:DeleteCertificate",
-                "acm:AddTagsToCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:GetChange",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:changeResourceRecordSets",
-              "Condition": {
-                "ForAllValues:StringEquals": {
-                  "route53:ChangeResourceRecordSetsActions": [
-                    "UPSERT",
-                  ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": [
-                    "CNAME",
-                  ],
-                },
-                "ForAllValues:StringLike": {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
-                    "*.cstructs.com",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":route53:::hostedzone/",
-                    {
-                      "Ref": "HostedZoneDB99F866",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "Roles": [
-          {
-            "Ref": "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "UrlShortenerCertificateCertificateRequestorResource3E9FD60B": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DomainName": "cstructs.com",
-        "HostedZoneId": {
-          "Ref": "HostedZoneDB99F866",
-        },
-        "Region": "us-east-1",
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunction12DFA935",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerDistributionA56BF25C": {
       "Properties": {
@@ -531,28 +411,19 @@ exports[`UrlShortener 1`] = `
                 ],
               },
               "Id": "StackUrlShortenerDistributionOrigin13B4BC1F2",
+              "OriginAccessControlId": {
+                "Fn::GetAtt": [
+                  "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F",
+                  "Id",
+                ],
+              },
               "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                      },
-                    ],
-                  ],
-                },
+                "OriginAccessIdentity": "",
               },
             },
           ],
           "ViewerCertificate": {
-            "AcmCertificateArn": {
-              "Fn::GetAtt": [
-                "UrlShortenerCertificateCertificateRequestorResource3E9FD60B",
-                "Arn",
-              ],
-            },
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop",
             "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
@@ -560,13 +431,16 @@ exports[`UrlShortener 1`] = `
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
+    "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F": {
       "Properties": {
-        "CloudFrontOriginAccessIdentityConfig": {
-          "Comment": "Identity for StackUrlShortenerDistributionOrigin13B4BC1F2",
+        "OriginAccessControlConfig": {
+          "Name": "StackUrlShortenerDistributioOrigin1S3OriginAccessControlF3A283B0",
+          "OriginAccessControlOriginType": "s3",
+          "SigningBehavior": "always",
+          "SigningProtocol": "sigv4",
         },
       },
-      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Type": "AWS::CloudFront::OriginAccessControl",
     },
     "UrlShortenerLogRetention2FFA6E68": {
       "Properties": {
@@ -1456,14 +1330,32 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
           "Statement": [
             {
               "Action": "s3:GetObject",
+              "Condition": {
+                "StringEquals": {
+                  "AWS:SourceArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":cloudfront::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":distribution/",
+                        {
+                          "Ref": "UrlShortenerDistributionA56BF25C",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
               "Effect": "Allow",
               "Principal": {
-                "CanonicalUser": {
-                  "Fn::GetAtt": [
-                    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                    "S3CanonicalUserId",
-                  ],
-                },
+                "Service": "cloudfront.amazonaws.com",
               },
               "Resource": {
                 "Fn::Join": [
@@ -1485,144 +1377,6 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
         },
       },
       "Type": "AWS::S3::BucketPolicy",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunction12DFA935": {
-      "DependsOn": [
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
-        },
-        "Handler": "index.certificateRequestHandler",
-        "Role": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs22.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "acm:RequestCertificate",
-                "acm:DescribeCertificate",
-                "acm:DeleteCertificate",
-                "acm:AddTagsToCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:GetChange",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:changeResourceRecordSets",
-              "Condition": {
-                "ForAllValues:StringEquals": {
-                  "route53:ChangeResourceRecordSetsActions": [
-                    "UPSERT",
-                  ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": [
-                    "CNAME",
-                  ],
-                },
-                "ForAllValues:StringLike": {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
-                    "*.cstructs.com",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":route53:::hostedzone/",
-                    {
-                      "Ref": "HostedZoneDB99F866",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "Roles": [
-          {
-            "Ref": "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "UrlShortenerCertificateCertificateRequestorResource3E9FD60B": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DomainName": "cstructs.com",
-        "HostedZoneId": {
-          "Ref": "HostedZoneDB99F866",
-        },
-        "Region": "us-east-1",
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunction12DFA935",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerDistributionA56BF25C": {
       "Properties": {
@@ -1659,28 +1413,19 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
                 ],
               },
               "Id": "StackUrlShortenerDistributionOrigin13B4BC1F2",
+              "OriginAccessControlId": {
+                "Fn::GetAtt": [
+                  "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F",
+                  "Id",
+                ],
+              },
               "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                      },
-                    ],
-                  ],
-                },
+                "OriginAccessIdentity": "",
               },
             },
           ],
           "ViewerCertificate": {
-            "AcmCertificateArn": {
-              "Fn::GetAtt": [
-                "UrlShortenerCertificateCertificateRequestorResource3E9FD60B",
-                "Arn",
-              ],
-            },
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop",
             "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
@@ -1688,13 +1433,16 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
+    "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F": {
       "Properties": {
-        "CloudFrontOriginAccessIdentityConfig": {
-          "Comment": "Identity for StackUrlShortenerDistributionOrigin13B4BC1F2",
+        "OriginAccessControlConfig": {
+          "Name": "StackUrlShortenerDistributioOrigin1S3OriginAccessControlF3A283B0",
+          "OriginAccessControlOriginType": "s3",
+          "SigningBehavior": "always",
+          "SigningProtocol": "sigv4",
         },
       },
-      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Type": "AWS::CloudFront::OriginAccessControl",
     },
     "UrlShortenerLogRetention2FFA6E68": {
       "Properties": {
@@ -2930,14 +2678,32 @@ exports[`UrlShortener with CORS 1`] = `
           "Statement": [
             {
               "Action": "s3:GetObject",
+              "Condition": {
+                "StringEquals": {
+                  "AWS:SourceArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":cloudfront::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":distribution/",
+                        {
+                          "Ref": "UrlShortenerDistributionA56BF25C",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
               "Effect": "Allow",
               "Principal": {
-                "CanonicalUser": {
-                  "Fn::GetAtt": [
-                    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                    "S3CanonicalUserId",
-                  ],
-                },
+                "Service": "cloudfront.amazonaws.com",
               },
               "Resource": {
                 "Fn::Join": [
@@ -2959,144 +2725,6 @@ exports[`UrlShortener with CORS 1`] = `
         },
       },
       "Type": "AWS::S3::BucketPolicy",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunction12DFA935": {
-      "DependsOn": [
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
-        },
-        "Handler": "index.certificateRequestHandler",
-        "Role": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs22.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "acm:RequestCertificate",
-                "acm:DescribeCertificate",
-                "acm:DeleteCertificate",
-                "acm:AddTagsToCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:GetChange",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:changeResourceRecordSets",
-              "Condition": {
-                "ForAllValues:StringEquals": {
-                  "route53:ChangeResourceRecordSetsActions": [
-                    "UPSERT",
-                  ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": [
-                    "CNAME",
-                  ],
-                },
-                "ForAllValues:StringLike": {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
-                    "*.cstructs.com",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":route53:::hostedzone/",
-                    {
-                      "Ref": "HostedZoneDB99F866",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "Roles": [
-          {
-            "Ref": "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "UrlShortenerCertificateCertificateRequestorResource3E9FD60B": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DomainName": "cstructs.com",
-        "HostedZoneId": {
-          "Ref": "HostedZoneDB99F866",
-        },
-        "Region": "us-east-1",
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunction12DFA935",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerDistributionA56BF25C": {
       "Properties": {
@@ -3133,28 +2761,19 @@ exports[`UrlShortener with CORS 1`] = `
                 ],
               },
               "Id": "StackUrlShortenerDistributionOrigin13B4BC1F2",
+              "OriginAccessControlId": {
+                "Fn::GetAtt": [
+                  "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F",
+                  "Id",
+                ],
+              },
               "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                      },
-                    ],
-                  ],
-                },
+                "OriginAccessIdentity": "",
               },
             },
           ],
           "ViewerCertificate": {
-            "AcmCertificateArn": {
-              "Fn::GetAtt": [
-                "UrlShortenerCertificateCertificateRequestorResource3E9FD60B",
-                "Arn",
-              ],
-            },
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop",
             "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
@@ -3162,13 +2781,16 @@ exports[`UrlShortener with CORS 1`] = `
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
+    "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F": {
       "Properties": {
-        "CloudFrontOriginAccessIdentityConfig": {
-          "Comment": "Identity for StackUrlShortenerDistributionOrigin13B4BC1F2",
+        "OriginAccessControlConfig": {
+          "Name": "StackUrlShortenerDistributioOrigin1S3OriginAccessControlF3A283B0",
+          "OriginAccessControlOriginType": "s3",
+          "SigningBehavior": "always",
+          "SigningProtocol": "sigv4",
         },
       },
-      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Type": "AWS::CloudFront::OriginAccessControl",
     },
     "UrlShortenerLogRetention2FFA6E68": {
       "Properties": {
@@ -4133,14 +3755,32 @@ exports[`UrlShortener with IAM authorization 1`] = `
           "Statement": [
             {
               "Action": "s3:GetObject",
+              "Condition": {
+                "StringEquals": {
+                  "AWS:SourceArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":cloudfront::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":distribution/",
+                        {
+                          "Ref": "UrlShortenerDistributionA56BF25C",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
               "Effect": "Allow",
               "Principal": {
-                "CanonicalUser": {
-                  "Fn::GetAtt": [
-                    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                    "S3CanonicalUserId",
-                  ],
-                },
+                "Service": "cloudfront.amazonaws.com",
               },
               "Resource": {
                 "Fn::Join": [
@@ -4162,144 +3802,6 @@ exports[`UrlShortener with IAM authorization 1`] = `
         },
       },
       "Type": "AWS::S3::BucketPolicy",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunction12DFA935": {
-      "DependsOn": [
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
-        },
-        "Handler": "index.certificateRequestHandler",
-        "Role": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs22.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "acm:RequestCertificate",
-                "acm:DescribeCertificate",
-                "acm:DeleteCertificate",
-                "acm:AddTagsToCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:GetChange",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:changeResourceRecordSets",
-              "Condition": {
-                "ForAllValues:StringEquals": {
-                  "route53:ChangeResourceRecordSetsActions": [
-                    "UPSERT",
-                  ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": [
-                    "CNAME",
-                  ],
-                },
-                "ForAllValues:StringLike": {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
-                    "*.cstructs.com",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":route53:::hostedzone/",
-                    {
-                      "Ref": "HostedZoneDB99F866",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "Roles": [
-          {
-            "Ref": "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "UrlShortenerCertificateCertificateRequestorResource3E9FD60B": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DomainName": "cstructs.com",
-        "HostedZoneId": {
-          "Ref": "HostedZoneDB99F866",
-        },
-        "Region": "us-east-1",
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunction12DFA935",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerDistributionA56BF25C": {
       "Properties": {
@@ -4336,28 +3838,19 @@ exports[`UrlShortener with IAM authorization 1`] = `
                 ],
               },
               "Id": "StackUrlShortenerDistributionOrigin13B4BC1F2",
+              "OriginAccessControlId": {
+                "Fn::GetAtt": [
+                  "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F",
+                  "Id",
+                ],
+              },
               "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                      },
-                    ],
-                  ],
-                },
+                "OriginAccessIdentity": "",
               },
             },
           ],
           "ViewerCertificate": {
-            "AcmCertificateArn": {
-              "Fn::GetAtt": [
-                "UrlShortenerCertificateCertificateRequestorResource3E9FD60B",
-                "Arn",
-              ],
-            },
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop",
             "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
@@ -4365,13 +3858,16 @@ exports[`UrlShortener with IAM authorization 1`] = `
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
+    "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F": {
       "Properties": {
-        "CloudFrontOriginAccessIdentityConfig": {
-          "Comment": "Identity for StackUrlShortenerDistributionOrigin13B4BC1F2",
+        "OriginAccessControlConfig": {
+          "Name": "StackUrlShortenerDistributioOrigin1S3OriginAccessControlF3A283B0",
+          "OriginAccessControlOriginType": "s3",
+          "SigningBehavior": "always",
+          "SigningProtocol": "sigv4",
         },
       },
-      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Type": "AWS::CloudFront::OriginAccessControl",
     },
     "UrlShortenerLogRetention2FFA6E68": {
       "Properties": {
@@ -5209,14 +4705,32 @@ exports[`UrlShortener with authorizer 1`] = `
           "Statement": [
             {
               "Action": "s3:GetObject",
+              "Condition": {
+                "StringEquals": {
+                  "AWS:SourceArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":cloudfront::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":distribution/",
+                        {
+                          "Ref": "UrlShortenerDistributionA56BF25C",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
               "Effect": "Allow",
               "Principal": {
-                "CanonicalUser": {
-                  "Fn::GetAtt": [
-                    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                    "S3CanonicalUserId",
-                  ],
-                },
+                "Service": "cloudfront.amazonaws.com",
               },
               "Resource": {
                 "Fn::Join": [
@@ -5238,144 +4752,6 @@ exports[`UrlShortener with authorizer 1`] = `
         },
       },
       "Type": "AWS::S3::BucketPolicy",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunction12DFA935": {
-      "DependsOn": [
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
-        },
-        "Handler": "index.certificateRequestHandler",
-        "Role": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs22.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "acm:RequestCertificate",
-                "acm:DescribeCertificate",
-                "acm:DeleteCertificate",
-                "acm:AddTagsToCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:GetChange",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:changeResourceRecordSets",
-              "Condition": {
-                "ForAllValues:StringEquals": {
-                  "route53:ChangeResourceRecordSetsActions": [
-                    "UPSERT",
-                  ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": [
-                    "CNAME",
-                  ],
-                },
-                "ForAllValues:StringLike": {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
-                    "*.cstructs.com",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":route53:::hostedzone/",
-                    {
-                      "Ref": "HostedZoneDB99F866",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "Roles": [
-          {
-            "Ref": "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "UrlShortenerCertificateCertificateRequestorResource3E9FD60B": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DomainName": "cstructs.com",
-        "HostedZoneId": {
-          "Ref": "HostedZoneDB99F866",
-        },
-        "Region": "us-east-1",
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunction12DFA935",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerDistributionA56BF25C": {
       "Properties": {
@@ -5412,28 +4788,19 @@ exports[`UrlShortener with authorizer 1`] = `
                 ],
               },
               "Id": "StackUrlShortenerDistributionOrigin13B4BC1F2",
+              "OriginAccessControlId": {
+                "Fn::GetAtt": [
+                  "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F",
+                  "Id",
+                ],
+              },
               "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                      },
-                    ],
-                  ],
-                },
+                "OriginAccessIdentity": "",
               },
             },
           ],
           "ViewerCertificate": {
-            "AcmCertificateArn": {
-              "Fn::GetAtt": [
-                "UrlShortenerCertificateCertificateRequestorResource3E9FD60B",
-                "Arn",
-              ],
-            },
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop",
             "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
@@ -5441,13 +4808,16 @@ exports[`UrlShortener with authorizer 1`] = `
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
+    "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F": {
       "Properties": {
-        "CloudFrontOriginAccessIdentityConfig": {
-          "Comment": "Identity for StackUrlShortenerDistributionOrigin13B4BC1F2",
+        "OriginAccessControlConfig": {
+          "Name": "StackUrlShortenerDistributioOrigin1S3OriginAccessControlF3A283B0",
+          "OriginAccessControlOriginType": "s3",
+          "SigningBehavior": "always",
+          "SigningProtocol": "sigv4",
         },
       },
-      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Type": "AWS::CloudFront::OriginAccessControl",
     },
     "UrlShortenerLogRetention2FFA6E68": {
       "Properties": {
@@ -6303,14 +5673,32 @@ exports[`UrlShortener with record name 1`] = `
           "Statement": [
             {
               "Action": "s3:GetObject",
+              "Condition": {
+                "StringEquals": {
+                  "AWS:SourceArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":cloudfront::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":distribution/",
+                        {
+                          "Ref": "UrlShortenerDistributionA56BF25C",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
               "Effect": "Allow",
               "Principal": {
-                "CanonicalUser": {
-                  "Fn::GetAtt": [
-                    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                    "S3CanonicalUserId",
-                  ],
-                },
+                "Service": "cloudfront.amazonaws.com",
               },
               "Resource": {
                 "Fn::Join": [
@@ -6332,144 +5720,6 @@ exports[`UrlShortener with record name 1`] = `
         },
       },
       "Type": "AWS::S3::BucketPolicy",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunction12DFA935": {
-      "DependsOn": [
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
-        },
-        "Handler": "index.certificateRequestHandler",
-        "Role": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs22.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "acm:RequestCertificate",
-                "acm:DescribeCertificate",
-                "acm:DeleteCertificate",
-                "acm:AddTagsToCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:GetChange",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:changeResourceRecordSets",
-              "Condition": {
-                "ForAllValues:StringEquals": {
-                  "route53:ChangeResourceRecordSetsActions": [
-                    "UPSERT",
-                  ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": [
-                    "CNAME",
-                  ],
-                },
-                "ForAllValues:StringLike": {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
-                    "*.short.cstructs.com",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":route53:::hostedzone/",
-                    {
-                      "Ref": "HostedZoneDB99F866",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "UrlShortenerCertificateCertificateRequestorFunctionServiceRoleDefaultPolicy1D1F1841",
-        "Roles": [
-          {
-            "Ref": "UrlShortenerCertificateCertificateRequestorFunctionServiceRole827D354C",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "UrlShortenerCertificateCertificateRequestorResource3E9FD60B": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DomainName": "short.cstructs.com",
-        "HostedZoneId": {
-          "Ref": "HostedZoneDB99F866",
-        },
-        "Region": "us-east-1",
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UrlShortenerCertificateCertificateRequestorFunction12DFA935",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "UrlShortenerDistributionA56BF25C": {
       "Properties": {
@@ -6506,28 +5756,19 @@ exports[`UrlShortener with record name 1`] = `
                 ],
               },
               "Id": "StackUrlShortenerDistributionOrigin13B4BC1F2",
+              "OriginAccessControlId": {
+                "Fn::GetAtt": [
+                  "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F",
+                  "Id",
+                ],
+              },
               "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "UrlShortenerDistributionOrigin1S3OriginCE2F6C05",
-                      },
-                    ],
-                  ],
-                },
+                "OriginAccessIdentity": "",
               },
             },
           ],
           "ViewerCertificate": {
-            "AcmCertificateArn": {
-              "Fn::GetAtt": [
-                "UrlShortenerCertificateCertificateRequestorResource3E9FD60B",
-                "Arn",
-              ],
-            },
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop",
             "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
@@ -6535,13 +5776,16 @@ exports[`UrlShortener with record name 1`] = `
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "UrlShortenerDistributionOrigin1S3OriginCE2F6C05": {
+    "UrlShortenerDistributionOrigin1S3OriginAccessControl9A19789F": {
       "Properties": {
-        "CloudFrontOriginAccessIdentityConfig": {
-          "Comment": "Identity for StackUrlShortenerDistributionOrigin13B4BC1F2",
+        "OriginAccessControlConfig": {
+          "Name": "StackUrlShortenerDistributioOrigin1S3OriginAccessControlF3A283B0",
+          "OriginAccessControlOriginType": "s3",
+          "SigningBehavior": "always",
+          "SigningProtocol": "sigv4",
         },
       },
-      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Type": "AWS::CloudFront::OriginAccessControl",
     },
     "UrlShortenerLogRetention2FFA6E68": {
       "Properties": {
