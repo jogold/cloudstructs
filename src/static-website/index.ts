@@ -28,6 +28,12 @@ export interface StaticWebsiteProps {
   readonly hostedZone: route53.IHostedZone;
 
   /**
+   * The ACM certificate to use for the CloudFront distribution.
+   * Must be in us-east-1.
+   */
+  readonly certificate: acm.ICertificate;
+
+  /**
    * A backend configuration that will be saved as `config.json`
    * in the S3 bucket of the static website.
    *
@@ -115,15 +121,9 @@ export class StaticWebsite extends Construct {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
     });
 
-    const certificate = new acm.DnsValidatedCertificate(this, 'Certificate', {
-      domainName: props.domainName,
-      hostedZone: props.hostedZone,
-      region: 'us-east-1',
-    });
-
     this.distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
-        origin: new origins.S3Origin(this.bucket),
+        origin: origins.S3BucketOrigin.withOriginAccessControl(this.bucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         edgeLambdas: props.edgeLambdas ?? [
           {
@@ -138,7 +138,7 @@ export class StaticWebsite extends Construct {
       },
       defaultRootObject: 'index.html',
       domainNames: [props.domainName],
-      certificate: acm.Certificate.fromCertificateArn(this, 'Cert', certificate.certificateArn),
+      certificate: props.certificate,
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       httpVersion: 'http2and3' as cloudfront.HttpVersion,
     });
@@ -195,8 +195,10 @@ export class StaticWebsite extends Construct {
       // Force minimum protocol version
       const redirectDistribution = httpsRedirect.node.tryFindChild('RedirectDistribution') as cloudfront.CloudFrontWebDistribution;
       const cfnDistribution = redirectDistribution.node.tryFindChild('CFDistribution') as cloudfront.CfnDistribution;
-      cfnDistribution.addPropertyOverride('DistributionConfig.ViewerCertificate.MinimumProtocolVersion', 'TLSv1.2_2021');
-      cfnDistribution.addPropertyOverride('DistributionConfig.HttpVersion', 'http2and3');
+      if (cfnDistribution) {
+        cfnDistribution.addPropertyOverride('DistributionConfig.ViewerCertificate.MinimumProtocolVersion', 'TLSv1.2_2021');
+        cfnDistribution.addPropertyOverride('DistributionConfig.HttpVersion', 'http2and3');
+      }
     }
   }
 }

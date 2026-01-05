@@ -1,6 +1,7 @@
 import { App, Duration, Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
@@ -21,6 +22,7 @@ test('UrlShortener', () => {
 
   new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
     expiration: Duration.days(60),
   });
 
@@ -39,6 +41,7 @@ test('UrlShortener with API gateway endpoint', () => {
 
   new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
     apiGatewayEndpoint,
   });
 
@@ -50,6 +53,7 @@ test('UrlShortener with record name', () => {
 
   new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
     recordName: 'short',
   });
 
@@ -61,6 +65,7 @@ test('UrlShortener with authorizer', () => {
 
   new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
     apiGatewayAuthorizer: new apigateway.CognitoUserPoolsAuthorizer(stack, 'Cognito', {
       cognitoUserPools: [new cognito.UserPool(stack, 'UserPool')],
     }),
@@ -74,6 +79,7 @@ test('UrlShortener with CORS', () => {
 
   new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
     corsAllowOrigins: ['https://www.example.com'],
   });
 
@@ -85,6 +91,7 @@ test('UrlShortener with IAM authorization', () => {
 
   const urlShortener = new UrlShortener(stack, 'UrlShortener', {
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
     iamAuthorization: true,
   });
 

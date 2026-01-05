@@ -2,6 +2,7 @@ import { App, Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import * as apigatewayv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import * as integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import { StaticWebsite } from '../../src';
@@ -28,6 +29,7 @@ test('StaticWebsite', () => {
   new StaticWebsite(stack, 'StaticWebsite', {
     domainName: 'www.my-site.com',
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
     backendConfiguration: {
       key1: 'value1',
       key2: 'value2',
@@ -48,6 +50,7 @@ test('no default redirect if domainName is zoneName', () => {
   new StaticWebsite(stack, 'StaticWebsite', {
     domainName: 'test.zone.com',
     hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
   });
 
   Template.fromStack(stack).resourceCountIs('AWS::CloudFront::Distribution', 1);

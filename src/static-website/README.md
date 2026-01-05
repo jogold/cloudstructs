@@ -20,6 +20,7 @@ export class MyStack extends Stack {
     const staticWebsite = new cloudstructs.StaticWebsite(this, 'StaticWebsite', {
       domainName: 'www.my-site.com',
       hostedZone: myHostedZone,
+      certificate: myCertificate,
       backendConfiguration: { // Saved to `config.json` in the bucket
         stage: 'prod',
         apiUrl: 'https://www.my-api.com/api',

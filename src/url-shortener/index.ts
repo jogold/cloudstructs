@@ -24,6 +24,12 @@ export interface UrlShortenerProps {
   readonly hostedZone: route53.IHostedZone;
 
   /**
+   * The ACM certificate to use for the CloudFront distribution.
+   * Must be in us-east-1.
+   */
+  readonly certificate: acm.ICertificate;
+
+  /**
    * The record name to use in the hosted zone
    *
    * @default - zone root
@@ -120,15 +126,9 @@ export class UrlShortener extends Construct {
     const redirectFunction = new RedirectFunction(this, 'Redirect');
     bucket.grantRead(redirectFunction);
 
-    // CloudFront distribution
-    const certificate = new acm.DnsValidatedCertificate(this, 'Certificate', {
-      domainName,
-      hostedZone: props.hostedZone,
-      region: 'us-east-1',
-    });
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
-        origin: new origins.S3Origin(bucket),
+        origin: origins.S3BucketOrigin.withOriginAccessControl(bucket),
         edgeLambdas: [
           {
             eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
@@ -136,7 +136,7 @@ export class UrlShortener extends Construct {
           },
         ],
       },
-      certificate: acm.Certificate.fromCertificateArn(this, 'Cert', certificate.certificateArn),
+      certificate: props.certificate,
       domainNames: [domainName],
       httpVersion: 'http2and3' as cloudfront.HttpVersion,
     });

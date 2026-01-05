@@ -12,6 +12,7 @@ Define a `UrlShortener`:
 ```ts
 import { Stack, StackProps } from 'aws-cdk-lib';
 import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudstructs from 'cloudstructs';
 import { Construct } from 'constructs';
 
@@ -22,7 +23,9 @@ export class MyStack extends Stack {
     // The hosted zone for the domain of the short urls
     const hostedZone = new route53.HostedZone(this, 'HostedZone', { zoneName: 'short.com' });
 
-    new cloudstructs.UrlShortener(this, 'UrlShortener', { hostedZone });
+    const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop');
+
+    new cloudstructs.UrlShortener(this, 'UrlShortener', { hostedZone, certificate });
   }
 }
 ```

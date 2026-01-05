@@ -494,14 +494,32 @@ exports[`StaticWebsite 2`] = `
           "Statement": [
             {
               "Action": "s3:GetObject",
+              "Condition": {
+                "StringEquals": {
+                  "AWS:SourceArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":cloudfront::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":distribution/",
+                        {
+                          "Ref": "StaticWebsiteDistributionBAD21F75",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
               "Effect": "Allow",
               "Principal": {
-                "CanonicalUser": {
-                  "Fn::GetAtt": [
-                    "StaticWebsiteDistributionOrigin1S3Origin3045572F",
-                    "S3CanonicalUserId",
-                  ],
-                },
+                "Service": "cloudfront.amazonaws.com",
               },
               "Resource": {
                 "Fn::Join": [
@@ -523,144 +541,6 @@ exports[`StaticWebsite 2`] = `
         },
       },
       "Type": "AWS::S3::BucketPolicy",
-    },
-    "StaticWebsiteCertificateCertificateRequestorFunction8DAF9CCF": {
-      "DependsOn": [
-        "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyBBEC5BA3",
-        "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B",
-      ],
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
-          },
-          "S3Key": "b073cebcf4d61fb152a30f5a5e57a94df7f980a549fdf1a79a0b18c5750522d8.zip",
-        },
-        "Handler": "index.certificateRequestHandler",
-        "Role": {
-          "Fn::GetAtt": [
-            "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs22.x",
-        "Timeout": 900,
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "lambda.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyBBEC5BA3": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "acm:RequestCertificate",
-                "acm:DescribeCertificate",
-                "acm:DeleteCertificate",
-                "acm:AddTagsToCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:GetChange",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "route53:changeResourceRecordSets",
-              "Condition": {
-                "ForAllValues:StringEquals": {
-                  "route53:ChangeResourceRecordSetsActions": [
-                    "UPSERT",
-                  ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": [
-                    "CNAME",
-                  ],
-                },
-                "ForAllValues:StringLike": {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
-                    "*.www.my-site.com",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":route53:::hostedzone/",
-                    {
-                      "Ref": "HostedZoneDB99F866",
-                    },
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleDefaultPolicyBBEC5BA3",
-        "Roles": [
-          {
-            "Ref": "StaticWebsiteCertificateCertificateRequestorFunctionServiceRoleC558C69B",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "StaticWebsiteCertificateCertificateRequestorResource7C29CEF3": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "DomainName": "www.my-site.com",
-        "HostedZoneId": {
-          "Ref": "HostedZoneDB99F866",
-        },
-        "Region": "us-east-1",
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "StaticWebsiteCertificateCertificateRequestorFunction8DAF9CCF",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::CustomResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "StaticWebsiteDistributionBAD21F75": {
       "Properties": {
@@ -701,28 +581,19 @@ exports[`StaticWebsite 2`] = `
                 ],
               },
               "Id": "StackStaticWebsiteDistributionOrigin103625211",
+              "OriginAccessControlId": {
+                "Fn::GetAtt": [
+                  "StaticWebsiteDistributionOrigin1S3OriginAccessControlC2387C0F",
+                  "Id",
+                ],
+              },
               "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "StaticWebsiteDistributionOrigin1S3Origin3045572F",
-                      },
-                    ],
-                  ],
-                },
+                "OriginAccessIdentity": "",
               },
             },
           ],
           "ViewerCertificate": {
-            "AcmCertificateArn": {
-              "Fn::GetAtt": [
-                "StaticWebsiteCertificateCertificateRequestorResource7C29CEF3",
-                "Arn",
-              ],
-            },
+            "AcmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop",
             "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only",
           },
@@ -730,13 +601,16 @@ exports[`StaticWebsite 2`] = `
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "StaticWebsiteDistributionOrigin1S3Origin3045572F": {
+    "StaticWebsiteDistributionOrigin1S3OriginAccessControlC2387C0F": {
       "Properties": {
-        "CloudFrontOriginAccessIdentityConfig": {
-          "Comment": "Identity for StackStaticWebsiteDistributionOrigin103625211",
+        "OriginAccessControlConfig": {
+          "Name": "StackStaticWebsiteDistributiOrigin1S3OriginAccessControlFD4B1A13",
+          "OriginAccessControlOriginType": "s3",
+          "SigningBehavior": "always",
+          "SigningProtocol": "sigv4",
         },
       },
-      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Type": "AWS::CloudFront::OriginAccessControl",
     },
     "StaticWebsiteHttpsRecord6CF10F2C": {
       "Properties": {

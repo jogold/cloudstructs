@@ -1,5 +1,6 @@
 import { App, CfnOutput, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as s3 from 'aws-cdk-lib/aws-s3';
@@ -19,6 +20,7 @@ class TestStack extends Stack {
         hostedZoneId: 'ZKEU89CLZS8GH',
         zoneName: 'goldex.be',
       }),
+      certificate: acm.Certificate.fromCertificateArn(this, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
       recordName: 'short',
       apiGatewayAuthorizer: new apigateway.CognitoUserPoolsAuthorizer(this, 'Authorizer', {
         cognitoUserPools: [userPool],
