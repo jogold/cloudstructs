@@ -138,7 +138,7 @@ export class UrlShortener extends Construct {
       },
       certificate: props.certificate,
       domainNames: [domainName],
-      httpVersion: 'http2and3' as cloudfront.HttpVersion,
+      httpVersion: cloudfront.HttpVersion.HTTP2_AND_3,
     });
 
     // Route53 records

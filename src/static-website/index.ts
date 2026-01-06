@@ -4,12 +4,10 @@ import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as route53 from 'aws-cdk-lib/aws-route53';
-import * as patterns from 'aws-cdk-lib/aws-route53-patterns';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as cr from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
-import { OriginRequestFunction } from './origin-request-function';
 
 /**
  * Properties for a StaticWebsite
@@ -125,12 +123,13 @@ export class StaticWebsite extends Construct {
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(this.bucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        edgeLambdas: props.edgeLambdas ?? [
-          {
-            eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
-            functionVersion: new OriginRequestFunction(this, 'OriginRequest'),
-          },
-        ],
+        edgeLambdas: props.edgeLambdas,
+        functionAssociations: [{
+          eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
+          function: new cloudfront.Function(this, 'RewriteFunction', {
+            code: cloudfront.FunctionCode.fromInline(rewriteFunctionCode()),
+          }),
+        }],
         responseHeadersPolicy: props.responseHeadersPolicy ?? new cloudfront.ResponseHeadersPolicy(this, 'ResponseHeadersPolicy', {
           securityHeadersBehavior: StaticWebsite.defaultSecurityHeadersBehavior,
         }),
@@ -156,7 +155,7 @@ export class StaticWebsite extends Construct {
     });
 
     new route53.RecordSet(this, 'HttpsRecord', {
-      recordType: 'HTTPS' as route53.RecordType,
+      recordType: route53.RecordType.HTTPS,
       recordName: props.domainName,
       zone: props.hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(this.distribution)),
@@ -187,17 +186,32 @@ export class StaticWebsite extends Construct {
     }
 
     if (shouldAddRedirect(props)) {
-      const httpsRedirect = new patterns.HttpsRedirect(this, 'HttpsRedirect', {
-        targetDomain: props.domainName,
-        zone: props.hostedZone,
-        recordNames: props.redirects,
+      const redirectDistribution = new cloudfront.Distribution(this, 'RedirectDistribution', {
+        defaultBehavior: {
+          origin: new origins.HttpOrigin(props.domainName),
+          viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+          functionAssociations: [{
+            eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
+            function: new cloudfront.Function(this, 'RedirectFunction', {
+              code: cloudfront.FunctionCode.fromInline(redirectFunctionCode(props.domainName)),
+            }),
+          }],
+        },
+        defaultRootObject: '',
+        domainNames: props.redirects,
+        certificate: props.certificate,
+        httpVersion: cloudfront.HttpVersion.HTTP2_AND_3,
+        comment: `Redirect to ${props.domainName} from ${props.redirects?.join(', ')}`,
       });
-      // Force minimum protocol version
-      const redirectDistribution = httpsRedirect.node.tryFindChild('RedirectDistribution') as cloudfront.CloudFrontWebDistribution;
-      const cfnDistribution = redirectDistribution.node.tryFindChild('CFDistribution') as cloudfront.CfnDistribution;
-      if (cfnDistribution) {
-        cfnDistribution.addPropertyOverride('DistributionConfig.ViewerCertificate.MinimumProtocolVersion', 'TLSv1.2_2021');
-        cfnDistribution.addPropertyOverride('DistributionConfig.HttpVersion', 'http2and3');
+      for (const redirect of props.redirects ?? []) {
+        const aliasProps = {
+          recordName: redirect,
+          zone: props.hostedZone,
+          target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(redirectDistribution)),
+        };
+        new route53.ARecord(this, `RedirectARecord${redirect}`, aliasProps);
+        new route53.AaaaRecord(this, `RedirectAaaaRecord${redirect}`, aliasProps);
+        new route53.HttpsRecord(this, `RedirectHttpsRecord${redirect}`, aliasProps);
       }
     }
   }
@@ -215,4 +229,29 @@ function shouldAddRedirect(props: StaticWebsiteProps): boolean {
   }
 
   return true;
+}
+
+function rewriteFunctionCode(): string {
+  return `function handler(event) {
+  const request = event.request;
+  const uri = request.uri;
+  const hasExtension = /\.[a-zA-Z0-9]+$/.test(uri);
+  if (!hasExtension) {
+    request.uri = '/index.html';
+  }
+  return request;
+  }`;
+}
+
+function redirectFunctionCode(domainName: string): string {
+  return `function handler(event) {
+  return {
+    statusCode: 301,
+    statusDescription: 'Moved permanently',
+    headers: {
+      location: {
+        value: 'https://${domainName}',
+      },
+    },
+  };`;
 }
