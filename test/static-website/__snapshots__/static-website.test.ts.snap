@@ -529,10 +529,67 @@ exports[`StaticWebsite 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "StaticWebsiteRedirectARecordmysitecom45D4EFA8": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "StaticWebsiteRedirectDistributionA10E29FF",
+              "DomainName",
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::FindInMap": [
+              "AWSCloudFrontPartitionHostedZoneIdMap",
+              {
+                "Ref": "AWS::Partition",
+              },
+              "zoneId",
+            ],
+          },
+        },
+        "HostedZoneId": {
+          "Ref": "HostedZoneDB99F866",
+        },
+        "Name": "my-site.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "StaticWebsiteRedirectAaaaRecordmysitecom9E9936CA": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "StaticWebsiteRedirectDistributionA10E29FF",
+              "DomainName",
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::FindInMap": [
+              "AWSCloudFrontPartitionHostedZoneIdMap",
+              {
+                "Ref": "AWS::Partition",
+              },
+              "zoneId",
+            ],
+          },
+        },
+        "HostedZoneId": {
+          "Ref": "HostedZoneDB99F866",
+        },
+        "Name": "my-site.com.",
+        "Type": "AAAA",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
     "StaticWebsiteRedirectDistributionA10E29FF": {
       "Properties": {
         "DistributionConfig": {
-          "Comment": "Redirect to www.my-site.com from undefined",
+          "Aliases": [
+            "my-site.com",
+          ],
+          "Comment": "Redirect to www.my-site.com from my-site.com",
           "DefaultCacheBehavior": {
             "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
@@ -595,6 +652,33 @@ exports[`StaticWebsite 1`] = `
         "Name": "eu-west-1StackStaticWebsiRedirectFunction172BEC3F",
       },
       "Type": "AWS::CloudFront::Function",
+    },
+    "StaticWebsiteRedirectHttpsRecordmysitecomB25F25A5": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "StaticWebsiteRedirectDistributionA10E29FF",
+              "DomainName",
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::FindInMap": [
+              "AWSCloudFrontPartitionHostedZoneIdMap",
+              {
+                "Ref": "AWS::Partition",
+              },
+              "zoneId",
+            ],
+          },
+        },
+        "HostedZoneId": {
+          "Ref": "HostedZoneDB99F866",
+        },
+        "Name": "my-site.com.",
+        "Type": "HTTPS",
+      },
+      "Type": "AWS::Route53::RecordSet",
     },
     "StaticWebsiteResponseHeadersPolicyF3EBE566": {
       "Properties": {
