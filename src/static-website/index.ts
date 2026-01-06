@@ -65,7 +65,7 @@ export interface StaticWebsiteProps {
   /**
    * The Lambda@Edge functions to invoke before serving the contents.
    *
-   * @default - an origin request function that redirects all requests for a path to /index.html
+   * @default - no edge Lambdas
    */
   readonly edgeLambdas?: cloudfront.EdgeLambda[];
 }
@@ -186,6 +186,7 @@ export class StaticWebsite extends Construct {
     }
 
     if (shouldAddRedirect(props)) {
+      const redirects = props.redirects ?? [props.hostedZone.zoneName];
       const redirectDistribution = new cloudfront.Distribution(this, 'RedirectDistribution', {
         defaultBehavior: {
           origin: new origins.HttpOrigin(props.domainName),
@@ -198,20 +199,21 @@ export class StaticWebsite extends Construct {
           }],
         },
         defaultRootObject: '',
-        domainNames: props.redirects,
+        domainNames: redirects,
         certificate: props.certificate,
         httpVersion: cloudfront.HttpVersion.HTTP2_AND_3,
-        comment: `Redirect to ${props.domainName} from ${props.redirects?.join(', ')}`,
+        comment: `Redirect to ${props.domainName} from ${redirects.join(', ')}`,
       });
-      for (const redirect of props.redirects ?? []) {
+      for (const redirect of redirects) {
+        const safeRedirectId = redirect.replace(/\./g, '-');
         const aliasProps = {
           recordName: redirect,
           zone: props.hostedZone,
           target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(redirectDistribution)),
         };
-        new route53.ARecord(this, `RedirectARecord${redirect}`, aliasProps);
-        new route53.AaaaRecord(this, `RedirectAaaaRecord${redirect}`, aliasProps);
-        new route53.HttpsRecord(this, `RedirectHttpsRecord${redirect}`, aliasProps);
+        new route53.ARecord(this, `RedirectARecord${safeRedirectId}`, aliasProps);
+        new route53.AaaaRecord(this, `RedirectAaaaRecord${safeRedirectId}`, aliasProps);
+        new route53.HttpsRecord(this, `RedirectHttpsRecord${safeRedirectId}`, aliasProps);
       }
     }
   }
