@@ -56,10 +56,7 @@ function extractS3Details(hostname: string): { bucket: string; region: string } 
 
   if (match) {
     const [, bucket, region] = match;
-    return {
-      bucket,
-      region,
-    };
+    return { bucket, region };
   }
 
   return undefined;
