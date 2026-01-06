@@ -257,5 +257,6 @@ function redirectFunctionCode(domainName: string): string {
         value: 'https://${domainName}',
       },
     },
-};`;
+  };
+}`;
 }
