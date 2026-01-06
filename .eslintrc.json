@@ -159,8 +159,8 @@
           "src/slack-textract/detect.lambda.ts",
           "src/ssl-server-test/analyze.lambda.ts",
           "src/toolkit-cleaner/clean.lambda.ts",
+          "src/url-shortener/redirect.lambda.ts",
           "src/url-shortener/shortener.lambda.ts",
-          "src/url-shortener/redirect.edge-lambda.ts",
           ".projenrc.ts",
           "projenrc/**/*.ts"
         ],

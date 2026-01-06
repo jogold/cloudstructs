@@ -123,18 +123,16 @@ export class UrlShortener extends Construct {
     });
 
     // Redirect function
-    const redirectFunction = new RedirectFunction(this, 'Redirect');
+    const redirectFunction = new RedirectFunction(this, 'Redirect', {
+      environment: {
+        BUCKET_NAME: bucket.bucketName,
+      },
+    });
     bucket.grantRead(redirectFunction);
 
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
-        origin: origins.S3BucketOrigin.withOriginAccessControl(bucket),
-        edgeLambdas: [
-          {
-            eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
-            functionVersion: redirectFunction,
-          },
-        ],
+        origin: origins.FunctionUrlOrigin.withOriginAccessControl(redirectFunction.addFunctionUrl()),
       },
       certificate: props.certificate,
       domainNames: [domainName],
@@ -142,16 +140,14 @@ export class UrlShortener extends Construct {
     });
 
     // Route53 records
-    new route53.ARecord(this, 'ARecord', {
+    const aliasProps = {
       zone: props.hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       recordName: props.recordName,
-    });
-    new route53.AaaaRecord(this, 'AaaaRecord', {
-      zone: props.hostedZone,
-      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
-      recordName: props.recordName,
-    });
+    };
+    new route53.ARecord(this, 'ARecord', aliasProps);
+    new route53.AaaaRecord(this, 'AaaaRecord', aliasProps);
+    new route53.HttpsRecord(this, 'HttpsRecord', aliasProps);
 
     // Lambda function to increment counter and write redirect in bucket
     const shortenerFunction = new ShortenerFunction(this, 'Shortener', {

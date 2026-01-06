@@ -65,10 +65,10 @@
           "spawn": "bundle:toolkit-cleaner/clean.lambda"
         },
         {
-          "spawn": "bundle:url-shortener/shortener.lambda"
+          "spawn": "bundle:url-shortener/redirect.lambda"
         },
         {
-          "spawn": "bundle:url-shortener/redirect.edge-lambda"
+          "spawn": "bundle:url-shortener/shortener.lambda"
         }
       ]
     },
@@ -180,21 +180,21 @@
         }
       ]
     },
-    "bundle:url-shortener/redirect.edge-lambda": {
-      "name": "bundle:url-shortener/redirect.edge-lambda",
-      "description": "Create a JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
+    "bundle:url-shortener/redirect.lambda": {
+      "name": "bundle:url-shortener/redirect.lambda",
+      "description": "Create a JavaScript bundle from src/url-shortener/redirect.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+          "exec": "esbuild --bundle src/url-shortener/redirect.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
-    "bundle:url-shortener/redirect.edge-lambda:watch": {
-      "name": "bundle:url-shortener/redirect.edge-lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/url-shortener/redirect.edge-lambda.ts",
+    "bundle:url-shortener/redirect.lambda:watch": {
+      "name": "bundle:url-shortener/redirect.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/url-shortener/redirect.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/url-shortener/redirect.edge-lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+          "exec": "esbuild --bundle src/url-shortener/redirect.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/url-shortener/redirect.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },

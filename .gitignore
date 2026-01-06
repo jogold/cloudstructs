@@ -56,8 +56,8 @@ tsconfig.json
 !/src/slack-textract/detect-function.ts
 !/src/ssl-server-test/analyze-function.ts
 !/src/toolkit-cleaner/clean-function.ts
-!/src/url-shortener/shortener-function.ts
 !/src/url-shortener/redirect-function.ts
+!/src/url-shortener/shortener-function.ts
 test/mjml-template/.tmp
 test/mjml-template/mjml-template.integ.snapshot/asset.*
 test/mjml-template/mjml-template.integ.snapshot/**/asset.*
