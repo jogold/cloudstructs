@@ -3787,7 +3787,7 @@ public readonly edgeLambdas: EdgeLambda[];
 ```
 
 - *Type:* aws-cdk-lib.aws_cloudfront.EdgeLambda[]
-- *Default:* an origin request function that redirects all requests for a path to /index.html
+- *Default:* no edge Lambdas
 
 The Lambda@Edge functions to invoke before serving the contents.
 

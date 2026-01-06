@@ -68,9 +68,6 @@
           "spawn": "bundle:url-shortener/shortener.lambda"
         },
         {
-          "spawn": "bundle:static-website/origin-request.edge-lambda"
-        },
-        {
           "spawn": "bundle:url-shortener/redirect.edge-lambda"
         }
       ]
@@ -162,24 +159,6 @@
       "steps": [
         {
           "exec": "esbuild --bundle src/ssl-server-test/analyze.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/ssl-server-test/analyze.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
-        }
-      ]
-    },
-    "bundle:static-website/origin-request.edge-lambda": {
-      "name": "bundle:static-website/origin-request.edge-lambda",
-      "description": "Create a JavaScript bundle from src/static-website/origin-request.edge-lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
-        }
-      ]
-    },
-    "bundle:static-website/origin-request.edge-lambda:watch": {
-      "name": "bundle:static-website/origin-request.edge-lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/static-website/origin-request.edge-lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/static-website/origin-request.edge-lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/static-website/origin-request.edge-lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
