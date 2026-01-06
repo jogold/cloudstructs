@@ -644,7 +644,7 @@ exports[`StaticWebsite 1`] = `
         value: 'https://www.my-site.com',
       },
     },
-  };",
+};",
         "FunctionConfig": {
           "Comment": "eu-west-1StackStaticWebsiRedirectFunction172BEC3F",
           "Runtime": "cloudfront-js-2.0",
@@ -718,12 +718,12 @@ exports[`StaticWebsite 1`] = `
         "FunctionCode": "function handler(event) {
   const request = event.request;
   const uri = request.uri;
-  const hasExtension = /.[a-zA-Z0-9]+$/.test(uri);
+  const hasExtension = /\\.[a-zA-Z0-9]+$/.test(uri);
   if (!hasExtension) {
     request.uri = '/index.html';
   }
   return request;
-  }",
+}",
         "FunctionConfig": {
           "Comment": "eu-west-1StackStaticWebsiteRewriteFunction4EBA86F3",
           "Runtime": "cloudfront-js-2.0",
