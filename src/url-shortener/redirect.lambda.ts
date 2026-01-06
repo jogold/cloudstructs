@@ -17,6 +17,10 @@ export async function handler(event: AWSLambda.LambdaFunctionURLEvent): Promise<
 
     const redirect = JSON.parse(await data.Body.transformToString());
 
+    if (!redirect.url) {
+      throw new Error('Redirect object in S3 is missing a `url` property.');
+    }
+
     return {
       statusCode: 301,
       headers: {
