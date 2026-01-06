@@ -24,7 +24,6 @@
 /src/slack-events/events-function.ts linguist-generated
 /src/slack-textract/detect-function.ts linguist-generated
 /src/ssl-server-test/analyze-function.ts linguist-generated
-/src/static-website/origin-request-function.ts linguist-generated
 /src/toolkit-cleaner/clean-function.ts linguist-generated
 /src/url-shortener/redirect-function.ts linguist-generated
 /src/url-shortener/shortener-function.ts linguist-generated

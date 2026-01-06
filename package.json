@@ -19,8 +19,6 @@
     "bundle:slack-textract/detect.lambda:watch": "npx projen bundle:slack-textract/detect.lambda:watch",
     "bundle:ssl-server-test/analyze.lambda": "npx projen bundle:ssl-server-test/analyze.lambda",
     "bundle:ssl-server-test/analyze.lambda:watch": "npx projen bundle:ssl-server-test/analyze.lambda:watch",
-    "bundle:static-website/origin-request.edge-lambda": "npx projen bundle:static-website/origin-request.edge-lambda",
-    "bundle:static-website/origin-request.edge-lambda:watch": "npx projen bundle:static-website/origin-request.edge-lambda:watch",
     "bundle:toolkit-cleaner/clean.lambda": "npx projen bundle:toolkit-cleaner/clean.lambda",
     "bundle:toolkit-cleaner/clean.lambda:watch": "npx projen bundle:toolkit-cleaner/clean.lambda:watch",
     "bundle:url-shortener/redirect.edge-lambda": "npx projen bundle:url-shortener/redirect.edge-lambda",
