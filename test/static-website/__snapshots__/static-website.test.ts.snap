@@ -647,7 +647,7 @@ exports[`StaticWebsite 1`] = `
   };",
         "FunctionConfig": {
           "Comment": "eu-west-1StackStaticWebsiRedirectFunction172BEC3F",
-          "Runtime": "cloudfront-js-1.0",
+          "Runtime": "cloudfront-js-2.0",
         },
         "Name": "eu-west-1StackStaticWebsiRedirectFunction172BEC3F",
       },
@@ -726,7 +726,7 @@ exports[`StaticWebsite 1`] = `
   }",
         "FunctionConfig": {
           "Comment": "eu-west-1StackStaticWebsiteRewriteFunction4EBA86F3",
-          "Runtime": "cloudfront-js-1.0",
+          "Runtime": "cloudfront-js-2.0",
         },
         "Name": "eu-west-1StackStaticWebsiteRewriteFunction4EBA86F3",
       },

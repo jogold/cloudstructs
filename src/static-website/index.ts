@@ -128,6 +128,7 @@ export class StaticWebsite extends Construct {
           eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
           function: new cloudfront.Function(this, 'RewriteFunction', {
             code: cloudfront.FunctionCode.fromInline(rewriteFunctionCode()),
+            runtime: cloudfront.FunctionRuntime.JS_2_0,
           }),
         }],
         responseHeadersPolicy: props.responseHeadersPolicy ?? new cloudfront.ResponseHeadersPolicy(this, 'ResponseHeadersPolicy', {
@@ -195,6 +196,7 @@ export class StaticWebsite extends Construct {
             eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
             function: new cloudfront.Function(this, 'RedirectFunction', {
               code: cloudfront.FunctionCode.fromInline(redirectFunctionCode(props.domainName)),
+              runtime: cloudfront.FunctionRuntime.JS_2_0,
             }),
           }],
         },
