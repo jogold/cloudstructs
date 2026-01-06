@@ -644,7 +644,8 @@ exports[`StaticWebsite 1`] = `
         value: 'https://www.my-site.com',
       },
     },
-};",
+  };
+}",
         "FunctionConfig": {
           "Comment": "eu-west-1StackStaticWebsiRedirectFunction172BEC3F",
           "Runtime": "cloudfront-js-2.0",
