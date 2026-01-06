@@ -7,7 +7,7 @@ export async function handler(event: AWSLambda.LambdaFunctionURLEvent): Promise<
     const key = event.rawPath.substring(1); // remove first slash
 
     const data = await s3Client.send(new GetObjectCommand({
-      Bucket: process.env.BUCKT_NAME,
+      Bucket: process.env.BUCKET_NAME,
       Key: key,
     }));
 
