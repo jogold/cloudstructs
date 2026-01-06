@@ -10,12 +10,16 @@ export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<
       throw new Error('No S3 origin');
     }
 
-    const s3Client = new S3Client({ region: s3Origin.region });
-    const bucket = s3Origin.domainName.replace(new RegExp(`.s3.${s3Origin.region}.amazonaws.com$`), '');
+    const s3details = extractS3Details(s3Origin.domainName);
+    if (!s3details) {
+      throw new Error('No S3 details');
+    }
+
+    const s3Client = new S3Client({ region: s3details.region });
     const key = request.uri.substring(1); // remove first slash
 
     const data = await s3Client.send(new GetObjectCommand({
-      Bucket: bucket,
+      Bucket: s3details.bucket,
       Key: key,
     }));
 
@@ -43,4 +47,19 @@ export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<
       statusDescription: 'Not Found',
     };
   }
+}
+
+function extractS3Details(hostname: string): { bucket: string; region: string } | undefined {
+  const regex = /^(.*)\.s3\.(.*)\.amazonaws\.com$/;
+
+  const match = hostname.match(regex);
+
+  if (match && match.length === 3) {
+    return {
+      bucket: match[1],
+      region: match[2],
+    };
+  }
+
+  return undefined;
 }
