@@ -239,12 +239,12 @@ function rewriteFunctionCode(): string {
   return `function handler(event) {
   const request = event.request;
   const uri = request.uri;
-  const hasExtension = /\.[a-zA-Z0-9]+$/.test(uri);
+  const hasExtension = /\\.[a-zA-Z0-9]+$/.test(uri);
   if (!hasExtension) {
     request.uri = '/index.html';
   }
   return request;
-  }`;
+}`;
 }
 
 function redirectFunctionCode(domainName: string): string {
@@ -257,5 +257,5 @@ function redirectFunctionCode(domainName: string): string {
         value: 'https://${domainName}',
       },
     },
-  };`;
+};`;
 }
