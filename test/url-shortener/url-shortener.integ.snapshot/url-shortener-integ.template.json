@@ -176,7 +176,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
      },
-     "S3Key": "b5ca2a6bbb5673bec71b2229a9e11478135d97661be8d9018f18ecc0b01e6cba.zip"
+     "S3Key": "a3188086ba45dcf2363b1ce7f01d1b91939a1e89ef9cc632b85ba06c630695c0.zip"
     },
     "Description": "src/url-shortener/redirect.lambda.ts",
     "Environment": {
