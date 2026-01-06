@@ -49,15 +49,16 @@ export async function handler(event: AWSLambda.CloudFrontRequestEvent): Promise<
   }
 }
 
+const S3_HOSTNAME_REGEX = /^(.*)\.s3\.(.*)\.amazonaws\.com$/;
+
 function extractS3Details(hostname: string): { bucket: string; region: string } | undefined {
-  const regex = /^(.*)\.s3\.(.*)\.amazonaws\.com$/;
+  const match = hostname.match(S3_HOSTNAME_REGEX);
 
-  const match = hostname.match(regex);
-
-  if (match && match.length === 3) {
+  if (match) {
+    const [, bucket, region] = match;
     return {
-      bucket: match[1],
-      region: match[2],
+      bucket,
+      region,
     };
   }
 
