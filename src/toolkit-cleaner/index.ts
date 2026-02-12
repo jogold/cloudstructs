@@ -90,7 +90,7 @@ export class ToolkitCleaner extends Construct {
     new Schedule(this, 'Schedule', {
       enabled: props.scheduleEnabled ?? true,
       schedule: props.scheduleExpression ?? ScheduleExpression.rate(Duration.days(1)),
-      target: new LambdaInvoke(cleanFunction, {}),
+      target: new LambdaInvoke(cleanFunction.latestVersion, {}),
     });
   }
 }
