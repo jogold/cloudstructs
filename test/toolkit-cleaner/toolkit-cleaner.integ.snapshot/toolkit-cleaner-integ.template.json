@@ -199,9 +199,17 @@
     "State": "ENABLED",
     "Target": {
      "Arn": {
-      "Fn::GetAtt": [
-       "ToolkitCleanerCleanFunction682954FF",
-       "Arn"
+      "Fn::Join": [
+       "",
+       [
+        {
+         "Fn::GetAtt": [
+          "ToolkitCleanerCleanFunction682954FF",
+          "Arn"
+         ]
+        },
+        ":$LATEST"
+       ]
       ]
      },
      "RetryPolicy": {
@@ -210,14 +218,14 @@
      },
      "RoleArn": {
       "Fn::GetAtt": [
-       "SchedulerRoleForTargetc4b32b96454979",
+       "SchedulerRoleForTargeta710031518EF28",
        "Arn"
       ]
      }
     }
    }
   },
-  "SchedulerRoleForTargetc4b32b96454979": {
+  "SchedulerRoleForTargeta710031518EF28": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -261,7 +269,7 @@
     }
    }
   },
-  "SchedulerRoleForTargetc4b32bDefaultPolicy77321186": {
+  "SchedulerRoleForTargeta71003DefaultPolicyE865D32D": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -269,36 +277,28 @@
       {
        "Action": "lambda:InvokeFunction",
        "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "ToolkitCleanerCleanFunction682954FF",
-          "Arn"
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "ToolkitCleanerCleanFunction682954FF",
+            "Arn"
+           ]
+          },
+          ":$LATEST"
          ]
-        },
-        {
-         "Fn::Join": [
-          "",
-          [
-           {
-            "Fn::GetAtt": [
-             "ToolkitCleanerCleanFunction682954FF",
-             "Arn"
-            ]
-           },
-           ":*"
-          ]
-         ]
-        }
-       ]
+        ]
+       }
       }
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "SchedulerRoleForTargetc4b32bDefaultPolicy77321186",
+    "PolicyName": "SchedulerRoleForTargeta71003DefaultPolicyE865D32D",
     "Roles": [
      {
-      "Ref": "SchedulerRoleForTargetc4b32b96454979"
+      "Ref": "SchedulerRoleForTargeta710031518EF28"
      }
     ]
    }
