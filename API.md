@@ -45,6 +45,7 @@ new CodeCommitMirror(scope: Construct, id: string, props: CodeCommitMirrorProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.CodeCommitMirror.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.CodeCommitMirror.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -55,6 +56,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.CodeCommitMirror.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.CodeCommitMirror.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -160,6 +182,7 @@ new DmarcReporter(scope: Construct, id: string, props: DmarcReporterProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.DmarcReporter.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.DmarcReporter.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -170,6 +193,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.DmarcReporter.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.DmarcReporter.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -275,6 +319,7 @@ new EcsServiceRoller(scope: Construct, id: string, props: EcsServiceRollerProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.EcsServiceRoller.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.EcsServiceRoller.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -285,6 +330,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.EcsServiceRoller.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.EcsServiceRoller.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -390,6 +456,7 @@ new EmailReceiver(scope: Construct, id: string, props: EmailReceiverProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.EmailReceiver.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.EmailReceiver.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -400,6 +467,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.EmailReceiver.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.EmailReceiver.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -531,6 +619,7 @@ new MjmlTemplate(scope: Construct, id: string, props: MjmlTemplateProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.MjmlTemplate.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.MjmlTemplate.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -541,6 +630,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.MjmlTemplate.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.MjmlTemplate.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -659,6 +769,7 @@ new SamlIdentityProvider(scope: Construct, id: string, props: SamlIdentityProvid
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.SamlIdentityProvider.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.SamlIdentityProvider.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -669,6 +780,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### ~~`with`~~ <a name="with" id="cloudstructs.SamlIdentityProvider.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.SamlIdentityProvider.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -793,6 +925,7 @@ new SlackApp(scope: Construct, id: string, props: SlackAppProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.SlackApp.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.SlackApp.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -803,6 +936,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.SlackApp.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.SlackApp.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -996,6 +1150,7 @@ new SlackEvents(scope: Construct, id: string, props: SlackEventsProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.SlackEvents.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.SlackEvents.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -1006,6 +1161,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.SlackEvents.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.SlackEvents.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -1124,6 +1300,7 @@ new SlackTextract(scope: Construct, id: string, props: SlackTextractProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.SlackTextract.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.SlackTextract.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -1134,6 +1311,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.SlackTextract.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.SlackTextract.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -1239,6 +1437,7 @@ new SslServerTest(scope: Construct, id: string, props: SslServerTestProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.SslServerTest.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.SslServerTest.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -1249,6 +1448,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.SslServerTest.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.SslServerTest.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -1367,6 +1587,7 @@ new StateMachineCustomResourceProvider(scope: Construct, id: string, props: Stat
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.StateMachineCustomResourceProvider.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.StateMachineCustomResourceProvider.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -1377,6 +1598,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.StateMachineCustomResourceProvider.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.StateMachineCustomResourceProvider.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -1495,6 +1737,7 @@ new StaticWebsite(scope: Construct, id: string, props: StaticWebsiteProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.StaticWebsite.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.StaticWebsite.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -1505,6 +1748,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.StaticWebsite.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.StaticWebsite.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -1649,6 +1913,7 @@ new ToolkitCleaner(scope: Construct, id: string, props?: ToolkitCleanerProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.ToolkitCleaner.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.ToolkitCleaner.with">with</a></code> | Applies one or more mixins to this construct. |
 
 ---
 
@@ -1659,6 +1924,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.ToolkitCleaner.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.ToolkitCleaner.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -1764,6 +2050,7 @@ new UrlShortener(scope: Construct, id: string, props: UrlShortenerProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cloudstructs.UrlShortener.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cloudstructs.UrlShortener.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#cloudstructs.UrlShortener.grantInvoke">grantInvoke</a></code> | Grant access to invoke the URL shortener if protected by IAM authorization. |
 
 ---
@@ -1775,6 +2062,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="cloudstructs.UrlShortener.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="cloudstructs.UrlShortener.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `grantInvoke` <a name="grantInvoke" id="cloudstructs.UrlShortener.grantInvoke"></a>
 
