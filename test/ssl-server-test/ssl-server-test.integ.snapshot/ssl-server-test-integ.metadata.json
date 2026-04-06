@@ -1,0 +1,94 @@
+{
+  "/ssl-server-test-integ/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/ssl-server-test-integ/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction": [
+    {
+      "type": "aws:cdk:info",
+      "data": "Modifying an existing lambda to use durability will trigger a resource replacement [ack: aws-lambda:Function.DurableConfig]",
+      "trace": [
+        "Annotations.addMessage (/workspaces/cloudstructs/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2399)",
+        "Annotations.addInfoV2 (/workspaces/cloudstructs/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1443)",
+        "AnalyzeFunction.renderDurableConfig (/workspaces/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:35914)",
+        "new Function2 (/workspaces/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:20651)",
+        "new Function2 (/workspaces/cloudstructs/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
+        "new AnalyzeFunction (/workspaces/cloudstructs/src/ssl-server-test/analyze-function.ts:17:5)",
+        "new SslServerTest (/workspaces/cloudstructs/src/ssl-server-test/index.ts:67:29)",
+        "new TestStack (/workspaces/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "Object.<anonymous> (/workspaces/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "Module._compile (node:internal/modules/cjs/loader:1761:14)",
+        "Module.m._compile (/workspaces/cloudstructs/node_modules/ts-node/src/index.ts:1618:23)",
+        "node:internal/modules/cjs/loader:1893:10",
+        "Object.require.extensions.<computed> [as .ts] (/workspaces/cloudstructs/node_modules/ts-node/src/index.ts:1621:12)",
+        "Module.load (node:internal/modules/cjs/loader:1481:32)",
+        "Module._load (node:internal/modules/cjs/loader:1300:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "phase4 (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:649:14)",
+        "bootstrap (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:95:10)",
+        "main (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:55:10)",
+        "Object.<anonymous> (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:800:3)",
+        "Module._compile (node:internal/modules/cjs/loader:1761:14)",
+        "Object.<anonymous> (node:internal/modules/cjs/loader:1893:10)",
+        "Module.load (node:internal/modules/cjs/loader:1481:32)",
+        "Module._load (node:internal/modules/cjs/loader:1300:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "node:internal/main/run_main_module:33:47"
+      ]
+    }
+  ],
+  "/ssl-server-test-integ/SchedulerRoleForTarget-0be089/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchedulerRoleForTarget0be0894E78F7A7"
+    }
+  ],
+  "/ssl-server-test-integ/SslServerTestCdkDev/AlarmTopic/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SslServerTestCdkDevAlarmTopic7DD51A1B"
+    }
+  ],
+  "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SslServerTestCdkDevAnalyzeFunction55D19894"
+    }
+  ],
+  "/ssl-server-test-integ/SslServerTestCdkDev/Schedule/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SslServerTestCdkDevScheduleFE056D2F"
+    }
+  ],
+  "/ssl-server-test-integ/SchedulerRoleForTarget-0be089/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchedulerRoleForTarget0be089DefaultPolicy904F731F"
+    }
+  ],
+  "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SslServerTestCdkDevAnalyzeFunctionServiceRoleF4F33002"
+    }
+  ],
+  "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SslServerTestCdkDevAnalyzeFunctionServiceRoleDefaultPolicy063E91F9"
+    }
+  ]
+}

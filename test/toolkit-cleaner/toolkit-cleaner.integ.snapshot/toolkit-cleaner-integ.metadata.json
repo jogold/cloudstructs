@@ -1,0 +1,88 @@
+{
+  "/toolkit-cleaner-integ/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/toolkit-cleaner-integ/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/toolkit-cleaner-integ/ToolkitCleaner/CleanFunction": [
+    {
+      "type": "aws:cdk:info",
+      "data": "Modifying an existing lambda to use durability will trigger a resource replacement [ack: aws-lambda:Function.DurableConfig]",
+      "trace": [
+        "Annotations.addMessage (/workspaces/cloudstructs/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2399)",
+        "Annotations.addInfoV2 (/workspaces/cloudstructs/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1443)",
+        "CleanFunction.renderDurableConfig (/workspaces/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:35914)",
+        "new Function2 (/workspaces/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:20651)",
+        "new Function2 (/workspaces/cloudstructs/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
+        "new CleanFunction (/workspaces/cloudstructs/src/toolkit-cleaner/clean-function.ts:17:5)",
+        "new ToolkitCleaner (/workspaces/cloudstructs/src/toolkit-cleaner/index.ts:66:27)",
+        "new TestStack (/workspaces/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:9:5)",
+        "Object.<anonymous> (/workspaces/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:17:1)",
+        "Module._compile (node:internal/modules/cjs/loader:1761:14)",
+        "Module.m._compile (/workspaces/cloudstructs/node_modules/ts-node/src/index.ts:1618:23)",
+        "node:internal/modules/cjs/loader:1893:10",
+        "Object.require.extensions.<computed> [as .ts] (/workspaces/cloudstructs/node_modules/ts-node/src/index.ts:1621:12)",
+        "Module.load (node:internal/modules/cjs/loader:1481:32)",
+        "Module._load (node:internal/modules/cjs/loader:1300:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "phase4 (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:649:14)",
+        "bootstrap (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:95:10)",
+        "main (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:55:10)",
+        "Object.<anonymous> (/workspaces/cloudstructs/node_modules/ts-node/src/bin.ts:800:3)",
+        "Module._compile (node:internal/modules/cjs/loader:1761:14)",
+        "Object.<anonymous> (node:internal/modules/cjs/loader:1893:10)",
+        "Module.load (node:internal/modules/cjs/loader:1481:32)",
+        "Module._load (node:internal/modules/cjs/loader:1300:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "node:internal/main/run_main_module:33:47"
+      ]
+    }
+  ],
+  "/toolkit-cleaner-integ/SchedulerRoleForTarget-a71003/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchedulerRoleForTargeta710031518EF28"
+    }
+  ],
+  "/toolkit-cleaner-integ/ToolkitCleaner/CleanFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ToolkitCleanerCleanFunction682954FF"
+    }
+  ],
+  "/toolkit-cleaner-integ/ToolkitCleaner/Schedule/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ToolkitCleanerScheduleA0581E4B"
+    }
+  ],
+  "/toolkit-cleaner-integ/SchedulerRoleForTarget-a71003/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchedulerRoleForTargeta71003DefaultPolicyE865D32D"
+    }
+  ],
+  "/toolkit-cleaner-integ/ToolkitCleaner/CleanFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ToolkitCleanerCleanFunctionServiceRoleFE59F176"
+    }
+  ],
+  "/toolkit-cleaner-integ/ToolkitCleaner/CleanFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ToolkitCleanerCleanFunctionServiceRoleDefaultPolicyBC7E9A9D"
+    }
+  ]
+}

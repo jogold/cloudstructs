@@ -1,0 +1,242 @@
+{
+  "/url-shortener-integ/AWSCloudFrontPartitionHostedZoneIdMap": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+    }
+  ],
+  "/url-shortener-integ/ApiEndpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiEndpoint"
+    }
+  ],
+  "/url-shortener-integ/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/url-shortener-integ/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/url-shortener-integ/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPool6BA7E5F2"
+    }
+  ],
+  "/url-shortener-integ/Authorizer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthorizerBD825682"
+    }
+  ],
+  "/url-shortener-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Table/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerTable9C0A20BB"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Bucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerBucket14C129A7"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Redirect/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerRedirectB70FCDB6"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerDistributionA56BF25C"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/ARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerARecord899EAFB0"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/AaaaRecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerAaaaRecordF6DE6BF6"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/HttpsRecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerHttpsRecordC4C37D4E"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Shortener/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortener201C0678"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbe049505BC"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Account": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeAccount82AF64BA"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeEndpointD5C20618"
+    }
+  ],
+  "/url-shortener-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Redirect/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerRedirectServiceRoleB0D8105B"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Redirect/FunctionUrl/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerRedirectFunctionUrlA0B93CD3"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Distribution/Origin1/InvokeFromApiForurlshortenerintegUrlShortenerDistributionOrigin145A8F93E": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerDistributionOrigin1InvokeFromApiForurlshortenerintegUrlShortenerDistributionOrigin145A8F93E5D49703A"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Shortener/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerServiceRoleD261E374"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Shortener/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerLogRetention2FFA6E68"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/CloudWatchRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeCloudWatchRoleD4BD9B4F"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeDeployment59E3A2A6d319c2e98f137ab0ee74e662d7d5e2c2"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/DeploymentStage.prod/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D"
+    }
+  ],
+  "/url-shortener-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Redirect/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerRedirectServiceRoleDefaultPolicyA47211A8"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Distribution/Origin1/FunctionUrlOriginAccessControl/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerDistributionOrigin1FunctionUrlOriginAccessControl393BA750"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/Shortener/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerServiceRoleDefaultPolicyC2E011EF"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeOPTIONS341F249C"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/POST/ApiPermission.urlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8.POST..": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbePOSTApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POST4C864057"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/POST/ApiPermission.Test.urlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8.POST..": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbePOSTApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POSTF5DF609E"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbePOSTF5C18C34"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/{proxy+}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeproxyA27529BB"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/{proxy+}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeproxyOPTIONS09EF47CE"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/{proxy+}/POST/ApiPermission.urlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8.POST..{proxy+}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeproxyPOSTApiPermissionurlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POSTproxy884BC62E"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/{proxy+}/POST/ApiPermission.Test.urlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8.POST..{proxy+}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeproxyPOSTApiPermissionTesturlshortenerintegUrlShortenerUrlShortenergoldexbe56B7F1C8POSTproxyB623C212"
+    }
+  ],
+  "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/Default/{proxy+}/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerUrlShortenergoldexbeproxyPOST1417E6E0"
+    }
+  ]
+}
