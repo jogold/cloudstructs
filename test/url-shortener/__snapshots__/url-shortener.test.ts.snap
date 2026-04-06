@@ -575,12 +575,14 @@ exports[`UrlShortener 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "UrlShortenerTable9C0A20BB",
-                  "Arn",
-                ],
-              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+              ],
             },
           ],
           "Version": "2012-10-17",
@@ -1608,12 +1610,14 @@ exports[`UrlShortener with API gateway endpoint 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "UrlShortenerTable9C0A20BB",
-                  "Arn",
-                ],
-              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+              ],
             },
           ],
           "Version": "2012-10-17",
@@ -2987,12 +2991,14 @@ exports[`UrlShortener with CORS 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "UrlShortenerTable9C0A20BB",
-                  "Arn",
-                ],
-              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+              ],
             },
           ],
           "Version": "2012-10-17",
@@ -4095,12 +4101,14 @@ exports[`UrlShortener with IAM authorization 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "UrlShortenerTable9C0A20BB",
-                  "Arn",
-                ],
-              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+              ],
             },
           ],
           "Version": "2012-10-17",
@@ -5076,12 +5084,14 @@ exports[`UrlShortener with authorizer 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "UrlShortenerTable9C0A20BB",
-                  "Arn",
-                ],
-              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+              ],
             },
           ],
           "Version": "2012-10-17",
@@ -6075,12 +6085,14 @@ exports[`UrlShortener with record name 1`] = `
             {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "UrlShortenerTable9C0A20BB",
-                  "Arn",
-                ],
-              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "UrlShortenerTable9C0A20BB",
+                    "Arn",
+                  ],
+                },
+              ],
             },
           ],
           "Version": "2012-10-17",

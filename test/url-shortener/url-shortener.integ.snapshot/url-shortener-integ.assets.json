@@ -1,5 +1,5 @@
 {
-  "version": "48.0.0",
+  "version": "53.0.0",
   "files": {
     "a3188086ba45dcf2363b1ce7f01d1b91939a1e89ef9cc632b85ba06c630695c0": {
       "displayName": "UrlShortener/Redirect/Code",
@@ -46,16 +46,16 @@
         }
       }
     },
-    "4202396fbe442fa6314bf1a0681e8e840cdb3b3ec87afceb984f7a7fa93ab05e": {
+    "684d8a54fb1c646bf9550631fbfa2c97cbe0d2cabe9145423c017ae7ee6401f5": {
       "displayName": "url-shortener-integ Template",
       "source": {
         "path": "url-shortener-integ.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-eu-west-1-c2a581a0": {
+        "current_account-eu-west-1-f692ef50": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1",
-          "objectKey": "4202396fbe442fa6314bf1a0681e8e840cdb3b3ec87afceb984f7a7fa93ab05e.json",
+          "objectKey": "684d8a54fb1c646bf9550631fbfa2c97cbe0d2cabe9145423c017ae7ee6401f5.json",
           "region": "eu-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-eu-west-1"
         }

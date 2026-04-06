@@ -452,12 +452,14 @@
       {
        "Action": "dynamodb:UpdateItem",
        "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "UrlShortenerTable9C0A20BB",
-         "Arn"
-        ]
-       }
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "UrlShortenerTable9C0A20BB",
+          "Arn"
+         ]
+        }
+       ]
       }
      ],
      "Version": "2012-10-17"
