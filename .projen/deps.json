@@ -188,6 +188,7 @@
     },
     {
       "name": "mjml",
+      "version": "^5.0.0-beta.2",
       "type": "bundled"
     },
     {

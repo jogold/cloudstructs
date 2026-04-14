@@ -16,7 +16,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws/durable-execution-sdk-js',
     '@slack/web-api',
     'got',
-    'mjml',
+    'mjml@^5.0.0-beta.2',
   ],
   devDeps: [
     '@aws-sdk/client-cloudformation',

@@ -133,7 +133,7 @@
     "@aws/durable-execution-sdk-js": "^1.1.0",
     "@slack/web-api": "^7.15.1",
     "got": "^11.8.6",
-    "mjml": "^4.18.0"
+    "mjml": "^5.0.0-beta.2"
   },
   "bundledDependencies": [
     "@aws/durable-execution-sdk-js",
