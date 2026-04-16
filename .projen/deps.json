@@ -66,10 +66,6 @@
       "type": "build"
     },
     {
-      "name": "@types/mjml",
-      "type": "build"
-    },
-    {
       "name": "@types/node",
       "type": "build"
     },
@@ -184,11 +180,6 @@
     },
     {
       "name": "got",
-      "type": "bundled"
-    },
-    {
-      "name": "mjml",
-      "version": "^5.0.0-beta.2",
       "type": "bundled"
     },
     {

@@ -27,7 +27,6 @@
     "types": [
       "aws-lambda",
       "jest",
-      "mjml",
       "node",
       "tsscmp"
     ]
