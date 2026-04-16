@@ -32,11 +32,6 @@
     "docgen": "projen docgen",
     "eject": "projen eject",
     "eslint": "projen eslint",
-    "integ:mjml-template:assert": "projen integ:mjml-template:assert",
-    "integ:mjml-template:deploy": "projen integ:mjml-template:deploy",
-    "integ:mjml-template:destroy": "projen integ:mjml-template:destroy",
-    "integ:mjml-template:snapshot": "projen integ:mjml-template:snapshot",
-    "integ:mjml-template:watch": "projen integ:mjml-template:watch",
     "integ:slack-app:assert": "projen integ:slack-app:assert",
     "integ:slack-app:deploy": "projen integ:slack-app:deploy",
     "integ:slack-app:destroy": "projen integ:slack-app:destroy",
@@ -97,7 +92,6 @@
     "@stylistic/eslint-plugin": "^2",
     "@types/aws-lambda": "^8.10.161",
     "@types/jest": "^29.5.14",
-    "@types/mjml": "^4.7.4",
     "@types/node": "^18.19.130",
     "@types/tsscmp": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^8",
@@ -132,14 +126,12 @@
   "dependencies": {
     "@aws/durable-execution-sdk-js": "^1.1.0",
     "@slack/web-api": "^7.15.1",
-    "got": "^11.8.6",
-    "mjml": "^4.18.0"
+    "got": "^11.8.6"
   },
   "bundledDependencies": [
     "@aws/durable-execution-sdk-js",
     "@slack/web-api",
-    "got",
-    "mjml"
+    "got"
   ],
   "keywords": [
     "cdk"
@@ -229,7 +221,6 @@
     "./lib/dmarc": "./lib/dmarc/index.js",
     "./lib/ecs-service-roller": "./lib/ecs-service-roller/index.js",
     "./lib/email-receiver": "./lib/email-receiver/index.js",
-    "./lib/mjml-template": "./lib/mjml-template/index.js",
     "./lib/saml-identity-provider": "./lib/saml-identity-provider/index.js",
     "./lib/slack-app": "./lib/slack-app/index.js",
     "./lib/slack-events": "./lib/slack-events/index.js",

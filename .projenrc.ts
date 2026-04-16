@@ -16,7 +16,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws/durable-execution-sdk-js',
     '@slack/web-api',
     'got',
-    'mjml',
   ],
   devDeps: [
     '@aws-sdk/client-cloudformation',
@@ -33,7 +32,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/lib-dynamodb',
     '@aws/durable-execution-sdk-js-testing',
     '@types/aws-lambda',
-    '@types/mjml',
     '@types/tsscmp',
     'aws-sdk-client-mock',
     'aws-sdk-client-mock-jest',
