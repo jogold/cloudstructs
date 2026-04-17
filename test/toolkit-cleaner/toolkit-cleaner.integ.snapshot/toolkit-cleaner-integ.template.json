@@ -154,7 +154,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "cfc67622382e4777fb7a524823e261b2e793a0bd8bece9f668da2cde74268e5a.zip"
+     "S3Key": "c03d6ddf861a009081895e110be0aba123d6e251b18dcdc97ee3a5156b2c695f.zip"
     },
     "Description": "src/toolkit-cleaner/clean.lambda.ts",
     "DurableConfig": {
