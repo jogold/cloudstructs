@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { awscdk } from 'projen';
+import { awscdk, javascript } from 'projen';
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Jonathan Goldwasser',
@@ -38,6 +38,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'nock',
   ],
   defaultReleaseBranch: 'master',
+  packageManager: javascript.NodePackageManager.NPM,
+  depsUpgradeOptions: {
+    cooldown: 3,
+  },
   releaseToNpm: true,
   npmTrustedPublishing: true,
   publishToPypi: {
