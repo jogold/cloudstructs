@@ -15,20 +15,6 @@
         }
       }
     },
-    "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d": {
-      "displayName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Code",
-      "source": {
-        "path": "asset.2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d",
-        "packaging": "zip"
-      },
-      "destinations": {
-        "current_account-current_region-8cfb6a01": {
-          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
-        }
-      }
-    },
     "07a90cc3efdfc34da22208dcd9d211f06f5b0e01b21e778edc7c3966b1f61d57": {
       "displayName": "SlackAppProvider/Resource/framework-onEvent/Code",
       "source": {
@@ -43,16 +29,16 @@
         }
       }
     },
-    "a82391f3e4f8f30547b95c35a95d421a2440cd9f5e2d95bac00c4fd2d0b60923": {
+    "979f938cf279e3130da67174cc01eb8324c37b33bcdeebbddcc748c7f06c4528": {
       "displayName": "slack-app-integ Template",
       "source": {
         "path": "slack-app-integ.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region-579f486e": {
+        "current_account-current_region-c37e0970": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "a82391f3e4f8f30547b95c35a95d421a2440cd9f5e2d95bac00c4fd2d0b60923.json",
+          "objectKey": "979f938cf279e3130da67174cc01eb8324c37b33bcdeebbddcc748c7f06c4528.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

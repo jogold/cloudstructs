@@ -38,7 +38,9 @@ export class SlackTextract extends Construct {
 
     const handler = new DetectFunction(this, 'handler', {
       timeout: Duration.seconds(30),
-      logRetention: logs.RetentionDays.ONE_MONTH,
+      logGroup: new logs.LogGroup(this, 'handlerLogGroup', {
+        retention: logs.RetentionDays.ONE_MONTH,
+      }),
       environment: {
         SLACK_TOKEN: props.botToken.toString(),
       },

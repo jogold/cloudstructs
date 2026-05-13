@@ -17,12 +17,6 @@
       "data": "CheckBootstrapVersion"
     }
   ],
-  "/slack-app-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
-    }
-  ],
   "/slack-app-integ/MyApp/Credentials/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -35,16 +29,16 @@
       "data": "MyApp3CE31C26"
     }
   ],
+  "/slack-app-integ/SlackAppProvider/handlerLogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackAppProviderhandlerLogGroupAE1EF89C"
+    }
+  ],
   "/slack-app-integ/SlackAppProvider/handler/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderhandler547B4993"
-    }
-  ],
-  "/slack-app-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
     }
   ],
   "/slack-app-integ/SlackAppProvider/handler/ServiceRole/Resource": [
@@ -53,22 +47,10 @@
       "data": "SlackAppProviderhandlerServiceRoleDAC1FDD7"
     }
   ],
-  "/slack-app-integ/SlackAppProvider/handler/LogRetention/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "SlackAppProviderhandlerLogRetentionA1560DAA"
-    }
-  ],
   "/slack-app-integ/SlackAppProvider/Resource/framework-onEvent/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderframeworkonEventF1145A70"
-    }
-  ],
-  "/slack-app-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
     }
   ],
   "/slack-app-integ/SlackAppProvider/handler/ServiceRole/DefaultPolicy/Resource": [

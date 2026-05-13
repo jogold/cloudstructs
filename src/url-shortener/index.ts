@@ -151,7 +151,9 @@ export class UrlShortener extends Construct {
 
     // Lambda function to increment counter and write redirect in bucket
     const shortenerFunction = new ShortenerFunction(this, 'Shortener', {
-      logRetention: logs.RetentionDays.ONE_MONTH,
+      logGroup: new logs.LogGroup(this, 'ShortenerLogGroup', {
+        retention: logs.RetentionDays.ONE_MONTH,
+      }),
       environment: {
         DOMAIN_NAME: domainName,
         BUCKET_NAME: bucket.bucketName,

@@ -23,7 +23,9 @@ export class SlackAppProvider extends Construct {
     super(scope, id);
 
     this.handler = new ProviderFunction(this, 'handler', {
-      logRetention: logs.RetentionDays.ONE_MONTH,
+      logGroup: new logs.LogGroup(this, 'handlerLogGroup', {
+        retention: logs.RetentionDays.ONE_MONTH,
+      }),
     });
 
     const provider = new cr.Provider(this, 'Resource', {

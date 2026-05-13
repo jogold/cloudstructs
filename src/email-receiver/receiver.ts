@@ -93,7 +93,9 @@ export class EmailReceiver extends Construct {
         environment: {
           SOURCE_WHITELIST: props.sourceWhitelist,
         },
-        logRetention: logs.RetentionDays.ONE_MONTH,
+        logGroup: new logs.LogGroup(this, 'whitelistLogGroup', {
+          retention: logs.RetentionDays.ONE_MONTH,
+        }),
       });
 
       receiptRule.addAction(new actions.Lambda({
