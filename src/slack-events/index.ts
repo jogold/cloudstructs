@@ -48,7 +48,9 @@ export class SlackEvents extends Construct {
 
     // Send event to the event bus
     const handler = new EventsFunction(this, 'handler', {
-      logRetention: logs.RetentionDays.ONE_MONTH,
+      logGroup: new logs.LogGroup(this, 'handlerLogGroup', {
+        retention: logs.RetentionDays.ONE_MONTH,
+      }),
       environment: {
         SLACK_SIGNING_SECRET: props.signingSecret.toString(),
       },
