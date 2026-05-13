@@ -315,7 +315,7 @@
       "description": "Install project dependencies and update lockfile (non-frozen)",
       "steps": [
         {
-          "exec": "yarn install --check-files"
+          "exec": "npm install"
         }
       ]
     },
@@ -324,7 +324,7 @@
       "description": "Install project dependencies using frozen lockfile",
       "steps": [
         {
-          "exec": "yarn install --check-files --frozen-lockfile"
+          "exec": "npm ci"
         }
       ]
     },
@@ -775,17 +775,18 @@
       "name": "upgrade",
       "description": "upgrade dependencies",
       "env": {
-        "CI": "0"
+        "CI": "0",
+        "NPM_CONFIG_BEFORE": "$(node -p \"new Date(Date.now()-259200000).toISOString()\")"
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@20 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@aws/durable-execution-sdk-js-testing,@types/aws-lambda,@types/jest,@types/node,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@aws/durable-execution-sdk-js,@slack/web-api,got"
+          "exec": "npx npm-check-updates@20 --upgrade --target=minor --cooldown=3 --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@aws/durable-execution-sdk-js-testing,@types/aws-lambda,@types/jest,@types/node,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,nock,projen,ts-jest,ts-node,typescript,@aws/durable-execution-sdk-js,@slack/web-api,got"
         },
         {
-          "exec": "yarn install --check-files"
+          "exec": "npm install"
         },
         {
-          "exec": "yarn upgrade @aws-sdk/client-cloudformation @aws-sdk/client-dynamodb @aws-sdk/client-ecr @aws-sdk/client-ecs @aws-sdk/client-eventbridge @aws-sdk/client-iam @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-sns @aws-sdk/client-textract @aws-sdk/lib-dynamodb @aws/durable-execution-sdk-js-testing @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-sdk-client-mock aws-sdk-client-mock-jest commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii nock projen ts-jest ts-node typescript @aws/durable-execution-sdk-js @slack/web-api got aws-cdk-lib constructs"
+          "exec": "npm update @aws-sdk/client-cloudformation @aws-sdk/client-dynamodb @aws-sdk/client-ecr @aws-sdk/client-ecs @aws-sdk/client-eventbridge @aws-sdk/client-iam @aws-sdk/client-s3 @aws-sdk/client-secrets-manager @aws-sdk/client-sfn @aws-sdk/client-sns @aws-sdk/client-textract @aws-sdk/lib-dynamodb @aws/durable-execution-sdk-js-testing @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/node @types/tsscmp @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk aws-sdk-client-mock aws-sdk-client-mock-jest commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii nock projen ts-jest ts-node typescript @aws/durable-execution-sdk-js @slack/web-api got aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
