@@ -35,12 +35,6 @@
       "data": "AuthorizerBD825682"
     }
   ],
-  "/url-shortener-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
-    }
-  ],
   "/url-shortener-integ/UrlShortener/Table/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -83,6 +77,12 @@
       "data": "UrlShortenerHttpsRecordC4C37D4E"
     }
   ],
+  "/url-shortener-integ/UrlShortener/ShortenerLogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UrlShortenerShortenerLogGroup160388BF"
+    }
+  ],
   "/url-shortener-integ/UrlShortener/Shortener/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -105,12 +105,6 @@
     {
       "type": "aws:cdk:logicalId",
       "data": "UrlShortenerUrlShortenergoldexbeEndpointD5C20618"
-    }
-  ],
-  "/url-shortener-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
     }
   ],
   "/url-shortener-integ/UrlShortener/Redirect/ServiceRole/Resource": [
@@ -137,12 +131,6 @@
       "data": "UrlShortenerServiceRoleD261E374"
     }
   ],
-  "/url-shortener-integ/UrlShortener/Shortener/LogRetention/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "UrlShortenerLogRetention2FFA6E68"
-    }
-  ],
   "/url-shortener-integ/UrlShortener/UrlShortenergoldex.be/CloudWatchRole/Resource": [
     {
       "type": "aws:cdk:logicalId",
@@ -159,12 +147,6 @@
     {
       "type": "aws:cdk:logicalId",
       "data": "UrlShortenerUrlShortenergoldexbeDeploymentStageprodD9860D8D"
-    }
-  ],
-  "/url-shortener-integ/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
-    {
-      "type": "aws:cdk:logicalId",
-      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
     }
   ],
   "/url-shortener-integ/UrlShortener/Redirect/ServiceRole/DefaultPolicy/Resource": [
