@@ -104,7 +104,7 @@
     "constructs": "10.5.1",
     "esbuild": "^0.28.0",
     "eslint": "^9",
-    "eslint-import-resolver-typescript": "^3.10.1",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "jest": "^30.4.2",
     "jest-junit": "^17",
