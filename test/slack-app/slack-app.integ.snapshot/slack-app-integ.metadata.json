@@ -1,74 +1,211 @@
 {
+  "/slack-app-integ": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
+    }
+  ],
   "/slack-app-integ/AppId": [
     {
       "type": "aws:cdk:logicalId",
       "data": "AppId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:18:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/BootstrapVersion": [
     {
       "type": "aws:cdk:logicalId",
       "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/CheckBootstrapVersion": [
     {
       "type": "aws:cdk:logicalId",
       "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/MyApp/Credentials/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "MyAppCredentialsA49C5B90"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Secret2 in aws-cdk-lib...",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:144:51)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/MyApp/Resource/Default": [
     {
       "type": "aws:cdk:logicalId",
       "data": "MyApp3CE31C26"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new CustomResource2 in aws-cdk-lib...",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:149:22)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/SlackAppProvider/handlerLogGroup/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderhandlerLogGroupAE1EF89C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:26:17)",
+        "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/SlackAppProvider/handler/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderhandler547B4993"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new ProviderFunction (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider-function.ts:17:5)",
+        "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:25:20)",
+        "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/SlackAppProvider/handler/ServiceRole/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderhandlerServiceRoleDAC1FDD7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new ProviderFunction (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider-function.ts:17:5)",
+        "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:25:20)",
+        "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/SlackAppProvider/Resource/framework-onEvent/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderframeworkonEventF1145A70"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Provider2 in aws-cdk-lib...",
+        "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:31:22)",
+        "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/SlackAppProvider/handler/ServiceRole/DefaultPolicy/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderhandlerServiceRoleDefaultPolicyBAEEA75E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...SecretBase.grantRead in aws-cdk-lib...",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:141:36)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/SlackAppProvider/Resource/framework-onEvent/ServiceRole/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderframeworkonEventServiceRoleE93E1666"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Provider2 in aws-cdk-lib...",
+        "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:31:22)",
+        "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/slack-app-integ/SlackAppProvider/Resource/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SlackAppProviderframeworkonEventServiceRoleDefaultPolicy494BD6CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Provider2 in aws-cdk-lib...",
+        "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:31:22)",
+        "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ]
 }

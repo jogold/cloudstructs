@@ -1,14 +1,39 @@
 {
+  "/ssl-server-test-integ": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
+    }
+  ],
   "/ssl-server-test-integ/BootstrapVersion": [
     {
       "type": "aws:cdk:logicalId",
       "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:18:5)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/CheckBootstrapVersion": [
     {
       "type": "aws:cdk:logicalId",
       "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:18:5)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction": [
@@ -18,30 +43,32 @@
       "trace": [
         "Annotations.addMessage (/home/runner/work/cloudstructs/cloudstructs/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2399)",
         "Annotations.addInfoV2 (/home/runner/work/cloudstructs/cloudstructs/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1443)",
-        "AnalyzeFunction.renderDurableConfig (/home/runner/work/cloudstructs/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:35914)",
-        "new Function2 (/home/runner/work/cloudstructs/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:20651)",
+        "AnalyzeFunction.renderDurableConfig (/home/runner/work/cloudstructs/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:35905)",
+        "new Function2 (/home/runner/work/cloudstructs/cloudstructs/node_modules/aws-cdk-lib/aws-lambda/lib/function.js:1:20719)",
         "new Function2 (/home/runner/work/cloudstructs/cloudstructs/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
         "new AnalyzeFunction (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/analyze-function.ts:17:5)",
         "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:67:29)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
         "Object.<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
-        "Module._compile (node:internal/modules/cjs/loader:1812:14)",
+        "Module._compile (node:internal/modules/cjs/loader:1804:14)",
         "Module.m._compile (/home/runner/work/cloudstructs/cloudstructs/node_modules/ts-node/src/index.ts:1618:23)",
-        "node:internal/modules/cjs/loader:1943:10",
+        "node:internal/modules/cjs/loader:1936:10",
         "Object.require.extensions.<computed> [as .ts] (/home/runner/work/cloudstructs/cloudstructs/node_modules/ts-node/src/index.ts:1621:12)",
-        "Module.load (node:internal/modules/cjs/loader:1533:32)",
-        "Module._load (node:internal/modules/cjs/loader:1335:12)",
-        "wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+        "Module.load (node:internal/modules/cjs/loader:1525:32)",
+        "Module._load (node:internal/modules/cjs/loader:1327:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
         "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
         "phase4 (/home/runner/work/cloudstructs/cloudstructs/node_modules/ts-node/src/bin.ts:649:14)",
         "bootstrap (/home/runner/work/cloudstructs/cloudstructs/node_modules/ts-node/src/bin.ts:95:10)",
         "main (/home/runner/work/cloudstructs/cloudstructs/node_modules/ts-node/src/bin.ts:55:10)",
         "Object.<anonymous> (/home/runner/work/cloudstructs/cloudstructs/node_modules/ts-node/src/bin.ts:800:3)",
-        "Module._compile (node:internal/modules/cjs/loader:1812:14)",
-        "Object.<anonymous> (node:internal/modules/cjs/loader:1943:10)",
-        "Module.load (node:internal/modules/cjs/loader:1533:32)",
-        "Module._load (node:internal/modules/cjs/loader:1335:12)",
-        "wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+        "Module._compile (node:internal/modules/cjs/loader:1804:14)",
+        "Object.<anonymous> (node:internal/modules/cjs/loader:1936:10)",
+        "Module.load (node:internal/modules/cjs/loader:1525:32)",
+        "Module._load (node:internal/modules/cjs/loader:1327:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
         "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
         "node:internal/main/run_main_module:33:47"
       ]
@@ -51,42 +78,114 @@
     {
       "type": "aws:cdk:logicalId",
       "data": "SchedulerRoleForTarget0be0894E78F7A7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Schedule2 in aws-cdk-lib...",
+        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:81:5)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/SslServerTestCdkDev/AlarmTopic/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SslServerTestCdkDevAlarmTopic7DD51A1B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Topic2 in aws-cdk-lib...",
+        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:65:43)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SslServerTestCdkDevAnalyzeFunction55D19894"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new AnalyzeFunction (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/analyze-function.ts:17:5)",
+        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:67:29)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/SslServerTestCdkDev/Schedule/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SslServerTestCdkDevScheduleFE056D2F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Schedule2 in aws-cdk-lib...",
+        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:81:5)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/SchedulerRoleForTarget-0be089/DefaultPolicy/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SchedulerRoleForTarget0be089DefaultPolicy904F731F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Schedule2 in aws-cdk-lib...",
+        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:81:5)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction/ServiceRole/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SslServerTestCdkDevAnalyzeFunctionServiceRoleF4F33002"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new AnalyzeFunction (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/analyze-function.ts:17:5)",
+        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:67:29)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ],
   "/ssl-server-test-integ/SslServerTestCdkDev/AnalyzeFunction/ServiceRole/DefaultPolicy/Resource": [
     {
       "type": "aws:cdk:logicalId",
       "data": "SslServerTestCdkDevAnalyzeFunctionServiceRoleDefaultPolicy063E91F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.grantPublish in aws-cdk-lib...",
+        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:79:21)",
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:17:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
     }
   ]
 }
