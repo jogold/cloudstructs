@@ -179,10 +179,6 @@
       "type": "bundled"
     },
     {
-      "name": "got",
-      "type": "bundled"
-    },
-    {
       "name": "aws-cdk-lib",
       "version": "^2.254.0",
       "type": "peer"

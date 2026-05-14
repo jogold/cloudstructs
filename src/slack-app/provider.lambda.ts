@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
 import type { OnEventRequest, OnEventResponse } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types';
-import got from 'got';
+
+const SLACK_API_BASE = 'https://slack.com/api';
 
 interface SlackSecret {
   accessToken?: string;
@@ -52,10 +53,6 @@ interface ManifestResponse {
 
 const secretsmanagerClient = new SecretsManagerClient({});
 
-const slackClient = got.extend({
-  prefixUrl: 'https://slack.com/api',
-});
-
 export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   console.log('Event: %j', event);
 
@@ -77,9 +74,13 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
     }
 
     console.log('Refreshing access token');
-    const rotate = await slackClient.get('tooling.tokens.rotate', {
-      searchParams: { refresh_token: secret.refreshToken },
-    }).json<RotateResponse>();
+    const rotateUrl = new URL(`${SLACK_API_BASE}/tooling.tokens.rotate`);
+    rotateUrl.searchParams.set('refresh_token', secret.refreshToken);
+    const rotateResponse = await fetch(rotateUrl);
+    if (!rotateResponse.ok) {
+      throw new Error(`Failed to refresh access token: ${rotateResponse.status} ${rotateResponse.statusText}`);
+    }
+    const rotate = await rotateResponse.json() as RotateResponse;
 
     if (!rotate.ok) {
       throw new Error(`Failed to refresh access token: ${rotate.error}`);
@@ -104,10 +105,18 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   const request = getManifestRequest(event);
 
   console.log(`Calling ${operation} manifest API: %j`, request);
-  const response = await slackClient.post(`apps.manifest.${operation}`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-    json: request,
-  }).json<ManifestResponse>();
+  const manifestHttpResponse = await fetch(`${SLACK_API_BASE}/apps.manifest.${operation}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(request),
+  });
+  if (!manifestHttpResponse.ok) {
+    throw new Error(`Failed to ${operation} manifest: ${manifestHttpResponse.status} ${manifestHttpResponse.statusText}`);
+  }
+  const response = await manifestHttpResponse.json() as ManifestResponse;
 
   if (!response.ok) {
     const errors = response.errors

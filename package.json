@@ -125,13 +125,11 @@
   },
   "dependencies": {
     "@aws/durable-execution-sdk-js": "^1.1.2",
-    "@slack/web-api": "^7.15.2",
-    "got": "^11.8.6"
+    "@slack/web-api": "^7.15.2"
   },
   "bundledDependencies": [
     "@aws/durable-execution-sdk-js",
-    "@slack/web-api",
-    "got"
+    "@slack/web-api"
   ],
   "keywords": [
     "cdk"

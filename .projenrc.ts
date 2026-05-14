@@ -15,7 +15,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   bundledDeps: [
     '@aws/durable-execution-sdk-js',
     '@slack/web-api',
-    'got',
   ],
   devDeps: [
     '@aws-sdk/client-cloudformation',
