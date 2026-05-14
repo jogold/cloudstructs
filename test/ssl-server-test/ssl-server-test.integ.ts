@@ -1,4 +1,4 @@
-import { App, Stack, StackProps } from 'aws-cdk-lib';
+import { Annotations, App, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { SslServerTest } from '../../src';
 
@@ -10,6 +10,8 @@ class TestStack extends Stack {
       registrationEmail: 'jdoe@someoraganizationemail.com',
       host: 'cdk.dev',
     });
+
+    Annotations.of(this).acknowledgeInfo('aws-lambda:Function.DurableConfig');
   }
 }
 

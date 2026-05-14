@@ -1,4 +1,4 @@
-import { App, Duration, Stack, StackProps } from 'aws-cdk-lib';
+import { Annotations, App, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { ToolkitCleaner } from '../../src';
 
@@ -10,6 +10,8 @@ class TestStack extends Stack {
       dryRun: true,
       retainAssetsNewerThan: Duration.days(90),
     });
+
+    Annotations.of(this).acknowledgeInfo('aws-lambda:Function.DurableConfig');
   }
 }
 
