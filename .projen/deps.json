@@ -151,10 +151,6 @@
       "type": "build"
     },
     {
-      "name": "nock",
-      "type": "build"
-    },
-    {
       "name": "projen",
       "type": "build"
     },

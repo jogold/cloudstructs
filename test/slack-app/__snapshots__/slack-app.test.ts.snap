@@ -188,7 +188,7 @@ exports[`SlackApp 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "8655cc46b474a26efa8a61a271b8f7d6dbf110afd844ef371d48ec49bb2dd065.zip",
+          "S3Key": "3e189b4179bf84fa37874e0a066f894c63ae862946984f58a0f31dfca493e491.zip",
         },
         "Description": "src/slack-app/provider.lambda.ts",
         "Environment": {

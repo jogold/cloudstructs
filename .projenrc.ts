@@ -34,7 +34,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/tsscmp',
     'aws-sdk-client-mock',
     'aws-sdk-client-mock-jest',
-    'nock',
   ],
   defaultReleaseBranch: 'master',
   packageManager: javascript.NodePackageManager.NPM,
