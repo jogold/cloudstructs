@@ -8,28 +8,25 @@ import 'aws-sdk-client-mock-jest';
 import { LocalDurableTestRunner } from '@aws/durable-execution-sdk-js-testing';
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns';
 import { mockClient } from 'aws-sdk-client-mock';
-import nock from 'nock';
 import { handler } from '../../src/ssl-server-test/analyze.lambda';
 import { AnalyzeResponse, AnalyzeStatus, SslServerTestGrade } from '../../src/ssl-server-test/types';
 
 const snsClientMock = mockClient(SNSClient);
 
-// Helper to mock SSL Labs API calls
-function mockSslLabsApi(startResponse: Partial<AnalyzeResponse>, ...pollResponses: Partial<AnalyzeResponse>[]) {
-  // Start analysis call
-  nock('https://api.ssllabs.com')
-    .get('/api/v4/analyze')
-    .query({ host: 'example.com', startNew: 'on' })
-    .matchHeader('email', 'test@example.com')
-    .reply(200, startResponse);
+const fetchMock = jest.fn();
+global.fetch = fetchMock as unknown as typeof fetch;
 
-  // Poll calls
-  for (const response of pollResponses) {
-    nock('https://api.ssllabs.com')
-      .get('/api/v4/analyze')
-      .query({ host: 'example.com' })
-      .matchHeader('email', 'test@example.com')
-      .reply(200, response);
+// Helper to queue SSL Labs API responses: first call is start-analysis, the rest are polls.
+function mockSslLabsApi(startResponse: Partial<AnalyzeResponse>, ...pollResponses: Partial<AnalyzeResponse>[]) {
+  for (const body of [startResponse, ...pollResponses]) {
+    fetchMock.mockImplementationOnce((url: URL) => {
+      expect(url.toString()).toContain('https://api.ssllabs.com/api/v4/analyze');
+      expect(url.searchParams.get('host')).toBe('example.com');
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(body),
+      });
+    });
   }
 }
 
@@ -38,16 +35,14 @@ describe('SSL Server Test Lambda', () => {
 
   beforeAll(async () => {
     await LocalDurableTestRunner.setupTestEnvironment({ skipTime: true });
-    nock.disableNetConnect();
   });
 
   afterAll(async () => {
     await LocalDurableTestRunner.teardownTestEnvironment();
-    nock.enableNetConnect();
   });
 
   beforeEach(() => {
-    nock.cleanAll();
+    fetchMock.mockReset();
     snsClientMock.reset();
     snsClientMock.on(PublishCommand).resolves({});
     runner = new LocalDurableTestRunner({ handlerFunction: handler });

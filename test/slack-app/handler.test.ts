@@ -79,7 +79,7 @@ test('create request', async () => {
   expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.create', {
     method: 'POST',
     headers: {
-      Authorization: 'Bearer access-token',
+      'Authorization': 'Bearer access-token',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ manifest: 'manifest' }),
@@ -143,7 +143,7 @@ test('refreshes the token', async () => {
   expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.create', {
     method: 'POST',
     headers: {
-      Authorization: 'Bearer new-access-token',
+      'Authorization': 'Bearer new-access-token',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ manifest: 'manifest' }),
@@ -172,7 +172,7 @@ test('update request', async () => {
   expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.update', {
     method: 'POST',
     headers: {
-      Authorization: 'Bearer access-token',
+      'Authorization': 'Bearer access-token',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ app_id: 'app-id', manifest: 'manifest' }),
@@ -202,7 +202,7 @@ test('delete request', async () => {
   expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.delete', {
     method: 'POST',
     headers: {
-      Authorization: 'Bearer access-token',
+      'Authorization': 'Bearer access-token',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ app_id: 'app-id' }),

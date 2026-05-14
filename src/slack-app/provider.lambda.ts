@@ -108,7 +108,7 @@ export async function handler(event: OnEventRequest): Promise<OnEventResponse> {
   const manifestHttpResponse = await fetch(`${SLACK_API_BASE}/apps.manifest.${operation}`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      'Authorization': `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(request),
