@@ -1,25 +1,8 @@
-const getResponseMock = jest.fn().mockResolvedValue({});
-const getMock = jest.fn().mockImplementation(() => ({
-  json: getResponseMock,
-}));
+const rotateResponseMock = jest.fn().mockResolvedValue({});
+const manifestResponseMock = jest.fn().mockResolvedValue({});
 
-const postResponseMock = jest.fn().mockResolvedValue({});
-const postMock = jest.fn().mockImplementation(() => ({
-  json: postResponseMock,
-}));
-
-const extendMock = jest.fn().mockImplementation(() => {
-  return {
-    get: getMock,
-    post: postMock,
-  };
-});
-
-jest.mock('got', () => {
-  return {
-    extend: extendMock,
-  };
-});
+const fetchMock = jest.fn();
+global.fetch = fetchMock as unknown as typeof fetch;
 
 import 'aws-sdk-client-mock-jest';
 import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
@@ -65,10 +48,17 @@ beforeEach(() => {
     ARN: 'arn',
   });
 
-  postResponseMock.mockResolvedValue({
+  manifestResponseMock.mockResolvedValue({
     ok: true,
     app_id: 'app-id',
     credentials,
+  });
+
+  fetchMock.mockImplementation((_url: unknown, init?: { method?: string }) => {
+    if (init?.method === 'POST') {
+      return Promise.resolve({ ok: true, json: manifestResponseMock });
+    }
+    return Promise.resolve({ ok: true, json: rotateResponseMock });
   });
 });
 
@@ -86,9 +76,13 @@ test('create request', async () => {
     SecretId: 'conf-secret-arn',
   });
 
-  expect(postMock).toHaveBeenCalledWith('apps.manifest.create', {
-    headers: { Authorization: 'Bearer access-token' },
-    json: { manifest: 'manifest' },
+  expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.create', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer access-token',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ manifest: 'manifest' }),
   });
 
   expect(secretsManagerClientMock).toHaveReceivedCommandWith(PutSecretValueCommand, {
@@ -113,7 +107,7 @@ test('refreshes the token', async () => {
   });
 
   const exp = (Date.now() / 1000) + 12 * 3600;
-  getResponseMock.mockResolvedValue({
+  rotateResponseMock.mockResolvedValue({
     ok: true,
     token: 'new-access-token',
     refresh_token: 'new-refresh-token',
@@ -142,14 +136,22 @@ test('refreshes the token', async () => {
     }),
   });
 
-  expect(postMock).toHaveBeenCalledWith('apps.manifest.create', {
-    headers: { Authorization: 'Bearer new-access-token' },
-    json: { manifest: 'manifest' },
+  const rotateUrl = new URL('https://slack.com/api/tooling.tokens.rotate');
+  rotateUrl.searchParams.set('refresh_token', 'refresh-token');
+  expect(fetchMock).toHaveBeenCalledWith(rotateUrl);
+
+  expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.create', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer new-access-token',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ manifest: 'manifest' }),
   });
 });
 
 test('update request', async () => {
-  postResponseMock.mockResolvedValue({
+  manifestResponseMock.mockResolvedValue({
     ok: true,
     app_id: 'app-id',
   });
@@ -167,16 +169,20 @@ test('update request', async () => {
     },
   });
 
-  expect(postMock).toHaveBeenCalledWith('apps.manifest.update', {
-    headers: { Authorization: 'Bearer access-token' },
-    json: { app_id: 'app-id', manifest: 'manifest' },
+  expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.update', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer access-token',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ app_id: 'app-id', manifest: 'manifest' }),
   });
 
   expect(secretsManagerClientMock).not.toHaveReceivedCommand(PutSecretValueCommand);
 });
 
 test('delete request', async () => {
-  postResponseMock.mockResolvedValue({
+  manifestResponseMock.mockResolvedValue({
     ok: true,
   });
 
@@ -193,9 +199,13 @@ test('delete request', async () => {
     },
   });
 
-  expect(postMock).toHaveBeenCalledWith('apps.manifest.delete', {
-    headers: { Authorization: 'Bearer access-token' },
-    json: { app_id: 'app-id' },
+  expect(fetchMock).toHaveBeenCalledWith('https://slack.com/api/apps.manifest.delete', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer access-token',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ app_id: 'app-id' }),
   });
 
   expect(secretsManagerClientMock).not.toHaveReceivedCommand(PutSecretValueCommand);

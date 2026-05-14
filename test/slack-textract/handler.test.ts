@@ -2,18 +2,19 @@ import 'aws-sdk-client-mock-jest';
 import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
 import { FilesInfoResponse, WebClient } from '@slack/web-api';
 import { mockClient } from 'aws-sdk-client-mock';
-import got from 'got';
 import { handler } from '../../src/slack-textract/detect.lambda';
 
 process.env.SLACK_TOKEN = 'token';
 
 jest.mock('@slack/web-api');
-jest.mock('got');
 
-const gotMock = got as unknown as jest.Mock;
+const fetchMock = jest.fn();
+global.fetch = fetchMock as unknown as typeof fetch;
+
 const textractClientMock = mockClient(TextractClient);
 
 beforeEach(() => {
+  fetchMock.mockReset();
   textractClientMock.reset();
 });
 
@@ -42,8 +43,9 @@ test('handler', async () => {
     };
   });
 
-  gotMock.mockImplementation(() => {
-    return { buffer: () => Buffer.from('image-buffer') };
+  fetchMock.mockResolvedValue({
+    ok: true,
+    arrayBuffer: () => Promise.resolve(Buffer.from('image-buffer')),
   });
 
   textractClientMock.on(DetectDocumentTextCommand).resolves({
@@ -72,7 +74,7 @@ test('handler', async () => {
     file: 'F1234567XYZ',
   });
 
-  expect(gotMock).toHaveBeenCalledWith('url-private', {
+  expect(fetchMock).toHaveBeenCalledWith('url-private', {
     headers: {
       Authorization: 'Bearer token',
     },

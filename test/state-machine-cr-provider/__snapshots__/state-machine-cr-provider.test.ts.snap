@@ -32,7 +32,7 @@ exports[`StateMachineCustomResourceProvider 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "ad188079f1c4f6583a0ca78720777daca37f080d2c69195ba2a27ae0b207a9a0.zip",
+          "S3Key": "bb719b458b05940a9ffbf010c23effd533f988186b5d3b2d86c25e2cdb6b45b0.zip",
         },
         "Handler": "index.cfnResponseFailed",
         "Role": {
@@ -85,7 +85,7 @@ exports[`StateMachineCustomResourceProvider 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "ad188079f1c4f6583a0ca78720777daca37f080d2c69195ba2a27ae0b207a9a0.zip",
+          "S3Key": "bb719b458b05940a9ffbf010c23effd533f988186b5d3b2d86c25e2cdb6b45b0.zip",
         },
         "Handler": "index.cfnResponseSuccess",
         "Role": {
@@ -250,7 +250,7 @@ exports[`StateMachineCustomResourceProvider 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "ad188079f1c4f6583a0ca78720777daca37f080d2c69195ba2a27ae0b207a9a0.zip",
+          "S3Key": "bb719b458b05940a9ffbf010c23effd533f988186b5d3b2d86c25e2cdb6b45b0.zip",
         },
         "Environment": {
           "Variables": {

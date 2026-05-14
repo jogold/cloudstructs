@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { DetectDocumentTextCommand, TextractClient } from '@aws-sdk/client-textract';
 import { WebClient } from '@slack/web-api';
-import got from 'got';
 
 export interface SlackEvent {
   channel_id: string;
@@ -37,11 +36,15 @@ export async function handler(event: SlackEvent): Promise<void> {
   }
 
   // Get file
-  const file = await got(info.file.url_private, {
+  const fileResponse = await fetch(info.file.url_private, {
     headers: {
       Authorization: `Bearer ${process.env.SLACK_TOKEN}`,
     },
-  }).buffer();
+  });
+  if (!fileResponse.ok) {
+    throw new Error(`Failed to download file: ${fileResponse.status} ${fileResponse.statusText}`);
+  }
+  const file = Buffer.from(await fileResponse.arrayBuffer());
 
   // Detect text with Textract
   const data = await textractClient.send(new DetectDocumentTextCommand({

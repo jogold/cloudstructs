@@ -7,7 +7,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'jonathan.goldwasser@gmail.com',
   description: 'High-level constructs for AWS CDK',
   jsiiVersion: '5.x',
-  cdkVersion: '2.254.0',
+  cdkVersion: '2.253.1',
   name: 'cloudstructs',
   projenrcTs: true,
   tsJestOptions: { transformOptions: { isolatedModules: true } },
@@ -15,7 +15,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   bundledDeps: [
     '@aws/durable-execution-sdk-js',
     '@slack/web-api',
-    'got',
   ],
   devDeps: [
     '@aws-sdk/client-cloudformation',
@@ -35,7 +34,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/tsscmp',
     'aws-sdk-client-mock',
     'aws-sdk-client-mock-jest',
-    'nock',
   ],
   defaultReleaseBranch: 'master',
   packageManager: javascript.NodePackageManager.NPM,

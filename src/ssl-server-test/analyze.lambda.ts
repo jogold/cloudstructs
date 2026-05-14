@@ -1,31 +1,37 @@
 import { DurableContext, withDurableExecution } from '@aws/durable-execution-sdk-js';
 import { PublishCommand, SNSClient } from '@aws-sdk/client-sns';
-import got from 'got';
 import { getEnv } from '../utils';
 import { AnalyzeResponse, AnalyzeStatus, SslServerTestGrade } from './types';
 
-const sslLabsClient = got.extend({
-  prefixUrl: 'https://api.ssllabs.com/api/v4',
-  headers: { email: getEnv('REGISTRATION_EMAIL') },
-  searchParams: {
-    host: getEnv('HOST'),
-  },
-});
+const SSL_LABS_BASE = 'https://api.ssllabs.com/api/v4';
+
+async function sslLabsAnalyze<T>(extraParams: Record<string, string> = {}): Promise<T> {
+  const url = new URL(`${SSL_LABS_BASE}/analyze`);
+  url.searchParams.set('host', getEnv('HOST'));
+  for (const [key, value] of Object.entries(extraParams)) {
+    url.searchParams.set(key, value);
+  }
+  const response = await fetch(url, {
+    headers: { email: getEnv('REGISTRATION_EMAIL') },
+  });
+  if (!response.ok) {
+    throw new Error(`SSL Labs request failed: ${response.status} ${response.statusText}`);
+  }
+  return response.json() as Promise<T>;
+}
 
 const snsClient = new SNSClient({});
 
 export const handler = withDurableExecution(async (_, context: DurableContext) => {
   // Start analysis
   await context.step('start-analysis', async () => {
-    const response = await sslLabsClient('analyze', {
-      searchParams: { startNew: 'on' },
-    }).json();
+    const response = await sslLabsAnalyze({ startNew: 'on' });
     context.logger.info('Started SSL analysis', response);
   });
 
   // Wait for analysis to complete
   const analysis = await context.waitForCondition<AnalyzeResponse>('wait-for-completion', async (_state, waitContext) => {
-    const response = await sslLabsClient('analyze').json<AnalyzeResponse>();
+    const response = await sslLabsAnalyze<AnalyzeResponse>();
     waitContext.logger.info('Current analysis status', response);
     return response;
   }, {

@@ -97,7 +97,7 @@
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk": "^2",
-    "aws-cdk-lib": "2.254.0",
+    "aws-cdk-lib": "2.253.1",
     "aws-sdk-client-mock": "^2.2.0",
     "aws-sdk-client-mock-jest": "^2.2.0",
     "commit-and-tag-version": "^12",
@@ -113,25 +113,22 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.129.0",
     "jsii-rosetta": "5.x",
-    "nock": "^13.5.6",
     "projen": "^0.99.60",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.254.0",
+    "aws-cdk-lib": "^2.253.1",
     "constructs": "^10.5.1"
   },
   "dependencies": {
     "@aws/durable-execution-sdk-js": "^1.1.2",
-    "@slack/web-api": "^7.15.2",
-    "got": "^11.8.6"
+    "@slack/web-api": "^7.15.2"
   },
   "bundledDependencies": [
     "@aws/durable-execution-sdk-js",
-    "@slack/web-api",
-    "got"
+    "@slack/web-api"
   ],
   "keywords": [
     "cdk"
