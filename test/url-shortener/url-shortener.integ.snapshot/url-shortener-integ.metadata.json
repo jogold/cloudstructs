@@ -3,7 +3,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -17,9 +17,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new ARecord2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:148:5)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:148:5)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -32,8 +32,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:34:5)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:34:5)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -47,7 +47,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:44:5)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:44:5)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -61,7 +61,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:44:5)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:44:5)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -75,8 +75,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new UserPool2 in aws-cdk-lib...",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:14:22)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:14:22)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -90,8 +90,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new CognitoUserPoolsAuthorizer2 in aws-cdk-lib...",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:25:29)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:25:29)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -105,9 +105,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Table2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:107:19)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:107:19)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -121,9 +121,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:117:20)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:117:20)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -137,10 +137,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new RedirectFunction (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/redirect-function.ts:17:5)",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:126:30)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new RedirectFunction (/workspaces/cloudstructs/src/url-shortener/redirect-function.ts:17:5)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:126:30)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -154,9 +154,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:133:26)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:133:26)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -170,9 +170,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new ARecord2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:148:5)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:148:5)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -186,9 +186,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new AaaaRecord2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:149:5)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:149:5)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -202,9 +202,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new HttpsRecord2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:150:5)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:150:5)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -218,9 +218,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new LogGroup2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:154:17)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:154:17)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -234,10 +234,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new ShortenerFunction (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/shortener-function.ts:17:5)",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:153:31)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new ShortenerFunction (/workspaces/cloudstructs/src/url-shortener/shortener-function.ts:17:5)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:153:31)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -251,9 +251,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:170:16)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:170:16)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -267,9 +267,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:170:16)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:170:16)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -283,9 +283,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:170:16)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:170:16)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -299,10 +299,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new RedirectFunction (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/redirect-function.ts:17:5)",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:126:30)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new RedirectFunction (/workspaces/cloudstructs/src/url-shortener/redirect-function.ts:17:5)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:126:30)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -316,9 +316,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RedirectFunction.addFunctionUrl in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:135:84)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:135:84)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -332,9 +332,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:133:26)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:133:26)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -348,10 +348,10 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new ShortenerFunction (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/shortener-function.ts:17:5)",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:153:31)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new ShortenerFunction (/workspaces/cloudstructs/src/url-shortener/shortener-function.ts:17:5)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:153:31)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -365,9 +365,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:170:16)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:170:16)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -381,9 +381,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:170:16)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:170:16)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -397,9 +397,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:170:16)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:170:16)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -413,9 +413,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.grantRead in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:131:12)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:131:12)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -429,9 +429,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:133:26)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:133:26)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -445,9 +445,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.grantPut in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:166:12)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:166:12)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -461,9 +461,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new RestApi2 in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:170:16)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:170:16)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -477,9 +477,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addMethod in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:198:19)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:198:19)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -493,9 +493,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addMethod in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:198:19)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:198:19)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -509,9 +509,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addMethod in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:198:19)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:198:19)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -525,9 +525,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addResource in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:203:8)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:203:8)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -541,9 +541,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...RootResource.addResource in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:203:8)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:203:8)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -557,9 +557,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:204:8)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:204:8)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -573,9 +573,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:204:8)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:204:8)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
@@ -589,9 +589,9 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.addMethod in aws-cdk-lib...",
-        "new UrlShortener (/home/runner/work/cloudstructs/cloudstructs/src/url-shortener/index.ts:204:8)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
+        "new UrlShortener (/workspaces/cloudstructs/src/url-shortener/index.ts:204:8)",
+        "new TestStack (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:18:26)",
+        "<anonymous> (/workspaces/cloudstructs/test/url-shortener/url-shortener.integ.ts:39:1)",
         "...node internals, ts-node, ts-node, ts-node..."
       ]
     }
