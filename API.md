@@ -2382,6 +2382,7 @@ const emailReceiverProps: EmailReceiverProps = { ... }
 | <code><a href="#cloudstructs.EmailReceiverProps.property.recipients">recipients</a></code> | <code>string[]</code> | The recipients for which emails should be received. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.afterRule">afterRule</a></code> | <code>aws-cdk-lib.aws_ses.IReceiptRule</code> | An existing rule after which the new rule will be placed in the rule set. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.enabled">enabled</a></code> | <code>boolean</code> | Whether the receiver is active. |
+| <code><a href="#cloudstructs.EmailReceiverProps.property.expiration">expiration</a></code> | <code>aws-cdk-lib.Duration</code> | The expiration for emails stored in the S3 bucket. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.function">function</a></code> | <code>aws-cdk-lib.aws_lambda.IFunction</code> | A Lambda function to invoke after the message is saved to S3. |
 | <code><a href="#cloudstructs.EmailReceiverProps.property.sourceWhitelist">sourceWhitelist</a></code> | <code>string</code> | A regular expression to whitelist source email addresses. |
 
@@ -2434,6 +2435,19 @@ public readonly enabled: boolean;
 - *Default:* true
 
 Whether the receiver is active.
+
+---
+
+##### `expiration`<sup>Optional</sup> <a name="expiration" id="cloudstructs.EmailReceiverProps.property.expiration"></a>
+
+```typescript
+public readonly expiration: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+- *Default:* Duration.days(1)
+
+The expiration for emails stored in the S3 bucket.
 
 ---
 
