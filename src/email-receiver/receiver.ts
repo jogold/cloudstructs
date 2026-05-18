@@ -49,6 +49,13 @@ export interface EmailReceiverProps {
    * @default true
    */
   readonly enabled?: boolean;
+
+  /**
+   * The expiration for emails stored in the S3 bucket.
+   *
+   * @default Duration.days(1)
+   */
+  readonly expiration?: Duration;
 }
 
 /**
@@ -79,7 +86,7 @@ export class EmailReceiver extends Construct {
     this.bucket = new s3.Bucket(this, 'Bucket', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       encryption: s3.BucketEncryption.S3_MANAGED,
-      lifecycleRules: [{ expiration: Duration.days(1) }],
+      lifecycleRules: [{ expiration: props.expiration ?? Duration.days(1) }],
     });
     if (props.function) {
       this.bucket.grantRead(props.function); // Download email
