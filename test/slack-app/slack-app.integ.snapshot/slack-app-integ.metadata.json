@@ -18,7 +18,7 @@
       "data": [
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:18:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -31,8 +31,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)"
       ]
     }
   ],
@@ -45,8 +44,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)"
       ]
     }
   ],
@@ -62,7 +60,7 @@
         "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:144:51)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -78,7 +76,7 @@
         "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:149:22)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -96,7 +94,7 @@
         "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node..."
       ]
     }
   ],
@@ -115,7 +113,7 @@
         "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node..."
       ]
     }
   ],
@@ -133,8 +131,7 @@
         "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
         "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)"
       ]
     }
   ],
@@ -151,8 +148,7 @@
         "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
         "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)"
       ]
     }
   ],
@@ -166,9 +162,7 @@
       "data": [
         "...SecretBase.grantRead in aws-cdk-lib...",
         "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:141:36)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)"
       ]
     }
   ],
@@ -183,10 +177,7 @@
         "...new Provider2 in aws-cdk-lib...",
         "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:31:22)",
         "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
-        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)"
       ]
     }
   ],
@@ -198,13 +189,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...new Provider2 in aws-cdk-lib...",
-        "new SlackAppProvider (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:31:22)",
-        "SlackAppProvider.getOrCreate (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/provider.ts:15:64)",
-        "new SlackApp (/home/runner/work/cloudstructs/cloudstructs/src/slack-app/slack-app.ts:140:39)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:10:17)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:25:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ]
