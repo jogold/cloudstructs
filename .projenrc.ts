@@ -7,7 +7,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'jonathan.goldwasser@gmail.com',
   description: 'High-level constructs for AWS CDK',
   jsiiVersion: '5.x',
-  cdkVersion: '2.253.1',
+  cdkVersion: '2.256.0',
   name: 'cloudstructs',
   projenrcTs: true,
   tsJestOptions: { transformOptions: { isolatedModules: true } },
