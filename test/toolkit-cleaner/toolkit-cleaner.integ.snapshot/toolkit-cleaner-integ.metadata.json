@@ -17,8 +17,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:20:5)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:20:5)"
       ]
     }
   ],
@@ -31,8 +30,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:20:5)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:20:5)"
       ]
     }
   ],
@@ -47,8 +45,7 @@
         "...new Schedule2 in aws-cdk-lib...",
         "new ToolkitCleaner (/home/runner/work/cloudstructs/cloudstructs/src/toolkit-cleaner/index.ts:90:5)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:9:5)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:19:1)"
       ]
     }
   ],
@@ -65,7 +62,7 @@
         "new ToolkitCleaner (/home/runner/work/cloudstructs/cloudstructs/src/toolkit-cleaner/index.ts:66:27)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -81,7 +78,7 @@
         "new ToolkitCleaner (/home/runner/work/cloudstructs/cloudstructs/src/toolkit-cleaner/index.ts:90:5)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -93,11 +90,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...new Schedule2 in aws-cdk-lib...",
-        "new ToolkitCleaner (/home/runner/work/cloudstructs/cloudstructs/src/toolkit-cleaner/index.ts:90:5)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:9:5)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -114,7 +108,7 @@
         "new ToolkitCleaner (/home/runner/work/cloudstructs/cloudstructs/src/toolkit-cleaner/index.ts:66:27)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node..."
       ]
     }
   ],
@@ -130,7 +124,7 @@
         "new ToolkitCleaner (/home/runner/work/cloudstructs/cloudstructs/src/toolkit-cleaner/index.ts:82:19)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/toolkit-cleaner/toolkit-cleaner.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals..."
       ]
     }
   ]

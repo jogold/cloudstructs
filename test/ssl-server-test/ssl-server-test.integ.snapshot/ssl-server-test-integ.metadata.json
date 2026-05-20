@@ -17,8 +17,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:20:5)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:20:5)"
       ]
     }
   ],
@@ -31,8 +30,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:20:5)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:20:5)"
       ]
     }
   ],
@@ -47,8 +45,7 @@
         "...new Schedule2 in aws-cdk-lib...",
         "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:81:5)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)"
       ]
     }
   ],
@@ -64,7 +61,7 @@
         "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:65:43)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -81,7 +78,7 @@
         "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:67:29)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -97,7 +94,7 @@
         "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:81:5)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node, ts-node..."
       ]
     }
   ],
@@ -109,11 +106,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...new Schedule2 in aws-cdk-lib...",
-        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:81:5)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -130,7 +124,7 @@
         "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:67:29)",
         "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
         "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...node internals, ts-node..."
       ]
     }
   ],
@@ -142,11 +136,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...WrappedClass.grantPublish in aws-cdk-lib...",
-        "new SslServerTest (/home/runner/work/cloudstructs/cloudstructs/src/ssl-server-test/index.ts:79:21)",
-        "new TestStack (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:9:5)",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:19:1)",
-        "...node internals, ts-node, ts-node, ts-node..."
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ]
