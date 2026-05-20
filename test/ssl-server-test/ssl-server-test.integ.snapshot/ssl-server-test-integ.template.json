@@ -64,7 +64,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "1d4fae1bbd7f561bc3a54c0fd1a7695b74f83ae663ed4e07723787b1d65cf08a.zip"
+     "S3Key": "23d1f92d94afa38d7b7396641a83375aa3331d890070f783e5fe9e1728f57620.zip"
     },
     "Description": "src/ssl-server-test/analyze.lambda.ts",
     "DurableConfig": {
