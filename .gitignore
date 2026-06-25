@@ -41,13 +41,13 @@ junit.xml
 !/.github/workflows/upgrade-master.yml
 !/.github/pull_request_template.md
 !/test/
+!/tsconfig.json
 !/tsconfig.dev.json
 !/src/
 /lib
 /dist/
 !/.eslintrc.json
 .jsii
-tsconfig.json
 !/API.md
 /assets/
 !/src/email-receiver/whitelist-function.ts
