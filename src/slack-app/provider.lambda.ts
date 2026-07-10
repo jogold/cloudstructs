@@ -1,8 +1,20 @@
 /* eslint-disable no-console */
 import { GetSecretValueCommand, PutSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
-import type { OnEventRequest, OnEventResponse } from 'aws-cdk-lib/custom-resources/lib/provider-framework/types';
 
 const SLACK_API_BASE = 'https://slack.com/api';
+
+// Local copy of the provider framework types: aws-cdk-lib does not expose
+// custom-resources/lib/provider-framework/types in its exports map
+interface OnEventRequest {
+  readonly RequestType: 'Create' | 'Update' | 'Delete';
+  readonly PhysicalResourceId?: string;
+  readonly ResourceProperties: { [key: string]: any };
+}
+
+interface OnEventResponse {
+  readonly PhysicalResourceId?: string;
+  readonly Data?: { [name: string]: any };
+}
 
 interface SlackSecret {
   accessToken?: string;
