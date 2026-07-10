@@ -20,7 +20,7 @@ test('ToolkitCleaner', () => {
         DOCKER_IMAGE_ASSET_HASH: Match.anyValue(),
       }),
     },
-    Timeout: 30,
+    Timeout: 900,
     DurableConfig: {
       ExecutionTimeout: 1800,
     },
@@ -46,6 +46,19 @@ test('with dry run', () => {
       Variables: Match.objectLike({
         RUN: Match.absent(),
       }),
+    },
+  });
+});
+
+test('with cleanAssetsTimeout', () => {
+  new ToolkitCleaner(stack, 'ToolkitCleaner', {
+    cleanAssetsTimeout: Duration.hours(1),
+  });
+
+  Template.fromStack(stack).hasResourceProperties('AWS::Lambda::Function', {
+    Timeout: 900,
+    DurableConfig: {
+      ExecutionTimeout: 3600,
     },
   });
 });
