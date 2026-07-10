@@ -76,21 +76,21 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.1061.0",
-    "@aws-sdk/client-dynamodb": "^3.1061.0",
-    "@aws-sdk/client-ecr": "^3.1061.0",
-    "@aws-sdk/client-ecs": "^3.1061.0",
-    "@aws-sdk/client-eventbridge": "^3.1061.0",
-    "@aws-sdk/client-iam": "^3.1061.0",
-    "@aws-sdk/client-s3": "^3.1061.0",
-    "@aws-sdk/client-secrets-manager": "^3.1061.0",
-    "@aws-sdk/client-sfn": "^3.1061.0",
-    "@aws-sdk/client-sns": "^3.1061.0",
-    "@aws-sdk/client-textract": "^3.1061.0",
-    "@aws-sdk/lib-dynamodb": "^3.1061.0",
+    "@aws-sdk/client-cloudformation": "^3.1073.0",
+    "@aws-sdk/client-dynamodb": "^3.1073.0",
+    "@aws-sdk/client-ecr": "^3.1073.0",
+    "@aws-sdk/client-ecs": "^3.1073.0",
+    "@aws-sdk/client-eventbridge": "^3.1073.0",
+    "@aws-sdk/client-iam": "^3.1073.0",
+    "@aws-sdk/client-s3": "^3.1073.0",
+    "@aws-sdk/client-secrets-manager": "^3.1073.0",
+    "@aws-sdk/client-sfn": "^3.1073.0",
+    "@aws-sdk/client-sns": "^3.1073.0",
+    "@aws-sdk/client-textract": "^3.1073.0",
+    "@aws-sdk/lib-dynamodb": "^3.1073.0",
     "@aws/durable-execution-sdk-js-testing": "^1.1.1",
     "@stylistic/eslint-plugin": "^2",
-    "@types/aws-lambda": "^8.10.161",
+    "@types/aws-lambda": "^8.10.162",
     "@types/jest": "^30.0.0",
     "@types/node": "^18.19.130",
     "@types/tsscmp": "^1.0.2",
@@ -102,18 +102,18 @@
     "aws-sdk-client-mock-jest": "^4.1.0",
     "commit-and-tag-version": "^12",
     "constructs": "10.5.1",
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.1",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-import": "^2.32.0",
     "jest": "^30.4.2",
     "jest-junit": "^17",
     "jsii": "5.x",
-    "jsii-diff": "^1.134.0",
+    "jsii-diff": "^1.136.0",
     "jsii-docgen": "^10.5.0",
-    "jsii-pacmak": "^1.134.0",
+    "jsii-pacmak": "^1.136.0",
     "jsii-rosetta": "5.x",
-    "projen": "^0.99.70",
+    "projen": "^0.100.2",
     "ts-jest": "^29.4.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
@@ -124,7 +124,7 @@
   },
   "dependencies": {
     "@aws/durable-execution-sdk-js": "^1.1.7",
-    "@slack/web-api": "^7.16.0"
+    "@slack/web-api": "^7.17.0"
   },
   "bundledDependencies": [
     "@aws/durable-execution-sdk-js",
@@ -141,6 +141,7 @@
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "stability": "stable",
   "publishConfig": {
     "access": "public"
   },
@@ -192,7 +193,6 @@
     }
   },
   "types": "lib/index.d.ts",
-  "stability": "stable",
   "jsii": {
     "outdir": "dist",
     "targets": {
@@ -211,10 +211,8 @@
         "moduleName": "github.com/jogold/cloudstructs-go"
       }
     },
-    "tsc": {
-      "outDir": "lib",
-      "rootDir": "src"
-    }
+    "tsconfig": "tsconfig.json",
+    "validateTsconfig": "strict"
   },
   "exports": {
     ".": "./lib/index.js",
