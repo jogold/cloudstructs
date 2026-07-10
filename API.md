@@ -3967,9 +3967,6 @@ public readonly cleanAssetsTimeout: Duration;
 
 The timeout for the durable execution of the clean function.
 
-The Lambda function timeout is set to this value, capped at the
-Lambda maximum of 15 minutes.
-
 ---
 
 ##### `dryRun`<sup>Optional</sup> <a name="dryRun" id="cloudstructs.ToolkitCleanerProps.property.dryRun"></a>

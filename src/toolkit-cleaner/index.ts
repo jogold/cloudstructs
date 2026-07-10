@@ -43,9 +43,6 @@ export interface ToolkitCleanerProps {
   /**
    * The timeout for the durable execution of the clean function.
    *
-   * The Lambda function timeout is set to this value, capped at the
-   * Lambda maximum of 15 minutes.
-   *
    * @default Duration.minutes(30)
    */
   readonly cleanAssetsTimeout?: Duration;
@@ -66,14 +63,13 @@ export class ToolkitCleaner extends Construct {
       directory: path.join(__dirname, '..', '..', 'assets', 'toolkit-cleaner', 'docker'),
     });
 
-    const executionTimeout = props.cleanAssetsTimeout ?? Duration.minutes(30);
-
     const cleanFunction = new CleanFunction(this, 'CleanFunction', {
       // The function timeout must cover the longest active phase of the durable
-      // execution, capped at the Lambda maximum of 15 minutes
-      timeout: Duration.seconds(Math.min(executionTimeout.toSeconds(), Duration.minutes(15).toSeconds())),
+      // execution, so use the Lambda maximum. Not derived from cleanAssetsTimeout
+      // because it may be an unresolved token.
+      timeout: Duration.minutes(15),
       durableConfig: {
-        executionTimeout,
+        executionTimeout: props.cleanAssetsTimeout ?? Duration.minutes(30),
       },
       environment: {
         BUCKET_NAME: fileAsset.bucket.bucketName,

@@ -50,15 +50,15 @@ test('with dry run', () => {
   });
 });
 
-test('with cleanAssetsTimeout shorter than the Lambda maximum', () => {
+test('with cleanAssetsTimeout', () => {
   new ToolkitCleaner(stack, 'ToolkitCleaner', {
-    cleanAssetsTimeout: Duration.minutes(5),
+    cleanAssetsTimeout: Duration.hours(1),
   });
 
   Template.fromStack(stack).hasResourceProperties('AWS::Lambda::Function', {
-    Timeout: 300,
+    Timeout: 900,
     DurableConfig: {
-      ExecutionTimeout: 300,
+      ExecutionTimeout: 3600,
     },
   });
 });
