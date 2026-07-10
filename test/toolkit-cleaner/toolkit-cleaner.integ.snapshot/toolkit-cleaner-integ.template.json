@@ -181,7 +181,7 @@
      ]
     },
     "Runtime": "nodejs24.x",
-    "Timeout": 30
+    "Timeout": 900
    },
    "DependsOn": [
     "ToolkitCleanerCleanFunctionServiceRoleDefaultPolicyBC7E9A9D",

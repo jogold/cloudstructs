@@ -41,7 +41,7 @@ export interface ToolkitCleanerProps {
   readonly retainAssetsNewerThan?: Duration;
 
   /**
-   * The timeout for the clean function
+   * The timeout for the durable execution of the clean function.
    *
    * @default Duration.minutes(30)
    */
@@ -64,7 +64,10 @@ export class ToolkitCleaner extends Construct {
     });
 
     const cleanFunction = new CleanFunction(this, 'CleanFunction', {
-      timeout: Duration.seconds(30),
+      // The function timeout must cover the longest active phase of the durable
+      // execution, so use the Lambda maximum. Not derived from cleanAssetsTimeout
+      // because it may be an unresolved token.
+      timeout: Duration.minutes(15),
       durableConfig: {
         executionTimeout: props.cleanAssetsTimeout ?? Duration.minutes(30),
       },
