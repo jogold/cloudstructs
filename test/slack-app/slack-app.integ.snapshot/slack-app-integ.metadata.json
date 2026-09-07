@@ -30,8 +30,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)"
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -43,8 +43,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/slack-app/slack-app.integ.ts:26:5)"
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],

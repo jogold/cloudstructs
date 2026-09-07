@@ -29,7 +29,7 @@ exports[`StaticWebsite 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-west-1",
           },
-          "S3Key": "56f7467bbde8a5efebcf57ae9e460027607099bab9f844669dcf5d800172ee5a.zip",
+          "S3Key": "9b8fce7ae7f25ef82fdbaf6b72523b99d0875c0c9c826642819fb51f11d9b125.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -38,7 +38,7 @@ exports[`StaticWebsite 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs22.x",
+        "Runtime": "nodejs24.x",
         "Timeout": 120,
       },
       "Type": "AWS::Lambda::Function",

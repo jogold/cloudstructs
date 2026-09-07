@@ -16,8 +16,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:20:5)"
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -29,8 +29,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/ssl-server-test/ssl-server-test.integ.ts:20:5)"
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],

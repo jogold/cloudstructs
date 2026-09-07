@@ -46,8 +46,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:44:5)"
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -59,8 +59,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "...App.synth in aws-cdk-lib...",
-        "<anonymous> (/home/runner/work/cloudstructs/cloudstructs/test/url-shortener/url-shortener.integ.ts:44:5)"
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
