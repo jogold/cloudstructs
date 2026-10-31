@@ -37,7 +37,7 @@
         "BUMPFILE": "dist/version.txt",
         "RELEASETAG": "dist/releasetag.txt",
         "RELEASE_TAG_PREFIX": "",
-        "BUMP_PACKAGE": "commit-and-tag-version@^12"
+        "BUMP_PACKAGE": "commit-and-tag-version@^13"
       },
       "steps": [
         {
@@ -110,6 +110,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/email-receiver/whitelist.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -128,6 +129,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/email-receiver/whitelist.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -147,6 +149,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/slack-app/provider.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -165,6 +168,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/slack-app/provider.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -184,6 +188,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/slack-events/events.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -202,6 +207,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/slack-events/events.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -221,6 +227,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/slack-textract/detect.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -239,6 +246,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/slack-textract/detect.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -258,6 +266,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/ssl-server-test/analyze.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -276,6 +285,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/ssl-server-test/analyze.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -295,6 +305,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/toolkit-cleaner/clean.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -313,6 +324,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/toolkit-cleaner/clean.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -332,6 +344,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/url-shortener/redirect.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -350,6 +363,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/url-shortener/redirect.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -369,6 +383,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/url-shortener/shortener.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*"
           ]
@@ -387,6 +402,7 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/url-shortener/shortener.lambda/index.js",
+            "--packages=bundle",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--watch"
@@ -1312,7 +1328,8 @@
         {
           "exec": "git diff --ignore-space-at-eol --exit-code"
         }
-      ]
+      ],
+      "condition": "git log --oneline -1 | grep -v \"chore(release):\" > /dev/null"
     },
     "test": {
       "name": "test",
@@ -1364,7 +1381,7 @@
         "BUMPFILE": "dist/version.txt",
         "RELEASETAG": "dist/releasetag.txt",
         "RELEASE_TAG_PREFIX": "",
-        "BUMP_PACKAGE": "commit-and-tag-version@^12"
+        "BUMP_PACKAGE": "commit-and-tag-version@^13"
       },
       "steps": [
         {
