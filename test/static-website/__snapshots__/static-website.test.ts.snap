@@ -176,7 +176,7 @@ exports[`StaticWebsite 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs24.x",
+        "Runtime": "nodejs26.x",
       },
       "Type": "AWS::Lambda::Function",
     },

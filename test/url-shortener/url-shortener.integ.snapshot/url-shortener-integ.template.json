@@ -194,7 +194,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs24.x"
+    "Runtime": "nodejs26.x"
    },
    "DependsOn": [
     "UrlShortenerRedirectServiceRoleDefaultPolicyA47211A8",
@@ -515,7 +515,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs24.x"
+    "Runtime": "nodejs26.x"
    },
    "DependsOn": [
     "UrlShortenerServiceRoleDefaultPolicyC2E011EF",

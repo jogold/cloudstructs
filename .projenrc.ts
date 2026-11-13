@@ -57,7 +57,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
     mavenServerId: 'central-ossrh',
   },
   lambdaOptions: {
-    runtime: awscdk.LambdaRuntime.NODEJS_24_X,
+    // projen has no NODEJS_26_X constant yet
+    runtime: new awscdk.LambdaRuntime('nodejs26.x', 'node26'),
   },
 });
 
