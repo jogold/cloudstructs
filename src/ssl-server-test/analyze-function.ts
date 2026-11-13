@@ -17,7 +17,7 @@ export class AnalyzeFunction extends lambda.Function {
     super(scope, id, {
       description: 'src/ssl-server-test/analyze.lambda.ts',
       ...props,
-      runtime: new lambda.Runtime('nodejs24.x', lambda.RuntimeFamily.NODEJS, { supportsInlineCode: true }),
+      runtime: new lambda.Runtime('nodejs26.x', lambda.RuntimeFamily.NODEJS, { supportsInlineCode: true }),
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../assets/ssl-server-test/analyze.lambda')),
     });
