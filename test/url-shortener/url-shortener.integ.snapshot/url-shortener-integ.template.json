@@ -50,26 +50,6 @@
     "Type": "COGNITO_USER_POOLS"
    }
   },
-  "UrlShortenerTable9C0A20BB": {
-   "Type": "AWS::DynamoDB::Table",
-   "Properties": {
-    "AttributeDefinitions": [
-     {
-      "AttributeName": "key",
-      "AttributeType": "S"
-     }
-    ],
-    "BillingMode": "PAY_PER_REQUEST",
-    "KeySchema": [
-     {
-      "AttributeName": "key",
-      "KeyType": "HASH"
-     }
-    ]
-   },
-   "UpdateReplacePolicy": "Delete",
-   "DeletionPolicy": "Delete"
-  },
   "UrlShortenerBucket14C129A7": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
@@ -176,7 +156,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
      },
-     "S3Key": "a3188086ba45dcf2363b1ce7f01d1b91939a1e89ef9cc632b85ba06c630695c0.zip"
+     "S3Key": "ca10766d3161e8ab7be44912837f709cd7e2b6b86c6bd3818a1741f49f4c954d.zip"
     },
     "Description": "src/url-shortener/redirect.lambda.ts",
     "Environment": {
@@ -456,18 +436,6 @@
          ]
         ]
        }
-      },
-      {
-       "Action": "dynamodb:UpdateItem",
-       "Effect": "Allow",
-       "Resource": [
-        {
-         "Fn::GetAtt": [
-          "UrlShortenerTable9C0A20BB",
-          "Arn"
-         ]
-        }
-       ]
       }
      ],
      "Version": "2012-10-17"
@@ -487,7 +455,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-eu-west-1"
      },
-     "S3Key": "b9d6c62120ffb22a5a44557d48d6261ae846d8bd49a68c3e3592af8248ba97f6.zip"
+     "S3Key": "265414f3d507fec4a310c4df15edd814b68cc1cea4e3ce407f0f3b5278e14b31.zip"
     },
     "Description": "src/url-shortener/shortener.lambda.ts",
     "Environment": {
@@ -495,9 +463,6 @@
       "DOMAIN_NAME": "short.goldex.be",
       "BUCKET_NAME": {
        "Ref": "UrlShortenerBucket14C129A7"
-      },
-      "TABLE_NAME": {
-       "Ref": "UrlShortenerTable9C0A20BB"
       },
       "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
       "CORS_ALLOW_ORIGINS": "*"

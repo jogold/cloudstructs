@@ -1403,7 +1403,7 @@
             "--peer",
             "--no-deprecated",
             "--dep=dev,prod,peer,optional",
-            "--filter=@aws-sdk/client-cloudformation,@aws-sdk/client-dynamodb,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-textract,@aws-sdk/lib-dynamodb,@aws/durable-execution-sdk-js-testing,@types/aws-lambda,@types/jest,@types/node,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,@aws/durable-execution-sdk-js,@slack/web-api"
+            "--filter=@aws-sdk/client-cloudformation,@aws-sdk/client-ecr,@aws-sdk/client-ecs,@aws-sdk/client-eventbridge,@aws-sdk/client-iam,@aws-sdk/client-s3,@aws-sdk/client-secrets-manager,@aws-sdk/client-sfn,@aws-sdk/client-sns,@aws-sdk/client-textract,@aws/durable-execution-sdk-js-testing,@types/aws-lambda,@types/jest,@types/node,@types/tsscmp,aws-sdk-client-mock,aws-sdk-client-mock-jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,@aws/durable-execution-sdk-js,@slack/web-api"
           ]
         },
         {
@@ -1414,7 +1414,6 @@
             "npm",
             "update",
             "@aws-sdk/client-cloudformation",
-            "@aws-sdk/client-dynamodb",
             "@aws-sdk/client-ecr",
             "@aws-sdk/client-ecs",
             "@aws-sdk/client-eventbridge",
@@ -1424,7 +1423,6 @@
             "@aws-sdk/client-sfn",
             "@aws-sdk/client-sns",
             "@aws-sdk/client-textract",
-            "@aws-sdk/lib-dynamodb",
             "@aws/durable-execution-sdk-js-testing",
             "@stylistic/eslint-plugin",
             "@types/aws-lambda",

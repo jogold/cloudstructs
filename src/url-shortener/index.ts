@@ -1,9 +1,8 @@
-import { Duration, Fn, RemovalPolicy } from 'aws-cdk-lib';
+import { Duration, Fn, Stack, Token } from 'aws-cdk-lib';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as logs from 'aws-cdk-lib/aws-logs';
@@ -39,9 +38,47 @@ export interface UrlShortenerProps {
   /**
    * Expiration for short urls
    *
-   * @default cdk.Duration.days(365)
+   * This is the lifecycle of the objects holding the redirects, in whole days.
+   * To stop a link at a precise time, use `linkTtl`.
+   *
+   * @default - one day more than `linkTtl` rounded up to days when `linkTtl` is set, cdk.Duration.days(365) otherwise
    */
   readonly expiration?: Duration;
+
+  /**
+   * Regular expressions a URL must match to be shortened
+   *
+   * Each pattern is tested against the whole URL, and a URL matching none of them
+   * is refused with a 400. Anchor each pattern up to the `/` after the host
+   * (`^https://www\.example\.com/`), or a URL on another host can match it.
+   *
+   * @default - any valid URL can be shortened
+   */
+  readonly allowedUrlPatterns?: string[];
+
+  /**
+   * How long a short link redirects after it was created
+   *
+   * Once set, links answer a 302 with `Cache-Control: no-store`, CloudFront does not
+   * cache them, so that no cache keeps a redirect past this duration, and a 404 after
+   * it. Links created before this is set expire as well once older than it.
+   *
+   * @default - links redirect with a 301 until their object expires (see `expiration`)
+   */
+  readonly linkTtl?: Duration;
+
+  /**
+   * Query parameter to redirect expired links with
+   *
+   * Instead of a 404, a link past its `linkTtl` redirects to its target URL without
+   * the query string and hash, with this parameter set to `1`. The target page can
+   * then explain that the link expired, without receiving what the query carried.
+   * Requires `linkTtl`, and an `expiration` at least a day longer, so that the object
+   * is still there to redirect from.
+   *
+   * @default - expired links answer a 404
+   */
+  readonly expiredRedirectQueryParameter?: string;
 
   /**
    * An interface VPC endpoint for API gateway. Specifying this property will
@@ -103,20 +140,35 @@ export class UrlShortener extends Construct {
 
     const domainName = props.recordName ? `${props.recordName}.${props.hostedZone.zoneName}` : props.hostedZone.zoneName;
 
-    // Table to save a counter
-    const table = new dynamodb.Table(this, 'Table', {
-      partitionKey: {
-        name: 'key',
-        type: dynamodb.AttributeType.STRING,
-      },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      removalPolicy: RemovalPolicy.DESTROY,
-    });
+    if (props.expiredRedirectQueryParameter && !props.linkTtl) {
+      throw new Error('`expiredRedirectQueryParameter` requires `linkTtl`');
+    }
+
+    if (props.linkTtl && props.expiration && props.expiration.toSeconds() < props.linkTtl.toSeconds()) {
+      throw new Error('`expiration` cannot be shorter than `linkTtl`');
+    }
+
+    if (props.expiredRedirectQueryParameter && props.linkTtl && props.expiration
+      && props.expiration.toSeconds() < props.linkTtl.toSeconds() + Duration.days(1).toSeconds()) {
+      throw new Error('`expiration` must be at least a day longer than `linkTtl` with `expiredRedirectQueryParameter`');
+    }
+
+    if (props.allowedUrlPatterns && props.allowedUrlPatterns.length === 0) {
+      throw new Error('`allowedUrlPatterns` cannot be empty, leave it out to allow any URL');
+    }
+
+    for (const pattern of props.allowedUrlPatterns ?? []) {
+      if (!Token.isUnresolved(pattern)) {
+        new RegExp(pattern); // throws at synth on an invalid pattern
+      }
+    }
 
     // Bucket to save redirects
     const bucket = new s3.Bucket(this, 'Bucket', {
       lifecycleRules: [{
-        expiration: props.expiration ?? Duration.days(365),
+        expiration: props.expiration ?? (props.linkTtl
+          ? Duration.days(Math.ceil(props.linkTtl.toSeconds() / 86400) + 1)
+          : Duration.days(365)),
       }],
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       bucketName: props.bucketName ?? `cloudstructs-url-shortener-${domainName}`,
@@ -128,11 +180,19 @@ export class UrlShortener extends Construct {
         BUCKET_NAME: bucket.bucketName,
       },
     });
+    if (props.linkTtl) {
+      redirectFunction.addEnvironment('LINK_TTL_SECONDS', props.linkTtl.toSeconds().toString());
+    }
+    if (props.expiredRedirectQueryParameter) {
+      redirectFunction.addEnvironment('EXPIRED_REDIRECT_QUERY_PARAMETER', props.expiredRedirectQueryParameter);
+    }
     bucket.grantRead(redirectFunction);
 
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: origins.FunctionUrlOrigin.withOriginAccessControl(redirectFunction.addFunctionUrl()),
+        // A cached redirect would outlive its link
+        cachePolicy: props.linkTtl ? cloudfront.CachePolicy.CACHING_DISABLED : undefined,
       },
       certificate: props.certificate,
       domainNames: [domainName],
@@ -149,7 +209,7 @@ export class UrlShortener extends Construct {
     new route53.AaaaRecord(this, 'AaaaRecord', aliasProps);
     new route53.HttpsRecord(this, 'HttpsRecord', aliasProps);
 
-    // Lambda function to increment counter and write redirect in bucket
+    // Lambda function to write redirect in bucket under a random key
     const shortenerFunction = new ShortenerFunction(this, 'Shortener', {
       logGroup: new logs.LogGroup(this, 'ShortenerLogGroup', {
         retention: logs.RetentionDays.ONE_MONTH,
@@ -157,14 +217,15 @@ export class UrlShortener extends Construct {
       environment: {
         DOMAIN_NAME: domainName,
         BUCKET_NAME: bucket.bucketName,
-        TABLE_NAME: table.tableName,
       },
     });
+    if (props.allowedUrlPatterns) {
+      shortenerFunction.addEnvironment('ALLOWED_URL_PATTERNS', Stack.of(this).toJsonString(props.allowedUrlPatterns));
+    }
     if (props.corsAllowOrigins) {
       shortenerFunction.addEnvironment('CORS_ALLOW_ORIGINS', props.corsAllowOrigins.join(' '));
     }
     bucket.grantPut(shortenerFunction);
-    table.grant(shortenerFunction, 'dynamodb:UpdateItem');
 
     // API
     this.api = new apigateway.RestApi(this, `UrlShortener${props.hostedZone.zoneName}`, {

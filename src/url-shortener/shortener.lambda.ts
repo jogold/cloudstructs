@@ -1,19 +1,21 @@
 /* eslint-disable no-console */
+import { randomBytes } from 'crypto';
 import { URL } from 'url';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
-function base62Encode(int: number): string {
-  const characterSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  if (int === 0) return '0';
-  let s = '';
-  while (int > 0) {
-    s = characterSet[int % 62] + s;
-    int = Math.floor(int / 62);
-  }
-  return s;
-};
+/**
+ * Random bytes in a key. A short link often stands in for a URL that carries a
+ * credential (a presigned URL for example), so a key must not be guessable from
+ * the keys around it: 128 bits make that impossible.
+ */
+const KEY_BYTES = 16;
+
+/**
+ * Attempts at writing a redirect under a fresh key. Two random 128-bit keys never
+ * collide in practice; the conditional write makes sure a collision could never
+ * overwrite another link, and a retry draws a new key.
+ */
+const MAX_KEY_ATTEMPTS = 3;
 
 function getEnv(name: string): string {
   const value = process.env[name];
@@ -25,8 +27,8 @@ function getEnv(name: string): string {
   return value;
 }
 
-function isUrlValid(url?: string): boolean {
-  if (!url) {
+function isUrlValid(url: unknown): url is string {
+  if (typeof url !== 'string' || !url) {
     return false;
   }
   try {
@@ -37,8 +39,14 @@ function isUrlValid(url?: string): boolean {
   }
 }
 
-const dynamoDBClient = new DynamoDBClient({});
-const documentClient = DynamoDBDocumentClient.from(dynamoDBClient);
+// Compiled once per container rather than per request
+const allowedUrlPatterns: RegExp[] | undefined = process.env.ALLOWED_URL_PATTERNS
+  ? (JSON.parse(process.env.ALLOWED_URL_PATTERNS) as string[]).map((pattern) => new RegExp(pattern))
+  : undefined;
+
+function isUrlAllowed(url: string): boolean {
+  return !allowedUrlPatterns || allowedUrlPatterns.some((pattern) => pattern.test(url));
+}
 
 const s3Client = new S3Client({});
 
@@ -56,39 +64,15 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
   try {
     const body = JSON.parse(event.body ?? '{}');
 
-    if (!isUrlValid(body.url)) {
+    if (!isUrlValid(body.url) || !isUrlAllowed(body.url)) {
       return {
         ...response,
         statusCode: 400,
       };
     }
 
-    // Get next counter value
-    const update = await documentClient.send(new UpdateCommand({
-      TableName: getEnv('TABLE_NAME'),
-      Key: { key: 'counter' },
-      UpdateExpression: 'ADD #value :incr',
-      ExpressionAttributeNames: { '#value': 'value' },
-      ExpressionAttributeValues: { ':incr': 1 },
-      ReturnValues: 'UPDATED_NEW',
-    }));
-
-    const value = update.Attributes?.value;
-
-    if (!value) {
-      throw new Error('Cannot get next counter value');
-    }
-
-    const key = base62Encode(value);
+    const key = await putRedirect(body.url);
     console.log('Key: %j', key);
-
-    const putObject = await s3Client.send(new PutObjectCommand({
-      Bucket: getEnv('BUCKET_NAME'),
-      Key: key,
-      ContentType: 'application/json',
-      Body: JSON.stringify({ url: body.url }),
-    }));
-    console.log('Put object: %j', putObject);
 
     // Return short url
     return {
@@ -105,5 +89,30 @@ export async function handler(event: AWSLambda.APIGatewayProxyEvent): Promise<AW
       ...response,
       statusCode: 500,
     };
+  }
+}
+
+/**
+ * Saves the redirect under a new random key and returns the key
+ */
+async function putRedirect(url: string): Promise<string> {
+  for (let attempt = 1; ; attempt++) {
+    const key = randomBytes(KEY_BYTES).toString('base64url');
+    try {
+      await s3Client.send(new PutObjectCommand({
+        Bucket: getEnv('BUCKET_NAME'),
+        Key: key,
+        ContentType: 'application/json',
+        Body: JSON.stringify({ url }),
+        IfNoneMatch: '*', // never overwrite an existing link
+      }));
+      return key;
+    } catch (err) {
+      // 412: the key exists, 409: a concurrent write to the same key
+      const statusCode = (err as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode;
+      if ((statusCode !== 412 && statusCode !== 409) || attempt >= MAX_KEY_ATTEMPTS) {
+        throw err;
+      }
+    }
   }
 }
