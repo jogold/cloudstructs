@@ -103,3 +103,100 @@ test('UrlShortener with IAM authorization', () => {
 
   expect(Template.fromStack(stack).toJSON()).toMatchSnapshot();
 });
+
+test('UrlShortener with allowed url patterns, link time to live and expired redirect', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    allowedUrlPatterns: ['^https://www\\.cstructs\\.com/'],
+    linkTtl: Duration.minutes(15),
+    expiredRedirectQueryParameter: 'expired',
+  });
+
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::S3::Bucket', {
+    LifecycleConfiguration: {
+      Rules: [{ ExpirationInDays: 2, Status: 'Enabled' }],
+    },
+  });
+  template.resourceCountIs('AWS::DynamoDB::Table', 0);
+  template.hasResourceProperties('AWS::CloudFront::Distribution', {
+    DistributionConfig: {
+      DefaultCacheBehavior: {
+        CachePolicyId: '4135ea2d-6df8-44a3-9df3-4b5a84be39ad', // CachingDisabled
+      },
+    },
+  });
+  expect(template.toJSON()).toMatchSnapshot();
+});
+
+test('UrlShortener derives the expiration from the link time to live', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    linkTtl: Duration.hours(36),
+  });
+
+  Template.fromStack(stack).hasResourceProperties('AWS::S3::Bucket', {
+    LifecycleConfiguration: {
+      Rules: [{ ExpirationInDays: 3, Status: 'Enabled' }],
+    },
+  });
+});
+
+test('UrlShortener throws with an expiration shorter than the link time to live', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  expect(() => new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    linkTtl: Duration.days(2),
+    expiration: Duration.days(1),
+  })).toThrow(/`expiration` cannot be shorter than `linkTtl`/);
+});
+
+test('UrlShortener throws with an expiration too short for the expired redirect', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  expect(() => new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    linkTtl: Duration.days(1),
+    expiration: Duration.days(1),
+    expiredRedirectQueryParameter: 'expired',
+  })).toThrow(/`expiration` must be at least a day longer than `linkTtl`/);
+});
+
+test('UrlShortener throws with empty allowed url patterns', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  expect(() => new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    allowedUrlPatterns: [],
+  })).toThrow(/`allowedUrlPatterns` cannot be empty/);
+});
+
+test('UrlShortener throws with an expired redirect but no link time to live', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  expect(() => new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    expiredRedirectQueryParameter: 'expired',
+  })).toThrow(/`expiredRedirectQueryParameter` requires `linkTtl`/);
+});
+
+test('UrlShortener throws with an invalid allowed url pattern', () => {
+  const hostedZone = new route53.HostedZone(stack, 'HostedZone', { zoneName: 'cstructs.com' });
+
+  expect(() => new UrlShortener(stack, 'UrlShortener', {
+    hostedZone,
+    certificate: acm.Certificate.fromCertificateArn(stack, 'Cert', 'arn:aws:acm:us-east-1:123456789012:certificate/abcd-efgh-ijkl-mnop'),
+    allowedUrlPatterns: ['^https://('],
+  })).toThrow(/Invalid regular expression/);
+});

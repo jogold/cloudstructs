@@ -18,7 +18,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   devDeps: [
     '@aws-sdk/client-cloudformation',
-    '@aws-sdk/client-dynamodb',
     '@aws-sdk/client-ecr',
     '@aws-sdk/client-ecs',
     '@aws-sdk/client-eventbridge',
@@ -28,7 +27,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@aws-sdk/client-sfn',
     '@aws-sdk/client-sns',
     '@aws-sdk/client-textract',
-    '@aws-sdk/lib-dynamodb',
     '@aws/durable-execution-sdk-js-testing',
     '@types/aws-lambda',
     '@types/tsscmp',

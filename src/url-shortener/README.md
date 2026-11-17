@@ -2,8 +2,8 @@
 
 Deploy an URL shortener API.
 
-Uses a DynamoDB table to increment a counter. The value of the counter is base62
-encoded and then a zero-byte object with redirection is stored in S3.
+Each short URL gets a random 128-bit key, under which an object holding the
+redirection is stored in S3. Keys cannot be guessed from one another.
 
 ## Usage
 
@@ -43,7 +43,7 @@ and replies with:
 ```json
 {
   "url": "https://www.mylongurl.com/very/long/path",
-  "shortUrl": "https://short.com/trBkV"
+  "shortUrl": "https://short.com/4Ma3mLc7PbZW9fHnQx1tGg"
 }
 ```
 
@@ -54,3 +54,30 @@ An authorizer can be added to the API by specifying the `apiGatewayAuthorizer`
 prop.
 
 Enable CORS by passing the `corsAllowOrigins` prop.
+
+Restrict the URLs that can be shortened with the `allowedUrlPatterns` prop, a
+list of regular expressions tested against the whole URL. A URL matching none
+of them is refused with a 400. Anchor each pattern up to the `/` after the
+host (`^https://www\.example\.com/`), or a URL on another host can match
+it. Without the prop, the short domain redirects to any URL its callers send.
+
+Make short URLs stop redirecting after a set time with the `linkTtl` prop:
+
+```ts
+new cloudstructs.UrlShortener(this, 'UrlShortener', {
+  hostedZone,
+  certificate,
+  allowedUrlPatterns: ['^https://www\\.example\\.com/upload\\?'],
+  linkTtl: Duration.minutes(15),
+  expiredRedirectQueryParameter: 'expired',
+});
+```
+
+With `linkTtl`, the redirection is a 302 with `Cache-Control: no-store` and
+CloudFront does not cache it, so that no cache keeps it past its time, and an
+expired short URL answers a 404. Short URLs created before `linkTtl` is turned
+on expire as well once older than it. With `expiredRedirectQueryParameter` it redirects instead to its
+target without the query string and hash, with that parameter set to `1`
+(`https://www.example.com/upload?expired=1`), so the target page can explain
+that the link expired. The objects in S3 then expire one day after `linkTtl`
+rounded up to days, unless `expiration` is set.

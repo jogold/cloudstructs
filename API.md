@@ -4041,12 +4041,15 @@ const urlShortenerProps: UrlShortenerProps = { ... }
 | --- | --- | --- |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.certificate">certificate</a></code> | <code>aws-cdk-lib.aws_certificatemanager.ICertificate</code> | The ACM certificate to use for the CloudFront distribution. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.hostedZone">hostedZone</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone</code> | The hosted zone for the short URLs domain. |
+| <code><a href="#cloudstructs.UrlShortenerProps.property.allowedUrlPatterns">allowedUrlPatterns</a></code> | <code>string[]</code> | Regular expressions a URL must match to be shortened. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.apiGatewayAuthorizer">apiGatewayAuthorizer</a></code> | <code>aws-cdk-lib.aws_apigateway.IAuthorizer</code> | Authorizer for API gateway. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.apiGatewayEndpoint">apiGatewayEndpoint</a></code> | <code>aws-cdk-lib.aws_ec2.IInterfaceVpcEndpoint</code> | An interface VPC endpoint for API gateway. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.bucketName">bucketName</a></code> | <code>string</code> | A name for the bucket saving the redirects. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.corsAllowOrigins">corsAllowOrigins</a></code> | <code>string[]</code> | Allowed origins for CORS. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.expiration">expiration</a></code> | <code>aws-cdk-lib.Duration</code> | Expiration for short urls. |
+| <code><a href="#cloudstructs.UrlShortenerProps.property.expiredRedirectQueryParameter">expiredRedirectQueryParameter</a></code> | <code>string</code> | Query parameter to redirect expired links with. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.iamAuthorization">iamAuthorization</a></code> | <code>boolean</code> | Whether to use IAM authorization. |
+| <code><a href="#cloudstructs.UrlShortenerProps.property.linkTtl">linkTtl</a></code> | <code>aws-cdk-lib.Duration</code> | How long a short link redirects after it was created. |
 | <code><a href="#cloudstructs.UrlShortenerProps.property.recordName">recordName</a></code> | <code>string</code> | The record name to use in the hosted zone. |
 
 ---
@@ -4074,6 +4077,22 @@ public readonly hostedZone: IHostedZone;
 - *Type:* aws-cdk-lib.aws_route53.IHostedZone
 
 The hosted zone for the short URLs domain.
+
+---
+
+##### `allowedUrlPatterns`<sup>Optional</sup> <a name="allowedUrlPatterns" id="cloudstructs.UrlShortenerProps.property.allowedUrlPatterns"></a>
+
+```typescript
+public readonly allowedUrlPatterns: string[];
+```
+
+- *Type:* string[]
+- *Default:* any valid URL can be shortened
+
+Regular expressions a URL must match to be shortened.
+
+A URL matching none of them is refused with a 400. Without this, the short
+domain redirects to any URL its callers send.
 
 ---
 
@@ -4141,9 +4160,30 @@ public readonly expiration: Duration;
 ```
 
 - *Type:* aws-cdk-lib.Duration
-- *Default:* cdk.Duration.days(365)
+- *Default:* one day more than `linkTtl` rounded up to days when `linkTtl` is set, cdk.Duration.days(365) otherwise
 
 Expiration for short urls.
+
+This is the lifecycle of the objects holding the redirects, in whole days.
+To stop a link at a precise time, use `linkTtl`.
+
+---
+
+##### `expiredRedirectQueryParameter`<sup>Optional</sup> <a name="expiredRedirectQueryParameter" id="cloudstructs.UrlShortenerProps.property.expiredRedirectQueryParameter"></a>
+
+```typescript
+public readonly expiredRedirectQueryParameter: string;
+```
+
+- *Type:* string
+- *Default:* expired links answer a 404
+
+Query parameter to redirect expired links with.
+
+Instead of a 404, a link past its `linkTtl` redirects to its target URL without
+the query string and hash, with this parameter set to `1`. The target page can
+then explain that the link expired, without receiving what the query carried.
+Requires `linkTtl`.
 
 ---
 
@@ -4157,6 +4197,22 @@ public readonly iamAuthorization: boolean;
 - *Default:* do not use IAM authorization
 
 Whether to use IAM authorization.
+
+---
+
+##### `linkTtl`<sup>Optional</sup> <a name="linkTtl" id="cloudstructs.UrlShortenerProps.property.linkTtl"></a>
+
+```typescript
+public readonly linkTtl: Duration;
+```
+
+- *Type:* aws-cdk-lib.Duration
+- *Default:* links redirect with a 301 until their object expires (see `expiration`)
+
+How long a short link redirects after it was created.
+
+Once set, links answer a 302 with `Cache-Control: no-store`, so that neither
+CloudFront nor browsers keep a redirect past this duration, and a 404 after it.
 
 ---
 
